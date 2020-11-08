@@ -1,9 +1,0 @@
-D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Services\ProSeeker.Services.Mapping\bin\Debug\netstandard2.1\ProSeeker.Services.Mapping.deps.json
-D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Services\ProSeeker.Services.Mapping\bin\Debug\netstandard2.1\ProSeeker.Services.Mapping.dll
-D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Services\ProSeeker.Services.Mapping\bin\Debug\netstandard2.1\ProSeeker.Services.Mapping.pdb
-D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Services\ProSeeker.Services.Mapping\obj\Debug\netstandard2.1\ProSeeker.Services.Mapping.csprojAssemblyReference.cache
-D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Services\ProSeeker.Services.Mapping\obj\Debug\netstandard2.1\ProSeeker.Services.Mapping.AssemblyInfoInputs.cache
-D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Services\ProSeeker.Services.Mapping\obj\Debug\netstandard2.1\ProSeeker.Services.Mapping.AssemblyInfo.cs
-D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Services\ProSeeker.Services.Mapping\obj\Debug\netstandard2.1\ProSeeker.Services.Mapping.csproj.CoreCompileInputs.cache
-D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Services\ProSeeker.Services.Mapping\obj\Debug\netstandard2.1\ProSeeker.Services.Mapping.dll
-D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Services\ProSeeker.Services.Mapping\obj\Debug\netstandard2.1\ProSeeker.Services.Mapping.pdb

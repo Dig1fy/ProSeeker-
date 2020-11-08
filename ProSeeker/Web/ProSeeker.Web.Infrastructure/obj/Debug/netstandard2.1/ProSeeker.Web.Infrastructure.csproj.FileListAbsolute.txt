@@ -1,9 +1,0 @@
-D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Web\ProSeeker.Web.Infrastructure\bin\Debug\netstandard2.1\ProSeeker.Web.Infrastructure.deps.json
-D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Web\ProSeeker.Web.Infrastructure\bin\Debug\netstandard2.1\ProSeeker.Web.Infrastructure.dll
-D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Web\ProSeeker.Web.Infrastructure\bin\Debug\netstandard2.1\ProSeeker.Web.Infrastructure.pdb
-D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Web\ProSeeker.Web.Infrastructure\obj\Debug\netstandard2.1\ProSeeker.Web.Infrastructure.csprojAssemblyReference.cache
-D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Web\ProSeeker.Web.Infrastructure\obj\Debug\netstandard2.1\ProSeeker.Web.Infrastructure.AssemblyInfoInputs.cache
-D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Web\ProSeeker.Web.Infrastructure\obj\Debug\netstandard2.1\ProSeeker.Web.Infrastructure.AssemblyInfo.cs
-D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Web\ProSeeker.Web.Infrastructure\obj\Debug\netstandard2.1\ProSeeker.Web.Infrastructure.csproj.CoreCompileInputs.cache
-D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Web\ProSeeker.Web.Infrastructure\obj\Debug\netstandard2.1\ProSeeker.Web.Infrastructure.dll
-D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Web\ProSeeker.Web.Infrastructure\obj\Debug\netstandard2.1\ProSeeker.Web.Infrastructure.pdb

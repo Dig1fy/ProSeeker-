@@ -1,9 +1,0 @@
-D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\ProSeeker.Common\bin\Debug\netstandard2.1\ProSeeker.Common.deps.json
-D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\ProSeeker.Common\bin\Debug\netstandard2.1\ProSeeker.Common.dll
-D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\ProSeeker.Common\bin\Debug\netstandard2.1\ProSeeker.Common.pdb
-D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\ProSeeker.Common\obj\Debug\netstandard2.1\ProSeeker.Common.csprojAssemblyReference.cache
-D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\ProSeeker.Common\obj\Debug\netstandard2.1\ProSeeker.Common.AssemblyInfoInputs.cache
-D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\ProSeeker.Common\obj\Debug\netstandard2.1\ProSeeker.Common.AssemblyInfo.cs
-D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\ProSeeker.Common\obj\Debug\netstandard2.1\ProSeeker.Common.csproj.CoreCompileInputs.cache
-D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\ProSeeker.Common\obj\Debug\netstandard2.1\ProSeeker.Common.dll
-D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\ProSeeker.Common\obj\Debug\netstandard2.1\ProSeeker.Common.pdb
