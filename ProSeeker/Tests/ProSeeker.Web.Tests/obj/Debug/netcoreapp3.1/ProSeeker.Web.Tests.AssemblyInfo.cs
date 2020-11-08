@@ -12,10 +12,8 @@ using System;
 using System.Reflection;
 
 [assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap4")]
-[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("ProSeeker.Data", "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Data\\" +
-    "ProSeeker.Data", "ProSeeker.Data.csproj", "0")]
-[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("ProSeeker.Web", "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Web\\P" +
-    "roSeeker.Web", "ProSeeker.Web.csproj", "0")]
+[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("ProSeeker.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "D:\\Programming stuff\\My .Net Project\\ProSeeker\\Data\\ProSeeker.Data", "ProSeeker.Data.csproj", "0")]
+[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("ProSeeker.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "D:\\Programming stuff\\My .Net Project\\ProSeeker\\Web\\ProSeeker.Web", "ProSeeker.Web.csproj", "0")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("ProSeeker.Web.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
