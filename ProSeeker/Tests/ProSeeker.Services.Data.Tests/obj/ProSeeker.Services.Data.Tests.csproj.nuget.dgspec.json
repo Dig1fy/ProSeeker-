@@ -1,0 +1,552 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Tests\\ProSeeker.Services.Data.Tests\\ProSeeker.Services.Data.Tests.csproj": {}
+  },
+  "projects": {
+    "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Data\\ProSeeker.Data.Common\\ProSeeker.Data.Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Data\\ProSeeker.Data.Common\\ProSeeker.Data.Common.csproj",
+        "projectName": "ProSeeker.Data.Common",
+        "projectPath": "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Data\\ProSeeker.Data.Common\\ProSeeker.Data.Common.csproj",
+        "packagesPath": "C:\\Users\\q2kfo\\.nuget\\packages\\",
+        "outputPath": "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Data\\ProSeeker.Data.Common\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\q2kfo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "dependencies": {
+            "StyleCop.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.2.0-beta.205, )"
+            },
+            "System.ComponentModel.Annotations": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Data\\ProSeeker.Data.Models\\ProSeeker.Data.Models.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Data\\ProSeeker.Data.Models\\ProSeeker.Data.Models.csproj",
+        "projectName": "ProSeeker.Data.Models",
+        "projectPath": "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Data\\ProSeeker.Data.Models\\ProSeeker.Data.Models.csproj",
+        "packagesPath": "C:\\Users\\q2kfo\\.nuget\\packages\\",
+        "outputPath": "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Data\\ProSeeker.Data.Models\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\q2kfo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "projectReferences": {
+              "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Data\\ProSeeker.Data.Common\\ProSeeker.Data.Common.csproj": {
+                "projectPath": "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Data\\ProSeeker.Data.Common\\ProSeeker.Data.Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.9, )"
+            },
+            "StyleCop.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.2.0-beta.205, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Data\\ProSeeker.Data\\ProSeeker.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Data\\ProSeeker.Data\\ProSeeker.Data.csproj",
+        "projectName": "ProSeeker.Data",
+        "projectPath": "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Data\\ProSeeker.Data\\ProSeeker.Data.csproj",
+        "packagesPath": "C:\\Users\\q2kfo\\.nuget\\packages\\",
+        "outputPath": "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Data\\ProSeeker.Data\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\q2kfo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Data\\ProSeeker.Data.Common\\ProSeeker.Data.Common.csproj": {
+                "projectPath": "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Data\\ProSeeker.Data.Common\\ProSeeker.Data.Common.csproj"
+              },
+              "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Data\\ProSeeker.Data.Models\\ProSeeker.Data.Models.csproj": {
+                "projectPath": "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Data\\ProSeeker.Data.Models\\ProSeeker.Data.Models.csproj"
+              },
+              "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\ProSeeker.Common\\ProSeeker.Common.csproj": {
+                "projectPath": "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\ProSeeker.Common\\ProSeeker.Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.9, )"
+            },
+            "Microsoft.Extensions.Configuration.UserSecrets": {
+              "target": "Package",
+              "version": "[3.1.9, )"
+            },
+            "StyleCop.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.2.0-beta.205, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\ProSeeker.Common\\ProSeeker.Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\ProSeeker.Common\\ProSeeker.Common.csproj",
+        "projectName": "ProSeeker.Common",
+        "projectPath": "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\ProSeeker.Common\\ProSeeker.Common.csproj",
+        "packagesPath": "C:\\Users\\q2kfo\\.nuget\\packages\\",
+        "outputPath": "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\ProSeeker.Common\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\q2kfo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "dependencies": {
+            "StyleCop.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.2.0-beta.205, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Services\\ProSeeker.Services.Data\\ProSeeker.Services.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Services\\ProSeeker.Services.Data\\ProSeeker.Services.Data.csproj",
+        "projectName": "ProSeeker.Services.Data",
+        "projectPath": "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Services\\ProSeeker.Services.Data\\ProSeeker.Services.Data.csproj",
+        "packagesPath": "C:\\Users\\q2kfo\\.nuget\\packages\\",
+        "outputPath": "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Services\\ProSeeker.Services.Data\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\q2kfo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "projectReferences": {
+              "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Data\\ProSeeker.Data.Common\\ProSeeker.Data.Common.csproj": {
+                "projectPath": "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Data\\ProSeeker.Data.Common\\ProSeeker.Data.Common.csproj"
+              },
+              "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Data\\ProSeeker.Data.Models\\ProSeeker.Data.Models.csproj": {
+                "projectPath": "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Data\\ProSeeker.Data.Models\\ProSeeker.Data.Models.csproj"
+              },
+              "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Services\\ProSeeker.Services.Mapping\\ProSeeker.Services.Mapping.csproj": {
+                "projectPath": "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Services\\ProSeeker.Services.Mapping\\ProSeeker.Services.Mapping.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "dependencies": {
+            "StyleCop.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.2.0-beta.205, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Services\\ProSeeker.Services.Mapping\\ProSeeker.Services.Mapping.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Services\\ProSeeker.Services.Mapping\\ProSeeker.Services.Mapping.csproj",
+        "projectName": "ProSeeker.Services.Mapping",
+        "projectPath": "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Services\\ProSeeker.Services.Mapping\\ProSeeker.Services.Mapping.csproj",
+        "packagesPath": "C:\\Users\\q2kfo\\.nuget\\packages\\",
+        "outputPath": "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Services\\ProSeeker.Services.Mapping\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\q2kfo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[10.1.1, )"
+            },
+            "StyleCop.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.2.0-beta.205, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Tests\\ProSeeker.Services.Data.Tests\\ProSeeker.Services.Data.Tests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Tests\\ProSeeker.Services.Data.Tests\\ProSeeker.Services.Data.Tests.csproj",
+        "projectName": "ProSeeker.Services.Data.Tests",
+        "projectPath": "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Tests\\ProSeeker.Services.Data.Tests\\ProSeeker.Services.Data.Tests.csproj",
+        "packagesPath": "C:\\Users\\q2kfo\\.nuget\\packages\\",
+        "outputPath": "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Tests\\ProSeeker.Services.Data.Tests\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\q2kfo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Data\\ProSeeker.Data\\ProSeeker.Data.csproj": {
+                "projectPath": "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Data\\ProSeeker.Data\\ProSeeker.Data.csproj"
+              },
+              "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Services\\ProSeeker.Services.Data\\ProSeeker.Services.Data.csproj": {
+                "projectPath": "D:\\Programming stuff\\GitHub\\FOR MY PROJECT INFOOOO\\NIKIs Template\\ProSeeker\\Services\\ProSeeker.Services.Data\\ProSeeker.Services.Data.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[3.1.9, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[16.7.1, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.14.7, )"
+            },
+            "StyleCop.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.2.0-beta.205, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.4.1, )"
+            },
+            "xunit.runner.visualstudio": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.4.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

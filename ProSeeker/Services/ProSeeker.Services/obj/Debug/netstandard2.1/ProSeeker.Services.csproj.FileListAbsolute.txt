@@ -1,0 +1,9 @@
+D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Services\ProSeeker.Services\bin\Debug\netstandard2.1\ProSeeker.Services.deps.json
+D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Services\ProSeeker.Services\bin\Debug\netstandard2.1\ProSeeker.Services.dll
+D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Services\ProSeeker.Services\bin\Debug\netstandard2.1\ProSeeker.Services.pdb
+D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Services\ProSeeker.Services\obj\Debug\netstandard2.1\ProSeeker.Services.csprojAssemblyReference.cache
+D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Services\ProSeeker.Services\obj\Debug\netstandard2.1\ProSeeker.Services.AssemblyInfoInputs.cache
+D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Services\ProSeeker.Services\obj\Debug\netstandard2.1\ProSeeker.Services.AssemblyInfo.cs
+D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Services\ProSeeker.Services\obj\Debug\netstandard2.1\ProSeeker.Services.csproj.CoreCompileInputs.cache
+D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Services\ProSeeker.Services\obj\Debug\netstandard2.1\ProSeeker.Services.dll
+D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Services\ProSeeker.Services\obj\Debug\netstandard2.1\ProSeeker.Services.pdb

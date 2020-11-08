@@ -1,0 +1,9 @@
+D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Services\ProSeeker.Services.Messaging\bin\Debug\netstandard2.1\ProSeeker.Services.Messaging.deps.json
+D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Services\ProSeeker.Services.Messaging\bin\Debug\netstandard2.1\ProSeeker.Services.Messaging.dll
+D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Services\ProSeeker.Services.Messaging\bin\Debug\netstandard2.1\ProSeeker.Services.Messaging.pdb
+D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Services\ProSeeker.Services.Messaging\obj\Debug\netstandard2.1\ProSeeker.Services.Messaging.csprojAssemblyReference.cache
+D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Services\ProSeeker.Services.Messaging\obj\Debug\netstandard2.1\ProSeeker.Services.Messaging.AssemblyInfoInputs.cache
+D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Services\ProSeeker.Services.Messaging\obj\Debug\netstandard2.1\ProSeeker.Services.Messaging.AssemblyInfo.cs
+D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Services\ProSeeker.Services.Messaging\obj\Debug\netstandard2.1\ProSeeker.Services.Messaging.csproj.CoreCompileInputs.cache
+D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Services\ProSeeker.Services.Messaging\obj\Debug\netstandard2.1\ProSeeker.Services.Messaging.dll
+D:\Programming stuff\GitHub\FOR MY PROJECT INFOOOO\NIKIs Template\ProSeeker\Services\ProSeeker.Services.Messaging\obj\Debug\netstandard2.1\ProSeeker.Services.Messaging.pdb
