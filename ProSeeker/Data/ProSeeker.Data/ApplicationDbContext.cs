@@ -74,6 +74,7 @@
             }
         }
 
+        // Filter (soft-deleted entities will be ignored when working with the db)
         private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)
             where T : class, IDeletableEntity
         {
