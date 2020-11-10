@@ -21,6 +21,7 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using ProSeeker.Services.Data.Home;
 
     public class Startup
     {
@@ -64,6 +65,7 @@
             // Register all application services (Dependency container)
             services.AddTransient<IEmailSender>(x => new SendGridEmailSender("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"));
             services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<IHomeService, HomeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

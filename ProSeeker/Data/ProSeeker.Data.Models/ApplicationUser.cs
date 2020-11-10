@@ -7,6 +7,7 @@ namespace ProSeeker.Data.Models
     using ProSeeker.Data.Common.Models;
 
     using Microsoft.AspNetCore.Identity;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
@@ -17,6 +18,10 @@ namespace ProSeeker.Data.Models
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
         }
+
+        public string ProfileId { get; set; }
+
+        public virtual Profile Profile { get; set; }
 
         // Audit info
         public DateTime CreatedOn { get; set; }

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
@@ -21,6 +21,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\ProSeeker.Data.Common\ProSeeker.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\ProSeeker.Data.Models\ProSeeker.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Data\ProSeeker.Data\ProSeeker.Data.csproj" />
+    <ProjectReference Include="..\..\Web\ProSeeker.Web.ViewModels\ProSeeker.Web.ViewModels.csproj" />
     <ProjectReference Include="..\ProSeeker.Services.Mapping\ProSeeker.Services.Mapping.csproj" />
   </ItemGroup>
 
