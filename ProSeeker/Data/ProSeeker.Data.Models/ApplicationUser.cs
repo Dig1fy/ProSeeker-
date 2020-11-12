@@ -3,11 +3,10 @@ namespace ProSeeker.Data.Models
 {
     using System;
     using System.Collections.Generic;
-
-    using ProSeeker.Data.Common.Models;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     using Microsoft.AspNetCore.Identity;
-    using System.ComponentModel.DataAnnotations.Schema;
+    using ProSeeker.Data.Common.Models;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
@@ -19,9 +18,21 @@ namespace ProSeeker.Data.Models
             this.Logins = new HashSet<IdentityUserLogin<string>>();
         }
 
-        public string ProfileId { get; set; }
+        public string FirstName { get; set; }
 
-        public virtual Profile Profile { get; set; }
+        public string LastName { get; set; }
+
+        public bool IsOnline { get; set; }
+
+        public DateTime LastVisit { get; set; }
+
+        public bool IsSpecialist { get; set; }
+
+        public string SpecialistDetailsId { get; set; }
+
+        public virtual Specialist_Details SpecialistDetails { get; set; }
+
+        public string DetailsId { get; set; }
 
         // Audit info
         public DateTime CreatedOn { get; set; }

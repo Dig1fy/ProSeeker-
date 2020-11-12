@@ -26,13 +26,11 @@
 
         public DbSet<Setting> Settings { get; set; }
 
-        public DbSet<Profile> Profiles { get; set; }
-
         public DbSet<Comment> Comments { get; set; }
 
         public DbSet<JobCategory> JobCategories { get; set; }
 
-        public DbSet<JobSubcategory> JobSubcategories { get; set; }
+        public DbSet<BaseJobCategory> BaseJobCategories { get; set; }
 
         public DbSet<Specialist_Details> Specialist_Details { get; set; }
 
@@ -85,14 +83,9 @@
             }
 
             builder.Entity<ApplicationUser>()
-                .HasOne<Profile>(user => user.Profile)
-                .WithOne(profile => profile.Owner)
-                .HasForeignKey<Profile>(fk => fk.OwnerId);
-
-            builder.Entity<Profile>()
-                .HasOne<Specialist_Details>(prof => prof.Details)
-                .WithOne(detail => detail.Profile)
-                .HasForeignKey<Specialist_Details>(fk => fk.ProfileId);
+                .HasOne<Specialist_Details>(user => user.SpecialistDetails)
+                .WithOne(sd => sd.User)
+                .HasForeignKey<Specialist_Details>(fk => fk.UserId);
         }
 
         // Filter (soft-deleted entities will be ignored when working with the db)

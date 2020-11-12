@@ -1,5 +1,6 @@
 ﻿@using ProSeeker.Common
 @model ProSeeker.Web.ViewModels.Home.IndexViewModel
+
 @{
     this.ViewData["Title"] = $"Welcome to {GlobalConstants.SystemName}!";
 }
@@ -7,26 +8,24 @@
 <div class="text-center">
     <h1 class="display-4">@this.ViewData["Title"]</h1>
 
-    @foreach (var category in Model.Categories)
+    @foreach (var baseCategory in Model.BaseCategories)
     {
         <div class="list-group m-4">
             <a href="#" class="list-group-item active">
-                <h4 class="list-group-item-heading">@category.Name</h4>
-                <p class="list-group-item-text">@category.Description</p>
+                <h4 class="list-group-item-heading">@baseCategory.CategoryName</h4>
+                <p class="list-group-item-text">@baseCategory.Description</p>
             </a>
 
             <div class="row">
-                @foreach (var subCat in category.Subcategories)
+                @foreach (var category in baseCategory.JobCategories)
                 {
-                    <div class="media d-md-inline m-md-2" href="@subCat.Url">
+                    <div class="media d-md-inline m-md-2" href="@category.Url">
                         <div class="media-left">
-                            <a href="@subCat.Url">
-                                <img class="media-object" width="250" height="200" src="@subCat.PictureUrl" alt="...">
+                            <a href="@category.Url" class="text-decoration-none">
+                                <img class="media-object" width="250" height="200" src="@category.PictureUrl" alt="...">
+                                <h4 class="media-heading text-success">@category.Name</h4>
                             </a>
-                        </div>
-                        <div class="media-body ">
-                            <h4 class="media-heading text-success">@subCat.Name</h4>
-                            <p class="text-break text-dark">@subCat.Description</p>
+                            <p class="text-break text-dark">@category.ShortDescription</p>
                         </div>
                     </div>
                 }

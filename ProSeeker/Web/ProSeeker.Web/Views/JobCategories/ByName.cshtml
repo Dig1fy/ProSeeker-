@@ -1,0 +1,29 @@
+﻿@model ProSeeker.Web.ViewModels.Categories.CategoriesViewModel
+
+@{
+    this.ViewData["Title"] = $"Welcome to {@Model.Name}!";
+}
+
+<h1 class="display-3">@Model.Name</h1>
+<div class="alert alert-heading">
+    <h2>@Model.Description</h2>
+</div>
+@if (Model.SpecialistsDetails.Count > 0)
+{
+    @foreach (var specialist in Model.SpecialistsDetails)
+    {
+        <div class="row">
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="..." alt="...">
+                    <div class="caption">
+                        <h3>@specialist.UserFirstName</h3>
+                        <h2>@specialist.JobCategoryId</h2>
+                        @*<p>Job category: @specialist.Details.JobCategoryId</p>*@
+                        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}

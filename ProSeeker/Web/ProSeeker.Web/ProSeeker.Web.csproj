@@ -36,4 +36,13 @@
     <ProjectReference Include="..\ProSeeker.Web.Infrastructure\ProSeeker.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\ProSeeker.Web.ViewModels\ProSeeker.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Home\Index.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\Home\Privacy.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

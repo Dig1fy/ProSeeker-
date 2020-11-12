@@ -2,17 +2,6 @@
 {
     using System.Reflection;
 
-    using ProSeeker.Data;
-    using ProSeeker.Data.Common;
-    using ProSeeker.Data.Common.Repositories;
-    using ProSeeker.Data.Models;
-    using ProSeeker.Data.Repositories;
-    using ProSeeker.Data.Seeding;
-    using ProSeeker.Services.Data;
-    using ProSeeker.Services.Mapping;
-    using ProSeeker.Services.Messaging;
-    using ProSeeker.Web.ViewModels;
-
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -21,7 +10,18 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using ProSeeker.Data;
+    using ProSeeker.Data.Common;
+    using ProSeeker.Data.Common.Repositories;
+    using ProSeeker.Data.Models;
+    using ProSeeker.Data.Repositories;
+    using ProSeeker.Data.Seeding;
+    using ProSeeker.Services.Data;
+    using ProSeeker.Services.Data.CategoriesService;
     using ProSeeker.Services.Data.Home;
+    using ProSeeker.Services.Mapping;
+    using ProSeeker.Services.Messaging;
+    using ProSeeker.Web.ViewModels;
 
     public class Startup
     {
@@ -66,6 +66,7 @@
             services.AddTransient<IEmailSender>(x => new SendGridEmailSender("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"));
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IHomeService, HomeService>();
+            services.AddTransient<ICategoriesService, CategoriesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -106,6 +107,7 @@
                     {
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                        endpoints.MapControllerRoute("JobCategories", "jobcategories/{name:minlength(2)}", new { controller = "JobCategories", action = "ByName" });
                         endpoints.MapRazorPages();
                     });
         }
