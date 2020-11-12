@@ -1,9 +1,8 @@
 ﻿namespace ProSeeker.Web.ViewModels.Settings
 {
+    using AutoMapper;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;
-
-    using AutoMapper;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {

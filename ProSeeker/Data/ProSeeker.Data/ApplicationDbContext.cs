@@ -34,6 +34,8 @@
 
         public DbSet<Specialist_Details> Specialist_Details { get; set; }
 
+        public DbSet<SpecialistsLikes> SpecialistsLikes { get; set; }
+
 
         public override int SaveChanges() => this.SaveChanges(true);
 
@@ -86,6 +88,8 @@
                 .HasOne<Specialist_Details>(user => user.SpecialistDetails)
                 .WithOne(sd => sd.User)
                 .HasForeignKey<Specialist_Details>(fk => fk.UserId);
+
+            builder.Entity<SpecialistsLikes>().HasKey(x => new { x.ApplicationUserId, x.SpecialistDetailsId });
         }
 
         // Filter (soft-deleted entities will be ignored when working with the db)

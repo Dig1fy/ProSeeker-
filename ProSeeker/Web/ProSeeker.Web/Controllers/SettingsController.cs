@@ -3,12 +3,11 @@
     using System;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Mvc;
     using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Data;
     using ProSeeker.Web.ViewModels.Settings;
-
-    using Microsoft.AspNetCore.Mvc;
 
     public class SettingsController : BaseController
     {

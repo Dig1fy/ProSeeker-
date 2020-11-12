@@ -2,9 +2,8 @@
 {
     using System.Linq;
 
-    using ProSeeker.Data.Common.Models;
-
     using Microsoft.EntityFrameworkCore;
+    using ProSeeker.Data.Common.Models;
 
     internal static class EntityIndexesConfiguration
     {

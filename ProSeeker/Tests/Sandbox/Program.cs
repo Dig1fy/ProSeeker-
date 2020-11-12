@@ -5,6 +5,11 @@
     using System.IO;
     using System.Threading.Tasks;
 
+    using CommandLine;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Logging;
     using ProSeeker.Data;
     using ProSeeker.Data.Common;
     using ProSeeker.Data.Common.Repositories;
@@ -13,13 +18,6 @@
     using ProSeeker.Data.Seeding;
     using ProSeeker.Services.Data;
     using ProSeeker.Services.Messaging;
-
-    using CommandLine;
-
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Logging;
 
     public static class Program
     {

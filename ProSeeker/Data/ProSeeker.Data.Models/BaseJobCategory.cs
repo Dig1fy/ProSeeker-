@@ -15,6 +15,6 @@
 
         public string Description { get; set; }
 
-        public virtual ICollection<JobCategory> JobCategories{ get; set; }
+        public virtual ICollection<JobCategory> JobCategories { get; set; }
     }
 }

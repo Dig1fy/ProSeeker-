@@ -3,9 +3,8 @@
     using System;
     using System.Threading.Tasks;
 
-    using ProSeeker.Data.Common;
-
     using Microsoft.EntityFrameworkCore;
+    using ProSeeker.Data.Common;
 
     public class DbQueryRunner : IDbQueryRunner
     {

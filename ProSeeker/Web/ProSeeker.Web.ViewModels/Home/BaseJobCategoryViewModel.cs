@@ -14,6 +14,5 @@
         public string Description { get; set; }
 
         public IEnumerable<JobCategoriesViewModel> JobCategories { get; set; }
-
     }
 }

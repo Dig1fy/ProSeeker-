@@ -1,9 +1,8 @@
 ﻿namespace ProSeeker.Web.Areas.Administration.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
     using ProSeeker.Services.Data;
     using ProSeeker.Web.ViewModels.Administration.Dashboard;
-
-    using Microsoft.AspNetCore.Mvc;
 
     public class DashboardController : AdministrationController
     {

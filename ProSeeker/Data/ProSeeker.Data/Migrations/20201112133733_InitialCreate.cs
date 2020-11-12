@@ -243,6 +243,7 @@ namespace ProSeeker.Data.Migrations
                     Website = table.Column<string>(nullable: true),
                     WorkActivities = table.Column<string>(nullable: true),
                     CityName = table.Column<string>(nullable: true),
+                    Likes = table.Column<int>(nullable: false),
                     UserId = table.Column<string>(nullable: true),
                     JobCategoryId = table.Column<int>(nullable: false)
                 },
@@ -296,6 +297,31 @@ namespace ProSeeker.Data.Migrations
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Comments_Specialist_Details_SpecialistDetailsId",
+                        column: x => x.SpecialistDetailsId,
+                        principalTable: "Specialist_Details",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SpecialistsLikes",
+                columns: table => new
+                {
+                    ApplicationUserId = table.Column<string>(nullable: false),
+                    SpecialistDetailsId = table.Column<string>(nullable: false),
+                    IsLiked = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SpecialistsLikes", x => new { x.ApplicationUserId, x.SpecialistDetailsId });
+                    table.ForeignKey(
+                        name: "FK_SpecialistsLikes_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_SpecialistsLikes_Specialist_Details_SpecialistDetailsId",
                         column: x => x.SpecialistDetailsId,
                         principalTable: "Specialist_Details",
                         principalColumn: "Id",
@@ -407,6 +433,11 @@ namespace ProSeeker.Data.Migrations
                 column: "UserId",
                 unique: true,
                 filter: "[UserId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SpecialistsLikes_SpecialistDetailsId",
+                table: "SpecialistsLikes",
+                column: "SpecialistDetailsId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -431,6 +462,9 @@ namespace ProSeeker.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Settings");
+
+            migrationBuilder.DropTable(
+                name: "SpecialistsLikes");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

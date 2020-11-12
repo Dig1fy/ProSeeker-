@@ -10,7 +10,7 @@ using ProSeeker.Data;
 namespace ProSeeker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201112113019_InitialCreate")]
+    [Migration("20201112133733_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -443,6 +443,9 @@ namespace ProSeeker.Data.Migrations
                     b.Property<int>("JobCategoryId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Likes")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
@@ -466,6 +469,24 @@ namespace ProSeeker.Data.Migrations
                         .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Specialist_Details");
+                });
+
+            modelBuilder.Entity("ProSeeker.Data.Models.SpecialistsLikes", b =>
+                {
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("SpecialistDetailsId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsLiked")
+                        .HasColumnType("bit");
+
+                    b.HasKey("ApplicationUserId", "SpecialistDetailsId");
+
+                    b.HasIndex("SpecialistDetailsId");
+
+                    b.ToTable("SpecialistsLikes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -544,7 +565,7 @@ namespace ProSeeker.Data.Migrations
             modelBuilder.Entity("ProSeeker.Data.Models.Specialist_Details", b =>
                 {
                     b.HasOne("ProSeeker.Data.Models.JobCategory", "JobCategory")
-                        .WithMany("Specialists")
+                        .WithMany("SpecialistsDetails")
                         .HasForeignKey("JobCategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -552,6 +573,21 @@ namespace ProSeeker.Data.Migrations
                     b.HasOne("ProSeeker.Data.Models.ApplicationUser", "User")
                         .WithOne("SpecialistDetails")
                         .HasForeignKey("ProSeeker.Data.Models.Specialist_Details", "UserId");
+                });
+
+            modelBuilder.Entity("ProSeeker.Data.Models.SpecialistsLikes", b =>
+                {
+                    b.HasOne("ProSeeker.Data.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ProSeeker.Data.Models.Specialist_Details", "SpecialistDetails")
+                        .WithMany()
+                        .HasForeignKey("SpecialistDetailsId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
