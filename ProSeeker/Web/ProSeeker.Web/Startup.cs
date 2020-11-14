@@ -48,6 +48,10 @@
                         options.MinimumSameSitePolicy = SameSiteMode.None;
                     });
 
+            services.AddAuthentication()
+                .AddFacebook()
+                .AddGoogle();
+
             services.AddControllersWithViews(
                 options =>
                     {
