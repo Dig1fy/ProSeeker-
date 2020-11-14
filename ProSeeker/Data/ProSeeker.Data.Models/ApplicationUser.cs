@@ -24,6 +24,8 @@ namespace ProSeeker.Data.Models
 
         public bool IsOnline { get; set; }
 
+        public string City { get; set; }
+
         public DateTime LastVisit { get; set; }
 
         public bool IsSpecialist { get; set; }

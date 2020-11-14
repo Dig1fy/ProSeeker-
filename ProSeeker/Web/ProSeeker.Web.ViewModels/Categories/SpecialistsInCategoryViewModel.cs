@@ -15,7 +15,7 @@
 
         public string UserFullName => $"{this.UserFirstName} {this.UserLastName}";
 
-        public string CityName { get; set; }
+        public string UserCity { get; set; }
 
         // Accessing Specialist_Details -> JobCategory -> Name property via the AutoMapper
         public string JobCategoryName { get; set; }

@@ -172,6 +172,9 @@ namespace ProSeeker.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -421,9 +424,6 @@ namespace ProSeeker.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("AboutMe")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CityName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CompanyName")

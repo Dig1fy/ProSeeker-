@@ -28,8 +28,6 @@
 
         public string WorkActivities { get; set; }
 
-        public string CityName { get; set; }
-
         public int Likes { get; set; }
 
         public string UserId { get; set; }
