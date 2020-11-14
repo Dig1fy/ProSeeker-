@@ -12,8 +12,11 @@ namespace ProSeeker.Web.Areas.Identity.Pages.Account
     using Microsoft.AspNetCore.Identity.UI.Services;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
+    using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.WebUtilities;
     using Microsoft.Extensions.Logging;
+    using ProSeeker.Data;
+    using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;
 
     public class RegisterSpecialistModel : PageModel
@@ -22,23 +25,32 @@ namespace ProSeeker.Web.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ILogger<RegisterSpecialistModel> logger;
         private readonly IEmailSender emailSender;
+        private readonly IDeletableEntityRepository<JobCategory> categoriesRepository;
+        private readonly ApplicationDbContext db;
 
         public RegisterSpecialistModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterSpecialistModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ApplicationDbContext db)
         {
+
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.logger = logger;
             this.emailSender = emailSender;
+            this.db = db;
         }
 
         [BindProperty]
         public RegisterSpecialistInputModel Input { get; set; }
 
         public string ReturnUrl { get; set; }
+
+        public IList<SelectListItem> AllCategories => this.db.JobCategories
+          .Select(c => new SelectListItem() { Text = c.Name, Value = c.Id.ToString() })
+          .ToList();
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
@@ -79,6 +91,10 @@ namespace ProSeeker.Web.Areas.Identity.Pages.Account
 
             [Display(Name = "Your company name")]
             public string CompanyName { get; set; }
+
+            public string JobCategoryId { get; set; }
+
+            public List<SelectListItem> AllCategories { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -102,7 +118,7 @@ namespace ProSeeker.Web.Areas.Identity.Pages.Account
                     IsSpecialist = true,
                     IsOnline = false,
                     City = this.Input.City,
-                    SpecialistDetails = new Specialist_Details { JobCategoryId = 2, CompanyName = this.Input.CompanyName },
+                    SpecialistDetails = new Specialist_Details { JobCategoryId = int.Parse(this.Input.JobCategoryId), CompanyName = this.Input.CompanyName },
                 };
                 var result = await this.userManager.CreateAsync(user, this.Input.Password);
                 if (result.Succeeded)
