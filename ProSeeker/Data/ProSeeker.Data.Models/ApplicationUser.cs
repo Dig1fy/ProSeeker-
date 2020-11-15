@@ -32,6 +32,9 @@ namespace ProSeeker.Data.Models
 
         public string SpecialistDetailsId { get; set; }
 
+        // Will be saved locally -> wwwroot
+        public string ProfilePicture { get; set; }
+
         public virtual Specialist_Details SpecialistDetails { get; set; }
 
         public string DetailsId { get; set; }

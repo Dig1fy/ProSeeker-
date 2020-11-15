@@ -1,8 +1,8 @@
 ﻿namespace ProSeeker.Data.Configurations
 {
-    using ProSeeker.Data.Models;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using ProSeeker.Data.Models;
 
     public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
     {

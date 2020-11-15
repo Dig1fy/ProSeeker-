@@ -16,6 +16,7 @@
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.AspNetCore.WebUtilities;
     using Microsoft.Extensions.Logging;
+    using ProSeeker.Common;
     using ProSeeker.Data.Models;
 
     [AllowAnonymous]
@@ -96,6 +97,7 @@
                     LastName = this.Input.LastName,
                     IsSpecialist = false,
                     IsOnline = false,
+                    ProfilePicture = GlobalConstants.DefaultProfileImagePath,
                 };
                 var result = await this.userManager.CreateAsync(user, this.Input.Password);
                 if (result.Succeeded)

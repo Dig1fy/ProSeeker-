@@ -15,6 +15,7 @@ namespace ProSeeker.Web.Areas.Identity.Pages.Account
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.WebUtilities;
     using Microsoft.Extensions.Logging;
+    using ProSeeker.Common;
     using ProSeeker.Data;
     using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;
@@ -119,6 +120,7 @@ namespace ProSeeker.Web.Areas.Identity.Pages.Account
                     IsOnline = false,
                     City = this.Input.City,
                     SpecialistDetails = new Specialist_Details { JobCategoryId = int.Parse(this.Input.JobCategoryId), CompanyName = this.Input.CompanyName },
+                    ProfilePicture = GlobalConstants.DefaultProfileImagePath,
                 };
                 var result = await this.userManager.CreateAsync(user, this.Input.Password);
                 if (result.Succeeded)

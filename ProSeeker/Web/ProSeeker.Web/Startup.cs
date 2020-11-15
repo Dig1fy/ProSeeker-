@@ -48,9 +48,18 @@
                         options.MinimumSameSitePolicy = SameSiteMode.None;
                     });
 
-            services.AddAuthentication()
-                .AddFacebook()
-                .AddGoogle();
+            // TODO: Add Privacy page and add implement facebook/google APIs
+            services.AddAuthentication();
+                //.AddFacebook(facebookOptions =>
+                //{
+                //    facebookOptions.AppId = this.configuration["Authentication:Facebook:AppId"];
+                //    facebookOptions.AppSecret = this.configuration["Authentication:Facebook:AppSecret"];
+                //})
+                //.AddGoogle(googleOptions =>
+                //{
+                //    googleOptions.ClientId = this.configuration["Authentication:Google:ClientId"];
+                //    googleOptions.ClientSecret = this.configuration["Authentication:Google:ClientSecret"];
+                //});
 
             services.AddControllersWithViews(
                 options =>

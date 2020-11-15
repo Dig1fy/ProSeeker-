@@ -23,6 +23,7 @@
     {
         public static int Main(string[] args)
         {
+
             Console.WriteLine($"{typeof(Program).Namespace} ({string.Join(" ", args)}) starts working...");
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
