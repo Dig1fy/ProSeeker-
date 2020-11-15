@@ -30,8 +30,7 @@
                 <div class="media d-md-inline m-md-2 row">
                     <h4 class="media-heading"><a asp-controller="SpecialistsDetails" asp-action="GetSpecialistsDetailsById" asp-route-id="@specialist.Id">@specialist.UserFullName</a></h4>
                     <div class="form-group">
-                        <label asp-for="@specialist.UserProfilePicture"></label>
-                        <img src="@specialist.UserProfilePicture" width="160" height="130" alt="Alternate Text" />
+                        <img src="@specialist.UserProfilePicture" width="130" height="110" alt="Alternate Text" />
                     </div>
                     <p>@specialist.JobCategoryName - @specialist.UserCity</p>
                     <p><i class="fas fa-user"></i> @specialist.UserUserName</p>
