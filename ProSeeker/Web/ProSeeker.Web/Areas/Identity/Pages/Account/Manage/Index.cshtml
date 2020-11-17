@@ -12,8 +12,8 @@
         <form id="profile-form" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger">Zz</div>
             <div class="form-group">
-                <label asp-for="Username"></label>
-                <input asp-for="Username" class="form-control" disabled />
+                <label asp-for="Input.Username"></label>
+                <input asp-for="Input.Username" class="form-control" disabled />
             </div>
             <div class="form-group">
                 <label asp-for="Input.PhoneNumber"></label>
@@ -35,6 +35,29 @@
                 <input asp-for="Input.City" class="form-control" />
                 <span asp-validation-for="Input.City" class="text-danger"></span>
             </div>
+            @if (Model.Input.IsSpecialist == true)
+            {
+                <div class="form-group">
+                    <label asp-for="Input.SpecialistDetails.AboutMe"></label>
+                    <input asp-for="Input.SpecialistDetails.AboutMe" class="form-control" />
+                    <span asp-validation-for="Input.SpecialistDetails.AboutMe" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.SpecialistDetails.CompanyName"></label>
+                    <input asp-for="Input.SpecialistDetails.CompanyName" class="form-control" />
+                    <span asp-validation-for="Input.SpecialistDetails.CompanyName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.SpecialistDetails.WorkActivities"></label>
+                    <input asp-for="Input.SpecialistDetails.WorkActivities" class="form-control" />
+                    <span asp-validation-for="Input.SpecialistDetails.WorkActivities" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.SpecialistDetails.Website"></label>
+                    <input asp-for="Input.SpecialistDetails.Website" class="form-control" />
+                    <span asp-validation-for="Input.SpecialistDetails.Website" class="text-danger"></span>
+                </div>
+            }
 
             <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
         </form>

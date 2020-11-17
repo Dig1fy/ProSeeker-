@@ -9,22 +9,24 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
+    using ProSeeker.Data;
     using ProSeeker.Data.Models;
 
     public partial class IndexModel : PageModel
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly ApplicationDbContext db;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+            ApplicationDbContext db)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.db = db;
         }
-
-        public string Username { get; set; }
 
         [TempData]
         public string StatusMessage { get; set; }
@@ -34,6 +36,9 @@
 
         public class InputModel
         {
+            [Display(Name = "Your user name")]
+            public string Username { get; set; }
+
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
@@ -55,29 +60,48 @@
             [Display(Name = "City name*")]
             public string City { get; set; }
 
+            public bool IsSpecialist { get; set; }
+
+            public SpecialistInputModel SpecialistDetails { get; set; }
+        }
+
+        public class SpecialistInputModel
+        {
             [Display(Name = "Additional information about you and your professional experience")]
             public string AboutMe { get; set; }
 
             [Display(Name = "Your company name")]
             public string CompanyName { get; set; }
 
-            //TODO: Add the other specialist properties
+            [Display(Name = "Your professional activities")]
+            public string WorkActivities { get; set; }
 
+            [Display(Name = "Your professional website")]
+            public string Website { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser user)
         {
-            //var userName = await this.userManager.GetUserNameAsync(user);
-            //var phoneNumber = await this.userManager.GetPhoneNumberAsync(user);
-            this.Username = user.UserName;
-
             this.Input = new InputModel
             {
+                Username = user.UserName,
                 PhoneNumber = user.PhoneNumber,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-
+                City = user.City,
+                IsSpecialist = user.IsSpecialist,
             };
+
+            if (user.IsSpecialist)
+            {
+                this.Input.SpecialistDetails = this.db.Specialist_Details.Where(x => x.UserId == user.Id).Select(y => new SpecialistInputModel
+                {
+                    AboutMe = y.AboutMe,
+                    CompanyName = y.CompanyName,
+                    Website = y.Website,
+                    WorkActivities = y.WorkActivities,
+                }).FirstOrDefault();
+            }
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -106,17 +130,19 @@
                 return this.Page();
             }
 
-            var phoneNumber = await this.userManager.GetPhoneNumberAsync(user);
-            if (this.Input.PhoneNumber != phoneNumber)
-            {
-                var setPhoneResult = await this.userManager.SetPhoneNumberAsync(user, this.Input.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
-                {
-                    this.StatusMessage = "Unexpected error when trying to set phone number.";
-                    return this.RedirectToPage();
-                }
-            }
+            //var phoneNumber = await this.userManager.GetPhoneNumberAsync(user);
+            //if (this.Input.PhoneNumber != phoneNumber)
+            //{
+            //    var setPhoneResult = await this.userManager.SetPhoneNumberAsync(user, this.Input.PhoneNumber);
+            //    if (!setPhoneResult.Succeeded)
+            //    {
+            //        this.StatusMessage = "Unexpected error when trying to set phone number.";
+            //        return this.RedirectToPage();
+            //    }
+            //}
 
+            var userData = this.db.Users.FirstOrDefault(x=>x.Id == this.userManager.getcu())
+            
             await this.signInManager.RefreshSignInAsync(user);
             this.StatusMessage = "Your profile has been updated";
             return this.RedirectToPage();
