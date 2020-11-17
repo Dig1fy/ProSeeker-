@@ -9,19 +9,21 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
+    using ProSeeker.Common;
     using ProSeeker.Data;
+    using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;
 
     public partial class IndexModel : PageModel
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
-        private readonly ApplicationDbContext db;
+        private readonly IDeletableEntityRepository<Specialist_Details> db;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            ApplicationDbContext db)
+            IDeletableEntityRepository<Specialist_Details> db)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -80,8 +82,14 @@
             public string Website { get; set; }
         }
 
-        private async Task LoadAsync(ApplicationUser user)
+        private async Task LoadAsync(ApplicationUser currentUser)
         {
+            //var userName = await this.userManager.GetUserNameAsync(user);
+            //var phoneNumber = await this.userManager.GetPhoneNumberAsync(user);
+            //this.Username = user.UserName;
+            //this.Input = await this.db.Users.Where(x => x.Id == user.Id).
+            var user = await this.userManager.GetUserAsync(this.User);
+
             this.Input = new InputModel
             {
                 Username = user.UserName,
@@ -94,7 +102,8 @@
 
             if (user.IsSpecialist)
             {
-                this.Input.SpecialistDetails = this.db.Specialist_Details.Where(x => x.UserId == user.Id).Select(y => new SpecialistInputModel
+
+                this.Input.SpecialistDetails = this.db.All().Where(x => x.UserId == user.Id).Select(y => new SpecialistInputModel
                 {
                     AboutMe = y.AboutMe,
                     CompanyName = y.CompanyName,
@@ -119,6 +128,7 @@
         public async Task<IActionResult> OnPostAsync()
         {
             var user = await this.userManager.GetUserAsync(this.User);
+
             if (user == null)
             {
                 return this.NotFound($"Unable to load user with ID '{this.userManager.GetUserId(this.User)}'.");
@@ -130,19 +140,50 @@
                 return this.Page();
             }
 
-            //var phoneNumber = await this.userManager.GetPhoneNumberAsync(user);
-            //if (this.Input.PhoneNumber != phoneNumber)
-            //{
-            //    var setPhoneResult = await this.userManager.SetPhoneNumberAsync(user, this.Input.PhoneNumber);
-            //    if (!setPhoneResult.Succeeded)
-            //    {
-            //        this.StatusMessage = "Unexpected error when trying to set phone number.";
-            //        return this.RedirectToPage();
-            //    }
-            //}
+            if (user.IsSpecialist)
+            {
+                var specDetails = this.db.All().FirstOrDefault(x => x.UserId == user.Id);
 
-            var userData = this.db.Users.FirstOrDefault(x=>x.Id == this.userManager.getcu())
-            
+                if (specDetails.AboutMe != this.Input.SpecialistDetails.AboutMe)
+                {
+                    specDetails.AboutMe = this.Input.SpecialistDetails.AboutMe;
+                }
+
+                if (specDetails.CompanyName != this.Input.SpecialistDetails.CompanyName)
+                {
+                    specDetails.CompanyName = this.Input.SpecialistDetails.CompanyName;
+                }
+
+                if (specDetails.Website != this.Input.SpecialistDetails.Website)
+                {
+                    specDetails.Website = this.Input.SpecialistDetails.Website;
+                }
+
+                if (specDetails.WorkActivities != this.Input.SpecialistDetails.WorkActivities)
+                {
+                    specDetails.WorkActivities = this.Input.SpecialistDetails.WorkActivities;
+                }
+            }
+
+            var phoneNumber = await this.userManager.GetPhoneNumberAsync(user);
+
+            if (this.Input.PhoneNumber != phoneNumber)
+            {
+                var setPhoneResult = await this.userManager.SetPhoneNumberAsync(user, this.Input.PhoneNumber);
+                if (!setPhoneResult.Succeeded)
+                {
+                    this.StatusMessage = "Unexpected error when trying to set phone number.";
+                    return this.RedirectToPage();
+                }
+            }
+
+            var updateResult = await this.userManager.UpdateAsync(user);
+
+            if (!updateResult.Succeeded)
+            {
+                this.StatusMessage = GlobalConstants.UpdateProfileErrorMessage;
+            }
+
             await this.signInManager.RefreshSignInAsync(user);
             this.StatusMessage = "Your profile has been updated";
             return this.RedirectToPage();
