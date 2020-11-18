@@ -1,7 +1,7 @@
 ﻿namespace ProSeeker.Web
 {
     using System.Reflection;
-
+    using CloudinaryDotNet;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -18,6 +18,7 @@
     using ProSeeker.Data.Seeding;
     using ProSeeker.Services.Data;
     using ProSeeker.Services.Data.CategoriesService;
+    using ProSeeker.Services.Data.Cloud;
     using ProSeeker.Services.Data.Home;
     using ProSeeker.Services.Mapping;
     using ProSeeker.Services.Messaging;
@@ -62,12 +63,12 @@
             //});
 
             // Cloudinary Authentication
-            //var cloudinaryAccount = new CloudinaryDotNet.Account(
-            //    this.configuration["Cloudinary:CloudName"],
-            //    this.configuration["Cloudinary:ApiKey"],
-            //    this.configuration["Cloudinary:ApiSecret"]);
-            //var cloudinary = new cloudinary(cloudinaryAccount);
-            //services.AddSingleton(cloudinary);
+            var clodAccount = new CloudinaryDotNet.Account(
+                this.configuration["Cloudinary:CloudName"],
+                this.configuration["Cloudinary:ApiKey"],
+                this.configuration["Cloudinary:Secret"]);
+            var cloudinary = new Cloudinary(clodAccount);
+            services.AddSingleton(cloudinary);
 
             services.AddControllersWithViews(
                 options =>
@@ -99,6 +100,7 @@
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IHomeService, HomeService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
+            services.AddTransient<ICloudinaryApplicationService, CloudinaryApplicationService>();
             //services.AddTransient<IApplicationUsersController, ApplicationUsersController>();
         }
 

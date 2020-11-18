@@ -5,7 +5,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -13,21 +13,25 @@
     using ProSeeker.Data;
     using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;
+    using ProSeeker.Services.Data.Cloud;
 
     public partial class IndexModel : PageModel
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly IDeletableEntityRepository<Specialist_Details> specialistsRepository;
+        private readonly ICloudinaryApplicationService cloudinaryApplicationService;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            IDeletableEntityRepository<Specialist_Details> specialistsRepository)
+            IDeletableEntityRepository<Specialist_Details> specialistsRepository,
+            ICloudinaryApplicationService cloudinaryApplicationService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.specialistsRepository = specialistsRepository;
+            this.cloudinaryApplicationService = cloudinaryApplicationService;
         }
 
         [TempData]
@@ -38,6 +42,8 @@
 
         public class InputModel
         {
+            public string ProfilePictureUrl { get; set; }
+
             [Display(Name = "Your user name")]
             public string Username { get; set; }
 
@@ -94,6 +100,7 @@
                 LastName = user.LastName,
                 City = user.City,
                 IsSpecialist = user.IsSpecialist,
+                ProfilePictureUrl = user.ProfilePicture,
             };
 
             if (user.IsSpecialist)
@@ -120,7 +127,7 @@
             return this.Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(IFormFile imageFile)
         {
             var user = await this.userManager.GetUserAsync(this.User);
 
@@ -167,9 +174,22 @@
                 var setPhoneResult = await this.userManager.SetPhoneNumberAsync(user, this.Input.PhoneNumber);
                 if (!setPhoneResult.Succeeded)
                 {
-                    this.StatusMessage = "Unexpected error when trying to set phone number.";
+                    this.StatusMessage = GlobalConstants.InvalidPhoneNumber;
                     return this.RedirectToPage();
                 }
+            }
+
+            var profileImageName = $"{user.Id}profilePicture";
+
+            if (imageFile != null)
+            {
+                if (!this.cloudinaryApplicationService.IsFileValid(imageFile))
+                {
+                    this.StatusMessage = GlobalConstants.InvalidProfilePictureMessage;
+                    return this.RedirectToPage();
+                }
+                var imageUrl = await this.cloudinaryApplicationService.UploadImageAsync(imageFile, profileImageName);
+                user.ProfilePicture = imageUrl;
             }
 
             var updateResult = await this.userManager.UpdateAsync(user);
