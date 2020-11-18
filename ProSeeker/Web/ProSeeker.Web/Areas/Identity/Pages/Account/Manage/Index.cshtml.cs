@@ -1,16 +1,14 @@
 ﻿namespace ProSeeker.Web.Areas.Identity.Pages.Account.Manage
 {
-    using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using ProSeeker.Common;
-    using ProSeeker.Data;
     using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Data.Cloud;
@@ -204,6 +202,7 @@
                     this.StatusMessage = GlobalConstants.InvalidProfilePictureMessage;
                     return this.RedirectToPage();
                 }
+
                 var imageUrl = await this.cloudinaryApplicationService.UploadImageAsync(imageFile, profileImageName);
                 user.ProfilePicture = imageUrl;
             }

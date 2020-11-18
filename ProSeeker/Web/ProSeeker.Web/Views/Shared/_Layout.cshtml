@@ -33,7 +33,7 @@
 
     <div class="container">
         <partial name="_CookieConsentPartial" />
-        <main role="main" onload="TEST()" class="pb-3">
+        <main role="main" class="pb-3">
             @this.RenderBody()
         </main>
     </div>
@@ -49,7 +49,6 @@
     <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
     <script src="~/js/site.min.js" asp-append-version="true"></script>
-    <script src="~/js/MyCustomJs/test.js" asp-append-version="true"></script>
     @await this.RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
