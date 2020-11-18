@@ -65,6 +65,7 @@
 
             [Required]
             [StringLength(30, ErrorMessage = "The city name should be between 3 and 30 characters long", MinimumLength = 3)]
+            [RegularExpression(@"^[a-zA-Z]*$", ErrorMessage = "Name should consist of letters only")]
             [Display(Name = "City name*")]
             public string City { get; set; }
 
@@ -96,9 +97,9 @@
             {
                 Username = user.UserName,
                 PhoneNumber = user.PhoneNumber,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                City = user.City,
+                FirstName = GlobalMethods.UpperFirstLetterOfEachWord(user.FirstName),
+                LastName = GlobalMethods.UpperFirstLetterOfEachWord(user.LastName),
+                City = GlobalMethods.UpperFirstLetterOfEachWord(user.City),
                 IsSpecialist = user.IsSpecialist,
                 ProfilePictureUrl = user.ProfilePicture,
             };
@@ -120,7 +121,7 @@
             var user = await this.userManager.GetUserAsync(this.User);
             if (user == null)
             {
-                return this.NotFound($"Unable to load user with ID '{this.userManager.GetUserId(this.User)}'.");
+                return this.NotFound($"{GlobalConstants.UnableToLoadUserByIdErrorMessage}'{this.userManager.GetUserId(this.User)}'.");
             }
 
             await this.LoadAsync(user);
@@ -133,13 +134,28 @@
 
             if (user == null)
             {
-                return this.NotFound($"Unable to load user with ID '{this.userManager.GetUserId(this.User)}'.");
+                return this.NotFound($"{GlobalConstants.UnableToLoadUserByIdErrorMessage}'{this.userManager.GetUserId(this.User)}'.");
             }
 
             if (!this.ModelState.IsValid)
             {
                 await this.LoadAsync(user);
                 return this.Page();
+            }
+
+            if (user.FirstName != this.Input.FirstName)
+            {
+                user.FirstName = GlobalMethods.UpperFirstLetterOfEachWord(this.Input.FirstName);
+            }
+
+            if (user.LastName != this.Input.LastName)
+            {
+                user.LastName = GlobalMethods.UpperFirstLetterOfEachWord(this.Input.LastName);
+            }
+
+            if (user.City != this.Input.City)
+            {
+                user.City = GlobalMethods.UpperFirstLetterOfEachWord(this.Input.City);
             }
 
             if (user.IsSpecialist)
@@ -153,7 +169,7 @@
 
                 if (specDetails.CompanyName != this.Input.SpecialistDetails.CompanyName)
                 {
-                    specDetails.CompanyName = this.Input.SpecialistDetails.CompanyName;
+                    specDetails.CompanyName = GlobalMethods.UpperFirstLetterOfEachWord(this.Input.SpecialistDetails.CompanyName);
                 }
 
                 if (specDetails.Website != this.Input.SpecialistDetails.Website)
@@ -200,7 +216,7 @@
             }
 
             await this.signInManager.RefreshSignInAsync(user);
-            this.StatusMessage = "Your profile has been updated";
+            this.StatusMessage = GlobalConstants.SuccessfullyUpdatedProfile;
             return this.RedirectToPage();
         }
     }

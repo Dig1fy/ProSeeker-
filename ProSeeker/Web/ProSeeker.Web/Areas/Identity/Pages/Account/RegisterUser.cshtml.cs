@@ -75,6 +75,12 @@
             [RegularExpression(@"^[a-zA-Z-\s]*$", ErrorMessage = @"Your last name can only contain letters, dashes '-', spaces.")]
             [Display(Name = "Your last name")]
             public string LastName { get; set; }
+
+            [Required]
+            [StringLength(30, ErrorMessage = "The city name should be between 3 and 30 characters long", MinimumLength = 3)]
+            [RegularExpression(@"^[a-zA-Z]*$", ErrorMessage = "Name should consist of letters only")]
+            [Display(Name = "City name")]
+            public string City { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -93,8 +99,9 @@
                 {
                     UserName = this.Input.Email,
                     Email = this.Input.Email,
-                    FirstName = this.Input.FirstName,
-                    LastName = this.Input.LastName,
+                    FirstName = GlobalMethods.UpperFirstLetterOfEachWord(this.Input.FirstName),
+                    LastName = GlobalMethods.UpperFirstLetterOfEachWord(this.Input.LastName),
+                    City = GlobalMethods.UpperFirstLetterOfEachWord(this.Input.City),
                     IsSpecialist = false,
                     IsOnline = false,
                     ProfilePicture = GlobalConstants.DefaultProfileImagePath,

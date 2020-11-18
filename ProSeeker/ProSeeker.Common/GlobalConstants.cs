@@ -14,5 +14,9 @@
         public const string InvalidProfilePictureMessage = "Invalid profile picture type. We support jpg, jpeg, png files only.";
 
         public const string InvalidPhoneNumber = "Unexpected error when trying to set phone number.";
+
+        public const string SuccessfullyUpdatedProfile = "Your profile has been updated";
+
+        public const string UnableToLoadUserByIdErrorMessage = "Unable to load user with ID ";
     }
 }

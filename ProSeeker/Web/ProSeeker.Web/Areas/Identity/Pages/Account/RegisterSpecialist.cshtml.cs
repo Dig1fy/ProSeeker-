@@ -88,6 +88,7 @@ namespace ProSeeker.Web.Areas.Identity.Pages.Account
 
             [Required]
             [StringLength(30, ErrorMessage = "The city name should be between 3 and 30 characters long", MinimumLength = 3)]
+            [RegularExpression(@"^[a-zA-Z]*$", ErrorMessage = "Name should consist of letters only")]
             [Display(Name = "City name")]
             public string City { get; set; }
 
@@ -115,12 +116,16 @@ namespace ProSeeker.Web.Areas.Identity.Pages.Account
                 {
                     UserName = this.Input.Email,
                     Email = this.Input.Email,
-                    FirstName = this.Input.FirstName,
-                    LastName = this.Input.LastName,
+                    FirstName = GlobalMethods.UpperFirstLetterOfEachWord(this.Input.FirstName),
+                    LastName = GlobalMethods.UpperFirstLetterOfEachWord(this.Input.LastName),
                     IsSpecialist = true,
                     IsOnline = false,
-                    City = this.Input.City,
-                    SpecialistDetails = new Specialist_Details { JobCategoryId = int.Parse(this.Input.JobCategoryId), CompanyName = this.Input.CompanyName },
+                    City = GlobalMethods.UpperFirstLetterOfEachWord(this.Input.City),
+                    SpecialistDetails = new Specialist_Details
+                    {
+                        JobCategoryId = int.Parse(this.Input.JobCategoryId),
+                        CompanyName = GlobalMethods.UpperFirstLetterOfEachWord(this.Input.CompanyName),
+                    },
                     ProfilePicture = GlobalConstants.DefaultProfileImagePath,
                 };
                 var result = await this.userManager.CreateAsync(user, this.Input.Password);
