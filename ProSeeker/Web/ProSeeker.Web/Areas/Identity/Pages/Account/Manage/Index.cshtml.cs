@@ -18,16 +18,16 @@
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
-        private readonly IDeletableEntityRepository<Specialist_Details> db;
+        private readonly IDeletableEntityRepository<Specialist_Details> specialistsRepository;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            IDeletableEntityRepository<Specialist_Details> db)
+            IDeletableEntityRepository<Specialist_Details> specialistsRepository)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
-            this.db = db;
+            this.specialistsRepository = specialistsRepository;
         }
 
         [TempData]
@@ -84,10 +84,6 @@
 
         private async Task LoadAsync(ApplicationUser currentUser)
         {
-            //var userName = await this.userManager.GetUserNameAsync(user);
-            //var phoneNumber = await this.userManager.GetPhoneNumberAsync(user);
-            //this.Username = user.UserName;
-            //this.Input = await this.db.Users.Where(x => x.Id == user.Id).
             var user = await this.userManager.GetUserAsync(this.User);
 
             this.Input = new InputModel
@@ -102,8 +98,7 @@
 
             if (user.IsSpecialist)
             {
-
-                this.Input.SpecialistDetails = this.db.All().Where(x => x.UserId == user.Id).Select(y => new SpecialistInputModel
+                this.Input.SpecialistDetails = this.specialistsRepository.All().Where(x => x.UserId == user.Id).Select(y => new SpecialistInputModel
                 {
                     AboutMe = y.AboutMe,
                     CompanyName = y.CompanyName,
@@ -142,7 +137,7 @@
 
             if (user.IsSpecialist)
             {
-                var specDetails = this.db.All().FirstOrDefault(x => x.UserId == user.Id);
+                var specDetails = this.specialistsRepository.All().FirstOrDefault(x => x.UserId == user.Id);
 
                 if (specDetails.AboutMe != this.Input.SpecialistDetails.AboutMe)
                 {

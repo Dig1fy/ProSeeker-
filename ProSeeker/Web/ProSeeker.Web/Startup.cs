@@ -50,22 +50,41 @@
 
             // TODO: Add Privacy page and add implement facebook/google APIs
             services.AddAuthentication();
-                //.AddFacebook(facebookOptions =>
-                //{
-                //    facebookOptions.AppId = this.configuration["Authentication:Facebook:AppId"];
-                //    facebookOptions.AppSecret = this.configuration["Authentication:Facebook:AppSecret"];
-                //})
-                //.AddGoogle(googleOptions =>
-                //{
-                //    googleOptions.ClientId = this.configuration["Authentication:Google:ClientId"];
-                //    googleOptions.ClientSecret = this.configuration["Authentication:Google:ClientSecret"];
-                //});
+            //.AddFacebook(facebookOptions =>
+            //{
+            //    facebookOptions.AppId = this.configuration["Authentication:Facebook:AppId"];
+            //    facebookOptions.AppSecret = this.configuration["Authentication:Facebook:AppSecret"];
+            //})
+            //.AddGoogle(googleOptions =>
+            //{
+            //    googleOptions.ClientId = this.configuration["Authentication:Google:ClientId"];
+            //    googleOptions.ClientSecret = this.configuration["Authentication:Google:ClientSecret"];
+            //});
+
+            // Cloudinary Authentication
+            //var cloudinaryAccount = new CloudinaryDotNet.Account(
+            //    this.configuration["Cloudinary:CloudName"],
+            //    this.configuration["Cloudinary:ApiKey"],
+            //    this.configuration["Cloudinary:ApiSecret"]);
+            //var cloudinary = new cloudinary(cloudinaryAccount);
+            //services.AddSingleton(cloudinary);
 
             services.AddControllersWithViews(
                 options =>
                     {
                         options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
                     }).AddRazorRuntimeCompilation();
+
+            // CSRF
+            services.AddControllersWithViews(options =>
+            {
+                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()); 
+            });
+            services.AddAntiforgery(options =>
+            {
+                options.HeaderName = "X-CSRF-TOKEN";
+            });
+
             services.AddRazorPages();
 
             services.AddSingleton(this.configuration);

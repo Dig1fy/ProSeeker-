@@ -34,14 +34,15 @@ namespace ProSeeker.Web.Areas.Identity.Pages.Account
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterSpecialistModel> logger,
             IEmailSender emailSender,
-            ApplicationDbContext db)
+            ApplicationDbContext db,
+            IDeletableEntityRepository<JobCategory> categoriesRepository)
         {
-
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.logger = logger;
             this.emailSender = emailSender;
             this.db = db;
+            this.categoriesRepository = categoriesRepository;
         }
 
         [BindProperty]
@@ -49,7 +50,7 @@ namespace ProSeeker.Web.Areas.Identity.Pages.Account
 
         public string ReturnUrl { get; set; }
 
-        public IList<SelectListItem> AllCategories => this.db.JobCategories
+        public IList<SelectListItem> AllCategories => this.categoriesRepository.All()
           .Select(c => new SelectListItem() { Text = c.Name, Value = c.Id.ToString() })
           .ToList();
 
