@@ -12,6 +12,7 @@
         {
             this.Id = Guid.NewGuid().ToString();
             this.Comments = new HashSet<Comment>();
+            this.Votes = new HashSet<Vote>();
 
             // this.Opinions = new HashSet<Opinion>();
             // this.Ratings = new HashSet<Rating>();
@@ -39,6 +40,8 @@
         public virtual JobCategory JobCategory { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
+
+        public virtual ICollection<Vote> Votes { get; set; }
 
         // public virtual ICollection<Opinion> Opinions { get; set; }
         // public virtual ICollection<Rating> Ratings { get; set; }
