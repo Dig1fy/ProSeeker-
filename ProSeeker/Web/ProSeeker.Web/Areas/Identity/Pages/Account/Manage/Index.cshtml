@@ -2,7 +2,7 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Profile";
-    ViewData["ActivePage"] = ManageNavPages.Index;    
+    ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
 <h4>@ViewData["Title"]</h4>
@@ -67,6 +67,16 @@
                     <input asp-for="Input.SpecialistDetails.Website" class="form-control" />
                     <span asp-validation-for="Input.SpecialistDetails.Website" class="text-danger"></span>
                 </div>
+                <div id="ServicesContainer">
+                    <label asp-for="Input.SpecialistDetails.Services"></label>
+                    <a class="btn btn-success" onclick="AddMoreServices()" onload="LoadAllServices(@Model.Input.SpecialistDetails.Services)">Add service</a>
+                    @foreach (var test in @Model.Input.SpecialistDetails.Services)
+                    {
+                        <p>@test.Name - @test.Description</p>
+                    }
+
+                    @*TODO: Adjust rendering*@
+                </div>
             }
 
             <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
@@ -78,8 +88,17 @@
     <partial name="_ValidationScriptsPartial" />
 
     @*==========================================
-          RENDER IMAGE AND SHOW IT'S NAME
-    ==========================================*@ 
+              RENDER IMAGE AND SHOW IT'S NAME
+        ==========================================*@
 
     <script src="~/js/MyCustomJs/Profile/renderProfileImg.js"></script>
+
+    <script>
+        var serviceIndex = 0;
+        function AddMoreServices() {
+            $("#ServicesContainer").
+                append("<div class= 'form-control'> Name: <input type='text' name='services[" + serviceIndex + "].Name' />  <hr /><br> Description: <textarea type='text' name='services[" + serviceIndex + "].Description'></textarea> </div > <br>");
+            serviceIndex++;
+        }
+    </script>
 }

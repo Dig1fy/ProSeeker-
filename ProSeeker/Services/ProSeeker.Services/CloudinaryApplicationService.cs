@@ -12,6 +12,7 @@
     public class CloudinaryApplicationService : ICloudinaryApplicationService
     {
         private readonly Cloudinary cloudinary;
+        private readonly string defaultProfileImagePath = "/images/ProfileImage/defaultUser.png";
 
         public CloudinaryApplicationService(Cloudinary cloudinary)
         {
@@ -50,7 +51,7 @@
         {
             if (imageFile == null || !this.IsFileValid(imageFile))
             {
-                return GlobalConstants.DefaultProfileImagePath;
+                return this.defaultProfileImagePath;
             }
 
             byte[] destinationImage;

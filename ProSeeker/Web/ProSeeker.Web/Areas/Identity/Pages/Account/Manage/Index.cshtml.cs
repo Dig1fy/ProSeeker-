@@ -13,23 +13,35 @@
     using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Data.Cloud;
+    using ProSeeker.Web.ViewModels.Services;
 
     public partial class IndexModel : PageModel
     {
+        // Profile
+        private const string UnableToLoadUserByIdErrorMessage = "Unable to load user with ID ";
+        private const string InvalidProfilePictureMessage = "Invalid profile picture type. We support jpg, jpeg, png files only.";
+        private const string InvalidPhoneNumber = "Unexpected error when trying to set phone number.";
+        private const string SuccessfullyUpdatedProfile = "Your profile has been updated";
+        private const string UpdateProfileErrorMessage = "Ouch! Unexpected error occured when updating your profile!";
+
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly IDeletableEntityRepository<Specialist_Details> specialistsRepository;
+        private readonly IDeletableEntityRepository<Service> servicesRepository;
         private readonly ICloudinaryApplicationService cloudinaryApplicationService;
+
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IDeletableEntityRepository<Specialist_Details> specialistsRepository,
+            IDeletableEntityRepository<Service> servicesRepository,
             ICloudinaryApplicationService cloudinaryApplicationService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.specialistsRepository = specialistsRepository;
+            this.servicesRepository = servicesRepository;
             this.cloudinaryApplicationService = cloudinaryApplicationService;
         }
 
@@ -96,7 +108,7 @@
             public string Website { get; set; }
 
             [Display(Name = "The services you provide")]
-            public ICollection<Service> Services { get; set; }
+            public IEnumerable<Service> Services { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser currentUser)
@@ -124,6 +136,7 @@
                     Experience = y.Experience,
                     Qualification = y.Qualification,
                     Services = y.Services,
+                    //.Select(z => new ServiceViewModel { Name = z.Name, Description = z.Description }),
                 }).FirstOrDefault();
             }
         }
@@ -133,20 +146,21 @@
             var user = await this.userManager.GetUserAsync(this.User);
             if (user == null)
             {
-                return this.NotFound($"{GlobalConstants.UnableToLoadUserByIdErrorMessage}'{this.userManager.GetUserId(this.User)}'.");
+                return this.NotFound($"{UnableToLoadUserByIdErrorMessage}'{this.userManager.GetUserId(this.User)}'.");
             }
 
             await this.LoadAsync(user);
             return this.Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(IFormFile imageFile)
+        // Input cannot bind services in razor pages.... 8 hours debugging and finally -> services need to be passed explicitly.
+        public async Task<IActionResult> OnPostAsync(IFormFile imageFile, IEnumerable<ServiceInputModel> services)
         {
             var user = await this.userManager.GetUserAsync(this.User);
 
             if (user == null)
             {
-                return this.NotFound($"{GlobalConstants.UnableToLoadUserByIdErrorMessage}'{this.userManager.GetUserId(this.User)}'.");
+                return this.NotFound($"{UnableToLoadUserByIdErrorMessage}'{this.userManager.GetUserId(this.User)}'.");
             }
 
             if (!this.ModelState.IsValid)
@@ -199,8 +213,19 @@
                     specDetails.Qualification = this.Input.SpecialistDetails.Qualification;
                 }
 
-                // TODO: Implement Specialist SERVICES
+                foreach (var service in services)
+                {
+                    var ns = new Service
+                    {
+                        Name = service.Name,
+                        Description = service.Description,
+                        SpecialistDetailsId = user.Id,
+                    };
 
+                    await this.servicesRepository.AddAsync(ns);
+                    specDetails.Services.Add(ns);
+                    await this.servicesRepository.SaveChangesAsync();
+                }
             }
 
             var phoneNumber = await this.userManager.GetPhoneNumberAsync(user);
@@ -210,7 +235,7 @@
                 var setPhoneResult = await this.userManager.SetPhoneNumberAsync(user, this.Input.PhoneNumber);
                 if (!setPhoneResult.Succeeded)
                 {
-                    this.StatusMessage = GlobalConstants.InvalidPhoneNumber;
+                    this.StatusMessage = InvalidPhoneNumber;
                     return this.RedirectToPage();
                 }
             }
@@ -221,7 +246,8 @@
             {
                 if (!this.cloudinaryApplicationService.IsFileValid(imageFile))
                 {
-                    this.StatusMessage = GlobalConstants.InvalidProfilePictureMessage;
+                    this.StatusMessage = InvalidProfilePictureMessage;
+
                     return this.RedirectToPage();
                 }
 
@@ -233,11 +259,11 @@
 
             if (!updateResult.Succeeded)
             {
-                this.StatusMessage = GlobalConstants.UpdateProfileErrorMessage;
+                this.StatusMessage = UpdateProfileErrorMessage;
             }
 
             await this.signInManager.RefreshSignInAsync(user);
-            this.StatusMessage = GlobalConstants.SuccessfullyUpdatedProfile;
+            this.StatusMessage = SuccessfullyUpdatedProfile;
             return this.RedirectToPage();
         }
     }
