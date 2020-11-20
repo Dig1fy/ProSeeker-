@@ -10,12 +10,8 @@
     {
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Profile">
-                <span class="user-wrapper">
-                    <span class="user-profile-picture">
-                        <img style="max-width: 3rem; height:auto; border-radius: 50%;" title="Profile" asp-append-version="true" src="@this.usersService.GetUserProfilePicture(this.UserManager.GetUserId(this.User))" alt="@this.UserManager.GetUserName(this.User) Avatar" />
-                    </span>
-                </span>
-                Hello, @(this.User.Identity.Name)!
+                <img style="width: 35px; height:35px; border-radius: 50%;" title="Profile" asp-append-version="true" src="@this.usersService.GetUserProfilePicture(this.UserManager.GetUserId(this.User))" alt="@this.UserManager.GetUserName(this.User) Avatar" />
+                Hello, @this.usersService.GetUserFirstNameById(this.UserManager.GetUserId(this.User))!
             </a>
         </li>
         if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
@@ -26,7 +22,7 @@
         }
         <li class="nav-item">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
-                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                <button type="submit" style="padding-top: 15%; " class="nav-link btn btn-link text-dark">Logout</button>
             </form>
         </li>
     }

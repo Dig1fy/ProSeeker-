@@ -1,7 +1,8 @@
 ﻿namespace ProSeeker.Data.Models
 {
-    using ProSeeker.Data.Common.Models;
     using System.ComponentModel.DataAnnotations;
+
+    using ProSeeker.Data.Common.Models;
 
     public class Vote : BaseModel<int>
     {

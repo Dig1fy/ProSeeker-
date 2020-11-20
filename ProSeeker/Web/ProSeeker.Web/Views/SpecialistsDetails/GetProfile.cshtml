@@ -1,0 +1,190 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using ProSeeker.Common
+@using ProSeeker.Data.Models
+@model ProSeeker.Web.ViewModels.Users.UserViewModel
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    this.ViewData["Title"] = $"Welcome to the proffesional page of {Model.FullName}!";
+}
+@section Styles{
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="~/css/MyCustomCss/Profile/userProfile.css" rel="stylesheet" />
+    <link href="~/css/MyCustomCss/Profile/user-common.css" rel="stylesheet" />
+}
+
+@*@Model.FirstName - First name
+    @Model.LastName Last name
+    @Model.City city
+    @Model.CreatedOn.ToShortDateString() Created on
+
+    @Model.SpecialistDetails.CompanyName - company Name
+    @Model.SpecialistDetails.AboutMe - About Me
+    @Model.SpecialistDetails.Website - WebSite
+    @Model.SpecialistDetails.Experience - WorkActivities
+    @Model.SpecialistDetails.Qualification - WorkActivities*@
+
+
+
+<div class="container emp-profile">
+    <form method="post">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <img src="@Model.ProfilePicture" alt="" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h5>
+                        @Model.FullName
+                    </h5>
+                    <h6>
+                        @Model.SpecialistDetails.JobCategory.Name
+                    </h6>
+                    <p class="proile-rating">Raitings : <span>8/10</span></p>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="about-tab" data-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="true">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="service-tab" data-toggle="tab" href="#service" role="tab" aria-controls="service" aria-selected="false">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="opinion-tab" data-toggle="tab" href="#opinion" role="tab" aria-controls="opinion" aria-selected="false">Opinions</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            @* ====================================================================
+                                           WORK INVITATION
+                ====================================================================*@
+            <div class="col-md-2">
+                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="invitation to work together" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-work">
+                    @if (!string.IsNullOrWhiteSpace(Model.SpecialistDetails.CompanyName))
+                    {
+
+                        <label>Company name</label>
+                        <p>@Model.SpecialistDetails.CompanyName</p>
+
+                    }
+
+                    @if (!string.IsNullOrWhiteSpace(Model.SpecialistDetails.Website))
+                    {
+                        <label>Website</label>
+                        <a href="@Model.SpecialistDetails.Website">@Model.SpecialistDetails.Website</a><br />
+                    }
+
+                </div>
+            </div>
+
+
+            @* ====================================================================
+                                            ABOUT TAB
+                ====================================================================*@
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="about-tab">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="label-description-title"><i class="fas fa-info-circle"></i> About me</label>
+                                <p>@Model.SpecialistDetails.AboutMe</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="label-description-title"><i class="fas fa-briefcase"></i> Previous experience</label>
+                                <p>@Model.SpecialistDetails.Experience</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="label-description-title"><i class="fab fa-linode"></i> Qualifications and specialisations</label>
+                                <p>@Model.SpecialistDetails.Qualification</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    @* ====================================================================
+                                                    SERVICE TAB
+                        ====================================================================*@
+                    <div class="tab-pane fade" id="service" role="tabpanel" aria-labelledby="service-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Experience</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Expert</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Hourly Rate</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>10$/hr</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Total Projects</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>230</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>English Level</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Expert</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Availability</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>6 months</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Your Bio</label><br />
+                                <p>Your detail description</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    @* ====================================================================
+                                                  OPINION TAB
+                        ====================================================================*@
+                    <div class="tab-pane fade" id="opinion" role="tabpanel" aria-labelledby="opinion-tab">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+@section Scripts
+{
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+}
+<!------ Include the above in your HEAD tag ---------->

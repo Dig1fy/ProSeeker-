@@ -1,5 +1,6 @@
 ﻿namespace ProSeeker.Web.Areas.Identity.Pages.Account.Manage
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Threading.Tasks;
@@ -50,13 +51,13 @@
             public string PhoneNumber { get; set; }
 
             [Required]
-            [StringLength(30, ErrorMessage = "Your first name should be between 1 and 30 characters long", MinimumLength = 1)]
+            [StringLength(16, ErrorMessage = "Your first name should be between 1 and 16 characters long", MinimumLength = 1)]
             [RegularExpression(@"^[a-zA-Z-\s]*$", ErrorMessage = @"Your first name can only contain letters, dashes '-', spaces.")]
             [Display(Name = "Your first name*")]
             public string FirstName { get; set; }
 
             [Required]
-            [StringLength(40, ErrorMessage = "Your last name should be between 1 and 40 characters long", MinimumLength = 1)]
+            [StringLength(25, ErrorMessage = "Your last name should be between 1 and 25 characters long", MinimumLength = 1)]
             [RegularExpression(@"^[a-zA-Z-\s]*$", ErrorMessage = @"Your last name can only contain letters, dashes '-', spaces.")]
             [Display(Name = "Your last name*")]
             public string LastName { get; set; }
@@ -74,17 +75,28 @@
 
         public class SpecialistInputModel
         {
+            [StringLength(250, ErrorMessage = "'About me' text content should be between 15 and 250 symbols long", MinimumLength = 15)]
             [Display(Name = "Additional information about you and your professional experience")]
             public string AboutMe { get; set; }
 
+            [StringLength(60, ErrorMessage = "'Company name' should be between 1 and 60 symbols long", MinimumLength = 1)]
             [Display(Name = "Your company name")]
             public string CompanyName { get; set; }
 
-            [Display(Name = "Your professional activities")]
-            public string WorkActivities { get; set; }
+            [StringLength(1000, ErrorMessage = "Your 'experience' text content should be between 15 and 1000 symbols long", MinimumLength = 15)]
+            [Display(Name = "Your professional experience")]
+            public string Experience { get; set; }
 
+            [StringLength(1000, ErrorMessage = "'Your qualifications' text content should be between 15 and 1000 symbols long", MinimumLength = 15)]
+            [Display(Name = "Your professional qualifications and specialisations")]
+            public string Qualification { get; set; }
+
+            [StringLength(75, ErrorMessage = "'Website' text content should be between 5 and 75 symbols long", MinimumLength = 5)]
             [Display(Name = "Your professional website")]
             public string Website { get; set; }
+
+            [Display(Name = "The services you provide")]
+            public ICollection<Service> Services { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser currentUser)
@@ -109,7 +121,9 @@
                     AboutMe = y.AboutMe,
                     CompanyName = y.CompanyName,
                     Website = y.Website,
-                    WorkActivities = y.WorkActivities,
+                    Experience = y.Experience,
+                    Qualification = y.Qualification,
+                    Services = y.Services,
                 }).FirstOrDefault();
             }
         }
@@ -175,10 +189,18 @@
                     specDetails.Website = this.Input.SpecialistDetails.Website;
                 }
 
-                if (specDetails.WorkActivities != this.Input.SpecialistDetails.WorkActivities)
+                if (specDetails.Experience != this.Input.SpecialistDetails.Experience)
                 {
-                    specDetails.WorkActivities = this.Input.SpecialistDetails.WorkActivities;
+                    specDetails.Experience = this.Input.SpecialistDetails.Experience;
                 }
+
+                if (specDetails.Qualification != this.Input.SpecialistDetails.Qualification)
+                {
+                    specDetails.Qualification = this.Input.SpecialistDetails.Qualification;
+                }
+
+                // TODO: Implement Specialist SERVICES
+
             }
 
             var phoneNumber = await this.userManager.GetPhoneNumberAsync(user);

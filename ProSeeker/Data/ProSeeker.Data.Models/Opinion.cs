@@ -4,7 +4,7 @@
 
     using ProSeeker.Data.Common.Models;
 
-    public class Comment : BaseDeletableModel<int>
+    public class Opinion : BaseDeletableModel<int>
     {
         public string SpecialistDetailsId { get; set; }
 
@@ -16,8 +16,8 @@
 
         public virtual ApplicationUser Creator { get; set; }
 
-        public string ParentCommentId { get; set; }
+        public string ParentOpinionId { get; set; }
 
-        public virtual Comment ParentComment { get; set; }
+        public virtual Opinion ParentOpinion { get; set; }
     }
 }

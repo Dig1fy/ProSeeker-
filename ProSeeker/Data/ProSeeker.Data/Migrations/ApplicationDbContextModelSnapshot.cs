@@ -302,53 +302,6 @@ namespace ProSeeker.Data.Migrations
                     b.ToTable("BaseJobCategories");
                 });
 
-            modelBuilder.Entity("ProSeeker.Data.Models.Comment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatorId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ParentCommentId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ParentCommentId1")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SpecialistDetailsId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CreatorId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("ParentCommentId1");
-
-                    b.HasIndex("SpecialistDetailsId");
-
-                    b.ToTable("Comments");
-                });
-
             modelBuilder.Entity("ProSeeker.Data.Models.JobCategory", b =>
                 {
                     b.Property<int>("Id")
@@ -387,6 +340,90 @@ namespace ProSeeker.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("JobCategories");
+                });
+
+            modelBuilder.Entity("ProSeeker.Data.Models.Opinion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatorId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ParentOpinionId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ParentOpinionId1")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SpecialistDetailsId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatorId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("ParentOpinionId1");
+
+                    b.HasIndex("SpecialistDetailsId");
+
+                    b.ToTable("Opinions");
+                });
+
+            modelBuilder.Entity("ProSeeker.Data.Models.Service", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SpecialistDetailsId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("SpecialistDetailsId");
+
+                    b.ToTable("Service");
                 });
 
             modelBuilder.Entity("ProSeeker.Data.Models.Setting", b =>
@@ -438,25 +475,25 @@ namespace ProSeeker.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Experience")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<int>("JobCategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Likes")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Qualification")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Website")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WorkActivities")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -472,54 +509,31 @@ namespace ProSeeker.Data.Migrations
                     b.ToTable("Specialist_Details");
                 });
 
-            modelBuilder.Entity("ProSeeker.Data.Models.SpecialistsLikes", b =>
+            modelBuilder.Entity("ProSeeker.Data.Models.Vote", b =>
                 {
-                    b.Property<string>("ApplicationUserId")
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("SpecialistDetailsId")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("IsLiked")
-                        .HasColumnType("bit");
-
-                    b.HasKey("ApplicationUserId", "SpecialistDetailsId");
-
-                    b.HasIndex("SpecialistDetailsId");
-
-                    b.ToTable("SpecialistsLikes");
-                });
-
-            modelBuilder.Entity("ProSeeker.Data.Models.Vote", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("SpecialistDetailsId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("VoteType")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId", "SpecialistDetailsId");
 
                     b.HasIndex("SpecialistDetailsId");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Vote");
+                    b.ToTable("Votes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -573,26 +587,33 @@ namespace ProSeeker.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ProSeeker.Data.Models.Comment", b =>
-                {
-                    b.HasOne("ProSeeker.Data.Models.ApplicationUser", "Creator")
-                        .WithMany()
-                        .HasForeignKey("CreatorId");
-
-                    b.HasOne("ProSeeker.Data.Models.Comment", "ParentComment")
-                        .WithMany()
-                        .HasForeignKey("ParentCommentId1");
-
-                    b.HasOne("ProSeeker.Data.Models.Specialist_Details", "SpecialistDetails")
-                        .WithMany("Comments")
-                        .HasForeignKey("SpecialistDetailsId");
-                });
-
             modelBuilder.Entity("ProSeeker.Data.Models.JobCategory", b =>
                 {
                     b.HasOne("ProSeeker.Data.Models.BaseJobCategory", null)
                         .WithMany("JobCategories")
                         .HasForeignKey("BaseJobCategoryId");
+                });
+
+            modelBuilder.Entity("ProSeeker.Data.Models.Opinion", b =>
+                {
+                    b.HasOne("ProSeeker.Data.Models.ApplicationUser", "Creator")
+                        .WithMany()
+                        .HasForeignKey("CreatorId");
+
+                    b.HasOne("ProSeeker.Data.Models.Opinion", "ParentOpinion")
+                        .WithMany()
+                        .HasForeignKey("ParentOpinionId1");
+
+                    b.HasOne("ProSeeker.Data.Models.Specialist_Details", "SpecialistDetails")
+                        .WithMany("Opinions")
+                        .HasForeignKey("SpecialistDetailsId");
+                });
+
+            modelBuilder.Entity("ProSeeker.Data.Models.Service", b =>
+                {
+                    b.HasOne("ProSeeker.Data.Models.Specialist_Details", "SpecialistDetails")
+                        .WithMany("Services")
+                        .HasForeignKey("SpecialistDetailsId");
                 });
 
             modelBuilder.Entity("ProSeeker.Data.Models.Specialist_Details", b =>
@@ -608,26 +629,13 @@ namespace ProSeeker.Data.Migrations
                         .HasForeignKey("ProSeeker.Data.Models.Specialist_Details", "UserId");
                 });
 
-            modelBuilder.Entity("ProSeeker.Data.Models.SpecialistsLikes", b =>
-                {
-                    b.HasOne("ProSeeker.Data.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("ProSeeker.Data.Models.Specialist_Details", "SpecialistDetails")
-                        .WithMany()
-                        .HasForeignKey("SpecialistDetailsId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("ProSeeker.Data.Models.Vote", b =>
                 {
                     b.HasOne("ProSeeker.Data.Models.Specialist_Details", "SpecialistDetails")
                         .WithMany("Votes")
-                        .HasForeignKey("SpecialistDetailsId");
+                        .HasForeignKey("SpecialistDetailsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ProSeeker.Data.Models.ApplicationUser", "User")
                         .WithMany()

@@ -26,7 +26,7 @@
 
         public DbSet<Setting> Settings { get; set; }
 
-        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Opinion> Opinions { get; set; }
 
         public DbSet<JobCategory> JobCategories { get; set; }
 
@@ -34,8 +34,7 @@
 
         public DbSet<Specialist_Details> Specialist_Details { get; set; }
 
-        public DbSet<SpecialistsLikes> SpecialistsLikes { get; set; }
-
+        public DbSet<Vote> Votes { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
@@ -89,7 +88,7 @@
                 .WithOne(sd => sd.User)
                 .HasForeignKey<Specialist_Details>(fk => fk.UserId);
 
-            builder.Entity<SpecialistsLikes>().HasKey(x => new { x.ApplicationUserId, x.SpecialistDetailsId });
+            builder.Entity<Vote>().HasKey(x => new { x.UserId, x.SpecialistDetailsId});
         }
 
         // Filter (soft-deleted entities will be ignored when working with the db)

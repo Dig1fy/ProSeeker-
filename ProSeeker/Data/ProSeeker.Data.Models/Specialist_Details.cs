@@ -11,8 +11,9 @@
         public Specialist_Details()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.Comments = new HashSet<Comment>();
+            this.Opinions = new HashSet<Opinion>();
             this.Votes = new HashSet<Vote>();
+            this.Services = new HashSet<Service>();
 
             // this.Opinions = new HashSet<Opinion>();
             // this.Ratings = new HashSet<Rating>();
@@ -27,9 +28,9 @@
 
         public string Website { get; set; }
 
-        public string WorkActivities { get; set; }
+        public string Experience { get; set; }
 
-        public int Likes { get; set; }
+        public string Qualification { get; set; }
 
         public string UserId { get; set; }
 
@@ -39,7 +40,9 @@
 
         public virtual JobCategory JobCategory { get; set; }
 
-        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<Service> Services { get; set; }
+
+        public virtual ICollection<Opinion> Opinions { get; set; }
 
         public virtual ICollection<Vote> Votes { get; set; }
 

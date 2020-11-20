@@ -22,7 +22,7 @@
 
                 foreach (var part in inputParts)
                 {
-                    stringBuilder.Append($"{part[0].ToString().ToUpper()}{part.Substring(1)} ");
+                    stringBuilder.Append($"{part[0].ToString().ToUpper()}{part.Substring(1).ToLower()} ");
                 }
             }
             else if (input.Contains('-'))
@@ -31,14 +31,14 @@
 
                 for (int i = 0; i < inputParts.Length; i++)
                 {
-                    inputParts[i] = inputParts[i][0].ToString().ToUpper() + inputParts[i].Substring(1);
+                    inputParts[i] = inputParts[i][0].ToString().ToUpper() + inputParts[i].Substring(1).ToLower();
                 }
 
                 stringBuilder.Append(string.Join('-', inputParts));
             }
             else
             {
-                stringBuilder.Append(input[0].ToString().ToUpper() + input.Substring(1));
+                stringBuilder.Append(input[0].ToString().ToUpper() + input.Substring(1).ToLower());
 
             }
 
