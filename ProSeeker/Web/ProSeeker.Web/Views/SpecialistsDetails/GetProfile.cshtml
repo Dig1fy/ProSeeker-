@@ -118,53 +118,19 @@
                                                     SERVICE TAB
                         ====================================================================*@
                     <div class="tab-pane fade" id="service" role="tabpanel" aria-labelledby="service-tab">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Experience</label>
+                        @foreach (var service in Model.SpecialistDetails.Services)
+                        {
+                            <div class="card border-info mb-3" style="max-width: 33rem;">
+                                <div class="card-header">@service.Name</div>
+                                <div class="card-body text-info">
+                                    @*<h5 class="card-title">Info Panel title</h5>*@
+                                    <p class="card-text">@service.Description</p>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <p>Expert</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Hourly Rate</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>10$/hr</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Total Projects</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>230</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>English Level</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>Expert</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Availability</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>6 months</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label>Your Bio</label><br />
-                                <p>Your detail description</p>
-                            </div>
-                        </div>
+                        }
                     </div>
+
+
 
                     @* ====================================================================
                                                   OPINION TAB
