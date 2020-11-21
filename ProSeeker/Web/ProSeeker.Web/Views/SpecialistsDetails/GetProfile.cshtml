@@ -13,19 +13,6 @@
     <link href="~/css/MyCustomCss/Profile/user-common.css" rel="stylesheet" />
 }
 
-@*@Model.FirstName - First name
-    @Model.LastName Last name
-    @Model.City city
-    @Model.CreatedOn.ToShortDateString() Created on
-
-    @Model.SpecialistDetails.CompanyName - company Name
-    @Model.SpecialistDetails.AboutMe - About Me
-    @Model.SpecialistDetails.Website - WebSite
-    @Model.SpecialistDetails.Experience - WorkActivities
-    @Model.SpecialistDetails.Qualification - WorkActivities*@
-
-
-
 <div class="container emp-profile">
 
     <div class="row">
@@ -69,10 +56,8 @@
             <div class="profile-work">
                 @if (!string.IsNullOrWhiteSpace(Model.SpecialistDetails.CompanyName))
                 {
-
                     <label>Company name</label>
                     <p>@Model.SpecialistDetails.CompanyName</p>
-
                 }
 
                 @if (!string.IsNullOrWhiteSpace(Model.SpecialistDetails.Website))
@@ -80,10 +65,8 @@
                     <label>Website</label>
                     <a href="@Model.SpecialistDetails.Website">@Model.SpecialistDetails.Website</a><br />
                 }
-
             </div>
         </div>
-
 
         @* ====================================================================
                                         ABOUT TAB
@@ -93,23 +76,23 @@
                 <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="about-tab">
 
                     <div class="row">
-                        <div class="col-md-6">
-                            <label class="label-description-title"><i class="fas fa-info-circle"></i> About me</label>
-                            <p>@Model.SpecialistDetails.AboutMe</p>
+                        <div class="col-md-12">
+                            <label class="label-description-title"><i class="fas fa-info-circle"></i> За мен</label>
+                            <p>@Html.Raw(@Model.SpecialistDetails.SanitezedAboutMe)</p>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
-                            <label class="label-description-title"><i class="fas fa-briefcase"></i> Previous experience</label>
-                            <p>@Model.SpecialistDetails.Experience</p>
+                        <div class="col-md-12">
+                            <label class="label-description-title"><i class="fas fa-briefcase"></i> Професионален опит</label>
+                            <p>@Html.Raw(@Model.SpecialistDetails.SanitizedExperience)</p>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
-                            <label class="label-description-title"><i class="fab fa-linode"></i> Qualifications and specialisations</label>
-                            <p>@Model.SpecialistDetails.Qualification</p>
+                        <div class="col-md-12">
+                            <label class="label-description-title"><i class="fab fa-linode"></i> Специализация и квалификация </label>
+                            <p>@Html.Raw(@Model.SpecialistDetails.SanitizedQualification)</p>
                         </div>
                     </div>
                 </div>
@@ -129,8 +112,6 @@
                         </div>
                     }
                 </div>
-
-
 
                 @* ====================================================================
                                               OPINION TAB

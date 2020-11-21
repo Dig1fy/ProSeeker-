@@ -4,11 +4,12 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using Ganss.XSS;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
+    using Microsoft.Security.Application;
     using ProSeeker.Common;
     using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;
@@ -87,7 +88,6 @@
 
         public class SpecialistInputModel
         {
-            [StringLength(250, ErrorMessage = "Съдържанието трябва да бъде между 15 и 250 символа.", MinimumLength = 15)]
             [Display(Name = "Допълнителна информация за Вас")]
             public string AboutMe { get; set; }
 
@@ -95,11 +95,9 @@
             [Display(Name = "Фирма /търговско наименование/")]
             public string CompanyName { get; set; }
 
-            [StringLength(1000, ErrorMessage = "Съдържанието трябва да бъде между 15 и 1000 символа.", MinimumLength = 15)]
             [Display(Name = "Описание на професионалния Ви опит")]
             public string Experience { get; set; }
 
-            [StringLength(1000, ErrorMessage = "Съдържанието трябва да бъде между 15 и 1000 символа.", MinimumLength = 15)]
             [Display(Name = "Специализация и квалификация")]
             public string Qualification { get; set; }
 

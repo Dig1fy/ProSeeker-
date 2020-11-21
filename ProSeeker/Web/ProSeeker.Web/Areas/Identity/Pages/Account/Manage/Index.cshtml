@@ -42,11 +42,11 @@
             </div>
             @if (Model.Input.IsSpecialist == true)
             {
-                <div class="form-group">
-                    <label asp-for="Input.SpecialistDetails.AboutMe"></label>
-                    <input asp-for="Input.SpecialistDetails.AboutMe" class="form-control" />
-                    <span asp-validation-for="Input.SpecialistDetails.AboutMe" class="text-danger"></span>
-                </div>
+        <div class="form-group">
+            <label asp-for="Input.SpecialistDetails.AboutMe"></label>
+            <textarea asp-for="Input.SpecialistDetails.AboutMe" class="form-control"></textarea>
+            <span asp-validation-for="Input.SpecialistDetails.AboutMe" class="text-danger"></span>
+        </div>
                 <div class="form-group">
                     <label asp-for="Input.SpecialistDetails.CompanyName"></label>
                     <input asp-for="Input.SpecialistDetails.CompanyName" class="form-control" />

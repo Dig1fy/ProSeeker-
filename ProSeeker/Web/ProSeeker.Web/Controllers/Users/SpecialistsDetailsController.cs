@@ -18,6 +18,12 @@
         public IActionResult GetProfile(string id)
         {
             var profile = this.usersService.GetUserById<UserViewModel>(id);
+
+            if (profile == null)
+            {
+                return this.NotFound();
+            }
+
             return this.View(profile);
         }
     }
