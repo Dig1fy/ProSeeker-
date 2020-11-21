@@ -27,120 +27,158 @@
 
 
 <div class="container emp-profile">
-    <form method="post">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="profile-img">
-                    <img src="@Model.ProfilePicture" alt="" />
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="profile-head">
-                    <h5>
-                        @Model.FullName
-                    </h5>
-                    <h6>
-                        @Model.SpecialistDetails.JobCategory.Name
-                    </h6>
-                    <p class="proile-rating">Raitings : <span>8/10</span></p>
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="about-tab" data-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="true">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="service-tab" data-toggle="tab" href="#service" role="tab" aria-controls="service" aria-selected="false">Services</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="opinion-tab" data-toggle="tab" href="#opinion" role="tab" aria-controls="opinion" aria-selected="false">Opinions</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
 
-            @* ====================================================================
-                                           WORK INVITATION
-                ====================================================================*@
-            <div class="col-md-2">
-                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="invitation to work together" />
+    <div class="row">
+        <div class="col-md-4">
+            <div class="profile-img">
+                <img src="@Model.ProfilePicture" alt="" />
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="profile-work">
-                    @if (!string.IsNullOrWhiteSpace(Model.SpecialistDetails.CompanyName))
-                    {
-
-                        <label>Company name</label>
-                        <p>@Model.SpecialistDetails.CompanyName</p>
-
-                    }
-
-                    @if (!string.IsNullOrWhiteSpace(Model.SpecialistDetails.Website))
-                    {
-                        <label>Website</label>
-                        <a href="@Model.SpecialistDetails.Website">@Model.SpecialistDetails.Website</a><br />
-                    }
-
-                </div>
+        <div class="col-md-6">
+            <div class="profile-head">
+                <h5>
+                    @Model.FullName
+                </h5>
+                <h6>
+                    @Model.SpecialistDetails.JobCategory.Name
+                </h6>
+                <p class="proile-rating">Raitings : <span>8/10</span></p>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="about-tab" data-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="true">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="service-tab" data-toggle="tab" href="#service" role="tab" aria-controls="service" aria-selected="false">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="opinion-tab" data-toggle="tab" href="#opinion" role="tab" aria-controls="opinion" aria-selected="false">Opinions</a>
+                    </li>
+                </ul>
             </div>
+        </div>
+
+        @* ====================================================================
+                                       WORK INVITATION
+            ====================================================================*@
+        <div class="col-md-2">
+            <input type="submit" class="profile-edit-btn" name="btnAddMore" value="invitation to work together" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="profile-work">
+                @if (!string.IsNullOrWhiteSpace(Model.SpecialistDetails.CompanyName))
+                {
+
+                    <label>Company name</label>
+                    <p>@Model.SpecialistDetails.CompanyName</p>
+
+                }
+
+                @if (!string.IsNullOrWhiteSpace(Model.SpecialistDetails.Website))
+                {
+                    <label>Website</label>
+                    <a href="@Model.SpecialistDetails.Website">@Model.SpecialistDetails.Website</a><br />
+                }
+
+            </div>
+        </div>
 
 
-            @* ====================================================================
-                                            ABOUT TAB
-                ====================================================================*@
-            <div class="col-md-8">
-                <div class="tab-content profile-tab" id="myTabContent">
-                    <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="about-tab">
+        @* ====================================================================
+                                        ABOUT TAB
+            ====================================================================*@
+        <div class="col-md-8">
+            <div class="tab-content profile-tab" id="myTabContent">
+                <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="about-tab">
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label class="label-description-title"><i class="fas fa-info-circle"></i> About me</label>
-                                <p>@Model.SpecialistDetails.AboutMe</p>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label class="label-description-title"><i class="fas fa-briefcase"></i> Previous experience</label>
-                                <p>@Model.SpecialistDetails.Experience</p>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label class="label-description-title"><i class="fab fa-linode"></i> Qualifications and specialisations</label>
-                                <p>@Model.SpecialistDetails.Qualification</p>
-                            </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="label-description-title"><i class="fas fa-info-circle"></i> About me</label>
+                            <p>@Model.SpecialistDetails.AboutMe</p>
                         </div>
                     </div>
 
-                    @* ====================================================================
-                                                    SERVICE TAB
-                        ====================================================================*@
-                    <div class="tab-pane fade" id="service" role="tabpanel" aria-labelledby="service-tab">
-                        @foreach (var service in Model.SpecialistDetails.Services)
-                        {
-                            <div class="card border-info mb-3" style="max-width: 33rem;">
-                                <div class="card-header">@service.Name</div>
-                                <div class="card-body text-info">
-                                    @*<h5 class="card-title">Info Panel title</h5>*@
-                                    <p class="card-text">@service.Description</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="label-description-title"><i class="fas fa-briefcase"></i> Previous experience</label>
+                            <p>@Model.SpecialistDetails.Experience</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="label-description-title"><i class="fab fa-linode"></i> Qualifications and specialisations</label>
+                            <p>@Model.SpecialistDetails.Qualification</p>
+                        </div>
+                    </div>
+                </div>
+
+                @* ====================================================================
+                                                SERVICE TAB
+                    ====================================================================*@
+                <div class="tab-pane fade" id="service" role="tabpanel" aria-labelledby="service-tab">
+                    @foreach (var service in Model.SpecialistDetails.Services)
+                    {
+                        <div class="card border-info mb-3" style="max-width: 33rem;">
+                            <div class="card-header">@service.Name</div>
+                            <div class="card-body text-info">
+                                @*<h5 class="card-title">Info Panel title</h5>*@
+                                <p class="card-text">@service.Description</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+
+
+                @* ====================================================================
+                                              OPINION TAB
+                    ====================================================================*@
+                <div class="tab-pane fade" id="opinion" role="tabpanel" aria-labelledby="opinion-tab">
+                    <form method="POST">
+                        <div id="comment-show-hide" style="display: none;">
+                            <div id="comments-pic-info">
+                                <div class="commenting-person-photo">
+                                </div>
+                                @*{{#each comments}}*@
+                                <div class="entire-comment-wrapper">
+                                    <div class="comment-info">
+                                        <div class="comment-photo">
+                                            <img class="comment-photo" src="https://firebasestorage.googleapis.com/v0/b/my-first-project-19511.appspot.com/o/users%2FBCnojLuYUrYy8ksIKKHe7RVETFf1%2F5HqB877ivFTxrn5eiJdZ%2F8.jpg?alt=media&token=c9f1fb5a-e3f4-446d-a094-68219839ebb8" alt="">
+                                        </div>
+                                        <div class="story-comment-userInfo-wrapper">
+                                            <div class="story-comment-userInfo">  GOSHO :</div>
+                                            <div class="story-comment-wrapper">
+                                                <label class="story-comment-content">COMMENT 1 </label>
+                                            </div>
+                                            <div class="story-comment-datetime">DATETIME NOW </div>
+                                        </div>
+                                        <br>
+                                    </div>
+                                </div>
+                                @*{{else}}*@
+                                <h4 class="text-center">No comments yet. Be the first to leave a comment!</h4>
+                                @*{{/each}}*@
+
+                            </div>
+
+                            <br>
+                            <div class="comment-post-wrapper">
+                                <div>
+                                    <textarea name="comment" id="story-comment" class="story-comment-textarea" type="text " rows="5" cols="33"
+                                              placeholder="write a comment..."></textarea>
+                                </div>
+                                <div>
+                                    <button type="submit" class="post-a-comment">Post the comment</button>
                                 </div>
                             </div>
-                        }
-                    </div>
-
-
-
-                    @* ====================================================================
-                                                  OPINION TAB
-                        ====================================================================*@
-                    <div class="tab-pane fade" id="opinion" role="tabpanel" aria-labelledby="opinion-tab">
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
 </div>
 
 

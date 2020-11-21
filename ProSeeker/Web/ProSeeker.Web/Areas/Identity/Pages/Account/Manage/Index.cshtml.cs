@@ -59,25 +59,25 @@
             public string Username { get; set; }
 
             [Phone]
-            [Display(Name = "Phone number")]
+            [Display(Name = "Телефон за връзка")]
             public string PhoneNumber { get; set; }
 
             [Required]
-            [StringLength(16, ErrorMessage = "Your first name should be between 1 and 16 characters long", MinimumLength = 1)]
-            [RegularExpression(@"^[a-zA-Z-\s]*$", ErrorMessage = @"Your first name can only contain letters, dashes '-', spaces.")]
-            [Display(Name = "Your first name*")]
+            [StringLength(16, ErrorMessage = "Името Ви трябва да бъде между 1 и 16 символа.", MinimumLength = 1)]
+            [RegularExpression(@"^[а-яА-Я]*?[- .]{0,2}[а-яА-Я]*?[- .]{0,2}[а-яА-Я]*$", ErrorMessage = @"Невалидно първо име. Примери за валидно име:'Георги', 'инж. Иван', 'г-н Тодор'")]
+            [Display(Name = "Име*")]
             public string FirstName { get; set; }
 
             [Required]
-            [StringLength(25, ErrorMessage = "Your last name should be between 1 and 25 characters long", MinimumLength = 1)]
-            [RegularExpression(@"^[a-zA-Z-\s]*$", ErrorMessage = @"Your last name can only contain letters, dashes '-', spaces.")]
-            [Display(Name = "Your last name*")]
+            [StringLength(25, ErrorMessage = "Фамилията Ви трябва да бъде между 1 и 25 символа.", MinimumLength = 1)]
+            [RegularExpression(@"^[а-яА-Я]*?[- .]{0,2}[а-яА-Я]*$", ErrorMessage = @"Невалидна фамилия. Примери за валидна фамилия: 'Тодоров', 'Петрова-Алексиева'")]
+            [Display(Name = "Фамилия*")]
             public string LastName { get; set; }
 
             [Required]
-            [StringLength(30, ErrorMessage = "The city name should be between 3 and 30 characters long", MinimumLength = 3)]
-            [RegularExpression(@"^[a-zA-Z]*$", ErrorMessage = "Name should consist of letters only")]
-            [Display(Name = "City name*")]
+            [StringLength(30, ErrorMessage = "Градът трябва да бъде между 3 и 30 символа.", MinimumLength = 3)]
+            [RegularExpression(@"^[а-яА-Я]*?[- .]{0,2}[а-яА-Я]*$", ErrorMessage = "Невалиден град. Примери за валидно име на град: 'Стара Загора', 'Димитровград'")]
+            [Display(Name = "Град*")]
             public string City { get; set; }
 
             public bool IsSpecialist { get; set; }
@@ -87,27 +87,27 @@
 
         public class SpecialistInputModel
         {
-            [StringLength(250, ErrorMessage = "'About me' text content should be between 15 and 250 symbols long", MinimumLength = 15)]
-            [Display(Name = "Additional information about you and your professional experience")]
+            [StringLength(250, ErrorMessage = "Съдържанието трябва да бъде между 15 и 250 символа.", MinimumLength = 15)]
+            [Display(Name = "Допълнителна информация за Вас")]
             public string AboutMe { get; set; }
 
-            [StringLength(60, ErrorMessage = "'Company name' should be between 1 and 60 symbols long", MinimumLength = 1)]
-            [Display(Name = "Your company name")]
+            [StringLength(60, ErrorMessage = "Съдържанието трябва да бъде между 1 и 60 символа.", MinimumLength = 1)]
+            [Display(Name = "Фирма /търговско наименование/")]
             public string CompanyName { get; set; }
 
-            [StringLength(1000, ErrorMessage = "Your 'experience' text content should be between 15 and 1000 symbols long", MinimumLength = 15)]
-            [Display(Name = "Your professional experience")]
+            [StringLength(1000, ErrorMessage = "Съдържанието трябва да бъде между 15 и 1000 символа.", MinimumLength = 15)]
+            [Display(Name = "Описание на професионалния Ви опит")]
             public string Experience { get; set; }
 
-            [StringLength(1000, ErrorMessage = "'Your qualifications' text content should be between 15 and 1000 symbols long", MinimumLength = 15)]
-            [Display(Name = "Your professional qualifications and specialisations")]
+            [StringLength(1000, ErrorMessage = "Съдържанието трябва да бъде между 15 и 1000 символа.", MinimumLength = 15)]
+            [Display(Name = "Специализация и квалификация")]
             public string Qualification { get; set; }
 
-            [StringLength(75, ErrorMessage = "'Website' text content should be between 5 and 75 symbols long", MinimumLength = 5)]
-            [Display(Name = "Your professional website")]
+            [StringLength(75, ErrorMessage = "Съдържанието трябва да бъде между 5 и 75 символа.", MinimumLength = 5)]
+            [Display(Name = "Професионален Уеб Сайт")]
             public string Website { get; set; }
 
-            [Display(Name = "The services you provide")]
+            [Display(Name = "Услугите, които предлагате")]
             public IEnumerable<Service> Services { get; set; }
         }
 
