@@ -8,39 +8,34 @@
 <h4>@ViewData["Title"]</h4>
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <form id="profile-form" method="post" enctype="multipart/form-data">
-            <div class="image-area mt-4"><img id="imageResult" src="@Model.Input.ProfilePictureUrl" alt="" class="img-thumbnail rounded"></div>
+            <div class="image-area col-md-10"><img id="imageResult" src="@Model.Input.ProfilePictureUrl" alt="" class="img-thumbnail rounded"></div>
             <label for="upload" id="proff"></label>
-            <input e id="upload" name="imageFile" type="file" onchange="RenderTheImage();">
+            <input e id="upload" class="col-md-10" name="imageFile" type="file" onchange="RenderTheImage();">
             <hr />
 
             <div asp-validation-summary="ModelOnly" class="text-danger">Zz</div>
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <label asp-for="Input.Username"></label>
                 <input asp-for="Input.Username" class="form-control" disabled />
             </div>
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <label asp-for="Input.PhoneNumber"></label>
                 <input asp-for="Input.PhoneNumber" class="form-control" />
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <label asp-for="Input.FirstName"></label>
                 <input asp-for="Input.FirstName" class="form-control" />
                 <span asp-validation-for="Input.FirstName" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <label asp-for="Input.LastName"></label>
                 <input asp-for="Input.LastName" class="form-control" />
                 <span asp-validation-for="Input.LastName" class="text-danger"></span>
             </div>
-            @*<div class="form-group">
-            <label asp-for="Input.City.Name"></label>
-            <input asp-for="Input.City.Name" class="form-control" />
-            <span asp-validation-for="Input.City.Name" class="text-danger"></span>
-        </div>*@
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <label asp-for="Input.City.Name"></label>
                 <select asp-for="Input.City.Name" class="form-control" asp-items="Model.AllCities">
                     <option selected> @Model.Input.City.Name </option>
@@ -49,83 +44,72 @@
             </div>
             @if (Model.Input.IsSpecialist == true)
             {
-                <div class="form-group">
-                    <label asp-for="Input.SpecialistDetails.AboutMe"></label>
-                    <textarea asp-for="Input.SpecialistDetails.AboutMe" class="form-control"></textarea>
-                    <span asp-validation-for="Input.SpecialistDetails.AboutMe" class="text-danger"></span>
-                </div>
-                <div class="form-group">
+                <div class="form-group col-md-6">
                     <label asp-for="Input.SpecialistDetails.CompanyName"></label>
                     <input asp-for="Input.SpecialistDetails.CompanyName" class="form-control" />
                     <span asp-validation-for="Input.SpecialistDetails.CompanyName" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Input.SpecialistDetails.Experience"></label>
-                    <textarea asp-for="Input.SpecialistDetails.Experience" class="form-control"></textarea>
-                    <span asp-validation-for="Input.SpecialistDetails.Experience" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Input.SpecialistDetails.Qualification"></label>
-                    <textarea asp-for="Input.SpecialistDetails.Qualification" class="form-control"></textarea>
-                    <span asp-validation-for="Input.SpecialistDetails.Qualification" class="text-danger"></span>
-                </div>
-                <div class="form-group">
+                <div class="form-group col-md-6">
                     <label asp-for="Input.SpecialistDetails.Website"></label>
                     <input asp-for="Input.SpecialistDetails.Website" class="form-control" />
                     <span asp-validation-for="Input.SpecialistDetails.Website" class="text-danger"></span>
                 </div>
+                <div class="form-group col-md-10">
+                    <label asp-for="Input.SpecialistDetails.AboutMe"></label>
+                    <textarea asp-for="Input.SpecialistDetails.AboutMe" class="form-control"></textarea>
+                    <span asp-validation-for="Input.SpecialistDetails.AboutMe" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-10">
+                    <label asp-for="Input.SpecialistDetails.Experience"></label>
+                    <textarea asp-for="Input.SpecialistDetails.Experience" class="form-control"></textarea>
+                    <span asp-validation-for="Input.SpecialistDetails.Experience" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-10">
+                    <label asp-for="Input.SpecialistDetails.Qualification"></label>
+                    <textarea asp-for="Input.SpecialistDetails.Qualification" class="form-control"></textarea>
+                    <span asp-validation-for="Input.SpecialistDetails.Qualification" class="text-danger"></span>
+                </div>
                 <div id="ServicesContainer">
                     <label asp-for="Input.SpecialistDetails.Services"></label>
-                    <a class="btn btn-success" onclick="AddMoreServices()" onload="LoadAllServices(@Model.Input.SpecialistDetails.Services)">Add service</a>
-                    @foreach (var test in @Model.Input.SpecialistDetails.Services)
-                    {
-                        <p>@test.Name - @test.Description</p>
-                    }
+                    <a class="btn btn-success col-md-10" onclick="AddMoreServices()" onload="LoadAllServices(@Model.Input.SpecialistDetails.Services)">Добави услуга</a>
+                    @{ var counter = 1;
+                        @foreach (var service in @Model.Input.SpecialistDetails.Services)
+                        {
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col">
+                            <label>@counter. @service.Name</label>
+                        </div>
+                        <div class="col">
+                            <label> - @service.Description</label>
+                        </div>
+                    </div>
+                    <a class="btn" type="submit" asp-area="" asp-controller="Services" asp-action="Delete" asp-route-id="@service.Id" style="min-width:initial; height:35px; background-color:bisque"> Премахни </a>
+                    @*<a class="btn btn-danger" type="submit" asp-controller="Announcements" asp-action="Delete" asp-route-id="@announcement.Id">Изтрий</a>*@
+                </div>
 
+                            counter++;
+                        }
+                    }
                     @*TODO: Adjust rendering*@
                 </div>
             }
 
-            <div class="col-md-6">
-                <div class="col">
-                    <label>FIRST COL</label>
-                </div>
-                <div class="col">
-                    <label>SECOND COL</label>
-                </div>
-            </div>
 
-            <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
+
+            <button id="update-profile-button" type="submit" class="btn btn-primary" style="width:85px; height:35px;">Запази промените</button>
         </form>
     </div>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-
-    @*==========================================
-              RENDER IMAGE AND SHOW IT'S NAME
-        ==========================================*@
-
-    <script src="~/js/MyCustomJs/Profile/renderProfileImg.js"></script>
-
-    <script>
-        var serviceIndex = 0;
-        function AddMoreServices() {
-            $("#ServicesContainer").
-                append("<div class= 'form-control'> Name: <input type='text' name='services[" + serviceIndex + "].Name' />  <hr /><br> Description: <textarea type='text' name='services[" + serviceIndex + "].Description'></textarea> </div > <br>");
-            serviceIndex++;
-        }
-    </script>
-
     <script src="/lib/tinymce/tinymce.min.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        tinymce.init({
-            selector: "textarea",
-            plugins: [
-                "image paste table link code media"
-            ]
-        });
-    </script>
+    <script src="~/js/TinyMCE/TinyMce.js" type="text/javascript"></script>
 
+    @*Add more services dinamically*@
+    <script src="~/js/MyCustomJs/Profile/Profile.js"></script>
+
+    @*Render img and show it's name*@
+    <script src="~/js/MyCustomJs/Profile/renderProfileImg.js"></script>
 }

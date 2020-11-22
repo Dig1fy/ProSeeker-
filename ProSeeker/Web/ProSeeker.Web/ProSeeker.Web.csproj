@@ -74,9 +74,6 @@
     <Content Update="wwwroot\js\MyCustomJs\Profile\renderProfileImg.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\txtFiles\listOfCities.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>

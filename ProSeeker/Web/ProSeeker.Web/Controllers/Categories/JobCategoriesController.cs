@@ -6,7 +6,7 @@
     using ProSeeker.Services.Data.CategoriesService;
     using ProSeeker.Web.ViewModels.Categories;
 
-    public class JobCategoriesController : Controller
+    public class JobCategoriesController : BaseController
     {
         private readonly ICategoriesService categoriesService;
 

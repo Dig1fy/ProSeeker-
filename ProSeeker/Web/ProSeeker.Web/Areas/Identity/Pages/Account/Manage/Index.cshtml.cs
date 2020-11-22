@@ -4,13 +4,11 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Threading.Tasks;
-    using Ganss.XSS;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.AspNetCore.Mvc.Rendering;
-    using Microsoft.Security.Application;
     using ProSeeker.Common;
     using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;
@@ -142,7 +140,6 @@
                     Experience = y.Experience,
                     Qualification = y.Qualification,
                     Services = y.Services,
-                    //.Select(z => new ServiceViewModel { Name = z.Name, Description = z.Description }),
                 }).FirstOrDefault();
             }
         }

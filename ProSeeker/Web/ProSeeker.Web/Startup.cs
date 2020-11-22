@@ -20,6 +20,7 @@
     using ProSeeker.Services.Data.CategoriesService;
     using ProSeeker.Services.Data.Cloud;
     using ProSeeker.Services.Data.Home;
+    using ProSeeker.Services.Data.ServicesService;
     using ProSeeker.Services.Data.UsersService;
     using ProSeeker.Services.Mapping;
     using ProSeeker.Services.Messaging;
@@ -103,6 +104,7 @@
             services.AddTransient<ICategoriesService, CategoriesService>();
             services.AddTransient<ICloudinaryApplicationService, CloudinaryApplicationService>();
             services.AddTransient<IUsersService, UsersService>();
+            services.AddTransient<IServicesService, ServicesService>();
             //services.AddTransient<IApplicationUsersController, ApplicationUsersController>();
         }
 
