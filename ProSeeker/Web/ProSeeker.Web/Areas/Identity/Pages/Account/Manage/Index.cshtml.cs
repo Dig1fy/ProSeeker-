@@ -270,5 +270,13 @@
             this.StatusMessage = SuccessfullyUpdatedProfile;
             return this.RedirectToPage();
         }
+
+        public async Task<IActionResult> OnPostDelete(int id)
+        {
+            var service = await this.servicesRepository.GetByIdWithDeletedAsync(id);
+            this.servicesRepository.Delete(service);
+            await this.servicesRepository.SaveChangesAsync();
+            return this.RedirectToPage();
+        }
     }
 }

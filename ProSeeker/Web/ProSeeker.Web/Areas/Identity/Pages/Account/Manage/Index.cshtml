@@ -75,19 +75,18 @@
                     @{ var counter = 1;
                         @foreach (var service in @Model.Input.SpecialistDetails.Services)
                         {
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="col">
-                            <label>@counter. @service.Name</label>
-                        </div>
-                        <div class="col">
-                            <label> - @service.Description</label>
-                        </div>
-                    </div>
-                    <a class="btn" type="submit" asp-area="" asp-controller="Services" asp-action="Delete" asp-route-id="@service.Id" style="min-width:initial; height:35px; background-color:bisque"> Премахни </a>
-                    @*<a class="btn btn-danger" type="submit" asp-controller="Announcements" asp-action="Delete" asp-route-id="@announcement.Id">Изтрий</a>*@
-                </div>
-
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="col">
+                                        <label>@counter. @service.Name</label>
+                                    </div>
+                                    <div class="col">
+                                        <label> - @service.Description</label>
+                                    </div>
+                                </div>
+                                <button class="btn" asp-page-handler="Delete" asp-route-id="@service.Id" style="min-width:initial; height:35px; background-color:bisque"> Премахни </button>
+                                @*<a class="btn btn-danger" type="submit" asp-controller="Announcements" asp-action="Delete" asp-route-id="@announcement.Id">Изтрий</a>*@
+                            </div>
                             counter++;
                         }
                     }
