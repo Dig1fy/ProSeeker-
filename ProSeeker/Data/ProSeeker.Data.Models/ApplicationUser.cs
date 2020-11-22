@@ -24,20 +24,22 @@ namespace ProSeeker.Data.Models
 
         public bool IsOnline { get; set; }
 
-        public string City { get; set; }
+        public int CityId { get; set; }
+
+        public virtual City City { get; set; }
 
         public DateTime LastVisit { get; set; }
 
         public bool IsSpecialist { get; set; }
 
-        public string SpecialistDetailsId { get; set; }
-
-        // Will be saved locally -> wwwroot
+        // The default image will be saved locally -> wwwroot
         public string ProfilePicture { get; set; }
+
+        public string SpecialistDetailsId { get; set; }
 
         public virtual Specialist_Details SpecialistDetails { get; set; }
 
-        public string DetailsId { get; set; }
+        //public string DetailsId { get; set; }
 
         // Audit info
         public DateTime CreatedOn { get; set; }
