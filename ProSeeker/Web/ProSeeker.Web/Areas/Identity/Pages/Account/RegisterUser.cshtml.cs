@@ -101,7 +101,7 @@
                     Email = this.Input.Email,
                     FirstName = GlobalMethods.UpperFirstLetterOfEachWord(this.Input.FirstName),
                     LastName = GlobalMethods.UpperFirstLetterOfEachWord(this.Input.LastName),
-                    City = GlobalMethods.UpperFirstLetterOfEachWord(this.Input.City),
+                    //City = GlobalMethods.UpperFirstLetterOfEachWord(this.Input.City),
                     IsSpecialist = false,
                     IsOnline = false,
                     ProfilePicture = GlobalConstants.DefaultProfileImagePath,

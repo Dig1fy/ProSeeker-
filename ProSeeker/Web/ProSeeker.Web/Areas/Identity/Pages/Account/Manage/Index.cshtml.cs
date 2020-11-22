@@ -9,6 +9,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
+    using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.Security.Application;
     using ProSeeker.Common;
     using ProSeeker.Data.Common.Repositories;
@@ -30,20 +31,22 @@
         private readonly IDeletableEntityRepository<Specialist_Details> specialistsRepository;
         private readonly IDeletableEntityRepository<Service> servicesRepository;
         private readonly ICloudinaryApplicationService cloudinaryApplicationService;
-
+        private readonly IRepository<City> citiesRepository;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IDeletableEntityRepository<Specialist_Details> specialistsRepository,
             IDeletableEntityRepository<Service> servicesRepository,
-            ICloudinaryApplicationService cloudinaryApplicationService)
+            ICloudinaryApplicationService cloudinaryApplicationService,
+            IRepository<City> citiesRepository)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.specialistsRepository = specialistsRepository;
             this.servicesRepository = servicesRepository;
             this.cloudinaryApplicationService = cloudinaryApplicationService;
+            this.citiesRepository = citiesRepository;
         }
 
         [TempData]
@@ -51,6 +54,10 @@
 
         [BindProperty]
         public InputModel Input { get; set; }
+
+        public IList<SelectListItem> AllCities => this.citiesRepository.All()
+            .Select(c => new SelectListItem() { Text = c.Name, Value = c.Id.ToString() })
+            .ToList();
 
         public class InputModel
         {
@@ -75,11 +82,11 @@
             [Display(Name = "Фамилия*")]
             public string LastName { get; set; }
 
-            [Required]
-            [StringLength(30, ErrorMessage = "Градът трябва да бъде между 3 и 30 символа.", MinimumLength = 3)]
-            [RegularExpression(@"^[а-яА-Я]*?[- .]{0,2}[а-яА-Я]*$", ErrorMessage = "Невалиден град. Примери за валидно име на град: 'Стара Загора', 'Димитровград'")]
-            [Display(Name = "Град*")]
-            public string City { get; set; }
+            //[Required]
+            //[StringLength(30, ErrorMessage = "Градът трябва да бъде между 3 и 30 символа.", MinimumLength = 3)]
+            //[RegularExpression(@"^[а-яА-Я]*?[- .]{0,2}[а-яА-Я]*$", ErrorMessage = "Невалиден град. Примери за валидно име на град: 'Стара Загора', 'Димитровград'")]
+            //[Display(Name = "Град*")]
+            public City City { get; set; }
 
             public bool IsSpecialist { get; set; }
 
@@ -112,6 +119,7 @@
         private async Task LoadAsync(ApplicationUser currentUser)
         {
             var user = await this.userManager.GetUserAsync(this.User);
+            user.City = this.citiesRepository.All().Where(x => x.Id == user.CityId).FirstOrDefault();
 
             this.Input = new InputModel
             {
@@ -119,7 +127,7 @@
                 PhoneNumber = user.PhoneNumber,
                 FirstName = GlobalMethods.UpperFirstLetterOfEachWord(user.FirstName),
                 LastName = GlobalMethods.UpperFirstLetterOfEachWord(user.LastName),
-                City = GlobalMethods.UpperFirstLetterOfEachWord(user.City),
+                City = user.City,
                 IsSpecialist = user.IsSpecialist,
                 ProfilePictureUrl = user.ProfilePicture,
             };
@@ -155,6 +163,7 @@
         public async Task<IActionResult> OnPostAsync(IFormFile imageFile, IEnumerable<ServiceInputModel> services)
         {
             var user = await this.userManager.GetUserAsync(this.User);
+            user.City = this.citiesRepository.All().Where(x => x.Id == user.CityId).FirstOrDefault();
 
             if (user == null)
             {
@@ -177,9 +186,9 @@
                 user.LastName = GlobalMethods.UpperFirstLetterOfEachWord(this.Input.LastName);
             }
 
-            if (user.City != this.Input.City)
+            if (user.City.Name != this.Input.City.Name)
             {
-                user.City = GlobalMethods.UpperFirstLetterOfEachWord(this.Input.City);
+                user.City = this.citiesRepository.All().FirstOrDefault(c => c.Id == int.Parse(this.Input.City.Name));
             }
 
             if (user.IsSpecialist)

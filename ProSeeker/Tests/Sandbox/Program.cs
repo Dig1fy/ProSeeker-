@@ -7,6 +7,7 @@
     using System.Threading.Tasks;
 
     using CommandLine;
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -24,7 +25,7 @@
     {
         public static int Main(string[] args)
         {
-
+            // var owners = File.ReadAllLines(@"..\wwwroot\txtFiles\listOfCities.txt")
             Console.WriteLine($"{typeof(Program).Namespace} ({string.Join(" ", args)}) starts working...");
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);

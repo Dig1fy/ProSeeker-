@@ -35,18 +35,25 @@
                 <input asp-for="Input.LastName" class="form-control" />
                 <span asp-validation-for="Input.LastName" class="text-danger"></span>
             </div>
+            @*<div class="form-group">
+            <label asp-for="Input.City.Name"></label>
+            <input asp-for="Input.City.Name" class="form-control" />
+            <span asp-validation-for="Input.City.Name" class="text-danger"></span>
+        </div>*@
             <div class="form-group">
-                <label asp-for="Input.City"></label>
-                <input asp-for="Input.City" class="form-control" />
-                <span asp-validation-for="Input.City" class="text-danger"></span>
+                <label asp-for="Input.City.Name"></label>
+                <select asp-for="Input.City.Name" class="form-control" asp-items="Model.AllCities">
+                    <option selected> @Model.Input.City.Name </option>
+                </select>
+                <span asp-validation-for="Input.City.Name" class="text-danger"></span>
             </div>
             @if (Model.Input.IsSpecialist == true)
             {
-        <div class="form-group">
-            <label asp-for="Input.SpecialistDetails.AboutMe"></label>
-            <textarea asp-for="Input.SpecialistDetails.AboutMe" class="form-control"></textarea>
-            <span asp-validation-for="Input.SpecialistDetails.AboutMe" class="text-danger"></span>
-        </div>
+                <div class="form-group">
+                    <label asp-for="Input.SpecialistDetails.AboutMe"></label>
+                    <textarea asp-for="Input.SpecialistDetails.AboutMe" class="form-control"></textarea>
+                    <span asp-validation-for="Input.SpecialistDetails.AboutMe" class="text-danger"></span>
+                </div>
                 <div class="form-group">
                     <label asp-for="Input.SpecialistDetails.CompanyName"></label>
                     <input asp-for="Input.SpecialistDetails.CompanyName" class="form-control" />

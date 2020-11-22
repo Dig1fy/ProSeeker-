@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <PackageReference Include="AntiXSS" Version="4.3.0" />
+    <PackageReference Include="bootstrap-select" Version="1.13.18" />
     <PackageReference Include="CloudinaryDotNet" Version="1.13.2" />
     <PackageReference Include="HtmlSanitizer" Version="5.0.355" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="3.1.10" />
@@ -71,6 +72,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="wwwroot\js\MyCustomJs\Profile\renderProfileImg.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\txtFiles\listOfCities.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

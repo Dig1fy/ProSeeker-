@@ -27,22 +27,22 @@ namespace ProSeeker.Web.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterSpecialistModel> logger;
         private readonly IEmailSender emailSender;
         private readonly IDeletableEntityRepository<JobCategory> categoriesRepository;
-        private readonly ApplicationDbContext db;
+        private readonly IRepository<City> citiesRepository;
 
         public RegisterSpecialistModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterSpecialistModel> logger,
             IEmailSender emailSender,
-            ApplicationDbContext db,
-            IDeletableEntityRepository<JobCategory> categoriesRepository)
+            IDeletableEntityRepository<JobCategory> categoriesRepository,
+            IRepository<City> citiesRepository)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.logger = logger;
             this.emailSender = emailSender;
-            this.db = db;
             this.categoriesRepository = categoriesRepository;
+            this.citiesRepository = citiesRepository;
         }
 
         [BindProperty]
@@ -53,6 +53,10 @@ namespace ProSeeker.Web.Areas.Identity.Pages.Account
         public IList<SelectListItem> AllCategories => this.categoriesRepository.All()
           .Select(c => new SelectListItem() { Text = c.Name, Value = c.Id.ToString() })
           .ToList();
+
+        public IList<SelectListItem> AllCities => this.citiesRepository.All()
+            .Select(c => new SelectListItem() { Text = c.Name, Value = c.Id.ToString() })
+            .ToList();
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
@@ -86,13 +90,14 @@ namespace ProSeeker.Web.Areas.Identity.Pages.Account
             [Display(Name = "Your last name")]
             public string LastName { get; set; }
 
-            [Required]
-            [StringLength(30, ErrorMessage = "The city name should be between 3 and 30 characters long", MinimumLength = 3)]
-            [RegularExpression(@"^[a-zA-Z]*$", ErrorMessage = "Name should consist of letters only")]
-            [Display(Name = "City name")]
-            public string City { get; set; }
+            //[Required]
+            //[StringLength(30, ErrorMessage = "The city name should be between 3 and 30 characters long", MinimumLength = 3)]
+            //[RegularExpression(@"^[a-zA-Z]*$", ErrorMessage = "Name should consist of letters only")]
+            //[Display(Name = "City name")]
+            [Required(ErrorMessage ="Полето 'Град' е задължително.")]
+            public int CityId { get; set; }
 
-            [Display(Name = "Your company name")]
+            [Display(Name = "Компания")]
             public string CompanyName { get; set; }
 
             public string JobCategoryId { get; set; }
@@ -120,7 +125,7 @@ namespace ProSeeker.Web.Areas.Identity.Pages.Account
                     LastName = GlobalMethods.UpperFirstLetterOfEachWord(this.Input.LastName),
                     IsSpecialist = true,
                     IsOnline = false,
-                    City = GlobalMethods.UpperFirstLetterOfEachWord(this.Input.City),
+                    CityId = this.Input.CityId,
                     SpecialistDetails = new Specialist_Details
                     {
                         JobCategoryId = int.Parse(this.Input.JobCategoryId),
