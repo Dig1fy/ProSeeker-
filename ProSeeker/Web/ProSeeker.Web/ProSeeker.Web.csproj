@@ -71,6 +71,9 @@
     <Content Update="wwwroot\js\Bootstrap\CoolCounter.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Update="wwwroot\js\MyCustomJs\Profile\Profile.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="wwwroot\js\MyCustomJs\Profile\renderProfileImg.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -13,7 +13,7 @@
     <link href="~/css/MyCustomCss/Profile/user-common.css" rel="stylesheet" />
 }
 
-<div class="container emp-profile">
+<div class="container emp-profile" onload="UpdateRaitings()">
 
     <div class="row">
         <div class="col-md-4">
@@ -27,9 +27,23 @@
                     @Model.FullName
                 </h5>
                 <h6>
-                    @Model.SpecialistDetails.JobCategory.Name
+                    @Model.SpecialistDetails.JobCategory.Name - гр. @Model.City.Name
                 </h6>
-                <p class="proile-rating">Raitings : <span>8/10</span></p>
+                <div>
+                    <div class="item-rating d-inline-flex" id="raitingContainer" style="padding-bottom:10px">
+                        <div style="padding-right:3px" class="star-fill" data-raitings="1"><i class="fas fa-star"></i></div>
+                        <div style="padding-right:3px" class="star-fill" data-raitings="2"><i class="fas fa-star"></i></div>
+                        <div style="padding-right:3px" class="star-fill" data-raitings="3"><i class="fas fa-star"></i></div>
+                        <div style="padding-right:3px" class="star-fill" data-raitings="4"><i class="fas fa-star"></i></div>
+                        <div style="padding-right:3px" class="star-fill" data-raitings="5"><i class="fas fa-star"></i></div>
+                        <div>
+                            <span id="averageRaitingValue">@Model.SpecialistDetails.AverageRaiting.ToString("0.0")</span><span> / 5</span>
+                            <span>from <span id="raitingsCount">@Model.SpecialistDetails.RaitingsCount </span> votes</span>
+                        </div>
+
+                    </div>
+                    <br />
+                </div>
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="about-tab" data-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="true">About</a>
@@ -161,15 +175,34 @@
         </div>
     </div>
 </div>
-
-
-
-
+<form method="post" id="antiForgeryForm"></form>
 
 @section Scripts
 {
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $("div[data-raitings]").each(function () {
 
+        $(this).click(function () {
+            var value = $(this).attr("data-raitings");
+            var specialistId = "@Model.SpecialistDetails.Id";
+            var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
+            var data = { specialistDetailsId: specialistId, value: Number(value) };
+            $.ajax({
+                type: "POST",
+                url: "/api/Raitings",
+                data: JSON.stringify(data),
+                headers: {
+                    'X-CSRF-TOKEN': antiForgeryToken
+                },
+                success: function (data) {
+                    $('#averageRaitingValue').html(data.averageRaitings.toFixed(1));
+                    $('#raitingsCount').html(data.raitingsCount)
+                },
+                contentType: 'application/json',
+            });
+        })
+    });
+    </script>
 }
-<!------ Include the above in your HEAD tag ---------->

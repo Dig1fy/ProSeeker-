@@ -4,17 +4,17 @@
 
     using ProSeeker.Data.Common.Models;
 
-    public class Vote : BaseModel<int>
+    public class Raiting : BaseModel<int>
     {
-        public string OpinionId { get; set; }
+        public string SpecialistDetailsId { get; set; }
 
-        public Opinion Opinion { get; set; }
+        public Specialist_Details SpecialistDetails { get; set; }
 
         [Required]
         public string UserId { get; set; }
 
         public ApplicationUser User { get; set; }
 
-        public VoteType VoteType { get; set; }
+        public int Value { get; set; }
     }
 }

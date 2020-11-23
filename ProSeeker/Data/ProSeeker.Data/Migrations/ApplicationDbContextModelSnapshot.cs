@@ -429,8 +429,8 @@ namespace ProSeeker.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<byte>("Value")
-                        .HasColumnType("tinyint");
+                    b.Property<int>("Value")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -690,7 +690,7 @@ namespace ProSeeker.Data.Migrations
                         .HasForeignKey("SpecialistDetailsId");
 
                     b.HasOne("ProSeeker.Data.Models.ApplicationUser", "User")
-                        .WithMany()
+                        .WithMany("Raitings")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();

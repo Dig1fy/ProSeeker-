@@ -20,6 +20,7 @@
     using ProSeeker.Services.Data.CategoriesService;
     using ProSeeker.Services.Data.Cloud;
     using ProSeeker.Services.Data.Home;
+    using ProSeeker.Services.Data.Raitings;
     using ProSeeker.Services.Data.ServicesService;
     using ProSeeker.Services.Data.UsersService;
     using ProSeeker.Services.Mapping;
@@ -81,7 +82,7 @@
             // CSRF
             services.AddControllersWithViews(options =>
             {
-                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()); 
+                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             });
             services.AddAntiforgery(options =>
             {
@@ -105,6 +106,7 @@
             services.AddTransient<ICloudinaryApplicationService, CloudinaryApplicationService>();
             services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<IServicesService, ServicesService>();
+            services.AddTransient<IRaitingsService, RaitingsService>();
             //services.AddTransient<IApplicationUsersController, ApplicationUsersController>();
         }
 

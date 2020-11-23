@@ -1,7 +1,7 @@
 ﻿namespace ProSeeker.Web.ViewModels.Users
 {
     using System;
-
+    using AutoMapper;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;
     using ProSeeker.Web.ViewModels.Users.Specialists;
@@ -16,12 +16,13 @@
 
         public string FullName => $"{this.FirstName} {this.LastName}";
 
-        public string City { get; set; }
+        public City City { get; set; }
 
         public string ProfilePicture { get; set; }
 
         public DateTime CreatedOn { get; set; }
 
         public virtual SpecialistDetailsViewModel SpecialistDetails { get; set; }
+
     }
 }

@@ -14,9 +14,11 @@
     using Microsoft.AspNetCore.Identity.UI.Services;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
+    using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.WebUtilities;
     using Microsoft.Extensions.Logging;
     using ProSeeker.Common;
+    using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;
 
     [AllowAnonymous]
@@ -26,17 +28,20 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ILogger<RegisterUserModel> logger;
         private readonly IEmailSender emailSender;
+        private readonly IRepository<City> citiesRepository;
 
         public RegisterUserModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterUserModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IRepository<City> citiesRepository)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.logger = logger;
             this.emailSender = emailSender;
+            this.citiesRepository = citiesRepository;
         }
 
         [BindProperty]
@@ -45,6 +50,11 @@
         public string ReturnUrl { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
+
+        public IList<SelectListItem> AllCities => this.citiesRepository.All()
+            .OrderBy(n => n.Name)
+            .Select(c => new SelectListItem() { Text = c.Name, Value = c.Id.ToString() })
+            .ToList();
 
         public class RegisterInputModel
         {
@@ -76,11 +86,8 @@
             [Display(Name = "Your last name")]
             public string LastName { get; set; }
 
-            [Required]
-            [StringLength(30, ErrorMessage = "The city name should be between 3 and 30 characters long", MinimumLength = 3)]
-            [RegularExpression(@"^[a-zA-Z]*$", ErrorMessage = "Name should consist of letters only")]
-            [Display(Name = "City name")]
-            public string City { get; set; }
+            [Required(ErrorMessage = "Полето 'Град' е задължително.")]
+            public int CityId { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -101,7 +108,7 @@
                     Email = this.Input.Email,
                     FirstName = GlobalMethods.UpperFirstLetterOfEachWord(this.Input.FirstName),
                     LastName = GlobalMethods.UpperFirstLetterOfEachWord(this.Input.LastName),
-                    //City = GlobalMethods.UpperFirstLetterOfEachWord(this.Input.City),
+                    CityId = this.Input.CityId,
                     IsSpecialist = false,
                     IsOnline = false,
                     ProfilePicture = GlobalConstants.DefaultProfileImagePath,

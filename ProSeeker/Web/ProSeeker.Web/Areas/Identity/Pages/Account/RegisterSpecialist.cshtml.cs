@@ -55,6 +55,7 @@ namespace ProSeeker.Web.Areas.Identity.Pages.Account
           .ToList();
 
         public IList<SelectListItem> AllCities => this.citiesRepository.All()
+            .OrderBy(n => n.Name)
             .Select(c => new SelectListItem() { Text = c.Name, Value = c.Id.ToString() })
             .ToList();
 
