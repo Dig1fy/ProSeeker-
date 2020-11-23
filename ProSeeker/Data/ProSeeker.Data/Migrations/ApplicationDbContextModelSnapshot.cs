@@ -409,6 +409,38 @@ namespace ProSeeker.Data.Migrations
                     b.ToTable("Opinions");
                 });
 
+            modelBuilder.Entity("ProSeeker.Data.Models.Raiting", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SpecialistDetailsId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<byte>("Value")
+                        .HasColumnType("tinyint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SpecialistDetailsId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Raitings");
+                });
+
             modelBuilder.Entity("ProSeeker.Data.Models.Service", b =>
                 {
                     b.Property<int>("Id")
@@ -531,27 +563,40 @@ namespace ProSeeker.Data.Migrations
 
             modelBuilder.Entity("ProSeeker.Data.Models.Vote", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("SpecialistDetailsId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("OpinionId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("OpinionId1")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Specialist_DetailsId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("VoteType")
                         .HasColumnType("int");
 
-                    b.HasKey("UserId", "SpecialistDetailsId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("SpecialistDetailsId");
+                    b.HasIndex("OpinionId1");
+
+                    b.HasIndex("Specialist_DetailsId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Votes");
                 });
@@ -638,6 +683,19 @@ namespace ProSeeker.Data.Migrations
                         .HasForeignKey("SpecialistDetailsId");
                 });
 
+            modelBuilder.Entity("ProSeeker.Data.Models.Raiting", b =>
+                {
+                    b.HasOne("ProSeeker.Data.Models.Specialist_Details", "SpecialistDetails")
+                        .WithMany("Raitings")
+                        .HasForeignKey("SpecialistDetailsId");
+
+                    b.HasOne("ProSeeker.Data.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ProSeeker.Data.Models.Service", b =>
                 {
                     b.HasOne("ProSeeker.Data.Models.Specialist_Details", "SpecialistDetails")
@@ -660,11 +718,13 @@ namespace ProSeeker.Data.Migrations
 
             modelBuilder.Entity("ProSeeker.Data.Models.Vote", b =>
                 {
-                    b.HasOne("ProSeeker.Data.Models.Specialist_Details", "SpecialistDetails")
+                    b.HasOne("ProSeeker.Data.Models.Opinion", "Opinion")
                         .WithMany("Votes")
-                        .HasForeignKey("SpecialistDetailsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OpinionId1");
+
+                    b.HasOne("ProSeeker.Data.Models.Specialist_Details", null)
+                        .WithMany("Votes")
+                        .HasForeignKey("Specialist_DetailsId");
 
                     b.HasOne("ProSeeker.Data.Models.ApplicationUser", "User")
                         .WithMany()

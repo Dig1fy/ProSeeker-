@@ -36,6 +36,8 @@
 
         public DbSet<Vote> Votes { get; set; }
 
+        public DbSet<Raiting> Raitings { get; set; }
+
         public DbSet<City> Cities { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
@@ -90,7 +92,7 @@
                 .WithOne(sd => sd.User)
                 .HasForeignKey<Specialist_Details>(fk => fk.UserId);
 
-            builder.Entity<Vote>().HasKey(x => new { x.UserId, x.SpecialistDetailsId});
+            //builder.Entity<Vote>().HasKey(x => new { x.UserId, x.OpinionId });
         }
 
         // Filter (soft-deleted entities will be ignored when working with the db)
