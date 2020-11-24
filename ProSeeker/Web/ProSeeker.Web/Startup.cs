@@ -1,6 +1,7 @@
 ﻿namespace ProSeeker.Web
 {
     using System.Reflection;
+
     using CloudinaryDotNet;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -54,16 +55,17 @@
 
             // TODO: Add Privacy page and add implement facebook/google APIs
             services.AddAuthentication();
-            //.AddFacebook(facebookOptions =>
-            //{
+
+            // .AddFacebook(facebookOptions =>
+            // {
             //    facebookOptions.AppId = this.configuration["Authentication:Facebook:AppId"];
             //    facebookOptions.AppSecret = this.configuration["Authentication:Facebook:AppSecret"];
-            //})
-            //.AddGoogle(googleOptions =>
-            //{
+            // })
+            // .AddGoogle(googleOptions =>
+            // {
             //    googleOptions.ClientId = this.configuration["Authentication:Google:ClientId"];
             //    googleOptions.ClientSecret = this.configuration["Authentication:Google:ClientSecret"];
-            //});
+            // });
 
             // Cloudinary Authentication
             var clodAccount = new CloudinaryDotNet.Account(
@@ -106,8 +108,9 @@
             services.AddTransient<ICloudinaryApplicationService, CloudinaryApplicationService>();
             services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<IServicesService, ServicesService>();
-            services.AddTransient<IRaitingsService, RaitingsService>();
-            //services.AddTransient<IApplicationUsersController, ApplicationUsersController>();
+            services.AddTransient<IRatingsService, RatingsService>();
+
+            // services.AddTransient<IApplicationUsersController, ApplicationUsersController>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

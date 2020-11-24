@@ -29,9 +29,9 @@
 
         public string SanitizedQualification => new HtmlSanitizer().Sanitize(this.Qualification);
 
-        public double AverageRaiting { get; set; }
+        public double AverageRating { get; set; }
 
-        public int RaitingsCount { get; set; }
+        public int RatingsCount { get; set; }
 
         public ICollection<ServiceViewModel> Services { get; set; }
 
@@ -40,13 +40,13 @@
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Specialist_Details, SpecialistDetailsViewModel>()
-                 .ForMember(x => x.AverageRaiting, opt =>
+                 .ForMember(x => x.AverageRating, opt =>
                    {
-                       opt.MapFrom(m => m.Raitings.Average(v => v.Value));
+                       opt.MapFrom(m => m.Ratings.Average(v => v.Value));
                    })
-                 .ForMember(y => y.RaitingsCount, opt =>
+                 .ForMember(y => y.RatingsCount, opt =>
                   {
-                      opt.MapFrom(m => m.Raitings.Count());
+                      opt.MapFrom(m => m.Ratings.Count());
                   });
         }
     }

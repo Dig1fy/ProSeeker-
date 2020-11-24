@@ -4,11 +4,10 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using ProSeeker.Common;
-    using ProSeeker.Data.Models;
-
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
+    using ProSeeker.Common;
+    using ProSeeker.Data.Models;
 
     internal class RolesSeeder : ISeeder
     {
@@ -17,6 +16,8 @@
             var roleManager = serviceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
 
             await SeedRoleAsync(roleManager, GlobalConstants.AdministratorRoleName);
+            await SeedRoleAsync(roleManager, GlobalConstants.RegularUserRoleName);
+            await SeedRoleAsync(roleManager, GlobalConstants.SpecialistRoleName);
         }
 
         private static async Task SeedRoleAsync(RoleManager<ApplicationRole> roleManager, string roleName)

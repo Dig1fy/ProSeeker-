@@ -15,7 +15,7 @@ namespace ProSeeker.Data.Models
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
-            this.Raitings = new HashSet<Raiting>();
+            this.Ratings = new HashSet<Rating>();
         }
 
         public string FirstName { get; set; }
@@ -54,6 +54,6 @@ namespace ProSeeker.Data.Models
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
 
-        public virtual ICollection<Raiting> Raitings { get; set; }
+        public virtual ICollection<Rating> Ratings { get; set; }
     }
 }

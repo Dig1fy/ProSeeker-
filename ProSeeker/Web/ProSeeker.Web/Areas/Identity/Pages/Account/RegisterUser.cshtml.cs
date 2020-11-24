@@ -1,6 +1,5 @@
 ﻿namespace ProSeeker.Web.Areas.Identity.Pages.Account
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
@@ -59,7 +58,7 @@
         public class RegisterInputModel
         {
             [Required(ErrorMessage = "Моля, попълнете полето 'потребителско име/имейл'!")]
-            [EmailAddress]
+            [EmailAddress(ErrorMessage ="Невалиден имейл.")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
@@ -138,6 +137,7 @@
                     }
                     else
                     {
+                        await this.userManager.AddToRoleAsync(user, GlobalConstants.RegularUserRoleName);
                         await this.signInManager.SignInAsync(user, isPersistent: false);
                         return this.LocalRedirect(returnUrl);
                     }

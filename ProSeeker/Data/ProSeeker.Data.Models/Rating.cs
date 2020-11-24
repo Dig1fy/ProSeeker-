@@ -4,7 +4,7 @@
 
     using ProSeeker.Data.Common.Models;
 
-    public class Raiting : BaseModel<int>
+    public class Rating : BaseModel<int>
     {
         public string SpecialistDetailsId { get; set; }
 

@@ -6,6 +6,10 @@
 
         public const string AdministratorRoleName = "Administrator";
 
+        public const string SpecialistRoleName = "Specialist";
+
+        public const string RegularUserRoleName = "User";
+
         public const string DefaultProfileImagePath = "/images/ProfileImage/defaultUser.png";
     }
 }

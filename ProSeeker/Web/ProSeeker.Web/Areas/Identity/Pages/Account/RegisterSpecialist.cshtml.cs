@@ -1,5 +1,6 @@
-namespace ProSeeker.Web.Areas.Identity.Pages.Account
+п»їnamespace ProSeeker.Web.Areas.Identity.Pages.Account
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
@@ -63,39 +64,39 @@ namespace ProSeeker.Web.Areas.Identity.Pages.Account
 
         public class RegisterSpecialistInputModel
         {
-            [Required(ErrorMessage ="Моля, попълнете полето 'потребителско име/имейл'!")]
-            [EmailAddress]
-            [Display(Name = "Потребителско име /имейл/")]
+            [Required(ErrorMessage = "РњРѕР»СЏ, РїРѕРїСЉР»РЅРµС‚Рµ РїРѕР»РµС‚Рѕ 'РїРѕС‚СЂРµР±РёС‚РµР»СЃРєРѕ РёРјРµ/РёРјРµР№Р»'!")]
+            [EmailAddress(ErrorMessage = "РќРµРІР°Р»РёРґРµРЅ РјРµР№Р».")]
+            [Display(Name = "РџРѕС‚СЂРµР±РёС‚РµР»СЃРєРѕ РёРјРµ /РёРјРµР№Р»/")]
             public string Email { get; set; }
 
-            [Required(ErrorMessage = "Моля, попълнете полето 'Парола'!")]
+            [Required(ErrorMessage = "РњРѕР»СЏ, РїРѕРїСЉР»РЅРµС‚Рµ РїРѕР»РµС‚Рѕ 'РџР°СЂРѕР»Р°'!")]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Парола")]
+            [Display(Name = "РџР°СЂРѕР»Р°")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Потвърждаване на паролата")]
-            [Compare("Password", ErrorMessage = "Двете пароли не съответстват.")]
+            [Display(Name = "РџРѕС‚РІСЉСЂР¶РґР°РІР°РЅРµ РЅР° РїР°СЂРѕР»Р°С‚Р°")]
+            [Compare("Password", ErrorMessage = "Р”РІРµС‚Рµ РїР°СЂРѕР»Рё РЅРµ СЃСЉРѕС‚РІРµС‚СЃС‚РІР°С‚.")]
             public string ConfirmPassword { get; set; }
 
-            [Required(ErrorMessage = "Моля, попълнете полето 'Име'!")]
+            [Required(ErrorMessage = "РњРѕР»СЏ, РїРѕРїСЉР»РЅРµС‚Рµ РїРѕР»РµС‚Рѕ 'РРјРµ'!")]
             [StringLength(20, MinimumLength = 1)]
-            [RegularExpression(@"^[а-яА-Я]*?[- .]{0,2}[а-яА-Я]*?[- .]{0,2}[а-яА-Я]*$", ErrorMessage = @"Невалидно първо име. Примери за валидно име:'Георги', 'инж. Иван', 'бай Иван'")]
-            [Display(Name = "Име*")]
+            [RegularExpression(@"^[Р°-СЏРђ-РЇ]*?[- .]{0,2}[Р°-СЏРђ-РЇ]*?[- .]{0,2}[Р°-СЏРђ-РЇ]*$", ErrorMessage = @"РќРµРІР°Р»РёРґРЅРѕ РїСЉСЂРІРѕ РёРјРµ. РџСЂРёРјРµСЂРё Р·Р° РІР°Р»РёРґРЅРѕ РёРјРµ:'Р“РµРѕСЂРіРё', 'РёРЅР¶. РРІР°РЅ', 'Р±Р°Р№ РРІР°РЅ'")]
+            [Display(Name = "РРјРµ*")]
             public string FirstName { get; set; }
 
-            [Required(ErrorMessage = "Моля, попълнете полето 'Фамилия'!")]
+            [Required(ErrorMessage = "РњРѕР»СЏ, РїРѕРїСЉР»РЅРµС‚Рµ РїРѕР»РµС‚Рѕ 'Р¤Р°РјРёР»РёСЏ'!")]
             [StringLength(25, MinimumLength = 1)]
-            [RegularExpression(@"^[а-яА-Я]*?[- .]{0,2}[а-яА-Я]*$", ErrorMessage = @"Невалидна фамилия. Примери за валидна фамилия: 'Тодоров', 'Петрова-Алексиева'")]
-            [Display(Name = "Фамилия*")]
+            [RegularExpression(@"^[Р°-СЏРђ-РЇ]*?[- .]{0,2}[Р°-СЏРђ-РЇ]*$", ErrorMessage = @"РќРµРІР°Р»РёРґРЅР° С„Р°РјРёР»РёСЏ. РџСЂРёРјРµСЂРё Р·Р° РІР°Р»РёРґРЅР° С„Р°РјРёР»РёСЏ: 'РўРѕРґРѕСЂРѕРІ', 'РџРµС‚СЂРѕРІР°-РђР»РµРєСЃРёРµРІР°'")]
+            [Display(Name = "Р¤Р°РјРёР»РёСЏ*")]
             public string LastName { get; set; }
 
-            [Display(Name = "Град")]
-            [Required(ErrorMessage ="Моля, попълнете полето 'Град'!")]
+            [Display(Name = "Р“СЂР°Рґ")]
+            [Required(ErrorMessage = "РњРѕР»СЏ, РїРѕРїСЉР»РЅРµС‚Рµ РїРѕР»РµС‚Рѕ 'Р“СЂР°Рґ'!")]
             public int CityId { get; set; }
 
-            [Display(Name = "Компания")]
+            [Display(Name = "РљРѕРјРїР°РЅРёСЏ")]
             public string CompanyName { get; set; }
 
             public string JobCategoryId { get; set; }
@@ -131,7 +132,9 @@ namespace ProSeeker.Web.Areas.Identity.Pages.Account
                     },
                     ProfilePicture = GlobalConstants.DefaultProfileImagePath,
                 };
+
                 var result = await this.userManager.CreateAsync(user, this.Input.Password);
+
                 if (result.Succeeded)
                 {
                     this.logger.LogInformation("User created a new account with password.");
@@ -155,6 +158,7 @@ namespace ProSeeker.Web.Areas.Identity.Pages.Account
                     }
                     else
                     {
+                        await this.userManager.AddToRoleAsync(user, GlobalConstants.SpecialistRoleName);
                         await this.signInManager.SignInAsync(user, isPersistent: false);
                         return this.LocalRedirect(returnUrl);
                     }

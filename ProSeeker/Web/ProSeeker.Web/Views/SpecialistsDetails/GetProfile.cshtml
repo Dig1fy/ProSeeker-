@@ -30,20 +30,35 @@
                     @Model.SpecialistDetails.JobCategory.Name - гр. @Model.City.Name
                 </h6>
                 <div>
-                    <div class="item-rating d-inline-flex" id="raitingContainer" style="padding-bottom:10px">
-                        <div style="padding-right:3px" class="star-fill" data-raitings="1"><i class="fas fa-star"></i></div>
-                        <div style="padding-right:3px" class="star-fill" data-raitings="2"><i class="fas fa-star"></i></div>
-                        <div style="padding-right:3px" class="star-fill" data-raitings="3"><i class="fas fa-star"></i></div>
-                        <div style="padding-right:3px" class="star-fill" data-raitings="4"><i class="fas fa-star"></i></div>
-                        <div style="padding-right:3px" class="star-fill" data-raitings="5"><i class="fas fa-star"></i></div>
+                    <div class="item-rating d-inline-flex" id="ratingContainer" style="padding-bottom:10px">
+                        <div style="padding-right:3px" class="star-fill" data-ratings="1"><i class="fas fa-star"></i></div>
+                        <div style="padding-right:3px" class="star-fill" data-ratings="2"><i class="fas fa-star"></i></div>
+                        <div style="padding-right:3px" class="star-fill" data-ratings="3"><i class="fas fa-star"></i></div>
+                        <div style="padding-right:3px" class="star-fill" data-ratings="4"><i class="fas fa-star"></i></div>
+                        <div style="padding-right:3px" class="star-fill" data-ratings="5"><i class="fas fa-star"></i></div>
                         <div>
-                            <span id="averageRaitingValue">@Model.SpecialistDetails.AverageRaiting.ToString("0.0")</span><span> / 5</span>
-                            <span>from <span id="raitingsCount">@Model.SpecialistDetails.RaitingsCount </span> votes</span>
+                            <span id="averageRatingValue">@Model.SpecialistDetails.AverageRating.ToString("0.0")</span><span> / 5</span>
+                            <span>
+                                (<span id="ratingsCount">@Model.SpecialistDetails.RatingsCount </span>
+                                @if (Model.SpecialistDetails.RatingsCount == 1)
+                                {
+                                    <span> vote)</span>
+                                }
+                                else
+                                {
+                                    <span> votes)</span>
+                                }
+                            </span>
+
                         </div>
 
+
                     </div>
+
                     <br />
+
                 </div>
+
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="about-tab" data-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="true">About</a>
@@ -182,23 +197,23 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
-        $("div[data-raitings]").each(function () {
+        $("div[data-ratings]").each(function () {
 
         $(this).click(function () {
-            var value = $(this).attr("data-raitings");
+            var value = $(this).attr("data-ratings");
             var specialistId = "@Model.SpecialistDetails.Id";
             var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
             var data = { specialistDetailsId: specialistId, value: Number(value) };
             $.ajax({
                 type: "POST",
-                url: "/api/Raitings",
+                url: "/api/Ratings",
                 data: JSON.stringify(data),
                 headers: {
                     'X-CSRF-TOKEN': antiForgeryToken
                 },
                 success: function (data) {
-                    $('#averageRaitingValue').html(data.averageRaitings.toFixed(1));
-                    $('#raitingsCount').html(data.raitingsCount)
+                    $('#averageRatingValue').html(data.averageRatings.toFixed(1));
+                    $('#ratingsCount').html(data.ratingsCount)
                 },
                 contentType: 'application/json',
             });

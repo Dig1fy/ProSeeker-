@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -65,7 +66,7 @@
             [Display(Name = "Вашият имейл")]
             public string Username { get; set; }
 
-            [Phone (ErrorMessage = "Невалиден телефонен номер")]
+            [Phone(ErrorMessage = "Невалиден телефонен номер")]
             [Display(Name = "Телефон за връзка")]
             public string PhoneNumber { get; set; }
 

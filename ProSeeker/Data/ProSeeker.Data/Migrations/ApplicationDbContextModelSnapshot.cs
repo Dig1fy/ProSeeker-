@@ -409,7 +409,7 @@ namespace ProSeeker.Data.Migrations
                     b.ToTable("Opinions");
                 });
 
-            modelBuilder.Entity("ProSeeker.Data.Models.Raiting", b =>
+            modelBuilder.Entity("ProSeeker.Data.Models.Rating", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -438,7 +438,7 @@ namespace ProSeeker.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Raitings");
+                    b.ToTable("Ratings");
                 });
 
             modelBuilder.Entity("ProSeeker.Data.Models.Service", b =>
@@ -683,14 +683,14 @@ namespace ProSeeker.Data.Migrations
                         .HasForeignKey("SpecialistDetailsId");
                 });
 
-            modelBuilder.Entity("ProSeeker.Data.Models.Raiting", b =>
+            modelBuilder.Entity("ProSeeker.Data.Models.Rating", b =>
                 {
                     b.HasOne("ProSeeker.Data.Models.Specialist_Details", "SpecialistDetails")
-                        .WithMany("Raitings")
+                        .WithMany("Ratings")
                         .HasForeignKey("SpecialistDetailsId");
 
                     b.HasOne("ProSeeker.Data.Models.ApplicationUser", "User")
-                        .WithMany("Raitings")
+                        .WithMany("Ratings")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();

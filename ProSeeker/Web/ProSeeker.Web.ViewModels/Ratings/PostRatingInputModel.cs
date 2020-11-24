@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class PostRaitingInputModel
+    public class PostRatingInputModel
     {
         public string SpecialistDetailsId { get; set; }
 
