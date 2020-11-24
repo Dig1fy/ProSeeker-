@@ -21,9 +21,13 @@
 
         public virtual ApplicationUser Creator { get; set; }
 
-        public string ParentOpinionId { get; set; }
+        public int ParentOpinionId { get; set; }
 
         public virtual Opinion ParentOpinion { get; set; }
+
+        public string AdId { get; set; }
+
+        public virtual Ad Ad { get; set; }
 
         public virtual ICollection<Vote> Votes { get; set; }
     }

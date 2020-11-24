@@ -24,8 +24,4 @@
     <ProjectReference Include="..\..\Services\ProSeeker.Services.Mapping\ProSeeker.Services.Mapping.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="City\" />
-  </ItemGroup>
-
 </Project>

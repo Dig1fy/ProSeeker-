@@ -123,6 +123,57 @@ namespace ProSeeker.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("ProSeeker.Data.Models.Ad", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsVip")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("JobCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PreparedBudget")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("JobCategoryId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Ads");
+                });
+
             modelBuilder.Entity("ProSeeker.Data.Models.ApplicationRole", b =>
                 {
                     b.Property<string>("Id")
@@ -205,7 +256,9 @@ namespace ProSeeker.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
 
                     b.Property<DateTime>("LastVisit")
                         .HasColumnType("datetime2");
@@ -369,6 +422,9 @@ namespace ProSeeker.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AdId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
@@ -387,10 +443,7 @@ namespace ProSeeker.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ParentOpinionId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ParentOpinionId1")
+                    b.Property<int>("ParentOpinionId")
                         .HasColumnType("int");
 
                     b.Property<string>("SpecialistDetailsId")
@@ -398,11 +451,13 @@ namespace ProSeeker.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AdId");
+
                     b.HasIndex("CreatorId");
 
                     b.HasIndex("IsDeleted");
 
-                    b.HasIndex("ParentOpinionId1");
+                    b.HasIndex("ParentOpinionId");
 
                     b.HasIndex("SpecialistDetailsId");
 
@@ -574,10 +629,7 @@ namespace ProSeeker.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("OpinionId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("OpinionId1")
+                    b.Property<int>("OpinionId")
                         .HasColumnType("int");
 
                     b.Property<string>("Specialist_DetailsId")
@@ -592,7 +644,7 @@ namespace ProSeeker.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OpinionId1");
+                    b.HasIndex("OpinionId");
 
                     b.HasIndex("Specialist_DetailsId");
 
@@ -652,6 +704,25 @@ namespace ProSeeker.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ProSeeker.Data.Models.Ad", b =>
+                {
+                    b.HasOne("ProSeeker.Data.Models.City", "City")
+                        .WithMany("Ads")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ProSeeker.Data.Models.JobCategory", "JobCategory")
+                        .WithMany("Ads")
+                        .HasForeignKey("JobCategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ProSeeker.Data.Models.ApplicationUser", "User")
+                        .WithMany("Ads")
+                        .HasForeignKey("UserId");
+                });
+
             modelBuilder.Entity("ProSeeker.Data.Models.ApplicationUser", b =>
                 {
                     b.HasOne("ProSeeker.Data.Models.City", "City")
@@ -670,13 +741,19 @@ namespace ProSeeker.Data.Migrations
 
             modelBuilder.Entity("ProSeeker.Data.Models.Opinion", b =>
                 {
+                    b.HasOne("ProSeeker.Data.Models.Ad", "Ad")
+                        .WithMany("Opinions")
+                        .HasForeignKey("AdId");
+
                     b.HasOne("ProSeeker.Data.Models.ApplicationUser", "Creator")
-                        .WithMany()
+                        .WithMany("Opinions")
                         .HasForeignKey("CreatorId");
 
                     b.HasOne("ProSeeker.Data.Models.Opinion", "ParentOpinion")
                         .WithMany()
-                        .HasForeignKey("ParentOpinionId1");
+                        .HasForeignKey("ParentOpinionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("ProSeeker.Data.Models.Specialist_Details", "SpecialistDetails")
                         .WithMany("Opinions")
@@ -720,14 +797,16 @@ namespace ProSeeker.Data.Migrations
                 {
                     b.HasOne("ProSeeker.Data.Models.Opinion", "Opinion")
                         .WithMany("Votes")
-                        .HasForeignKey("OpinionId1");
+                        .HasForeignKey("OpinionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("ProSeeker.Data.Models.Specialist_Details", null)
                         .WithMany("Votes")
                         .HasForeignKey("Specialist_DetailsId");
 
                     b.HasOne("ProSeeker.Data.Models.ApplicationUser", "User")
-                        .WithMany()
+                        .WithMany("Votes")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();

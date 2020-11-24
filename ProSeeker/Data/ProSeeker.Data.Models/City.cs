@@ -10,10 +10,13 @@ namespace ProSeeker.Data.Models
         public City()
         {
             this.ApplicationUsers = new HashSet<ApplicationUser>();
+            this.Ads = new HashSet<Ad>();
         }
 
         public string Name { get; set; }
 
         public ICollection<ApplicationUser> ApplicationUsers { get; set; }
+
+        public virtual ICollection<Ad> Ads { get; set; }
     }
 }

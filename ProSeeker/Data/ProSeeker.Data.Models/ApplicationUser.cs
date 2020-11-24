@@ -3,6 +3,7 @@ namespace ProSeeker.Data.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     using Microsoft.AspNetCore.Identity;
     using ProSeeker.Data.Common.Models;
@@ -12,14 +13,20 @@ namespace ProSeeker.Data.Models
         public ApplicationUser()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.Votes = new HashSet<Vote>();
+            this.Ratings = new HashSet<Rating>();
+            this.Opinions = new HashSet<Opinion>();
+            this.Ads = new HashSet<Ad>();
+
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
-            this.Ratings = new HashSet<Rating>();
         }
 
         public string FirstName { get; set; }
 
+        [Required(ErrorMessage = "Моля, попълнете полето 'Име'!")]
+        [MaxLength(20)]
         public string LastName { get; set; }
 
         public bool IsOnline { get; set; }
@@ -55,5 +62,11 @@ namespace ProSeeker.Data.Models
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
 
         public virtual ICollection<Rating> Ratings { get; set; }
+
+        public virtual ICollection<Vote> Votes { get; set; }
+
+        public virtual ICollection<Opinion> Opinions { get; set; }
+
+        public virtual ICollection<Ad> Ads { get; set; }
     }
 }

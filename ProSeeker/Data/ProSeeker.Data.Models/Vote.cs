@@ -6,7 +6,7 @@
 
     public class Vote : BaseModel<int>
     {
-        public string OpinionId { get; set; }
+        public int OpinionId { get; set; }
 
         public Opinion Opinion { get; set; }
 
