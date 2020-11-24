@@ -18,11 +18,11 @@
     public partial class IndexModel : PageModel
     {
         // Profile
-        private const string UnableToLoadUserByIdErrorMessage = "Unable to load user with ID ";
-        private const string InvalidProfilePictureMessage = "Invalid profile picture type. We support jpg, jpeg, png files only.";
-        private const string InvalidPhoneNumber = "Unexpected error when trying to set phone number.";
-        private const string SuccessfullyUpdatedProfile = "Your profile has been updated";
-        private const string UpdateProfileErrorMessage = "Ouch! Unexpected error occured when updating your profile!";
+        private const string UnableToLoadUserByIdErrorMessage = "Не успяхме да открием потребител с ID ";
+        private const string InvalidProfilePictureMessage = "Невалиден формат на снимка. Поддържаме jpg, jpeg и png файлове.";
+        private const string InvalidPhoneNumber = "Невалиден телефонен номер.";
+        private const string SuccessfullyUpdatedProfile = "Профилът Ви бе обновен успешно!";
+        private const string UpdateProfileErrorMessage = "Възникна грешка, докато обновявахме профила Ви!";
 
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
@@ -62,29 +62,27 @@
         {
             public string ProfilePictureUrl { get; set; }
 
-            [Display(Name = "Your user name")]
+            [Display(Name = "Вашият имейл")]
             public string Username { get; set; }
 
-            [Phone]
+            [Phone (ErrorMessage = "Невалиден телефонен номер")]
             [Display(Name = "Телефон за връзка")]
             public string PhoneNumber { get; set; }
 
-            [Required]
-            [StringLength(16, ErrorMessage = "Името Ви трябва да бъде между 1 и 16 символа.", MinimumLength = 1)]
-            [RegularExpression(@"^[а-яА-Я]*?[- .]{0,2}[а-яА-Я]*?[- .]{0,2}[а-яА-Я]*$", ErrorMessage = @"Невалидно първо име. Примери за валидно име:'Георги', 'инж. Иван', 'г-н Тодор'")]
+            [Required(ErrorMessage = "Моля, попълнете полето 'Име'!")]
+            [StringLength(20, MinimumLength = 1)]
+            [RegularExpression(@"^[а-яА-Я]*?[- .]{0,2}[а-яА-Я]*?[- .]{0,2}[а-яА-Я]*$", ErrorMessage = @"Невалидно първо име. Примери за валидно име:'Георги', 'инж. Иван', 'бай Иван'")]
             [Display(Name = "Име*")]
             public string FirstName { get; set; }
 
-            [Required]
-            [StringLength(25, ErrorMessage = "Фамилията Ви трябва да бъде между 1 и 25 символа.", MinimumLength = 1)]
+            [Required(ErrorMessage = "Моля, попълнете полето 'Фамилия'!")]
+            [StringLength(25, MinimumLength = 1)]
             [RegularExpression(@"^[а-яА-Я]*?[- .]{0,2}[а-яА-Я]*$", ErrorMessage = @"Невалидна фамилия. Примери за валидна фамилия: 'Тодоров', 'Петрова-Алексиева'")]
             [Display(Name = "Фамилия*")]
             public string LastName { get; set; }
 
-            //[Required]
-            //[StringLength(30, ErrorMessage = "Градът трябва да бъде между 3 и 30 символа.", MinimumLength = 3)]
-            //[RegularExpression(@"^[а-яА-Я]*?[- .]{0,2}[а-яА-Я]*$", ErrorMessage = "Невалиден град. Примери за валидно име на град: 'Стара Загора', 'Димитровград'")]
-            //[Display(Name = "Град*")]
+            [Required(ErrorMessage = "Моля, попълнете полето 'Град'!")]
+            [Display(Name = "Град*")]
             public City City { get; set; }
 
             public bool IsSpecialist { get; set; }

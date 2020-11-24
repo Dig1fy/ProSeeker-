@@ -1,14 +1,13 @@
 ﻿namespace ProSeeker.Web.Controllers.Raitings
 {
+    using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Data.Raitings;
     using ProSeeker.Web.ViewModels.Raitings;
-    using System.Security.Claims;
-    using System.Threading.Tasks;
 
     [ApiController]
     [Route("api/[controller]")]
@@ -25,8 +24,6 @@
 
         [HttpPost]
         [Authorize]
-        //[ProducesResponseType(StatusCodes.Status201Created)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<PostRaitingResponseViewModel>> Post(PostRaitingInputModel inputModel)
         {
             var userId = this.userManager.GetUserId(this.User);

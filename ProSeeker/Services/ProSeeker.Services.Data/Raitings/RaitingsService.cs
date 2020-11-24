@@ -30,8 +30,9 @@
 
         public int GetRaitingsCount(string specialistId)
         {
-            var raitingsCount = this.specialistsDetailsRepository.All()
-                 .Select(x => x.Raitings)
+            var raitingsCount = this.raitingsRepository.All()
+                .Where(x => x.SpecialistDetailsId == specialistId)
+                 .ToList()
                  .Count();
 
             return raitingsCount;

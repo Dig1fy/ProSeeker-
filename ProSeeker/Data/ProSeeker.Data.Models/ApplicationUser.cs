@@ -3,7 +3,6 @@ namespace ProSeeker.Data.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations.Schema;
 
     using Microsoft.AspNetCore.Identity;
     using ProSeeker.Data.Common.Models;
@@ -33,14 +32,11 @@ namespace ProSeeker.Data.Models
 
         public bool IsSpecialist { get; set; }
 
-        // The default image will be saved locally -> wwwroot
         public string ProfilePicture { get; set; }
 
         public string SpecialistDetailsId { get; set; }
 
         public virtual Specialist_Details SpecialistDetails { get; set; }
-
-        //public string DetailsId { get; set; }
 
         // Audit info
         public DateTime CreatedOn { get; set; }
@@ -59,7 +55,5 @@ namespace ProSeeker.Data.Models
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
 
         public virtual ICollection<Raiting> Raitings { get; set; }
-
-
     }
 }

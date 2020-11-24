@@ -63,39 +63,36 @@ namespace ProSeeker.Web.Areas.Identity.Pages.Account
 
         public class RegisterSpecialistInputModel
         {
-            [Required]
+            [Required(ErrorMessage ="Моля, попълнете полето 'потребителско име/имейл'!")]
             [EmailAddress]
-            [Display(Name = "Email")]
+            [Display(Name = "Потребителско име /имейл/")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Моля, попълнете полето 'Парола'!")]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Парола")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Потвърждаване на паролата")]
+            [Compare("Password", ErrorMessage = "Двете пароли не съответстват.")]
             public string ConfirmPassword { get; set; }
 
-            [Required]
-            [StringLength(30, ErrorMessage = "Your first name should be between 1 and 30 characters long", MinimumLength = 1)]
-            [RegularExpression(@"^[a-zA-Z-\s]*$", ErrorMessage = @"Your first name can only contain letters, dashes '-', spaces.")]
-            [Display(Name = "Your first name")]
+            [Required(ErrorMessage = "Моля, попълнете полето 'Име'!")]
+            [StringLength(20, MinimumLength = 1)]
+            [RegularExpression(@"^[а-яА-Я]*?[- .]{0,2}[а-яА-Я]*?[- .]{0,2}[а-яА-Я]*$", ErrorMessage = @"Невалидно първо име. Примери за валидно име:'Георги', 'инж. Иван', 'бай Иван'")]
+            [Display(Name = "Име*")]
             public string FirstName { get; set; }
 
-            [Required]
-            [StringLength(40, ErrorMessage = "Your last name should be between 1 and 40 characters long", MinimumLength = 1)]
-            [RegularExpression(@"^[a-zA-Z-\s]*$", ErrorMessage = @"Your last name can only contain letters, dashes '-', spaces.")]
-            [Display(Name = "Your last name")]
+            [Required(ErrorMessage = "Моля, попълнете полето 'Фамилия'!")]
+            [StringLength(25, MinimumLength = 1)]
+            [RegularExpression(@"^[а-яА-Я]*?[- .]{0,2}[а-яА-Я]*$", ErrorMessage = @"Невалидна фамилия. Примери за валидна фамилия: 'Тодоров', 'Петрова-Алексиева'")]
+            [Display(Name = "Фамилия*")]
             public string LastName { get; set; }
 
-            //[Required]
-            //[StringLength(30, ErrorMessage = "The city name should be between 3 and 30 characters long", MinimumLength = 3)]
-            //[RegularExpression(@"^[a-zA-Z]*$", ErrorMessage = "Name should consist of letters only")]
-            //[Display(Name = "City name")]
-            [Required(ErrorMessage ="Полето 'Град' е задължително.")]
+            [Display(Name = "Град")]
+            [Required(ErrorMessage ="Моля, попълнете полето 'Град'!")]
             public int CityId { get; set; }
 
             [Display(Name = "Компания")]
