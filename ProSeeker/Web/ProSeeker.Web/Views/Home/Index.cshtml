@@ -61,9 +61,10 @@
             <div class="row">
                 @foreach (var category in baseCategory.JobCategories)
                 {
-                    <div class="media d-md-inline m-md-2" href="@category.Url">
+                    //  asp-controller="Ads" asp-action="Create"
+                    <div class="media d-md-inline m-md-2" @*asp-route-id="@category.Id" asp-controller="JobCategories" asp-action="GetById"*@>
                         <div class="media-left">
-                            <a href="@category.Url" class="text-decoration-none">
+                            <a asp-route-id="@category.Id" asp-controller="JobCategories" asp-action="GetCategory" class="text-decoration-none">
                                 <img class="media-object" width="250" height="200" src="@category.PictureUrl" alt="...">
                                 <h4 class="media-heading text-success">@category.Name</h4>
                             </a>

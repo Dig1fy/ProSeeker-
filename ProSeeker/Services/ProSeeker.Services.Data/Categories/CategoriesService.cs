@@ -26,11 +26,11 @@
             return allCategories;
         }
 
-        public T GetByName<T>(string name)
+        public T GetById<T>(int id)
         {
             var category = this.categoriesRepository
                  .All()
-                 .Where(x => x.Name == name)
+                 .Where(x => x.Id == id)
                  .To<T>()
                  .FirstOrDefault();
 

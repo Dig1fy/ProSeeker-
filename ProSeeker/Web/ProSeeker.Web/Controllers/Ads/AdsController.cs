@@ -63,13 +63,20 @@
             }
 
             var user = await this.userManager.GetUserAsync(this.User);
-            var newAdId = await this.adsService.CreateAsync(input, user.Id);
-            
+            var newAdId = await this.adsService.CreateAsync(input, user.Id);            
             return this.Redirect("/");
+
             //return this.RedirectToAction("GetDetails", new { id = id });
 
 
             // TODO: USE SANITIZER WHEN SHOWING AD DETAILS !!!!
+        }
+
+        public IActionResult GetById(string id)
+        {
+            var ad = this.adsService.GetAdDetailsById<AdShortDetailsViewModel>(id);
+            return null;
+
         }
     }
 }

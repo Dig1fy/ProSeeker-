@@ -1,29 +1,29 @@
-﻿namespace ProSeeker.Data.Models
+﻿namespace ProSeeker.Web.ViewModels.Ads
 {
-    using System;
     using System.Collections.Generic;
 
-    using ProSeeker.Data.Common.Models;
+    using ProSeeker.Data.Models;
+    using ProSeeker.Services.Mapping;
 
-    public class Ad : BaseDeletableModel<string>
+    public class AdShortDetailsViewModel : IMapFrom<Ad>
     {
-        public Ad()
-        {
-            this.Id = Guid.NewGuid().ToString();
-            this.Opinions = new HashSet<Opinion>();
-        }
+        public string Id { get; set; }
 
         public string Title { get; set; }
 
+        public string ShortTitle =>
+            this.Title.Length > 30 ? this.Title.Substring(0, 30) + "..." : this.Title;
+
         public string Description { get; set; }
+
+        public string ShortDescription =>
+            this.Description.Length > 50 ? this.Description.Substring(0, 50) + "..." : this.Description;
 
         public int JobCategoryId { get; set; }
 
         public JobCategory JobCategory { get; set; }
 
         public int CityId { get; set; }
-
-        public City City { get; set; }
 
         public bool IsVip { get; set; }
 

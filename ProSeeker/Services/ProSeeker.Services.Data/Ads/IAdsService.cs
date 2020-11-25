@@ -9,7 +9,7 @@
     {
         Task<string> CreateAsync(CreateAdInputModel adtInputModel, string userId);
 
-        T GetAdDetails<T>(string id);
+        T GetAdDetailsById<T>(string id);
 
         // IEnumerable<T> GetByCreatedOn<T>(int skip = 0);
         IEnumerable<T> GetByCategory<T>(string categoryName, int skip = 0);

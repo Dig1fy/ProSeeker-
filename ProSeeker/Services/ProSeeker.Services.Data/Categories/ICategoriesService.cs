@@ -4,7 +4,7 @@ namespace ProSeeker.Services.Data.CategoriesService
 {
     public interface ICategoriesService
     {
-        T GetByName<T>(string name);
+        T GetById<T>(int id);
 
         IEnumerable<T> GetAllCategories<T>();
     }

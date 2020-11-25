@@ -15,7 +15,5 @@
 
         public string ShortDescription =>
             this.Description.Length > 30 ? this.Description.Substring(0, 30) + "..." : this.Description;
-
-        public string Url => $"/jobcategories/{this.Name.Replace(" ", "-").ToLower()}";
     }
 }

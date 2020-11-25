@@ -65,7 +65,7 @@
             return allByCategory;
         }
 
-        public T GetAdDetails<T>(string id)
+        public T GetAdDetailsById<T>(string id)
         {
             var ad = this.adsRepository
                 .All()

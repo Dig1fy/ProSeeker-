@@ -1,8 +1,6 @@
 ﻿namespace ProSeeker.Web.Controllers.Category
 {
     using Microsoft.AspNetCore.Mvc;
-    using ProSeeker.Data.Common.Repositories;
-    using ProSeeker.Data.Models;
     using ProSeeker.Services.Data.CategoriesService;
     using ProSeeker.Web.ViewModels.Categories;
 
@@ -15,9 +13,9 @@
             this.categoriesService = categoriesService;
         }
 
-        public IActionResult ByName(string name)
+        public IActionResult GetCategory(int id)
         {
-            var viewModel = this.categoriesService.GetByName<CategoriesViewModel>(name);
+            var viewModel = this.categoriesService.GetById<CategoriesViewModel>(id);
             return this.View(viewModel);
         }
     }
