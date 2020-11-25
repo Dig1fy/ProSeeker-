@@ -67,6 +67,9 @@
             
             return this.Redirect("/");
             //return this.RedirectToAction("GetDetails", new { id = id });
+
+
+            // TODO: USE SANITIZER WHEN SHOWING AD DETAILS !!!!
         }
     }
 }

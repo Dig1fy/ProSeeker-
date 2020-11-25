@@ -33,6 +33,7 @@
                 Opinions = new List<Opinion>(),
                 PreparedBudget = adtInputModel.PreparedBudget,
                 Title = adtInputModel.Title,
+                Description = adtInputModel.Description,
             };
 
             await this.adsRepository.AddAsync(ad);
