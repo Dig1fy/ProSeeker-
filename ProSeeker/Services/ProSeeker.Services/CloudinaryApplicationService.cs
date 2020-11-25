@@ -64,13 +64,13 @@
 
             using (var memoryStream = new MemoryStream(destinationImage))
             {
-                // Cloudinary doesn't support work with the following symbols: [ >, <, &, ?, %, #, \ ]
+                // Cloudinary doesn't support the following symbols: [ >, <, &, ?, %, #, \ ]
                 imageName = imageName.Replace(">", "greater");
                 imageName = imageName.Replace("<", "lower");
-                imageName = imageName.Replace("&", "And");
+                imageName = imageName.Replace("&", "and");
                 imageName = imageName.Replace("?", "qMark");
                 imageName = imageName.Replace("%", "percent");
-                imageName = imageName.Replace("#", "hashTag");
+                imageName = imageName.Replace("#", "sharp");
                 imageName = imageName.Replace("\\", "dash");
 
                 var uploadParameters = new ImageUploadParams()
