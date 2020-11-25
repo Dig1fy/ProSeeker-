@@ -5,38 +5,45 @@
 
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;
+    using ProSeeker.Web.ViewModels.Categories;
+    using ProSeeker.Web.ViewModels.Cities;
 
-    public class AdInputModel : IMapFrom<Ad>
+    public class CreateAdInputModel : IMapFrom<Ad>
     {
         [Required(ErrorMessage = "Моля, попълнете полето 'Заглавие на обява'")]
         [Display(Name = "Заглавие на обява")]
         public string Title { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Моля, попълнете описание на обявата!")]
+        [MinLength(40)]
         [Display(Name = "Описание")]
         public string Description { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Моля, попълнете полето 'Предвиден бюджет'")]
         [Display(Name = "Предвиден бюджет (свободен текст)")]
         public string PreparedBudget { get; set; }
 
+        [Required(ErrorMessage = "Моля, изберете категория от падащото меню!")]
+        [Display(Name = "Какъв професионалист Ви е нужен?")]
         public int JobCategoryId { get; set; }
 
-        [Required]
         public JobCategory JobCategory { get; set; }
 
+        [Required(ErrorMessage = "Моля, изберете град от падащото меню!")]
         public int CityId { get; set; }
 
-        [Required]
         public City City { get; set; }
 
         public bool IsVip { get; set; }
 
         public string UserId { get; set; }
 
-        [Required]
         public virtual ApplicationUser User { get; set; }
 
         public virtual ICollection<Opinion> Opinions { get; set; }
+
+        public IEnumerable<CitySimpleViewModel> Cities { get; set; }
+
+        public IEnumerable<CategorySimpleViewModel> Categories { get; set; }
     }
 }

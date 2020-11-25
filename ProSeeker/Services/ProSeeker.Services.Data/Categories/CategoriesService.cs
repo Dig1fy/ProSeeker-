@@ -1,5 +1,6 @@
 ﻿namespace ProSeeker.Services.Data.CategoriesService
 {
+    using System.Collections.Generic;
     using System.Linq;
 
     using ProSeeker.Data.Common.Repositories;
@@ -13,6 +14,16 @@
         public CategoriesService(IDeletableEntityRepository<JobCategory> categoriesRepository)
         {
             this.categoriesRepository = categoriesRepository;
+        }
+
+        public IEnumerable<T> GetAllCategories<T>()
+        {
+            var allCategories = this.categoriesRepository
+                .All()
+                .To<T>()
+                .ToList();
+
+            return allCategories;
         }
 
         public T GetByName<T>(string name)

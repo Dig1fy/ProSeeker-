@@ -1,0 +1,29 @@
+﻿
+/* ============================
+    Submit btn    
+   ============================ */
+.custom-submit-button {
+    height: 35px;
+    width: 440px;
+    font-size: 16px;
+    padding: 5px 40px;
+    border-radius: 4%;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    background-color: rgb(161, 153, 56);
+    text-shadow: 1px 1px 1px rgb(17, 15, 139);
+    padding: 4px;
+}
+
+.custom-submit-button-wrapper {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    justify-content: center;
+}
+
+.custom-submit-button:hover {
+    cursor: pointer;
+    background-color: rgb(136, 122, 41);
+    color: rgb(37, 70, 43);
+}

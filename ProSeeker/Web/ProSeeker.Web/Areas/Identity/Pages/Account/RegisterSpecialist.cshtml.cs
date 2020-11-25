@@ -64,7 +64,7 @@
 
         public class RegisterSpecialistInputModel
         {
-            [Required(ErrorMessage = "Моля, попълнете полето 'потребителско име/имейл'!")]
+            [Required(ErrorMessage = "Моля, попълнете полето 'Потребителско име/имейл'!")]
             [EmailAddress(ErrorMessage = "Невалиден мейл.")]
             [Display(Name = "Потребителско име /имейл/")]
             public string Email { get; set; }
@@ -92,16 +92,16 @@
             [Display(Name = "Фамилия*")]
             public string LastName { get; set; }
 
-            [Display(Name = "Град")]
             [Required(ErrorMessage = "Моля, попълнете полето 'Град'!")]
+            [Display(Name = "Град")]
             public int CityId { get; set; }
 
             [Display(Name = "Компания")]
             public string CompanyName { get; set; }
 
+            [Required(ErrorMessage = "Моля, попълнете полето 'Професионална категория'!")]
+            [Display(Name = "Професионална категория")]
             public string JobCategoryId { get; set; }
-
-            public List<SelectListItem> AllCategories { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)

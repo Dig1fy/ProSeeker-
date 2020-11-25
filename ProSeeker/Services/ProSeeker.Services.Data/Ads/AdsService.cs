@@ -12,15 +12,32 @@
     public class AdsService : IAdsService
     {
         private readonly IDeletableEntityRepository<Ad> adsRepository;
+        private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
 
-        public AdsService(IDeletableEntityRepository<Ad> adsRepository)
+        public AdsService(
+            IDeletableEntityRepository<Ad> adsRepository,
+            IDeletableEntityRepository<ApplicationUser> usersRepository)
         {
             this.adsRepository = adsRepository;
+            this.usersRepository = usersRepository;
         }
 
-        public async Task<string> CreateAsync(AdInputModel adtInputModel, string userId)
+        public async Task<string> CreateAsync(CreateAdInputModel adtInputModel, string userId)
         {
-            throw new System.NotImplementedException();
+            var ad = new Ad
+            {
+                CityId = adtInputModel.CityId,
+                IsVip = false,
+                UserId = userId,
+                JobCategoryId = adtInputModel.JobCategoryId,
+                Opinions = new List<Opinion>(),
+                PreparedBudget = adtInputModel.PreparedBudget,
+                Title = adtInputModel.Title,
+            };
+
+            await this.adsRepository.AddAsync(ad);
+            await this.adsRepository.SaveChangesAsync();
+            return ad.Id;
         }
 
         public int AllAdsByCategoryCount(string name)
@@ -35,7 +52,7 @@
 
         public int AllAdsCount()
             => this.adsRepository.All().Count();
-               
+
         public IEnumerable<T> GetByCategory<T>(string categoryName, int skip = 0)
         {
             var allByCategory = this.adsRepository

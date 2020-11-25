@@ -1,17 +1,19 @@
 ﻿namespace ProSeeker.Web.ViewModels.Ads
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
-    using ProSeeker.Data.Models;
     using ProSeeker.Web.ViewModels.Categories;
     using ProSeeker.Web.ViewModels.Cities;
 
     public class CreateModel
     {
-        public Ad Ad { get; set; }
+        public CreateAdInputModel Ad { get; set; }
 
-        public IEnumerable<AllCitiesViewModel> Cities { get; set; }
+        //[Required(ErrorMessage = "ssss")]
+        //public IEnumerable<CitySimpleViewModel> Cities { get; set; }
 
-        public IEnumerable<AllCategoriesViewModel> Categories { get; set; }
+        //[Required(ErrorMessage = "ssss")]
+        //public IEnumerable<CategorySimpleViewModel> Categories { get; set; }
     }
 }

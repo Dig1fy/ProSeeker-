@@ -59,6 +59,12 @@
     <Content Update="wwwroot\css\Bootstrap\coolCounter.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Update="wwwroot\css\MyCustomCss\Common\buttons.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\css\MyCustomCss\Common\common.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="wwwroot\css\MyCustomCss\Profile\user-common.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -7,7 +7,7 @@
 
     public interface IAdsService
     {
-        Task<string> CreateAsync(AdInputModel adtInputModel, string userId);
+        Task<string> CreateAsync(CreateAdInputModel adtInputModel, string userId);
 
         T GetAdDetails<T>(string id);
 

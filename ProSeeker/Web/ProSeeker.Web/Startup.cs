@@ -20,6 +20,7 @@
     using ProSeeker.Services.Data;
     using ProSeeker.Services.Data.Ads;
     using ProSeeker.Services.Data.CategoriesService;
+    using ProSeeker.Services.Data.Cities;
     using ProSeeker.Services.Data.Cloud;
     using ProSeeker.Services.Data.Home;
     using ProSeeker.Services.Data.Raitings;
@@ -111,6 +112,7 @@
             services.AddTransient<IServicesService, ServicesService>();
             services.AddTransient<IRatingsService, RatingsService>();
             services.AddTransient<IAdsService, AdsService>();
+            services.AddTransient<ICitiesService, CitiesService>();
 
             // services.AddTransient<IApplicationUsersController, ApplicationUsersController>();
         }

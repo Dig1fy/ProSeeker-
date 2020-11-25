@@ -1,0 +1,42 @@
+﻿/* ============================
+    Header -> Ads    
+   ============================ */
+
+.dropdown-content {
+    display: none;
+    position: relative;
+    background-color: #f9f9f9;
+    min-width: 146px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+    .dropdown-content a {
+        float: none;
+        color: black;
+        padding: 10px 15px 10px 15px;
+        text-decoration: none;
+        transition: 0.6s;
+        display: block;
+        text-align: left;
+        font-size: 15px;
+        background-color: aliceblue;
+    }
+
+        .dropdown-content a:hover {
+            background-color: rgb(214, 228, 240);
+            transition: 0.1s;
+            border-radius: 5%;
+            color: #303129;
+            font-weight: bold;
+        }
+
+.dropdown-btn-wrapper:hover .dropdown-content {
+    position: absolute;
+    display: block;
+}
+
+.navbar-ads:hover {
+    cursor: pointer;
+}
+
