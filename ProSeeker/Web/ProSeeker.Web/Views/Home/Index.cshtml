@@ -15,7 +15,7 @@
     @*TODO: Adjust rendering*@
 
     <div class="container">
-        
+
         <div class="row text-center">
             <div class="col">
                 <div class="cool-bootstrap-counter">
@@ -27,22 +27,43 @@
             <div class="col">
                 <div class="cool-bootstrap-counter">
                     <i class="fa fa-coffee fa-2x"></i>
-                    <h2 class="timer count-title count-number" data-to="1700" data-speed="1500"></h2>
-                    <p class="count-text ">Happy Clients</p>
+                    <h2 class="timer count-title count-number" data-to="@Model.Counters.AllClients" data-speed="1500"></h2>
+                    @if (@Model.Counters.AllClients < 2)
+                    {
+                        <p class="count-text ">Потребител (непрофесионалист)</p>
+                    }
+                    else
+                    {
+                        <p class="count-text ">Потребители <br /> (непрофесионалисти)</p>
+                    }
                 </div>
             </div>
             <div class="col">
                 <div class="cool-bootstrap-counter">
                     <i class="fa fa-lightbulb-o fa-2x"></i>
-                    <h2 class="timer count-title count-number" data-to="11900" data-speed="1500"></h2>
-                    <p class="count-text ">Project Complete</p>
+                    <h2 class="timer count-title count-number" data-to="@Model.BaseCategories.SelectMany(c=>c.JobCategories).Count()" data-speed="1500"></h2>
+                    @if (@Model.Counters.AllClients < 2)
+                    {
+                        <p class="count-text ">Професия</p>
+                    }
+                    else
+                    {
+                        <p class="count-text ">Професии</p>
+                    }
                 </div>
             </div>
             <div class="col">
                 <div class="cool-bootstrap-counter">
                     <i class="fa fa-bug fa-2x"></i>
-                    <h2 class="timer count-title count-number" data-to="157" data-speed="1500"></h2>
-                    <p class="count-text ">Coffee With Clients</p>
+                    <h2 class="timer count-title count-number" data-to="@Model.Counters.AllSpecialists" data-speed="1500"></h2>
+                    @if (@Model.Counters.AllSpecialists < 2)
+                    {
+                        <p class="count-text ">Специалист</p>
+                    }
+                    else
+                    {
+                        <p class="count-text ">Специалисти</p>
+                    }
                 </div>
             </div>
         </div>
@@ -79,6 +100,6 @@
 
 
 
-@section Scripts{ 
+@section Scripts{
     <script src="~/js/Bootstrap/CoolCounter.js"></script>
 }

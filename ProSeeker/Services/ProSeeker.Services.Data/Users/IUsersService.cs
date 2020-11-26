@@ -7,5 +7,9 @@
         string GetUserFirstNameById(string userId);
 
         T GetUserById<T>(string id);
+
+        int GetAllSpecialistsCount();
+
+        int GetAllClientsCount();
     }
 }

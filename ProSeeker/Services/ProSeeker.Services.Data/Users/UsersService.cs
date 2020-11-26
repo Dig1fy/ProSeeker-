@@ -44,5 +44,31 @@
 
             return user;
         }
+
+        public int GetAllSpecialistsCount()
+        {
+            var allSpecialists = this.usersRepository
+                .All()
+                .Where(x => x.IsSpecialist == true)
+                .Count();
+
+            return allSpecialists;
+        }
+
+        public int GetAllClientsCount()
+        {
+            var allClients = this.usersRepository
+                .All()
+                .Where(x => x.IsSpecialist == false)
+                .Count();
+
+
+            //var all2 = allClients.Where(x => !x.IsSpecialist).ToArray();
+            //var all3 = all2.Count();
+            //.Select(x => !x.IsSpecialist)
+            //.Count();
+
+            return allClients;
+        }
     }
 }

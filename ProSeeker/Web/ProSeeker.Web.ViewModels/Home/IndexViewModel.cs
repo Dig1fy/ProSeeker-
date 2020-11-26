@@ -5,5 +5,7 @@
     public class IndexViewModel
     {
         public IEnumerable<BaseJobCategoryViewModel> BaseCategories { get; set; }
+
+        public IndexCountersViewModel Counters { get; set; }
     }
 }
