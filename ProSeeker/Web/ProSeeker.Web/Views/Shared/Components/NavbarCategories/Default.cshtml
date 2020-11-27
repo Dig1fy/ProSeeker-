@@ -1,3 +1,14 @@
 ﻿@model ProSeeker.Web.ViewModels.Categories.AllCategoriesViewModel
 
-<h1>FASFASOKFPAOSKFPOASKFPOASFPAOSK</h1>
+@foreach (var baseCategory in Model.BaseCategories)
+{
+    <div style="width:270px;">
+        <div class="dropdown-header">@baseCategory.CategoryName</div>
+
+        @foreach (var category in baseCategory.JobCategories)
+        {
+            <a asp-route-id="@category.Name" asp-controller="Ads" asp-action="GetByCategory" class="dropdown-item">@category.Name</a>
+
+        }
+    </div>
+}
