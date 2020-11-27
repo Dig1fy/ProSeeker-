@@ -50,11 +50,11 @@
                     {
                         Name = "Урбанист",
                         Description = "Умни хора - планират огромни територии. Ще се справят безупречно с вашия имот!",
-                        PictureUrl = string.Format(homeTemplate, "Урбанист"),
+                        PictureUrl = string.Format(homeTemplate, "урбанист"),
                     },
                     new JobCategory
                     {
-                        Name = "Консултант-недвижими имоти (брокер)",
+                        Name = "Консултант-недвижими имоти",
                         Description = "Понякога са нужни...",
                         PictureUrl = string.Format(homeTemplate, "брокер"),
                     },

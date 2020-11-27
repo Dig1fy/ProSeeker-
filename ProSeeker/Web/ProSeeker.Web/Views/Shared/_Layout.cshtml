@@ -8,8 +8,9 @@
     <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" asp-append-version="true" />
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" asp-append-version="true" />
     <link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true" />
-    <link href="~/css/MyCustomCss/Common/common.css" rel="stylesheet" asp-append-version="true"/>   
-    
+    <link href="~/css/MyCustomCss/Common/common.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/MyCustomCss/Common/buttons.css" rel="stylesheet" asp-append-version="true" />
+
     @*<link href="~/css/MyCustomCss/Profile/userProfile.css" rel="stylesheet" asp-append-version="true" />*@
     @await this.RenderSectionAsync("Styles", required: false)
 </head>
@@ -29,46 +30,39 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Начало</a>
                         </li>
 
-
-                        <li class="dropdown-btn-wrapper nav-item">
-                            <span class="text-dark nav-link navbar-ads">
-                                Обяви
-                            </span>
-                            <div class="dropdown-content">
-                                <a asp-area="" asp-controller="Ads" asp-action="Create">Създай обява</a>
-                                <a asp-area="" asp-controller="Ads" asp-action="AllAds">Всички обяви</a>
-                            </div>
-                        </li>
-
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Services</a>
+                            <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Обяви</a>
                             <div class="dropdown-menu dropdown-menu-center" aria-labelledby="servicesDropdown">
-                                <a class="dropdown-item" href="#">What we do</a>
-                                <a class="dropdown-item" href="#">How we fit your needs</a>
+
+                                <a class=" text-center custom-a-as-button" asp-area="" asp-controller="Ads" asp-action="Create">Създай обява</a>
+
                                 <div class="dropdown-divider"></div>
-                                <div class="d-md-flex align-items-start justify-content-start">
-                                    <div>
-                                        <div class="dropdown-header">Development</div>
-                                        <a class="dropdown-item" href="#">Bespoke software</a>
-                                        <a class="dropdown-item" href="#">Mobile apps</a>
-                                        <a class="dropdown-item" href="#">Websites</a>
-                                    </div>
-                                    <div>
-                                        <div class="dropdown-header">Professional Services</div>
-                                        <a class="dropdown-item" href="#">Project rescue</a>
-                                        <a class="dropdown-item" href="#">Source code recovery</a>
-                                        <a class="dropdown-item" href="#">Application support &amp; maintenance</a>
-                                    </div>
-                                    <div>
-                                        <div class="dropdown-header">Fixed Price Services</div>
-                                        <a class="dropdown-item" href="#">Add cookie consent</a>
-                                        <a class="dropdown-item" href="#">Add captcha</a>
-                                        <a class="dropdown-item" href="#">Add core data</a>
-                                        <a class="dropdown-item" href="#">Custom error pages</a>
-                                        <a class="dropdown-item" href="#">Contact form creation</a>
-                                        <a class="dropdown-item" href="#">Automated backups</a>
-                                        <a class="dropdown-item" href="#">Image to HTML</a>
-                                    </div>
+                                <div class="d-md-flex align-items-start justify-content-start custom-mega-menu-content">
+                                    <vc:navbar-categories></vc:navbar-categories>
+
+                                    @*<div style="width:270px;">
+                                            <div class="dropdown-header">За дома</div>
+                                            <a asp-route-id="архитект" asp-controller="Ads" asp-action="GetByCategory" class="dropdown-item">Архитект</a>
+                                            <a asp-route-id="геодезист" asp-controller="Ads" asp-action="GetByCategory" class="dropdown-item">Геодезист</a>
+                                            <a asp-route-id="интериорен дизайнер" asp-controller="Ads" asp-action="GetByCategory" class="dropdown-item">Интериорен дизайнер</a>
+                                            <a asp-route-id="брокер" asp-controller="Ads" asp-action="GetByCategory" class="dropdown-item">Консултант-недвижими имоти</a>
+                                        </div>
+                                        <div style="width:270px;">
+                                            <div class="dropdown-header">За колата</div>
+                                            <a asp-route-id="автомонтьор" asp-controller="Ads" asp-action="GetByCategory" class="dropdown-item">Автомонтьор</a>
+                                            <a asp-route-id="автобояджия" asp-controller="Ads" asp-action="GetByCategory" class="dropdown-item">Автобояджия</a>
+                                            <a asp-route-id="тенекиджия" asp-controller="Ads" asp-action="GetByCategory" class="dropdown-item">Тенекиджия</a>
+                                            <a asp-route-id="тазаджия" asp-controller="Ads" asp-action="GetByCategory" class="dropdown-item">Газаджия</a>
+                                        </div>
+                                        <div style="min-width:270px;">
+                                            <div class="dropdown-header">Други</div>
+                                            <a asp-route-id="адвокат" asp-controller="Ads" asp-action="GetByCategory" class="dropdown-item">Адвокат</a>
+                                            <a asp-route-id="зъболекар" asp-controller="Ads" asp-action="GetByCategory" class="dropdown-item">Зъболекар</a>
+                                            <a asp-route-id="психолог" asp-controller="Ads" asp-action="GetByCategory" class="dropdown-item">Психолог</a>
+                                            <a asp-route-id="фотограф" asp-controller="Ads" asp-action="GetByCategory" class="dropdown-item">Фотограф</a>
+                                            <a asp-route-id="счетоводител" asp-controller="Ads" asp-action="GetByCategory" class="dropdown-item">Счетоводител</a>
+                                            <a asp-route-id="фризьор" asp-controller="Ads" asp-action="GetByCategory" class="dropdown-item">Фризьор</a>
+                                        </div>*@
                                 </div>
                             </div>
                         </li>

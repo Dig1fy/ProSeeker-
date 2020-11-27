@@ -76,7 +76,15 @@
         {
             var ad = this.adsService.GetAdDetailsById<AdShortDetailsViewModel>(id);
             return null;
+        }
 
+        public IActionResult GetByCategory(string id)
+        {
+            var adsByCategory = this.adsService.GetByCategory<AdsFullDetailsViewModel>(id);
+            var model = new GetAllViewModel();
+            model.Ads = adsByCategory;
+
+            return this.View(model);
         }
     }
 }

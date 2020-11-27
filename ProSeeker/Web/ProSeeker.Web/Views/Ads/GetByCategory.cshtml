@@ -1,0 +1,29 @@
+﻿@model ProSeeker.Web.ViewModels.Ads.GetAllViewModel
+<h1>FOFOFO</h1>
+
+@foreach (var ad in Model.Ads)
+{
+    <section class="card border-info mb-3">
+        <h2 class="card-header">
+            @ad.Title
+        </h2>
+        <div style="padding:8px 8px 8px 8px;">
+            <span class="card-text d-block">
+                <span>@Html.Raw(@ad.SanitizedDescription)<br></span>
+
+            </span>
+            <div class="row specs">
+                <div class="col-lg-4 item">
+                    <b class="d-block mb-5">Град: @ad.City.Name</b>
+                    Категория - @ad.JobCategory.Name
+                </div>
+                <div class="col-lg-4 item">
+                    <b class="d-block mb-5">Създадена на: @ad.CreatedOn</b>
+                </div>
+                <div class="col-lg-4 item">
+                    <b class="d-block mb-5">Предвиден бюджет: @ad.PreparedBudget</b>
+                </div>
+            </div>
+        </div>
+    </section>
+}
