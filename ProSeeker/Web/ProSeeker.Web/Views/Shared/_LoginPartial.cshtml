@@ -11,7 +11,7 @@
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Profile">
                 <img style="width: 35px; height:35px; border-radius: 50%;" title="Profile" asp-append-version="true" src="@this.usersService.GetUserProfilePicture(this.UserManager.GetUserId(this.User))" alt="@this.UserManager.GetUserName(this.User) Avatar" />
-                Здравей, @this.usersService.GetUserFirstNameById(this.UserManager.GetUserId(this.User))!
+                Здравейте, @this.usersService.GetUserFirstNameById(this.UserManager.GetUserId(this.User))!
             </a>
         </li>
 

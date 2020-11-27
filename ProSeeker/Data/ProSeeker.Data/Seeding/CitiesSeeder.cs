@@ -18,7 +18,7 @@
             {
                 return;
             }
-            
+
             var importCitiesDto = JsonConvert
                 .DeserializeObject<ImportCitiesDto[]>(File.ReadAllText(@"../../Data/ProSeeker.Data/Seeding/Data/Cities.json"));
 
