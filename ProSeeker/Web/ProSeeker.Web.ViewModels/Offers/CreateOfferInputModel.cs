@@ -1,4 +1,4 @@
-﻿namespace ProSeeker.Web.Controllers.Offers
+﻿namespace ProSeeker.Web.ViewModels.Offers
 {
     using System;
     using System.ComponentModel.DataAnnotations;

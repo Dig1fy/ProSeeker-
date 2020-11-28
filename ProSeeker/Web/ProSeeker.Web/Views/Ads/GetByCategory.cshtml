@@ -35,8 +35,8 @@
             <div class="button-container">
                 <div style="margin:5px;">
                     <form method="post">
-                        <input type="hidden" asp-for="@ad.Id" name="currentAdId"/>
-                        <input type="hidden" asp-for="@ad.UserId" name="userId"/>
+                        <input type="hidden" asp-for="@ad.Id" name="adId"/>
+                        <input type="hidden" asp-for="@ad.UserId" name="applicationUserId"/>
                         <button type="submit" class="custom-submit-button" style="width:145px;" asp-controller="Offers" asp-action="Create">Make an offer</button>
                     </form>
                 </div>

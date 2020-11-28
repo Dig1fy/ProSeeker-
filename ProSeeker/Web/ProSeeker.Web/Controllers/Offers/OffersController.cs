@@ -1,32 +1,44 @@
 ﻿namespace ProSeeker.Web.Controllers.Offers
 {
-    using Microsoft.AspNetCore.Authorization;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using ProSeeker.Common;
+    using ProSeeker.Data.Models;
+    using ProSeeker.Services.Data.Offers;
     using ProSeeker.Web.ViewModels.Offers;
 
     public class OffersController : BaseController
     {
+        private readonly IOffersService offersService;
+        private readonly UserManager<ApplicationUser> userManager;
+
+        public OffersController(IOffersService offersService, UserManager<ApplicationUser> userManager)
+        {
+            this.offersService = offersService;
+            this.userManager = userManager;
+        }
 
         //[Authorize(Roles = GlobalConstants.SpecialistRoleName)]
-        public IActionResult Create(string currentAdId, string userId)
+        public IActionResult Create(CreateOfferViewModel viewModel)
         {
-            var model = new CreateOfferViewModel();
-            model.AdId = currentAdId;
-            model.ApplicationUserId = userId;
-            return this.View(model);
+            return this.View(viewModel);
         }
 
         [HttpPost]
         //[Authorize(Roles = GlobalConstants.SpecialistRoleName)]
-        public IActionResult Create(CreateOfferInputModel inputModel)
+        public async Task<IActionResult> Create(CreateOfferInputModel inputModel)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.View(inputModel);
             }
 
+            var user = await this.userManager.GetUserAsync(this.User);
+            var specialistId = user.SpecialistDetailsId;
+            var newOfferId = await this.offersService.CreateAsync(inputModel, specialistId);
 
+            return this.Redirect("/");
         }
     }
 }

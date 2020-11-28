@@ -89,9 +89,14 @@
             }
 
             builder.Entity<ApplicationUser>()
-                .HasOne<Specialist_Details>(user => user.SpecialistDetails)
+                .HasOne(user => user.SpecialistDetails)
                 .WithOne(sd => sd.User)
                 .HasForeignKey<Specialist_Details>(fk => fk.UserId);
+
+            builder.Entity<Specialist_Details>()
+                .HasOne(user => user.User)
+                .WithOne(sd => sd.SpecialistDetails)
+                .HasForeignKey<ApplicationUser>(fk => fk.SpecialistDetailsId);
 
             // builder.Entity<Vote>().HasKey(x => new { x.UserId, x.OpinionId });
         }

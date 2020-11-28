@@ -10,8 +10,8 @@ using ProSeeker.Data;
 namespace ProSeeker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201128132558_AddOfferExpirationDate")]
-    partial class AddOfferExpirationDate
+    [Migration("20201128154400_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -301,7 +301,7 @@ namespace ProSeeker.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SpecialistDetailsId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
@@ -323,6 +323,10 @@ namespace ProSeeker.Data.Migrations
                         .IsUnique()
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.HasIndex("SpecialistDetailsId")
+                        .IsUnique()
+                        .HasFilter("[SpecialistDetailsId] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -647,7 +651,7 @@ namespace ProSeeker.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Website")
                         .HasColumnType("nvarchar(max)");
@@ -657,10 +661,6 @@ namespace ProSeeker.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("JobCategoryId");
-
-                    b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Specialist_Details");
                 });
@@ -779,6 +779,10 @@ namespace ProSeeker.Data.Migrations
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("ProSeeker.Data.Models.Specialist_Details", "SpecialistDetails")
+                        .WithOne("User")
+                        .HasForeignKey("ProSeeker.Data.Models.ApplicationUser", "SpecialistDetailsId");
                 });
 
             modelBuilder.Entity("ProSeeker.Data.Models.JobCategory", b =>
@@ -847,10 +851,6 @@ namespace ProSeeker.Data.Migrations
                         .HasForeignKey("JobCategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.HasOne("ProSeeker.Data.Models.ApplicationUser", "User")
-                        .WithOne("SpecialistDetails")
-                        .HasForeignKey("ProSeeker.Data.Models.Specialist_Details", "UserId");
                 });
 
             modelBuilder.Entity("ProSeeker.Data.Models.Vote", b =>

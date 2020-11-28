@@ -39,7 +39,6 @@
             else
             {
                 stringBuilder.Append(input[0].ToString().ToUpper() + input.Substring(1).ToLower());
-
             }
 
             return stringBuilder.ToString().Trim();
