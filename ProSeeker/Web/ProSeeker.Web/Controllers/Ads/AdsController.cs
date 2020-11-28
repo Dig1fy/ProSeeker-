@@ -2,6 +2,7 @@
 {
     using System.Linq;
     using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using ProSeeker.Data.Models;
@@ -31,7 +32,7 @@
             this.userManager = userManager;
         }
 
-        //[Authorize(Roles = "User")]
+        // [Authorize(Roles = "User")]
         public IActionResult Create()
         {
             var allCities = this.citiesService.GetAllCities<CitySimpleViewModel>();
@@ -46,6 +47,7 @@
             return this.View(createModel);
         }
 
+        // [Authorize(Roles = "User")]
         [HttpPost]
         public async Task<IActionResult> Create(CreateAdInputModel input)
         {
@@ -63,21 +65,21 @@
             }
 
             var user = await this.userManager.GetUserAsync(this.User);
-            var newAdId = await this.adsService.CreateAsync(input, user.Id);            
+            var newAdId = await this.adsService.CreateAsync(input, user.Id);
             return this.Redirect("/");
 
-            //return this.RedirectToAction("GetDetails", new { id = id });
-
-
+            // return this.RedirectToAction("GetDetails", new { id = id });
             // TODO: USE SANITIZER WHEN SHOWING AD DETAILS !!!!
         }
 
+        // [Authorize]
         public IActionResult GetById(string id)
         {
             var ad = this.adsService.GetAdDetailsById<AdShortDetailsViewModel>(id);
             return null;
         }
 
+        // [Authorize]
         public IActionResult GetByCategory(string id)
         {
             var adsByCategory = this.adsService.GetByCategory<AdsFullDetailsViewModel>(id);

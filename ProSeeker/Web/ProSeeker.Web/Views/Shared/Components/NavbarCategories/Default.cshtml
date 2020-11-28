@@ -2,13 +2,13 @@
 
 @foreach (var baseCategory in Model.BaseCategories)
 {
-    <div style="width:270px;">
-        <div class="dropdown-header">@baseCategory.CategoryName</div>
+<div style="width:270px;">
+    <div class="dropdown-header"><strong style="font-size:18px; color:cornflowerblue">@baseCategory.CategoryName</strong></div>
 
-        @foreach (var category in baseCategory.JobCategories)
-        {
-            <a asp-route-id="@category.Name" asp-controller="Ads" asp-action="GetByCategory" class="dropdown-item">@category.Name</a>
+    @foreach (var category in baseCategory.JobCategories)
+    {
+        <a asp-route-id="@category.Name" asp-controller="Ads" asp-action="GetByCategory" class="dropdown-item">@category.Name</a>
+    }
 
-        }
-    </div>
+</div>
 }
