@@ -11,6 +11,8 @@
 
         T GetAdDetailsById<T>(string id);
 
+        IEnumerable<T> GetMyAds<T>(string id);
+
         // IEnumerable<T> GetByCreatedOn<T>(int skip = 0);
         IEnumerable<T> GetByCategory<T>(string categoryName, int skip = 0);
 
@@ -18,7 +20,7 @@
 
         int AllAdsByCategoryCount(string name);
 
-        // Task<int> DeleteAsync(string id);
+        Task DeleteById(string id);
 
         // Task<string> UpdateAsync(AdInputModel adInputModel, string id);
 

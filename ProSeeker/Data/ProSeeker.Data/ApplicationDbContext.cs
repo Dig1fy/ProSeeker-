@@ -93,6 +93,7 @@
                 .WithOne(sd => sd.User)
                 .HasForeignKey<Specialist_Details>(fk => fk.UserId);
 
+            // Add the opposite scenario too so EF can populate specialistId too.
             builder.Entity<Specialist_Details>()
                 .HasOne(user => user.User)
                 .WithOne(sd => sd.SpecialistDetails)

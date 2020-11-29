@@ -75,5 +75,23 @@
 
             return ad;
         }
+
+        public IEnumerable<T> GetMyAds<T>(string id)
+        {
+            var allMyAds = this.adsRepository
+                .All()
+                .Where(x => x.UserId == id)
+                .To<T>()
+                .ToList();
+
+            return allMyAds;
+        }
+
+        public async Task DeleteById(string id)
+        {
+            var ad = await this.adsRepository.GetByIdWithDeletedAsync(id);
+            this.adsRepository.Delete(ad);
+            await this.adsRepository.SaveChangesAsync();
+        }
     }
 }

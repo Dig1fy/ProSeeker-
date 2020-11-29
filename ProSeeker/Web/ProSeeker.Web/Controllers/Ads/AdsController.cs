@@ -2,7 +2,7 @@
 {
     using System.Linq;
     using System.Threading.Tasks;
-
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using ProSeeker.Data.Models;
@@ -87,6 +87,29 @@
             model.Ads = adsByCategory;
 
             return this.View(model);
+        }
+
+        //[Authorize]
+        // Is in role RegularUser
+        public async Task<IActionResult> MyAds()
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+            var allMyAds = this.adsService.GetMyAds<AdsFullDetailsViewModel>(user.Id);
+            var model = new GetAllViewModel();
+            model.Ads = allMyAds;
+            return this.View(model);
+        }
+
+        // [Authorize]
+        public async Task<IActionResult> Delete(string id)
+        {
+            await this.adsService.DeleteById(id);
+            return this.RedirectToAction(nameof(this.MyAds));
+        }
+
+        public async Task<IActionResult> Edit(string id)
+        {
+            return null;
         }
     }
 }
