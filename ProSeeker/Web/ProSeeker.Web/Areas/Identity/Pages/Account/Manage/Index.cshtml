@@ -70,33 +70,35 @@
                     <span asp-validation-for="Input.SpecialistDetails.Qualification" class="text-danger"></span>
                 </div>
 
-                <div>
-                    <label asp-for="Input.SpecialistDetails.Services"></label>
+                <div class="col col-md-10">
+                    <label class="col-md-10" asp-for="Input.SpecialistDetails.Services"></label>
                     @{ var counter = 1;
                         @foreach (var service in @Model.Input.SpecialistDetails.Services)
                         {
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="col">
+                            <div class="form-row">
+                                <div class="col-md-10">
+                                    <div>
                                         <label>@counter. @service.Name</label>
                                     </div>
-                                    <div class="col">
+                                    <div>
                                         <label> - @service.Description</label>
                                     </div>
                                 </div>
-                                <button class="btn" asp-page-handler="Delete" asp-route-id="@service.Id" style="min-width:initial; height:35px; background-color:bisque"> Премахни </button>
+                                <button class="btn col-md-2" asp-page-handler="Delete" asp-route-id="@service.Id" onclick="return confirm('Наистина ли искате да изтриете обявата?')" style="height:36px; background-color:rgba(92, 2, 2, 0.41)"> Премахни </button>
                                 @*<a class="btn btn-danger" type="submit" asp-controller="Announcements" asp-action="Delete" asp-route-id="@announcement.Id">Изтрий</a>*@
                             </div>
                             counter++;
                         }
-
-                        <div id="ServicesContainer"></div>
-                        <a class="btn btn-success col-md-10" onclick="AddMoreServices()" onload="LoadAllServices(@Model.Input.SpecialistDetails.Services)">Добави услуга</a>
                     }
+
+                </div>
+                <div id="ServicesContainer"></div>
+                <div class="text-left col-md-12">
+                    <a class="btn btn-success col-md-10" onclick="AddMoreServices()" onload="LoadAllServices(@Model.Input.SpecialistDetails.Services)">Добави услуга</a><br /><br />
                 </div>
             }
 
-            <button id="update-profile-button" type="submit" class="btn btn-primary" style="width:85px; height:35px;">Запази промените</button>
+            <button id="update-profile-button" type="submit" class="btn btn-primary col-md-10" style="margin-top:3px;">Запази промените</button>
         </form>
     </div>
 </div>

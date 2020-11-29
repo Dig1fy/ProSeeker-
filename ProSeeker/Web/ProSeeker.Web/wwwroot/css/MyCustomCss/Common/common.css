@@ -48,14 +48,14 @@
     /*background-color: aliceblue;*/
 }
 
-.custom-mega-menu-content a:hover {
-    background-color: rgb(214, 228, 240);
-    transition: 0.1s;
-    /*border-radius: 5%;*/
-    color: #303129;
-    font-weight:bolder;
-    cursor: pointer;
-}
+    .custom-mega-menu-content a:hover {
+        background-color: rgb(214, 228, 240);
+        transition: 0.1s;
+        /*border-radius: 5%;*/
+        color: #303129;
+        font-weight: bolder;
+        cursor: pointer;
+    }
 
 .custom-a-as-button {
     background-color: forestgreen;
@@ -71,4 +71,21 @@
         color: white;
         font-weight: bolder;
         text-decoration: none;
+    }
+
+
+/*Transform*/
+#custom-shadow-transform {
+    transition: ease-in-out 0.4s;
+    border: none;
+    box-shadow: inset 0px 1px 0px -5px rgba(50, 65, 49, 0.2), 0px 1px 11px 1px rgb(69, 71, 87);
+}
+
+    #custom-shadow-transform:hover {
+        background-color: rgb(255, 255, 255);
+        /* transition      : ease 0.5s; */
+        box-shadow: inset 10px 10px 21px -5px rgba(50, 65, 49, 0.2), 19px 15px 11px 1px rgb(69, 71, 87);
+        transform: scale(1.02);
+        transition: ease-in-out 0.4s;
+        z-index: 1;
     }
