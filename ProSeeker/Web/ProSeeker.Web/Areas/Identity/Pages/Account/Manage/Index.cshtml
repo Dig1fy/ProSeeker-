@@ -56,22 +56,22 @@
                 </div>
                 <div class="form-group col-md-10">
                     <label asp-for="Input.SpecialistDetails.AboutMe"></label>
-                    <textarea asp-for="Input.SpecialistDetails.AboutMe" class="form-control"></textarea>
+                    <textarea asp-for="Input.SpecialistDetails.AboutMe" class="form-control tinymce-textarea"></textarea>
                     <span asp-validation-for="Input.SpecialistDetails.AboutMe" class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-10">
                     <label asp-for="Input.SpecialistDetails.Experience"></label>
-                    <textarea asp-for="Input.SpecialistDetails.Experience" class="form-control"></textarea>
+                    <textarea asp-for="Input.SpecialistDetails.Experience" class="form-control tinymce-textarea"></textarea>
                     <span asp-validation-for="Input.SpecialistDetails.Experience" class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-10">
                     <label asp-for="Input.SpecialistDetails.Qualification"></label>
-                    <textarea asp-for="Input.SpecialistDetails.Qualification" class="form-control"></textarea>
+                    <textarea asp-for="Input.SpecialistDetails.Qualification" class="form-control tinymce-textarea"></textarea>
                     <span asp-validation-for="Input.SpecialistDetails.Qualification" class="text-danger"></span>
                 </div>
-                <div id="ServicesContainer">
+
+                <div>
                     <label asp-for="Input.SpecialistDetails.Services"></label>
-                    <a class="btn btn-success col-md-10" onclick="AddMoreServices()" onload="LoadAllServices(@Model.Input.SpecialistDetails.Services)">Добави услуга</a>
                     @{ var counter = 1;
                         @foreach (var service in @Model.Input.SpecialistDetails.Services)
                         {
@@ -89,12 +89,12 @@
                             </div>
                             counter++;
                         }
+
+                        <div id="ServicesContainer"></div>
+                        <a class="btn btn-success col-md-10" onclick="AddMoreServices()" onload="LoadAllServices(@Model.Input.SpecialistDetails.Services)">Добави услуга</a>
                     }
-                    @*TODO: Adjust rendering*@
                 </div>
             }
-
-
 
             <button id="update-profile-button" type="submit" class="btn btn-primary" style="width:85px; height:35px;">Запази промените</button>
         </form>
@@ -102,12 +102,12 @@
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-    <script src="/lib/tinymce/tinymce.min.js" type="text/javascript"></script>
-    <script src="~/js/TinyMCE/TinyMce.js" type="text/javascript"></script>
-
     @*Add more services dinamically*@
-    <script src="~/js/MyCustomJs/Profile/Profile.js"></script>
+    <script asp-append-version='true' src="~/js/MyCustomJs/Profile/Profile.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+    <script asp-append-version='true' src="/lib/tinymce/tinymce.min.js" type="text/javascript"></script>
+    <script asp-append-version='true' src="~/js/TinyMCE/TinyMce.js" type="text/javascript"></script>
+
 
     @*Render img and show it's name*@
     <script src="~/js/MyCustomJs/Profile/renderProfileImg.js"></script>

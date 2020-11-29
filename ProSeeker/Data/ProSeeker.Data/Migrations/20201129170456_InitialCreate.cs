@@ -124,34 +124,6 @@ namespace ProSeeker.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Specialist_Details",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    CreatedOn = table.Column<DateTime>(nullable: false),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true),
-                    AboutMe = table.Column<string>(nullable: true),
-                    CompanyName = table.Column<string>(nullable: true),
-                    Website = table.Column<string>(nullable: true),
-                    Experience = table.Column<string>(nullable: true),
-                    Qualification = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: true),
-                    JobCategoryId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Specialist_Details", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Specialist_Details_JobCategories_JobCategoryId",
-                        column: x => x.JobCategoryId,
-                        principalTable: "JobCategories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
                 {
@@ -190,37 +162,6 @@ namespace ProSeeker.Data.Migrations
                         name: "FK_AspNetUsers_Cities_CityId",
                         column: x => x.CityId,
                         principalTable: "Cities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_AspNetUsers_Specialist_Details_SpecialistDetailsId",
-                        column: x => x.SpecialistDetailsId,
-                        principalTable: "Specialist_Details",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Service",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedOn = table.Column<DateTime>(nullable: false),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    SpecialistDetailsId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Service", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Service_Specialist_Details_SpecialistDetailsId",
-                        column: x => x.SpecialistDetailsId,
-                        principalTable: "Specialist_Details",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -352,6 +293,40 @@ namespace ProSeeker.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Specialist_Details",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    AboutMe = table.Column<string>(nullable: true),
+                    CompanyName = table.Column<string>(nullable: true),
+                    Website = table.Column<string>(nullable: true),
+                    Experience = table.Column<string>(nullable: true),
+                    Qualification = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true),
+                    JobCategoryId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Specialist_Details", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Specialist_Details_JobCategories_JobCategoryId",
+                        column: x => x.JobCategoryId,
+                        principalTable: "JobCategories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Specialist_Details_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Offer",
                 columns: table => new
                 {
@@ -379,35 +354,6 @@ namespace ProSeeker.Data.Migrations
                         name: "FK_Offer_Specialist_Details_SpecialistDetailsId",
                         column: x => x.SpecialistDetailsId,
                         principalTable: "Specialist_Details",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Ratings",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedOn = table.Column<DateTime>(nullable: false),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    SpecialistDetailsId = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: false),
-                    Value = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Ratings", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Ratings_Specialist_Details_SpecialistDetailsId",
-                        column: x => x.SpecialistDetailsId,
-                        principalTable: "Specialist_Details",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Ratings_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -451,6 +397,60 @@ namespace ProSeeker.Data.Migrations
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Opinions_Specialist_Details_SpecialistDetailsId",
+                        column: x => x.SpecialistDetailsId,
+                        principalTable: "Specialist_Details",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Ratings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    SpecialistDetailsId = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: false),
+                    Value = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ratings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Ratings_Specialist_Details_SpecialistDetailsId",
+                        column: x => x.SpecialistDetailsId,
+                        principalTable: "Specialist_Details",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Ratings_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Service",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    SpecialistDetailsId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Service", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Service_Specialist_Details_SpecialistDetailsId",
                         column: x => x.SpecialistDetailsId,
                         principalTable: "Specialist_Details",
                         principalColumn: "Id",
@@ -568,13 +568,6 @@ namespace ProSeeker.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_SpecialistDetailsId",
-                table: "AspNetUsers",
-                column: "SpecialistDetailsId",
-                unique: true,
-                filter: "[SpecialistDetailsId] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_BaseJobCategories_IsDeleted",
                 table: "BaseJobCategories",
                 column: "IsDeleted");
@@ -660,6 +653,13 @@ namespace ProSeeker.Data.Migrations
                 column: "JobCategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Specialist_Details_UserId",
+                table: "Specialist_Details",
+                column: "UserId",
+                unique: true,
+                filter: "[UserId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Votes_OpinionId",
                 table: "Votes",
                 column: "OpinionId");
@@ -717,19 +717,19 @@ namespace ProSeeker.Data.Migrations
                 name: "Ads");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Cities");
-
-            migrationBuilder.DropTable(
                 name: "Specialist_Details");
 
             migrationBuilder.DropTable(
                 name: "JobCategories");
 
             migrationBuilder.DropTable(
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
                 name: "BaseJobCategories");
+
+            migrationBuilder.DropTable(
+                name: "Cities");
         }
     }
 }

@@ -21,11 +21,12 @@
 
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-            var specialists = new List<ApplicationUser>
+            var users = new List<ApplicationUser>
             {
                 new ApplicationUser
                 {
-                     UserName = "test2@test.com",
+                     UserName = "s@s",
+                     Email = "s@s",
                      CityId = 120,
                      EmailConfirmed = true,
                      FirstName = "Георги",
@@ -52,8 +53,8 @@
                 },
                 new ApplicationUser
                 {
-                     UserName = "specialist@specialist",
-                     PasswordHash = "123123",
+                     UserName = "s@s2",
+                     Email = "s@s2",
                      CityId = 120,
                      EmailConfirmed = true,
                      FirstName = "Иван",
@@ -80,8 +81,8 @@
                 },
                 new ApplicationUser
                 {
-                     UserName = "user@user",
-                     PasswordHash = "123123",
+                     UserName = "u@u",
+                     Email = "u@u",
                      CityId = 120,
                      EmailConfirmed = true,
                      FirstName = "Стоян",
@@ -90,17 +91,18 @@
                      IsSpecialist = false,
                 },
             };
-            foreach (var specialist in specialists)
+            foreach (var user in users)
             {
-                await userManager.CreateAsync(specialist, "123123");
+                await userManager.CreateAsync(user, "123123");
 
-                if (specialist.IsSpecialist)
+                if (user.IsSpecialist)
                 {
-                    await userManager.AddToRoleAsync(specialist, GlobalConstants.SpecialistRoleName);
+                    user.SpecialistDetailsId = user.SpecialistDetails.Id;
+                    await userManager.AddToRoleAsync(user, GlobalConstants.SpecialistRoleName);
                 }
                 else
                 {
-                    await userManager.AddToRoleAsync(specialist, GlobalConstants.RegularUserRoleName);
+                    await userManager.AddToRoleAsync(user, GlobalConstants.RegularUserRoleName);
                 }
             }
         }

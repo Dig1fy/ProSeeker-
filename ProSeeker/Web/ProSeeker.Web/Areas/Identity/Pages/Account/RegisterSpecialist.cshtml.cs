@@ -133,6 +133,7 @@
                     ProfilePicture = GlobalConstants.DefaultProfileImagePath,
                 };
 
+                user.SpecialistDetailsId = user.SpecialistDetails.Id;
                 var result = await this.userManager.CreateAsync(user, this.Input.Password);
 
                 if (result.Succeeded)

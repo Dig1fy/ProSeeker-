@@ -1,5 +1,5 @@
 ﻿tinymce.init({
-    selector: "textarea",
+    selector: ".tinymce-textarea",
     plugins: [
         "image paste table link code media"
     ]
