@@ -4,7 +4,13 @@
     ViewData["Title"] = "Profile";
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
-
+<style>
+    body {
+        /*background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;*/
+        background: url('https://localhost:44319/images/ProfileImage/Register.png') no-repeat center center fixed;
+        background-size: cover;
+    }
+</style>
 <h4>@ViewData["Title"]</h4>
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 <div class="row">

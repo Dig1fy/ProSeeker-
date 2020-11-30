@@ -1,6 +1,5 @@
 ﻿namespace ProSeeker.Web.Areas.Identity.Pages.Account
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
@@ -17,23 +16,22 @@
     using Microsoft.AspNetCore.WebUtilities;
     using Microsoft.Extensions.Logging;
     using ProSeeker.Common;
-    using ProSeeker.Data;
     using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;
 
-    public class RegisterSpecialistModel : PageModel
+    public class RegisterModel : PageModel
     {
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly ILogger<RegisterSpecialistModel> logger;
+        private readonly ILogger<RegisterModel> logger;
         private readonly IEmailSender emailSender;
         private readonly IDeletableEntityRepository<JobCategory> categoriesRepository;
         private readonly IRepository<City> citiesRepository;
 
-        public RegisterSpecialistModel(
+        public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            ILogger<RegisterSpecialistModel> logger,
+            ILogger<RegisterModel> logger,
             IEmailSender emailSender,
             IDeletableEntityRepository<JobCategory> categoriesRepository,
             IRepository<City> citiesRepository)
@@ -47,9 +45,11 @@
         }
 
         [BindProperty]
-        public RegisterSpecialistInputModel Input { get; set; }
+        public RegisterInputModel Input { get; set; }
 
         public string ReturnUrl { get; set; }
+
+        public int TempIdCheck { get; set; }
 
         public IList<SelectListItem> AllCategories => this.categoriesRepository.All()
           .Select(c => new SelectListItem() { Text = c.Name, Value = c.Id.ToString() })
@@ -62,8 +62,9 @@
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
-        public class RegisterSpecialistInputModel
+        public class RegisterInputModel
         {
+
             [Required(ErrorMessage = "Моля, попълнете полето 'Потребителско име/имейл'!")]
             [EmailAddress(ErrorMessage = "Невалиден мейл.")]
             [Display(Name = "Потребителско име /имейл/")]
@@ -104,13 +105,14 @@
             public string JobCategoryId { get; set; }
         }
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public async Task OnGetAsync(int id, string returnUrl = null)
         {
+            this.TempIdCheck = id;
             this.ReturnUrl = returnUrl;
             this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync(int tempIdCheck = 0, string returnUrl = null)
         {
             returnUrl = returnUrl ?? this.Url.Content("~/");
             this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -122,18 +124,22 @@
                     Email = this.Input.Email,
                     FirstName = GlobalMethods.UpperFirstLetterOfEachWord(this.Input.FirstName),
                     LastName = GlobalMethods.UpperFirstLetterOfEachWord(this.Input.LastName),
-                    IsSpecialist = true,
                     IsOnline = false,
                     CityId = this.Input.CityId,
-                    SpecialistDetails = new Specialist_Details
-                    {
-                        JobCategoryId = int.Parse(this.Input.JobCategoryId),
-                        CompanyName = GlobalMethods.UpperFirstLetterOfEachWord(this.Input.CompanyName),
-                    },
                     ProfilePicture = GlobalConstants.DefaultProfileImagePath,
                 };
 
-                user.SpecialistDetailsId = user.SpecialistDetails.Id;
+                if (tempIdCheck == 1)
+                {
+                    user.SpecialistDetails = new Specialist_Details
+                    {
+                        JobCategoryId = int.Parse(this.Input.JobCategoryId),
+                        CompanyName = GlobalMethods.UpperFirstLetterOfEachWord(this.Input.CompanyName),
+                    };
+                    user.SpecialistDetailsId = user.SpecialistDetails.Id;
+                    user.IsSpecialist = true;
+                }
+
                 var result = await this.userManager.CreateAsync(user, this.Input.Password);
 
                 if (result.Succeeded)
@@ -159,7 +165,7 @@
                     }
                     else
                     {
-                        await this.userManager.AddToRoleAsync(user, GlobalConstants.SpecialistRoleName);
+                        await this.userManager.AddToRoleAsync(user, tempIdCheck == 1 ? GlobalConstants.SpecialistRoleName : GlobalConstants.RegularUserRoleName);
                         await this.signInManager.SignInAsync(user, isPersistent: false);
                         return this.LocalRedirect(returnUrl);
                     }
