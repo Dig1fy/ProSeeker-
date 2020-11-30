@@ -40,7 +40,7 @@
     position: absolute;
 }*/
 
-#fas-pic:hover {
+#fas-pic:hover, #proff {
     cursor: pointer;
 }
 
