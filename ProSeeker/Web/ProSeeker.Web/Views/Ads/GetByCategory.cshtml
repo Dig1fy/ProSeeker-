@@ -7,39 +7,40 @@
 
 @foreach (var ad in Model.Ads)
 {
-<section class="card border-info mb-3" id="custom-shadow-transform">
-    <h3 class="card-header">
-        @ad.Title
-    </h3>   
-    <div style="padding:8px 8px 8px 8px;">
-        <span class="card-text d-block">
-            <span>@Html.Raw(@ad.SanitizedDescription)<br></span>
+    <section class="card border-info mb-3" id="custom-shadow-transform">
+        <h3 class="card-header">
+            @ad.Title
+        </h3>
+        <div style="padding:8px 8px 8px 8px;">
+            <span class="card-text d-block">
+                <span>@Html.Raw(@ad.SanitizedDescription)<br></span>
 
-        </span>
-        <div class="row" style="margin-top:-20px;">
-            <div class="col-lg-4 item">
-                <b class="d-block mb-5"><i class="fas fa-city"> гр.</i> @ad.City.Name</b>
+            </span>
+            <div class="row" style="margin-top:-20px;">
+                <div class="col-lg-4 item">
+                    <b class="d-block mb-5"><i class="fas fa-city"> гр.</i> @ad.City.Name</b>
+                </div>
+                <div class="col-lg-4 item">
+                    <i class="far fa-calendar-alt"></i> От: <time class="d-block mb-5" datetime="@ad.CreatedOn.ToString("O")"> </time>                    
+                </div>
+                <div class="col-lg-4 item">
+                    <b class="d-block mb-5"><i class="fas fa-hand-holding-usd"> Предвиден бюджет:</i> @ad.PreparedBudget</b>
+                </div>
             </div>
-            <div class="col-lg-4 item">
-                <b class="d-block mb-5"><i class="far fa-calendar-alt"></i> От: @ad.CreatedOn</b>
-            </div>
-            <div class="col-lg-4 item">
-                <b class="d-block mb-5"><i class="fas fa-hand-holding-usd"> Предвиден бюджет:</i> @ad.PreparedBudget</b>
+            @*@if (this.User.IsInRole("Specialist")) - Add this when the logic has been tested
+                {
+
+                }*@
+            <div class="button-container">
+                <div style="margin-bottom:1px;">
+                    <form method="post">
+                        <input type="hidden" asp-for="@ad.Id" name="adId" />
+                        <input type="hidden" asp-for="@ad.UserId" name="applicationUserId" />
+                        <button type="submit" class="custom-submit-button" style="width:141px;" asp-controller="Offers" asp-action="Create">Направи оферта</button>
+                    </form>
+                </div>
             </div>
         </div>
-        @*@if (this.User.IsInRole("Specialist")) - Add this when the logic has been tested
-        {
-
-        }*@
-        <div class="button-container">
-            <div style="margin-bottom:1px;">
-                <form method="post">
-                    <input type="hidden" asp-for="@ad.Id" name="adId" />
-                    <input type="hidden" asp-for="@ad.UserId" name="applicationUserId" />
-                    <button type="submit" class="custom-submit-button" style="width:141px;" asp-controller="Offers" asp-action="Create">Направи оферта</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>
 }
+

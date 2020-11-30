@@ -15,13 +15,15 @@
             </a>
         </li>
 
-        <li class="dropdown-btn-wrapper nav-item flex-grow-1" style="padding:10px; padding-top:12px;">
-            <i class="fas fa-chevron-circle-down" style="opacity:9; color:cornflowerblue;"></i>
-            <div class="custom-dropdown-content">
-                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Profile">Акаунт</a>
-                <a asp-area="" asp-controller="Ads" asp-action="MyAds">Моите обяви</a>
-                <a asp-area="" asp-controller="Ads" asp-action="GetMyAds">нищо няма тук</a>
-                <a asp-area="" asp-controller="Ads" asp-action="Create">оф</a>
+        <li class="btn-group">
+            <i id="fas-pic" class="fas fa-chevron-circle-down" style="padding-right: 10px; font-size:17px; margin:auto 0; color: cornflowerblue;" data-toggle="dropdown">
+            </i>
+            <div class="dropdown-menu custom-dropdown-content containerz" style="margin-top:-8px;">
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Profile">Акаунт</a>
+                <a class="dropdown-item" asp-area="" asp-controller="Ads" asp-action="MyAds">Моите обяви</a>
+                <a class="dropdown-item" asp-area="" asp-controller="Ads" asp-action="GetMyAds">нищо няма тук</a>
+                <a class="dropdown-item" asp-area="" asp-controller="Ads" asp-action="Create">оф</a>
+                <a class="dropdown-item" href="#">Link 2</a>
             </div>
         </li>
 

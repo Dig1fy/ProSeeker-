@@ -29,6 +29,7 @@
                 <h6>
                     @Model.SpecialistDetails.JobCategory.Name - гр. @Model.City.Name
                 </h6>
+
                 <div>
                     <div class="item-rating d-inline-flex" id="ratingContainer" style="padding-bottom:10px">
                         <div style="padding-right:3px" class="star-fill" data-ratings="1"><i class="fas fa-star"></i></div>
@@ -49,15 +50,12 @@
                                     <span> votes)</span>
                                 }
                             </span>
-
                         </div>
-
-
                     </div>
-
                     <br />
-
                 </div>
+
+                <p> Членува от: <time class="d-block mb-5" datetime="@Model.CreatedOn.ToString("O")"> </time></p>
 
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">

@@ -32,9 +32,9 @@
                     <div class="form-group">
                         <img src="@specialist.UserProfilePicture" width="130" height="110" alt="Alternate Text" />
                     </div>
-                    <p>@specialist.JobCategoryName - @specialist.UserCity</p>
+                    <p>@specialist.JobCategoryName - @specialist.UserCityName</p>
                     <p><i class="fas fa-user"></i> @specialist.UserUserName</p>
-                    <p><i class="fas fa-hourglass-end"></i> Member since: @specialist.CreatedOn</p>
+                    <p><i class="fas fa-hourglass-end"></i> Членство от: <time class="d-block mb-5" datetime="@specialist.CreatedOn.ToString("O")"> </time></p>
                     <p><i class="far fa-thumbs-up"></i> @specialist.Likes </p>
 
                     @*</div>*@

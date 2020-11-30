@@ -31,9 +31,17 @@
             font-weight: bold;
         }
 
-.dropdown-btn-wrapper:hover .custom-dropdown-content {
+/*.dropdown-btn-wrapper:hover .custom-dropdown-content {
     position: absolute;
     display: block;
+}
+
+.dropdown-btn-wrapper .custom-dropdown-content {
+    position: absolute;
+}*/
+
+#fas-pic:hover {
+    cursor: pointer;
 }
 
 .navbar-ads:hover {
