@@ -9,8 +9,8 @@
     @if (this.SignInManager.IsSignedIn(this.User))
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Profile">
-                <img style="width: 35px; height:35px; border-radius: 50%;" title="Profile" asp-append-version="true" src="@this.usersService.GetUserProfilePicture(this.UserManager.GetUserId(this.User))" alt="@this.UserManager.GetUserName(this.User) Avatar" />
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Профил">
+                <img style="width: 35px; height:35px; border-radius: 50%;" title="Профил" asp-append-version="true" src="@this.usersService.GetUserProfilePicture(this.UserManager.GetUserId(this.User))" alt="@this.UserManager.GetUserName(this.User) Avatar" />
                 Здравейте, @this.usersService.GetUserFirstNameById(this.UserManager.GetUserId(this.User))!
             </a>
         </li>
@@ -19,11 +19,13 @@
             <i id="fas-pic" class="fas fa-chevron-circle-down" style="padding-right: 10px; font-size:17px; margin:auto 0; color: cornflowerblue;" data-toggle="dropdown">
             </i>
             <div class="dropdown-menu custom-dropdown-content containerz" style="margin-top:-8px;">
-                <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Profile">Акаунт</a>
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Акаунт</a>
                 <a class="dropdown-item" asp-area="" asp-controller="Ads" asp-action="MyAds">Моите обяви</a>
                 <a class="dropdown-item" asp-area="" asp-controller="Ads" asp-action="GetMyAds">нищо няма тук</a>
                 <a class="dropdown-item" asp-area="" asp-controller="Ads" asp-action="Create">оф</a>
-                <a class="dropdown-item" href="#">Link 2</a>
+                <a onclick="SubmitForm()" class="dropdown-item">
+                    <form id="submitForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">Изход </form>
+                </a>
             </div>
         </li>
 
@@ -33,12 +35,6 @@
                 <a class="nav-link text-dark" asp-area="Administration" asp-controller="Dashboard" asp-action="Index" title="Admin">Админ</a>
             </li>
         }
-        <li class="nav-item">
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
-                <button type="submit" style="padding-top: 15%; " class="nav-link btn btn-link text-dark">Logout</button>
-            </form>
-        </li>
-
     }
     else
     {
@@ -50,3 +46,13 @@
         </li>
     }
 </ul>
+
+<script asp-append-version="true">
+    function SubmitForm() {
+        //return confirm('Наистина ли искате да изтриете обявата?')
+        if (confirm('Наистина ли излезе от акаунта си?') === true) {
+            $('#submitForm').submit();
+        }
+    }
+
+</script>
