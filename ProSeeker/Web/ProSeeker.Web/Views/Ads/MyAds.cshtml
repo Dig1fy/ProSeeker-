@@ -5,6 +5,14 @@
     <h2>Все още нямате регистрирани обяви!</h2>
 }
 
+@if (TempData["Message"] != null)
+{
+
+    <div class="alert alert-success alert-dismissible text-center" style="font-size:20px;" role="alert">
+        @TempData["Message"]
+    </div>
+}
+
 @foreach (var ad in Model.Ads)
 {
 <section class="card border-info mb-3" id="custom-shadow-transform">
@@ -33,8 +41,8 @@
     <div class="button-container">
         <div style="margin:5px;" class="">
             <div>
-                <form >
-                    <div class="text-right">
+                <form>
+                    <div class="text-left">
                         <button type="submit" class="custom-submit-button" style="width:105px; margin-bottom:7px;" asp-route-id="@ad.Id" asp-controller="Ads" asp-action="Edit">Промени</button>
                         <button type="submit" class="custom-submit-button" style="width:105px;" asp-route-id="@ad.Id" asp-controller="Ads" asp-action="Delete" onclick="return confirm('Наистина ли искате да изтриете обявата?')">Изтрий</button>
                     </div>
@@ -42,5 +50,30 @@
             </div>
         </div>
     </div>
+
+    @*sdadasd*@
+    @*tinymce-textarea*@
+    <div id="AddOpinionsForm">
+        <form>
+            <div class="form-group col-md-10">
+                <label for="Content"></label>
+                <textarea name="Content" id="Content" class="form-control tinymce-textarea"></textarea>
+                
+            </div>
+        </form>
+    </div>
+
+    <div class="px-4 pt-3"> <button type="button" class="btn btn-primary float-right" onclick="showAddCommentForm(0)"><i class="fa fa-plus"></i>&nbsp; Comment</button> </div>
+
+
+
+
+
+
+
+
+
+
+
 </section>
 }

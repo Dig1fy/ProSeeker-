@@ -66,6 +66,8 @@
 
             var user = await this.userManager.GetUserAsync(this.User);
             var newAdId = await this.adsService.CreateAsync(input, user.Id);
+
+            this.TempData["Message"] = "Успешно създадохте нова обява!"; //ТОДО - CHANGE REDIRECT
             return this.Redirect("/");
 
             // return this.RedirectToAction("GetDetails", new { id = id });
@@ -124,6 +126,8 @@
             }
 
             await this.adsService.UpdateAdAsync(inputModel);
+
+            this.TempData["Message"] = "Успешно коригирахте своята обява!";
             return this.RedirectToAction(nameof(this.MyAds));
         }
 
