@@ -13,13 +13,19 @@
     {
         private readonly IDeletableEntityRepository<Ad> adsRepository;
         private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
+        private readonly IRepository<City> citiesRepository;
+        private readonly IDeletableEntityRepository<JobCategory> categoriesRepository;
 
         public AdsService(
             IDeletableEntityRepository<Ad> adsRepository,
-            IDeletableEntityRepository<ApplicationUser> usersRepository)
+            IDeletableEntityRepository<ApplicationUser> usersRepository,
+            IRepository<City> citiesRepository,
+            IDeletableEntityRepository<JobCategory> categoriesRepository)
         {
             this.adsRepository = adsRepository;
             this.usersRepository = usersRepository;
+            this.citiesRepository = citiesRepository;
+            this.categoriesRepository = categoriesRepository;
         }
 
         public async Task<string> CreateAsync(CreateAdInputModel adtInputModel, string userId)
@@ -27,9 +33,11 @@
             var ad = new Ad
             {
                 CityId = adtInputModel.CityId,
+                City = this.citiesRepository.All().FirstOrDefault(x => x.Id == adtInputModel.CityId),
                 IsVip = false,
                 UserId = userId,
                 JobCategoryId = adtInputModel.JobCategoryId,
+                JobCategory = this.categoriesRepository.All().FirstOrDefault(x => x.Id == adtInputModel.JobCategoryId),
                 Opinions = new List<Opinion>(),
                 PreparedBudget = adtInputModel.PreparedBudget,
                 Title = adtInputModel.Title,
@@ -39,6 +47,20 @@
             await this.adsRepository.AddAsync(ad);
             await this.adsRepository.SaveChangesAsync();
             return ad.Id;
+        }
+
+        public async Task UpdateAdAsync(UpdateInputModel model)
+        {
+            var ad = this.adsRepository.All().FirstOrDefault(x => x.Id == model.Id);
+
+            ad.CityId = model.CityId;
+            ad.Description = model.Description;
+            ad.Title = model.Title;
+            ad.PreparedBudget = model.PreparedBudget;
+            ad.JobCategoryId = model.JobCategoryId;
+
+            this.adsRepository.Update(ad);
+            await this.adsRepository.SaveChangesAsync();
         }
 
         public int AllAdsByCategoryCount(string name)

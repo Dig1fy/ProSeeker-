@@ -73,13 +73,6 @@
         }
 
         // [Authorize]
-        public IActionResult GetById(string id)
-        {
-            var ad = this.adsService.GetAdDetailsById<AdShortDetailsViewModel>(id);
-            return null;
-        }
-
-        // [Authorize]
         public IActionResult GetByCategory(string id)
         {
             var adsByCategory = this.adsService.GetByCategory<AdsFullDetailsViewModel>(id);
@@ -107,9 +100,32 @@
             return this.RedirectToAction(nameof(this.MyAds));
         }
 
-        public async Task<IActionResult> Edit(string id)
+        // [Authorize]
+        public IActionResult Edit(string id)
         {
-            return null;
+            var model = this.adsService.GetAdDetailsById<UpdateInputModel>(id);
+            var allCities = this.citiesService.GetAllCities<CitySimpleViewModel>();
+            var allcategories = this.categoriesService.GetAllCategories<CategorySimpleViewModel>();
+
+            model.Cities = allCities;
+            model.Categories = allcategories;
+
+            return this.View(model);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(UpdateInputModel inputModel)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                inputModel.Cities = this.citiesService.GetAllCities<CitySimpleViewModel>();
+                inputModel.Categories = this.categoriesService.GetAllCategories<CategorySimpleViewModel>();
+                return this.View(inputModel);
+            }
+
+            await this.adsService.UpdateAdAsync(inputModel);
+            return this.RedirectToAction(nameof(this.MyAds));
+        }
+
     }
 }

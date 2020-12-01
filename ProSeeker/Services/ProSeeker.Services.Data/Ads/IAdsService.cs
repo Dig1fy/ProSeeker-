@@ -22,6 +22,8 @@
 
         Task DeleteById(string id);
 
+        Task UpdateAdAsync(UpdateInputModel model);
+
         // Task<string> UpdateAsync(AdInputModel adInputModel, string id);
 
         // IEnumerable<T> GetByKeyWord<T>(string search, string category, string city);
