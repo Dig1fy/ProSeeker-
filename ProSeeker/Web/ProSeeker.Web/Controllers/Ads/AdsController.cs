@@ -131,5 +131,10 @@
             return this.RedirectToAction(nameof(this.MyAds));
         }
 
+        public IActionResult GetById(string id)
+        {
+            var ad = this.adsService.GetAdDetailsById<AdsFullDetailsViewModel>(id);
+            return this.View(ad);
+        }
     }
 }

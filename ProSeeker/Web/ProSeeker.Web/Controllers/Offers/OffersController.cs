@@ -22,7 +22,13 @@
         //[Authorize(Roles = GlobalConstants.SpecialistRoleName)]
         public IActionResult Create(CreateOfferViewModel viewModel)
         {
-            return this.View(viewModel);
+            var inputModel = new CreateOfferInputModel
+            {
+                AdId = viewModel.AdId,
+                ApplicationUserId = viewModel.ApplicationUserId,
+            };
+
+            return this.View(inputModel);
         }
 
         [HttpPost]

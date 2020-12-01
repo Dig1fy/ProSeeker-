@@ -1,0 +1,75 @@
+﻿@model ProSeeker.Web.ViewModels.Ads.AdsFullDetailsViewModel
+
+<section class="card border-info mb-3" id="custom-shadow-transform">
+    <h2 class="card-header">
+        @Model.Title
+    </h2>
+
+    <div style="padding:8px 8px 8px 8px;">
+        <span class="card-text d-block">
+            <span>@Html.Raw(Model.SanitizedDescription)<br></span>
+
+        </span>
+        <div class="row" style="margin-top:-20px;">
+            <div class="col-lg-4 item">
+                <b class="d-block mb-5"><i class="fas fa-city"> гр.</i> @Model.City.Name</b>
+                @*Категория - @ad.JobCategory.Name*@
+            </div>
+            <div class="col-lg-4 item">
+                <b class="d-block mb-5"><i class="far fa-calendar-alt"></i> От: <time class="d-block mb-5" datetime="@Model.CreatedOn.ToString("O")"> </time></b>
+            </div>
+            <div class="col-lg-4 item">
+                <b class="d-block mb-5"><i class="fas fa-hand-holding-usd"> Предвиден бюджет:</i> @Model.PreparedBudget</b>
+            </div>
+        </div>
+    </div>
+    <div class="button-container">
+        <div style="margin:5px;" class="">
+            <div>
+                <form>
+                    <div class="text-left">
+                        <button type="submit" class="custom-submit-button" style="width:105px; margin-bottom:7px;" asp-route-id="@Model.Id" asp-controller="Ads" asp-action="Edit">Промени</button>
+                        <button type="submit" class="custom-submit-button" style="width:105px;" asp-route-id="@Model.Id" asp-controller="Ads" asp-action="Delete" onclick="return confirm('Наистина ли искате да изтриете обявата?')">Изтрий</button>
+
+                        <input type="hidden" asp-for="@Model.Id" name="adId" />
+                        <input type="hidden" asp-for="@Model.UserId" name="applicationUserId" />
+                        <button type="submit" class="custom-submit-button" style="width:141px;" asp-controller="Offers" asp-action="Create">Направи оферта</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+@*sdadasd*@
+@*tinymce-textarea*@
+
+<div class="px-4 pt-3"> <button type="button" class="btn btn-primary float-right" onclick="showOpinionsSection(0)"><i class="fa fa-plus"></i>&nbsp; Comment</button> </div>
+
+
+<div id="addOpinionsForm" style="display:none;">
+    <form>
+        <div class="form-group col-md-10">
+            <label for="Content"></label>
+            <textarea name="Content" id="Content" class="form-control tinymce-textarea"></textarea>
+
+        </div>
+    </form>
+</div>
+
+<script>
+    function showOpinionsSection(id) {
+        let section = document.querySelector('#addOpinionsForm');
+        section.style.display = section.style.display === 'block' ? 'none' : 'block';
+    }
+</script>
