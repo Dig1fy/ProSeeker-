@@ -1,4 +1,18 @@
 ﻿@model ProSeeker.Web.ViewModels.Ads.AdsFullDetailsViewModel
+
+<style>
+    .custom-text-shadows {
+        text-shadow: 1px 0px 0px rgb(64, 59, 138);
+        /*box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.2);*/
+        color: rgba(11, 65, 242, 0.83);
+        font-size: 16px;
+    }
+
+    .custom-textarea-text {
+        color: rgba(8, 4, 98, 0.72);
+        font-size: 16px;
+    }
+</style>
 @*=====================================
       View function for the recursion
     ==================================*@
@@ -17,46 +31,50 @@
             return;
         }
 
-        @foreach (var opinion in opinions)
-        {
-            <div class="container-fluid ">
-                <div class="row">
+        <div class="all-opinions-container">
+
+            @foreach (var opinion in opinions)
+            {
+                <div class="row justify-content-center">
                     <div class="col-md-12">
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <div class="media flex-wrap w-100 align-items-center">
-                                    <img src="@opinion.Creator.ProfilePicture" style="width:40px; height:40px;" class="d-block ui-w-40 rounded-circle" alt="">
-                                    <div class="media-body ml-3">
-                                        @opinion.Creator.FullName
-                                        <div class="text-muted small">
-                                            <time datetime="@opinion.CreatedOn.ToString("O")"></time>
-                                        </div>
+                        <div class="card ">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-0">
+                                        <img src="@opinion.Creator.ProfilePicture" class="d-block ui-w-40 rounded-circle col-md-0 d-inline" style="width:40px; height:40px;">
                                     </div>
-                                    <div class="text-muted small ml-3">
-                                        @if (this.User.Identity.IsAuthenticated)
-                                        {
-                                            <div class="px-4 pt-3"> <button type="button" class="btn btn-secondary" onclick="showOpinionsSection(@opinion.Id)"><i class="fa fa-plus"></i>&nbsp; Answer</button> </div>
-                                            <div class="clearfix"></div>
-                                        }
+                                    <div class="col-md-11">
+                                        <p class="custom-text-shadows d-inline"> @opinion.Creator.FullName </p>
+                                        <div class="clearfix"></div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-body">
-                                <article>
-                                    @Html.Raw(opinion.SanitizedContent)
-                                </article>
+                                <div class="row ml-4">
+                                    <div class="col-md-12 custom-textarea-text">
+
+                                        @Html.Raw(opinion.SanitizedContent)
+
+                                    </div>
+                                </div>
+
+                                @if (this.User.Identity.IsAuthenticated)
+                                {
+                                    <div>
+                                        <a style="font-size:14px;" onclick="showOpinionsSection(@opinion.Id)"><i style="font-size:14px;" class="fa fa-plus-square d-inline link"></i>&nbsp;Отговори</a>
+                                        /<time style="font-size:14px;" class="text-muted text-right d-inline" datetime="@opinion.CreatedOn.ToString("O")"></time>/
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div> /<time class="text-muted text-right d-inline" datetime="@opinion.CreatedOn.ToString("O")"></time>/</div>
+                                }
                                 @{DisplayOpinions(opinion.Id);}
                             </div>
                         </div>
                     </div>
                 </div>
+            }
 
-
-
-
-            </div>
-
-        }
+        </div>
     }
 }
 
@@ -103,13 +121,13 @@
 
         @if (this.User.Identity.IsAuthenticated)
         {
-            <div class="col-md-12"> <button type="button" class="btn btn-primary float-right" onclick="showOpinionsSection(0)"><i class="fa fa-plus"></i>&nbsp; Comment</button> </div>
+            <a type="button" href="#" class="float-right" onclick="showOpinionsSection(0)"><i class="fa fa-comment-dots"></i>&nbsp; (@Model.Opinions.Count()) Мнения</a>
             <div class="clearfix"></div>
         }
 
     </section>
 </div>
-        @{ DisplayOpinions(null); }
+@{ DisplayOpinions(null); }
 
 @*============================
        New opinion /text area/
@@ -129,3 +147,20 @@
         </form>
     </div>
 </div>
+
+<script>
+    function showOpinionsSection(parentId) {  // TODO: Add teaxarea for leaving an opinion + functionality for reply under each opinion
+        // Show / hide opinions
+        let section = document.querySelector("#addOpinionsForm");
+        //let section = document.querySelector(".all-opinions-container");
+        section.style.display = section.style.display === 'block' ? 'none' : 'block';
+
+        // Insert parentId value according to the opinion(comment) we want to reply
+        $("#addOpinionsForm input[name='ParentId']").val(parentId);
+
+        // Navigate to the text area
+        //$([document.documentElement, document.body]).animate({
+        //    scrollTop: $("#addOpinionsForm").offset().top
+        //}, 1000);
+    }
+</script>
