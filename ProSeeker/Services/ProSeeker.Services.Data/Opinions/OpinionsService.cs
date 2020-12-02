@@ -22,19 +22,19 @@
             this.usersRepository = usersRepository;
         }
 
-        public async Task CreateAdOpinion(string currentAdId, string userId, string content, int? parentId = null)
+        public async Task CreateAdOpinion(string currentAdId, string userId, string content, int? parentOpinionId = null)
         {
             var ad = this.adsRepository.All().FirstOrDefault(x => x.Id == currentAdId);
             var user = this.usersRepository.All().FirstOrDefault(x => x.Id == userId);
 
             var opinion = new Opinion
             {
+                Content = content,
                 Ad = ad,
                 AdId = ad.Id,
-                Creator = user,
+                //Creator = user,
                 CreatorId = user.Id,
-                Content = content,
-                ParentOpinionId = parentId,
+                ParentOpinionId = parentOpinionId,
             };
 
             await this.opinionsRepository.AddAsync(opinion);

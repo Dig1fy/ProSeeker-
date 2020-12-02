@@ -11,7 +11,7 @@
     {
         public int Id { get; set; }
 
-        public int? ParentId { get; set; }
+        public int? ParentOpinionId { get; set; }
 
         public DateTime CreatedOn { get; set; }
 

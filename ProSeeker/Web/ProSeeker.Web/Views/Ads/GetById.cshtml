@@ -5,12 +5,12 @@
 @{
     this.ViewData["Title"] = Model.Title;
 
-    void DisplayOpinions(int? parentId)
+    void DisplayOpinions(int? parentOpinionId)
     {
         @*=================
                All opinions
             ==================*@
-        var opinions = Model.Opinions.Where(x => x.ParentId == parentId);
+        var opinions = Model.Opinions.Where(x => x.ParentOpinionId == parentOpinionId).ToList();
 
         if (!opinions.Any())
         {
@@ -50,6 +50,10 @@
                         </div>
                     </div>
                 </div>
+
+
+
+
             </div>
 
         }
@@ -103,9 +107,9 @@
             <div class="clearfix"></div>
         }
 
-        @{ DisplayOpinions(null); }
     </section>
 </div>
+        @{ DisplayOpinions(null); }
 
 @*============================
        New opinion /text area/
