@@ -7,7 +7,7 @@
 
     @foreach (var category in baseCategory.JobCategories.OrderBy(x=>x.Name))
     {
-        <a asp-route-id="@category.Name" asp-controller="Ads" asp-action="GetByCategory" class="dropdown-item">@category.Name</a>
+        <a asp-route-id="@category.Name" asp-area="" asp-controller="Ads" asp-action="GetByCategory" class="dropdown-item">@category.Name</a>
     }
 
 </div>

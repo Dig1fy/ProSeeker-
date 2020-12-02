@@ -25,10 +25,6 @@
         [Display(Name = "Офертата Ви е валидна до:")]
         public DateTime ExpirationDate { get; set; }
 
-        public string ApplicationUserId { get; set; }
-
-        public virtual ApplicationUser ApplicationUser { get; set; }
-
         public string SpecialistDetailsId { get; set; }
 
         public virtual Specialist_Details SpecialistDetails { get; set; }

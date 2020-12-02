@@ -24,8 +24,7 @@
         {
             var inputModel = new CreateOfferInputModel
             {
-                AdId = viewModel.AdId,
-                ApplicationUserId = viewModel.ApplicationUserId,
+                AdId = viewModel.Id,
             };
 
             return this.View(inputModel);
