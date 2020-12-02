@@ -34,6 +34,7 @@
                 Creator = user,
                 CreatorId = user.Id,
                 Content = content,
+                ParentOpinionId = parentId,
             };
 
             await this.opinionsRepository.AddAsync(opinion);
@@ -43,7 +44,7 @@
         public bool IsInAdId(int opinionId, string currentAdId)
         {
             var opinionAdId = this.opinionsRepository
-                .All()
+                .AllAsNoTracking()
                 .Where(x => x.Id == opinionId)
                 .Select(y => y.AdId)
                 .FirstOrDefault();

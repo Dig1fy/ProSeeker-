@@ -39,7 +39,7 @@
 
             var userId = this.userManager.GetUserId(this.User);
             await this.opinionsService.CreateAdOpinion(inputModel.AdId, userId, inputModel.Content, parentId);
-            return this.RedirectToAction("GetById", "Ads", new { adId = inputModel.AdId });
+            return this.RedirectToAction("GetById", "Ads", new { Id = inputModel.AdId });
         }
     }
 }

@@ -1,10 +1,11 @@
 ﻿namespace ProSeeker.Web.ViewModels.Ads
 {
     using System;
-
+    using System.Collections.Generic;
     using Ganss.XSS;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;
+    using ProSeeker.Web.ViewModels.Opinions;
 
     public class AdsFullDetailsViewModel : IMapFrom<Ad>
     {
@@ -35,5 +36,7 @@
         public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }
+
+        public virtual ICollection<AdOpinionViewModel> Opinions { get; set; }
     }
 }

@@ -1,4 +1,64 @@
 ﻿@model ProSeeker.Web.ViewModels.Ads.AdsFullDetailsViewModel
+@*=====================================
+      View function for the recursion
+    ==================================*@
+@{
+    this.ViewData["Title"] = Model.Title;
+
+    void DisplayOpinions(int? parentId)
+    {
+        @*=================
+               All opinions
+            ==================*@
+        var opinions = Model.Opinions.Where(x => x.ParentId == parentId);
+
+        if (!opinions.Any())
+        {
+            return;
+        }
+
+        @foreach (var opinion in opinions)
+        {
+            <div class="container-fluid ">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <div class="media flex-wrap w-100 align-items-center">
+                                    <img src="@opinion.Creator.ProfilePicture" style="width:40px; height:40px;" class="d-block ui-w-40 rounded-circle" alt="">
+                                    <div class="media-body ml-3">
+                                        @opinion.Creator.FullName
+                                        <div class="text-muted small">
+                                            <time datetime="@opinion.CreatedOn.ToString("O")"></time>
+                                        </div>
+                                    </div>
+                                    <div class="text-muted small ml-3">
+                                        @if (this.User.Identity.IsAuthenticated)
+                                        {
+                                            <div class="px-4 pt-3"> <button type="button" class="btn btn-secondary" onclick="showOpinionsSection(@opinion.Id)"><i class="fa fa-plus"></i>&nbsp; Answer</button> </div>
+                                            <div class="clearfix"></div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <article>
+                                    @Html.Raw(opinion.SanitizedContent)
+                                </article>
+                                @{DisplayOpinions(opinion.Id);}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+    }
+}
+
+@*=================
+      Ad's details
+    ===============*@
 <div class="row">
     <div class="button-container col-md-2">
         <div class="col-md-12">
@@ -7,9 +67,6 @@
                     <div class="text-left">
                         <button type="submit" class="custom-submit-button mb-3 col-md-12" asp-route-id="@Model.Id" asp-controller="Ads" asp-action="Edit">Промени</button>
                         <button type="submit" class="custom-submit-button mb-3 col-md-12" asp-route-id="@Model.Id" asp-controller="Ads" asp-action="Delete" onclick="return confirm('Наистина ли искате да изтриете обявата?')">Изтрий</button>
-
-                        @*<input type="hidden" asp-for="@Model.Id" name="adId" />*@
-                        @*<input type="hidden" asp-for="@Model.UserId" name="applicationUserId" />*@
                         <button type="submit" class="custom-submit-button mb-3 col-md-12" asp-route-id="@Model.Id" asp-controller="Offers" asp-action="Create">Направи оферта</button>
                     </div>
                 </form>
@@ -40,27 +97,24 @@
             </div>
         </div>
 
-        @*sqdqwdqwdqw*@
+        @if (this.User.Identity.IsAuthenticated)
+        {
+            <div class="col-md-12"> <button type="button" class="btn btn-primary float-right" onclick="showOpinionsSection(0)"><i class="fa fa-plus"></i>&nbsp; Comment</button> </div>
+            <div class="clearfix"></div>
+        }
 
-        <div class="col-md-12"> <button type="button" class="btn btn-primary float-right" onclick="showOpinionsSection(0)"><i class="fa fa-plus"></i>&nbsp; Comment</button> </div>
-
-
-
-
-
-
-
-
-        @*wqdqwdqwdqw*@
-
+        @{ DisplayOpinions(null); }
     </section>
-
 </div>
 
+@*============================
+       New opinion /text area/
+    ===========================*@
 <div class="row ml-2">
-    <div class="col-md-12" id="addOpinionsForm" style="display:none;">
-        <form asp-controller="Opinions" asp-action="CreateAdOpinion" method="post">
+    <div class="col-md-12">
+        <form asp-controller="Opinions" asp-action="CreateAdOpinion" method="post" id="addOpinionsForm" style="display:none;">
             <input hidden name="adId" value="@Model.Id" />
+            <input type="hidden" name="ParentId" value="0" />
             <div>
                 <label for="Content"></label>
                 <textarea name="Content" id="Content" class="form-control tinymce-textarea"></textarea>
@@ -71,17 +125,3 @@
         </form>
     </div>
 </div>
-
-@*sdadasd*@
-@*tinymce-textarea*@
-
-
-
-
-
-<script>
-    function showOpinionsSection(id) {
-        let section = document.querySelector('#addOpinionsForm');
-        section.style.display = section.style.display === 'block' ? 'none' : 'block';
-    }
-</script>

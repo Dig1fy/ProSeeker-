@@ -21,7 +21,7 @@
 
         public double GetAverageRating(string specialistId)
         {
-            var averageRating = this.ratingsRepository.All()
+            var averageRating = this.ratingsRepository.AllAsNoTracking()
                 .Where(x => x.SpecialistDetailsId == specialistId)
                 .Average(a => a.Value);
 
@@ -30,7 +30,8 @@
 
         public int GetRatingsCount(string specialistId)
         {
-            var ratingsCount = this.ratingsRepository.All()
+            var ratingsCount = this.ratingsRepository
+                .AllAsNoTracking()
                 .Where(x => x.SpecialistDetailsId == specialistId)
                  .ToList()
                  .Count();

@@ -19,7 +19,7 @@
         public IEnumerable<T> GetAllCategories<T>()
         {
             var allCategories = this.categoriesRepository
-                .All()
+                .AllAsNoTracking()
                 .To<T>()
                 .ToList();
 

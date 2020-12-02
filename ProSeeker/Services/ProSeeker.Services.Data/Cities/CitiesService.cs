@@ -19,7 +19,7 @@
         public IEnumerable<T> GetAllCities<T>()
         {
             var cities = this.citiesRepository
-                .All()
+                .AllAsNoTracking()
                 .To<T>()
                 .ToList();
 

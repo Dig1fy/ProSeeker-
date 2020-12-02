@@ -28,7 +28,7 @@
             <div class="row" style="margin-top:-20px;">
                 <div class="col-lg-4 item">
                     <b class="d-block mb-5"><i class="fas fa-city"> гр.</i> @ad.City.Name</b>
-                    @*Категория - @ad.JobCategory.Name*@
+                    Категория - @ad.JobCategory.Name
                 </div>
                 <div class="col-lg-4 item">
                     <b class="d-block mb-5"><i class="far fa-calendar-alt"></i> От: <time class="d-block mb-5" datetime="@ad.CreatedOn.ToString("O")"> </time></b>
@@ -46,8 +46,8 @@
                             
                             <button type="submit" class="custom-submit-button" style="width:105px; margin-bottom:7px;" asp-route-id="@ad.Id" asp-controller="Ads" asp-action="GetById">Виж цялата обява</button>
 
-                            @*<button type="submit" class="custom-submit-button" style="width:105px; margin-bottom:7px;" asp-route-id="@ad.Id" asp-controller="Ads" asp-action="Edit">Промени</button>
-                            <button type="submit" class="custom-submit-button" style="width:105px;" asp-route-id="@ad.Id" asp-controller="Ads" asp-action="Delete" onclick="return confirm('Наистина ли искате да изтриете обявата?')">Изтрий</button>*@
+                            <button type="submit" class="custom-submit-button" style="width:105px; margin-bottom:7px;" asp-route-id="@ad.Id" asp-controller="Ads" asp-action="Edit">Промени</button>
+                            <button type="submit" class="custom-submit-button" style="width:105px;" asp-route-id="@ad.Id" asp-controller="Ads" asp-action="Delete" onclick="return confirm('Наистина ли искате да изтриете обявата?')">Изтрий</button>
                         </div>
                     </form>
                 </div>

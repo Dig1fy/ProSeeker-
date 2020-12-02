@@ -17,7 +17,7 @@
         public string Title { get; set; }
 
         [Required(ErrorMessage = "Моля, попълнете описание на обявата!")]
-        [StringLength(5000, ErrorMessage = "Описанието трябва да бъде поне 20 символа.", MinimumLength = 20)]
+        [StringLength(25000, ErrorMessage = "Описанието трябва да бъде поне 20 символа.", MinimumLength = 20)]
         [Display(Name = "Описание")]
         public string Description { get; set; }
 
