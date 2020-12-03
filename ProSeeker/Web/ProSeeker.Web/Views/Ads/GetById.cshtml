@@ -12,6 +12,19 @@
         color: rgba(8, 4, 98, 0.72);
         font-size: 16px;
     }
+
+    .no-opinions-text {
+        text-shadow: 1px 0px 0px rgba(82, 82, 92, 0.18);
+        color: rgba(11, 65, 242, 0.83);
+        font-family: Tahoma;
+        font-size: 18px;
+        font-style: italic;
+    }
+
+    .reply-to-opinion:hover {
+        cursor: pointer;
+        text-decoration: none;
+    }
 </style>
 @*=====================================
       View function for the recursion
@@ -31,7 +44,7 @@
             return;
         }
 
-        <div class="all-opinions-container">
+        <div class="all-opinions-container" style="display:block;">
 
             @foreach (var opinion in opinions)
             {
@@ -53,7 +66,7 @@
                                 @if (this.User.Identity.IsAuthenticated)
                                 {
                                     <div>
-                                        <a style="font-size:14px;" onclick="showOpinionsSection(@opinion.Id)"><i style="font-size:14px;" class="fa fa-plus-square d-inline link"></i>&nbsp;Отговори</a>
+                                        <a class="reply-to-opinion text-muted" style="font-size:14px;" onclick="sendParentId(@opinion.Id)"><i style="font-size:14px;" class="fa fa-plus-square d-inline link"></i>&nbsp;Отговори</a>
                                         /<time style="font-size:14px;" class="text-muted text-right d-inline" datetime="@opinion.CreatedOn.ToString("O")"></time>/
                                     </div>
                                 }
@@ -121,12 +134,20 @@
 
         @{ DisplayOpinions(null); }
 
+
+
         @*============================
                New opinion /text area/
             ===========================*@
         <div class="row">
             <div class="col-md-12">
-                <form asp-controller="Opinions" asp-action="CreateAdOpinion" method="post" id="addOpinionsForm" style="display:none;">
+                <form asp-controller="Opinions" asp-action="CreateAdOpinion" method="post" id="addOpinionsForm" style="display:block;">
+                    @if (!Model.Opinions.Any())
+                    {
+                        <h5 class="text-center no-opinions-text">
+                            Все още няма мнения за тази обява.
+                        </h5>
+                    }
                     <input hidden name="adId" value="@Model.Id" />
                     <input type="hidden" name="ParentId" value="0" />
                     <div>
@@ -142,19 +163,29 @@
     </section>
 </div>
 
-<script>
-    function showOpinionsSection(parentId) {  // TODO: Add teaxarea for leaving an opinion + functionality for reply under each opinion
-        // Show / hide opinions
-        let section = document.querySelector("#addOpinionsForm");
-        //let section = document.querySelector(".all-opinions-container");
-        section.style.display = section.style.display === 'block' ? 'none' : 'block';
+@section Scripts{
 
-        // Insert parentId value according to the opinion(comment) we want to reply
-        $("#addOpinionsForm input[name='ParentId']").val(parentId);
+    <script asp-append-version="true">
+        function showOpinionsSection(parentId) {  // TODO: Add teaxarea for leaving an opinion + functionality for reply under each opinion
+            // Show / hide opinions
+            let section = document.querySelector("#addOpinionsForm");
+            //let section = document.querySelector(".all-opinions-container");
+            section.style.display = section.style.display === 'block' ? 'none' : 'block';
 
-        // Navigate to the text area
-        //$([document.documentElement, document.body]).animate({
-        //    scrollTop: $("#addOpinionsForm").offset().top
-        //}, 1000);
-    }
-</script>
+            let allOpinionsContainer = document.querySelector('.all-opinions-container');
+            allOpinionsContainer.style.display = allOpinionsContainer.style.display == 'block' ? 'none' : 'block';
+
+            // Insert parentId value according to the opinion(comment) we want to reply
+            $("#addOpinionsForm input[name='ParentId']").val(parentId);
+        }
+
+        function sendParentId(parentId) {
+            $("#addOpinionsForm input[name='ParentId']").val(parentId);
+
+            // Navigate to the text area
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $("#addOpinionsForm").offset().top
+            }, 1000);
+        }
+    </script>
+}
