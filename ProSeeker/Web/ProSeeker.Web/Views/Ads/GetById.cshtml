@@ -35,7 +35,7 @@
 
             @foreach (var opinion in opinions)
             {
-                <div class="row justify-content-center">
+                <div class="row justify-content-center  mb-3">
                     <div class="col-md-12">
                         <div class="card ">
                             <div class="card-body">
@@ -45,14 +45,8 @@
                                     </div>
                                     <div class="col-md-11">
                                         <p class="custom-text-shadows d-inline"> @opinion.Creator.FullName </p>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                                <div class="row ml-4">
-                                    <div class="col-md-12 custom-textarea-text">
-
+                                        @*<div class="clearfix"></div>*@
                                         @Html.Raw(opinion.SanitizedContent)
-
                                     </div>
                                 </div>
 
@@ -125,27 +119,27 @@
             <div class="clearfix"></div>
         }
 
-    </section>
-</div>
-@{ DisplayOpinions(null); }
+        @{ DisplayOpinions(null); }
 
-@*============================
-       New opinion /text area/
-    ===========================*@
-<div class="row ml-2">
-    <div class="col-md-12">
-        <form asp-controller="Opinions" asp-action="CreateAdOpinion" method="post" id="addOpinionsForm" style="display:none;">
-            <input hidden name="adId" value="@Model.Id" />
-            <input type="hidden" name="ParentId" value="0" />
-            <div>
-                <label for="Content"></label>
-                <textarea name="Content" id="Content" class="form-control tinymce-textarea"></textarea>
+        @*============================
+               New opinion /text area/
+            ===========================*@
+        <div class="row">
+            <div class="col-md-12">
+                <form asp-controller="Opinions" asp-action="CreateAdOpinion" method="post" id="addOpinionsForm" style="display:none;">
+                    <input hidden name="adId" value="@Model.Id" />
+                    <input type="hidden" name="ParentId" value="0" />
+                    <div>
+                        <label for="Content"></label>
+                        <textarea placeholder="Напиши своето мнение..." name="Content" id="Content" class="form-control tinymce-textarea"></textarea>
+                    </div>
+                    <div>
+                        <input type="submit" class="btn custom-submit-button" value="Изпрати" />
+                    </div>
+                </form>
             </div>
-            <div>
-                <input type="submit" class="btn custom-submit-button" value="Изпрати" />
-            </div>
-        </form>
-    </div>
+        </div>
+    </section>
 </div>
 
 <script>
