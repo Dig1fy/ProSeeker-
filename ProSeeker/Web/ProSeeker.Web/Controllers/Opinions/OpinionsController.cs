@@ -41,5 +41,27 @@
             await this.opinionsService.CreateAdOpinion(inputModel.AdId, userId, inputModel.Content, parentId);
             return this.RedirectToAction("GetById", "Ads", new { Id = inputModel.AdId });
         }
+
+        [HttpPost]
+        //[Authorize]
+        public async Task<IActionResult> CreateOpinionToSpecialist(CreateSpecialistOpinionInputModel inputModel)
+        {
+            var parentId =
+                inputModel.ParentId == 0 ?
+                    (int?)null :
+                    inputModel.ParentId;
+
+            if (parentId.HasValue)
+            {
+                if (!this.opinionsService.IsInSpecialistId(parentId.Value, inputModel.SpecialistId))
+                {
+                    return this.BadRequest();
+                }
+            }
+
+            var userId = this.userManager.GetUserId(this.User);
+            await this.opinionsService.CreateSpecOpinion(inputModel.SpecialistId, userId, inputModel.Content, parentId);
+            return this.RedirectToAction("GetProfile", "SpecialistsDetails", new { Id = inputModel.SpecialistId });
+        }
     }
 }

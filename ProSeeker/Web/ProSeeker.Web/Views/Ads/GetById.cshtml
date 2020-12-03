@@ -1,31 +1,4 @@
 ﻿@model ProSeeker.Web.ViewModels.Ads.AdsFullDetailsViewModel
-
-<style>
-    .custom-text-shadows {
-        text-shadow: 1px 0px 0px rgb(64, 59, 138);
-        /*box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.2);*/
-        color: rgba(11, 65, 242, 0.83);
-        font-size: 16px;
-    }
-
-    .custom-textarea-text {
-        color: rgba(8, 4, 98, 0.72);
-        font-size: 16px;
-    }
-
-    .no-opinions-text {
-        text-shadow: 1px 0px 0px rgba(82, 82, 92, 0.18);
-        color: rgba(11, 65, 242, 0.83);
-        font-family: Tahoma;
-        font-size: 18px;
-        font-style: italic;
-    }
-
-    .reply-to-opinion:hover {
-        cursor: pointer;
-        text-decoration: none;
-    }
-</style>
 @*=====================================
       View function for the recursion
     ==================================*@
@@ -37,7 +10,10 @@
         @*=================
                All opinions
             ==================*@
-        var opinions = Model.Opinions.Where(x => x.ParentOpinionId == parentOpinionId).ToList();
+        var opinions = Model.Opinions
+           .Where(o => o.SpecialistDetailsId == null)
+           .Where(x => x.ParentOpinionId == parentOpinionId)
+           .ToList();
 
         if (!opinions.Any())
         {
@@ -162,6 +138,7 @@
         </div>
     </section>
 </div>
+    <br /><br />
 
 @section Scripts{
 

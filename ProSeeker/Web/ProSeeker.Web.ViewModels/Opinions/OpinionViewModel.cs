@@ -7,7 +7,7 @@
     using ProSeeker.Services.Mapping;
     using ProSeeker.Web.ViewModels.Users;
 
-    public class AdOpinionViewModel : IMapFrom<Opinion>
+    public class OpinionViewModel : IMapFrom<Opinion>
     {
         public int Id { get; set; }
 
@@ -19,13 +19,10 @@
 
         public string SanitizedContent => new HtmlSanitizer().Sanitize(this.Content);
 
-        public UserViewModel Creator { get; set; }
-        //public string CreatorFirstName { get; set; }
+        public UserOpinionViewModel Creator { get; set; }
 
-        //public string CreatorLastName { get; set; }
+        public string AdId { get; set; }
 
-        //public string CreatorFullName => $"{this.CreatorFirstName} {this.CreatorLastName}";
-
-        //public string CreatorProfilePicture { get; set; }
+        public string SpecialistDetailsId { get; set; }
     }
 }

@@ -37,6 +37,6 @@
 
         public virtual ApplicationUser User { get; set; }
 
-        public virtual ICollection<AdOpinionViewModel> Opinions { get; set; }
+        public virtual ICollection<OpinionViewModel> Opinions { get; set; }
     }
 }

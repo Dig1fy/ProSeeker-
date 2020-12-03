@@ -8,8 +8,8 @@
 
         bool IsInAdId(int opinionId, string currentAdId);
 
-        //Task CreateSpecOpinion(string specialistId, string userId, string content, int? parentId = null);
+        Task CreateSpecOpinion(string specialistId, string userId, string content, int? parentId = null);
 
-        //bool IsInSpecialistId(string specialistId, int postId);
+        bool IsInSpecialistId(int opinionId, string specialistId);
     }
 }
