@@ -2,12 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using AutoMapper;
     using Ganss.XSS;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;
     using ProSeeker.Web.ViewModels.Opinions;
 
-    public class AdsFullDetailsViewModel : IMapFrom<Ad>
+    public class AdsFullDetailsViewModel : IMapFrom<Ad>, IMapTo<Ad>, IHaveCustomMappings
     {
         public string Id { get; set; }
 
@@ -35,8 +37,27 @@
 
         public string UserId { get; set; }
 
+        public int UpVotesCount { get; set; }
+
+        public int DownVotesCount { get; set; }
+
         public virtual ApplicationUser User { get; set; }
 
         public virtual ICollection<OpinionViewModel> Opinions { get; set; }
+
+        public void CreateMappings(IProfileExpression configuration)
+        {
+            configuration.CreateMap<Ad, AdsFullDetailsViewModel>()
+               .ForMember(x => x.UpVotesCount, options =>
+               {
+                   options.MapFrom(p => p.Votes.Where(x => x.VoteType == VoteType.UpVote)
+               .Select(x => x.VoteType).Count());
+               })
+               .ForMember(x => x.DownVotesCount, options =>
+               {
+                   options.MapFrom(p => p.Votes.Where(x => x.VoteType == VoteType.DownVote)
+               .Select(x => x.VoteType).Count());
+               });
+        }
     }
 }

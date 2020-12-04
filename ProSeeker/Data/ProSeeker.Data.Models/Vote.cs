@@ -6,9 +6,9 @@
 
     public class Vote : BaseModel<int>
     {
-        public int OpinionId { get; set; }
+        public string AdId { get; set; }
 
-        public Opinion Opinion { get; set; }
+        public Ad Ad { get; set; }
 
         [Required]
         public string UserId { get; set; }

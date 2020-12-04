@@ -107,6 +107,22 @@
 
         @if (this.User.Identity.IsAuthenticated)
         {
+    <div class="text-muted small ml-3">
+        <form id="votesForm" method="post"></form>
+        <div>
+            <a href="#" onclick="sendVote('@Model.Id', true)">
+                <i class="fa fa-thumbs-up"></i>
+            </a>
+        </div>
+        <div id="upVotesCount">@Model.UpVotesCount</div>
+
+        <div id="downVotesCount">@Model.DownVotesCount</div>
+        <div>
+            <a href="#" onclick="sendVote('@Model.Id', false)">
+                <i class="fa fa-thumbs-down"></i>
+            </a>
+        </div>
+    </div>
             <a type="button" href="#" class="float-right" onclick="showOpinionsSection(0)"><i class="fa fa-comment-dots"></i>&nbsp; (@Model.Opinions.Count()) Мнения</a>
             <div class="clearfix"></div>
         }
@@ -116,8 +132,8 @@
 
 
         @*============================
-               New opinion /text area/
-            ===========================*@
+           New opinion /text area/
+        ===========================*@
         <div class="row">
             <div class="col-md-12">
                 <form asp-controller="Opinions" asp-action="CreateAdOpinion" method="post" id="addOpinionsForm" style="display:block;">
@@ -164,6 +180,24 @@
 
 
 @section Scripts{
+    <script asp-append-version="true">
+        function sendVote(adId, isUpVote) {
+            var token = $("#votesForm input[name=__RequestVerificationToken]").val();
+            var json = { adId: adId, isUpVote: isUpVote };
+            $.ajax({
+                url: "/api/votes",
+                type: "POST",
+                data: JSON.stringify(json),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                headers: { 'X-CSRF-TOKEN': token },
+                success: function (data) {
+                    $("#upVotesCount").html(data.upVotesCount);
+                    $("#downVotesCount").html(data.downVotesCount);
+                }
+            });
+        }
+    </script>
 
     <script asp-append-version="true">
         function showOpinionsSection(parentId) {  // TODO: Add teaxarea for leaving an opinion + functionality for reply under each opinion

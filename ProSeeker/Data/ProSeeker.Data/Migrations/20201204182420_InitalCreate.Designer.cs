@@ -10,8 +10,8 @@ using ProSeeker.Data;
 namespace ProSeeker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201129170456_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20201204182420_InitalCreate")]
+    partial class InitalCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -492,7 +492,7 @@ namespace ProSeeker.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ParentOpinionId")
+                    b.Property<int?>("ParentOpinionId")
                         .HasColumnType("int");
 
                     b.Property<string>("SpecialistDetailsId")
@@ -672,17 +672,14 @@ namespace ProSeeker.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AdId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("OpinionId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Specialist_DetailsId")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -693,9 +690,7 @@ namespace ProSeeker.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OpinionId");
-
-                    b.HasIndex("Specialist_DetailsId");
+                    b.HasIndex("AdId");
 
                     b.HasIndex("UserId");
 
@@ -811,9 +806,7 @@ namespace ProSeeker.Data.Migrations
 
                     b.HasOne("ProSeeker.Data.Models.Opinion", "ParentOpinion")
                         .WithMany()
-                        .HasForeignKey("ParentOpinionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("ParentOpinionId");
 
                     b.HasOne("ProSeeker.Data.Models.Specialist_Details", "SpecialistDetails")
                         .WithMany("Opinions")
@@ -855,15 +848,9 @@ namespace ProSeeker.Data.Migrations
 
             modelBuilder.Entity("ProSeeker.Data.Models.Vote", b =>
                 {
-                    b.HasOne("ProSeeker.Data.Models.Opinion", "Opinion")
+                    b.HasOne("ProSeeker.Data.Models.Ad", "Ad")
                         .WithMany("Votes")
-                        .HasForeignKey("OpinionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("ProSeeker.Data.Models.Specialist_Details", null)
-                        .WithMany("Votes")
-                        .HasForeignKey("Specialist_DetailsId");
+                        .HasForeignKey("AdId");
 
                     b.HasOne("ProSeeker.Data.Models.ApplicationUser", "User")
                         .WithMany("Votes")

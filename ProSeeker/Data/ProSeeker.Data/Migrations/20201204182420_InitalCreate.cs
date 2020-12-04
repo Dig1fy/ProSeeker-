@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProSeeker.Data.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitalCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -327,6 +327,35 @@ namespace ProSeeker.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Votes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    AdId = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: false),
+                    VoteType = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Votes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Votes_Ads_AdId",
+                        column: x => x.AdId,
+                        principalTable: "Ads",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Votes_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Offer",
                 columns: table => new
                 {
@@ -368,11 +397,11 @@ namespace ProSeeker.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    SpecialistDetailsId = table.Column<string>(nullable: true),
                     Content = table.Column<string>(nullable: true),
                     CreatorId = table.Column<string>(nullable: true),
-                    ParentOpinionId = table.Column<int>(nullable: false),
-                    AdId = table.Column<string>(nullable: true)
+                    ParentOpinionId = table.Column<int>(nullable: true),
+                    AdId = table.Column<string>(nullable: true),
+                    SpecialistDetailsId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -453,42 +482,6 @@ namespace ProSeeker.Data.Migrations
                         name: "FK_Service_Specialist_Details_SpecialistDetailsId",
                         column: x => x.SpecialistDetailsId,
                         principalTable: "Specialist_Details",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Votes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedOn = table.Column<DateTime>(nullable: false),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    OpinionId = table.Column<int>(nullable: false),
-                    UserId = table.Column<string>(nullable: false),
-                    VoteType = table.Column<int>(nullable: false),
-                    Specialist_DetailsId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Votes", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Votes_Opinions_OpinionId",
-                        column: x => x.OpinionId,
-                        principalTable: "Opinions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Votes_Specialist_Details_Specialist_DetailsId",
-                        column: x => x.Specialist_DetailsId,
-                        principalTable: "Specialist_Details",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Votes_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -660,14 +653,9 @@ namespace ProSeeker.Data.Migrations
                 filter: "[UserId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Votes_OpinionId",
+                name: "IX_Votes_AdId",
                 table: "Votes",
-                column: "OpinionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Votes_Specialist_DetailsId",
-                table: "Votes",
-                column: "Specialist_DetailsId");
+                column: "AdId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Votes_UserId",
@@ -696,6 +684,9 @@ namespace ProSeeker.Data.Migrations
                 name: "Offer");
 
             migrationBuilder.DropTable(
+                name: "Opinions");
+
+            migrationBuilder.DropTable(
                 name: "Ratings");
 
             migrationBuilder.DropTable(
@@ -711,13 +702,10 @@ namespace ProSeeker.Data.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Opinions");
+                name: "Specialist_Details");
 
             migrationBuilder.DropTable(
                 name: "Ads");
-
-            migrationBuilder.DropTable(
-                name: "Specialist_Details");
 
             migrationBuilder.DropTable(
                 name: "JobCategories");

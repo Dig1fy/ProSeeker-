@@ -12,7 +12,6 @@
         {
             this.Id = Guid.NewGuid().ToString();
             this.Opinions = new HashSet<Opinion>();
-            this.Votes = new HashSet<Vote>();
             this.Services = new HashSet<Service>();
             this.Ratings = new HashSet<Rating>();
             this.Offers = new HashSet<Offer>();
@@ -44,8 +43,6 @@
         public virtual ICollection<Service> Services { get; set; }
 
         public virtual ICollection<Opinion> Opinions { get; set; }
-
-        public virtual ICollection<Vote> Votes { get; set; }
 
         public virtual ICollection<Rating> Ratings { get; set; }
 

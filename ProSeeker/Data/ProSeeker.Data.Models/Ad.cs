@@ -11,6 +11,7 @@
         {
             this.Id = Guid.NewGuid().ToString();
             this.Opinions = new HashSet<Opinion>();
+            this.Votes = new HashSet<Vote>();
         }
 
         public string Title { get; set; }
@@ -36,5 +37,8 @@
         public virtual ApplicationUser User { get; set; }
 
         public virtual ICollection<Opinion> Opinions { get; set; }
+
+        public virtual ICollection<Vote> Votes { get; set; }
+
     }
 }

@@ -6,11 +6,6 @@
 
     public class Opinion : BaseDeletableModel<int>
     {
-        public Opinion()
-        {
-            this.Votes = new HashSet<Vote>();
-        }
-
         public string Content { get; set; }
 
         public string CreatorId { get; set; }
@@ -28,7 +23,5 @@
         public string SpecialistDetailsId { get; set; }
 
         public virtual Specialist_Details SpecialistDetails { get; set; }
-
-        public virtual ICollection<Vote> Votes { get; set; }
     }
 }
