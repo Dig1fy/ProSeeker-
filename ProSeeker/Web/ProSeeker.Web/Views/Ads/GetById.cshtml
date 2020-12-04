@@ -71,10 +71,13 @@
                 <form>
                     <div class="text-left">
                         <button type="submit" class="custom-submit-button mb-3 col-md-12" asp-route-id="@Model.Id" asp-controller="Ads" asp-action="Edit">Промени</button>
-                        <button type="submit" class="custom-submit-button mb-3 col-md-12" asp-route-id="@Model.Id" asp-controller="Ads" asp-action="Delete" onclick="return confirm('Наистина ли искате да изтриете обявата?')">Изтрий</button>
+
                         <button type="submit" class="custom-submit-button mb-3 col-md-12" asp-route-id="@Model.Id" asp-controller="Offers" asp-action="Create">Направи оферта</button>
                     </div>
                 </form>
+                <form asp-route-id="@Model.Id" asp-controller="Ads" asp-action="Delete" id="deleteAdForm">
+                </form>
+                <button class="custom-submit-button mb-3 col-md-12" data-toggle="modal" data-target="#deleteModal">Изтрий</button>
             </div>
         </div>
     </div>
@@ -138,7 +141,70 @@
         </div>
     </section>
 </div>
-    <br /><br />
+<br />
+<br />
+
+
+@*=================================
+       MODAL - delete confirmation //тест на формата/ id на формата /
+    ===========================*@
+<div class="modal" tabindex="-1" role="dialog" id="deleteModal" >
+    <div class="modal-dialog" role="document" >
+        <div class="modal-content" style="background-color:azure">
+            <div class="modal-body d-flex justify-content-center">
+                <p class="custom-text-shadows">Сигурни ли сте, че искате да изтриете този запис?</p>
+            </div>
+            <div class="modal-footer row d-flex justify-content-center">
+                <button type="button" class="custom-success-btn col-md-4 text-center" onclick="deleteAdForm.submit()">Да</button>
+                <button type="button" class="custom-danger-btn col-md-4 text-center" data-dismiss="modal">Не</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style asp-append-version="true">
+    /* ============================
+    SUCCESS BUTTTON   
+   ============================ */
+    .custom-success-btn {
+        font-size: 17px;
+        border-radius: 2%;
+        box-shadow: 1px 2px 1px 1px rgba(24, 81, 24, 0.75), 1px 1px 0 0px rgb(24, 81, 24);
+        background-color: rgb(4, 194, 4);
+        text-shadow: 1px 1px 1px rgb(0, 0, 0);
+        border-radius: 6%;
+        color: azure;
+        opacity: 0.8;
+        font-weight: bold;
+    }
+
+        .custom-success-btn:hover {
+            cursor: pointer;
+            background-color: rgb(36, 128, 41);
+            font-weight: bold;
+        }
+
+    /* ============================
+    DANGER BUTTTON   
+   ============================ */
+    .custom-danger-btn {
+        font-size: 17px;
+        border-radius: 2%;
+        box-shadow: 1px 2px 1px 1px rgba(24, 81, 24, 0.75), 1px 1px 0 0px rgb(24, 81, 24);
+        background-color: rgba(120, 7, 14, 0.83);
+        text-shadow: 1px 1px 1px rgb(0, 0, 0);
+        border-radius: 6%;
+        color: azure;
+        opacity: 0.9;
+        font-weight: bold;
+    }
+
+        .custom-danger-btn:hover {
+            cursor: pointer;
+            background-color: rgba(72, 5, 5, 0.83);
+            font-weight: bold;
+        }
+</style>
 
 @section Scripts{
 

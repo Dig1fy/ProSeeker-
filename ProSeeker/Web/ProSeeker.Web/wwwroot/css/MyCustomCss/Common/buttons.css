@@ -3,8 +3,6 @@
     Submit btn    
    ============================ */
 .custom-submit-button {
-    /*height: 35px;
-    width: 440px;*/
     font-size: 16px;
     padding: 5px 40px;
     border-radius: 8%;
@@ -12,8 +10,8 @@
     background-color: rgba(144, 221, 214, 0.00);
     text-shadow: 1px 1px 1px rgba(17, 15, 139, 0.95);
     padding: 4px;
-    color:powderblue;
-    border:none;
+    color: powderblue;
+    border: none;
 }
 
 .custom-submit-button-wrapper {
@@ -29,3 +27,45 @@
     background-color: rgb(136, 122, 41);
     color: rgb(37, 70, 43);
 }
+
+/* ============================
+    SUCCESS BUTTTON   
+   ============================ */
+.custom-success-btn {
+    font-size: 17px;
+    border-radius: 2%;
+    box-shadow: 1px 2px 1px 1px rgba(24, 81, 24, 0.75), 1px 1px 0 0px rgb(24, 81, 24);
+    background-color: rgb(4, 194, 4);
+    text-shadow: 1px 1px 1px rgb(0, 0, 0);
+    border-radius: 6%;
+    color: azure;
+    opacity: 0.8;
+    font-weight: bold;
+}
+
+    .custom-success-btn:hover {
+        cursor: pointer;
+        background-color: rgb(36, 128, 41);
+        font-weight: bold;
+    }
+
+/* ============================
+    DANGER BUTTTON   
+   ============================ */
+.custom-danger-btn {
+    font-size: 17px;
+    border-radius: 2%;
+    box-shadow: 1px 2px 1px 1px rgba(24, 81, 24, 0.75), 1px 1px 0 0px rgb(24, 81, 24);
+    background-color: rgba(120, 7, 14, 0.83);
+    text-shadow: 1px 1px 1px rgb(0, 0, 0);
+    border-radius: 6%;
+    color: azure;
+    opacity: 0.9;
+    font-weight: bold;
+}
+
+    .custom-danger-btn:hover {
+        cursor: pointer;
+        background-color: rgba(72, 5, 5, 0.83);
+        font-weight: bold;
+    }
