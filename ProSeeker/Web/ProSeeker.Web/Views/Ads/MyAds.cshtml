@@ -41,13 +41,9 @@
         <div class="button-container">
             <div style="margin:5px;" class="">
                 <div>
-                    <form>
-                        <div class="text-left">
-                            
-                            <button type="submit" class="custom-submit-button" style="width:105px; margin-bottom:7px;" asp-route-id="@ad.Id" asp-controller="Ads" asp-action="GetById">Виж цялата обява</button>
-
-                            <button type="submit" class="custom-submit-button" style="width:105px; margin-bottom:7px;" asp-route-id="@ad.Id" asp-controller="Ads" asp-action="Edit">Промени</button>
-                            <button type="submit" class="custom-submit-button" style="width:105px;" asp-route-id="@ad.Id" asp-controller="Ads" asp-action="Delete" onclick="return confirm('Наистина ли искате да изтриете обявата?')">Изтрий</button>
+                    <form method="post">
+                        <div class="text-left">                            
+                            <button type="submit" class="custom-submit-button" style="width:145px; margin-bottom:7px;" asp-route-id="@ad.Id" asp-controller="Ads" asp-action="GetById">Детайли</button>
                         </div>
                     </form>
                 </div>

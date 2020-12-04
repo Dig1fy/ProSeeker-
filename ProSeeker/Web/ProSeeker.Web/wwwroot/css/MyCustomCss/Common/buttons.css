@@ -10,7 +10,7 @@
     background-color: rgba(144, 221, 214, 0.00);
     text-shadow: 1px 1px 1px rgba(17, 15, 139, 0.95);
     padding: 4px;
-    color: powderblue;
+    color: rgba(29, 148, 137, 0.77);
     border: none;
 }
 
@@ -24,8 +24,8 @@
 
 .custom-submit-button:hover {
     cursor: pointer;
-    background-color: rgb(136, 122, 41);
-    color: rgb(37, 70, 43);
+    background-color: rgba(103, 181, 181, 0.66);
+    color: rgb(27, 62, 59);
 }
 
 /* ============================
@@ -40,7 +40,6 @@
     border-radius: 6%;
     color: azure;
     opacity: 0.8;
-    font-weight: bold;
 }
 
     .custom-success-btn:hover {
@@ -61,11 +60,12 @@
     border-radius: 6%;
     color: azure;
     opacity: 0.9;
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
 
     .custom-danger-btn:hover {
         cursor: pointer;
-        background-color: rgba(72, 5, 5, 0.83);
+        background-color: rgba(33, 3, 3, 0.64);
         font-weight: bold;
+        color: azure;
     }

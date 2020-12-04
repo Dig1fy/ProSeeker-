@@ -76,35 +76,36 @@
                     <span asp-validation-for="Input.SpecialistDetails.Qualification" class="text-danger"></span>
                 </div>
 
-                <div class="col col-md-10">
-                    <label class="col-md-10" asp-for="Input.SpecialistDetails.Services"></label>
-                    @{ var counter = 1;
-                        @foreach (var service in @Model.Input.SpecialistDetails.Services)
-                        {
-                            <div class="form-row">
-                                <div class="col-md-10">
-                                    <div>
-                                        <label>@counter. @service.Name</label>
-                                    </div>
-                                    <div>
-                                        <label> - @service.Description</label>
-                                    </div>
-                                </div>
-                                <button class="btn col-md-2" asp-page-handler="Delete" asp-route-id="@service.Id" onclick="return confirm('Наистина ли искате да изтриете обявата?')" style="height:36px; background-color:rgba(92, 2, 2, 0.41)"> Премахни </button>
-                                @*<a class="btn btn-danger" type="submit" asp-controller="Announcements" asp-action="Delete" asp-route-id="@announcement.Id">Изтрий</a>*@
-                            </div>
-                            counter++;
-                        }
-                    }
-
-                </div>
-                <div id="ServicesContainer"></div>
-                <div class="text-left col-md-12">
-                    <a class="btn btn-success col-md-10" onclick="AddMoreServices()" onload="LoadAllServices(@Model.Input.SpecialistDetails.Services)">Добави услуга</a><br /><br />
-                </div>
             }
 
-            <button id="update-profile-button" type="submit" class="btn btn-primary col-md-10" style="margin-top:3px;">Запази промените</button>
+            <div class="col col-md-10">
+                <label class="col-md-10" asp-for="Input.SpecialistDetails.Services"></label>
+                @{ var counter = 1;
+                    @foreach (var service in @Model.Input.SpecialistDetails.Services)
+                    {
+                        <div class="form-row">
+                            <div class="col-md-10">
+                                <div>
+                                    <label>@counter. @service.Name</label>
+                                </div>
+                                <div>
+                                    <label> - @service.Description</label>
+                                </div>
+                            </div>
+                            <button class="btn col-md-2 custom-danger-btn" asp-page-handler="Delete" asp-route-id="@service.Id" onclick="return confirm('Услугата \'@service.Name\' ще бъде изтрита от профила Ви.')" style="height:36px;"> Премахни </button>
+                        </div>
+                        counter++;
+                    }
+                }
+
+            </div>
+            <div class="text-left col-md-12">
+                <a class="btn btn-success col-md-10" onclick="AddMoreServices()" onload="LoadAllServices(@Model.Input.SpecialistDetails.Services)">Добави услуга</a><br /><br />
+            </div>
+            <div id="ServicesContainer"></div>
+            <div class="text-left col-md-12">
+                <button id="update-profile-button" type="submit" class="btn btn-primary col col-md-10" style="margin-top:3px;">Запази промените</button>
+            </div>
         </form>
     </div>
 </div>
