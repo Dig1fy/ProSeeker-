@@ -78,7 +78,7 @@
         // [Authorize]
         public IActionResult GetByCategory(string categoryName, int page = 1)
         {
-            // this id is actually the category name. We pass it as id because of the SelectListItems (Value, Name) in the view
+            // Explicitly check the page in case someone wants to cheat :)
             page = page < 1 ? 1 : page;
 
             var model = new GetAllViewModel
@@ -94,12 +94,21 @@
 
         //[Authorize]
         // Is in role RegularUser
-        public async Task<IActionResult> MyAds()
+        public async Task<IActionResult> MyAds(int page = 1)
         {
+            page = page < 1 ? 1 : page;
+
             var user = await this.userManager.GetUserAsync(this.User);
-            var allMyAds = this.adsService.GetMyAds<AdsShortDetailsViewModel>(user.Id);
-            var model = new GetAllViewModel();
-            model.Ads = allMyAds;
+            var adsPerPage = this.adsService.GetMyAds<AdsShortDetailsViewModel>(user.Id, page);
+            var allMyAdsCount = this.adsService.GetAdsCountByUserId(user.Id);
+
+            var model = new GetAllViewModel
+            {
+                Ads = adsPerPage,
+                AdsCount = allMyAdsCount,
+                PageNumber = page,
+            };
+
             return this.View(model);
         }
 

@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using ProSeeker.Common;
     using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;
@@ -101,11 +102,16 @@
             return ad;
         }
 
-        public IEnumerable<T> GetMyAds<T>(string id)
+        public IEnumerable<T> GetMyAds<T>(string id, int page)
         {
+            var adsToSkip = (page - 1) * GlobalConstants.ItemsPerPage;
+
             var allMyAds = this.adsRepository
-                .All()
+                .AllAsNoTracking()
                 .Where(x => x.UserId == id)
+                .OrderByDescending(x => x.CreatedOn)
+                .Skip(adsToSkip)
+                .Take(GlobalConstants.ItemsPerPage)
                 .To<T>()
                 .ToList();
 
@@ -117,6 +123,17 @@
             var ad = await this.adsRepository.GetByIdWithDeletedAsync(id);
             this.adsRepository.Delete(ad);
             await this.adsRepository.SaveChangesAsync();
+        }
+
+        public int GetAdsCountByUserId(string id)
+        {
+            var allUserAds = this.adsRepository
+                .AllAsNoTracking()
+                .Where(x => x.UserId == id)
+                .ToList()
+                .Count();
+
+            return allUserAds;
         }
     }
 }
