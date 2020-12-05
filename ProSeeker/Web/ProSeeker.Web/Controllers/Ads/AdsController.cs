@@ -77,7 +77,7 @@
         // [Authorize]
         public IActionResult GetByCategory(string id)
         {
-            var adsByCategory = this.adsService.GetByCategory<AdsFullDetailsViewModel>(id);
+            var adsByCategory = this.adsService.GetByCategory<AdsShortDetailsViewModel>(id);
             var model = new GetAllViewModel();
             model.Ads = adsByCategory;
 
@@ -89,7 +89,7 @@
         public async Task<IActionResult> MyAds()
         {
             var user = await this.userManager.GetUserAsync(this.User);
-            var allMyAds = this.adsService.GetMyAds<AdsFullDetailsViewModel>(user.Id);
+            var allMyAds = this.adsService.GetMyAds<AdsShortDetailsViewModel>(user.Id);
             var model = new GetAllViewModel();
             model.Ads = allMyAds;
             return this.View(model);

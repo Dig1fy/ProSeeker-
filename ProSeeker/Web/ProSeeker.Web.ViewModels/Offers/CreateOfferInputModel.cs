@@ -14,7 +14,8 @@
         [Display(Name = "Описание / допълнителна инфомация")]
         public string Description { get; set; }
 
-        [Display(Name = "Офертна цена")]
+        [Display(Name = "Офертна цена /български левове/")]
+        [RegularExpression(@"^[1-9][\.\d]*(,\d+)?$", ErrorMessage = "Цената не може да съдържа букви. Примери за валидна цена: '2500', '1200.25', '10.55'")]
         public decimal Price { get; set; }
 
         [Required]
