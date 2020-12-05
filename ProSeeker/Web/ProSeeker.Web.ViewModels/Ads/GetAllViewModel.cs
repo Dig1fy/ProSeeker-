@@ -2,7 +2,10 @@
 {
     using System.Collections.Generic;
 
-    public class GetAllViewModel
+    using ProSeeker.Web.ViewModels.Pagination;
+
+    // XXXViewModel : XXXPagingViewModel : BasePagingViewModel
+    public class GetAllViewModel : AdsPagingViewModel
     {
         public IEnumerable<AdsShortDetailsViewModel> Ads { get; set; }
     }

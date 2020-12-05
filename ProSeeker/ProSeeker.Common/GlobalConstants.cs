@@ -11,5 +11,7 @@
         public const string RegularUserRoleName = "User";
 
         public const string DefaultProfileImagePath = "/images/ProfileImage/defaultUser.png";
+
+        public const int ItemsPerPage = 12;
     }
 }

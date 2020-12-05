@@ -5,6 +5,7 @@
 
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using ProSeeker.Common;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Data.Ads;
     using ProSeeker.Services.Data.CategoriesService;
@@ -75,11 +76,22 @@
         }
 
         // [Authorize]
-        public IActionResult GetByCategory(string id)
+        public IActionResult GetByCategory(string id, int page = 1)
         {
+            // this id is actually the category name. We pass it as id because of the SelectListItems (Value, Name) in the view
+            if (page <= 0)
+            {
+                return this.NotFound();
+            }
+
             var adsByCategory = this.adsService.GetByCategory<AdsShortDetailsViewModel>(id);
-            var model = new GetAllViewModel();
-            model.Ads = adsByCategory;
+            var model = new GetAllViewModel
+            {
+                Ads = adsByCategory,
+                PageNumber = page,
+                AdsCount = this.adsService.AllAdsByCategoryCount(id),
+                ItemsPerPage = GlobalConstants.ItemsPerPage,
+            };
 
             return this.View(model);
         }

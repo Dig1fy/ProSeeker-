@@ -34,10 +34,7 @@
             <div class="button-container">
                 <div style="margin-bottom:1px;">
                     <form method="post">
-                        <button type="submit" class="custom-submit-button" style="width:145px; margin-bottom:7px;" asp-route-id="@ad.Id" asp-controller="Ads" asp-action="GetById">Детайли</button>
-                        @*<input type="hidden" asp-for="@ad.Id" name="adId" />
-                        <input type="hidden" asp-for="@ad.UserId" name="applicationUserId" />
-                        <button type="submit" class="custom-submit-button" style="width:141px;" asp-controller="Offers" asp-action="Create">Направи оферта</button>*@
+                        <button type="submit" class="custom-submit-button" style="width:145px; margin-bottom:7px;" asp-route-id="@ad.Id" asp-controller="Ads" asp-action="GetById">Детайли</button>                       
                     </form>
                 </div>
             </div>
@@ -45,17 +42,4 @@
     </section>
 }
 
-<hr />
-<nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
-        <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-        </li>
-    </ul>
-</nav>
+<partial name="_PagingPartial" model="@Model" />

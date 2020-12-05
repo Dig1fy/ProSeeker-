@@ -79,7 +79,7 @@
         public IEnumerable<T> GetByCategory<T>(string categoryName, int skip = 0)
         {
             var allByCategory = this.adsRepository
-                .All()
+                .AllAsNoTracking()
                 .Where(x => x.JobCategory.Name == categoryName)
                 .To<T>()
                 .ToList();
