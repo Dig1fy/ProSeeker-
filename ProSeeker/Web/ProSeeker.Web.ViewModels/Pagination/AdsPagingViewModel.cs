@@ -4,11 +4,13 @@
 
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;
-    using ProSeeker.Web.ViewModels.Pages;
+    using ProSeeker.Web.ViewModels.Categories;
 
     // XXXViewModel : AdsPagingViewModel : BasePagingViewModel
     public class AdsPagingViewModel : BasePagingViewModel, IMapFrom<Ad>
     {
+        public string CategoryName { get; set; }
+
         public int AdsCount { get; set; }
 
         public int PagesCount => (int)Math.Ceiling((double)this.AdsCount / this.ItemsPerPage);

@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using ProSeeker.Common;
     using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;
@@ -76,11 +76,14 @@
         public int AllAdsCount()
             => this.adsRepository.All().Count();
 
-        public IEnumerable<T> GetByCategory<T>(string categoryName, int skip = 0)
+        public IEnumerable<T> GetByCategory<T>(string categoryName, int page)
         {
             var allByCategory = this.adsRepository
                 .AllAsNoTracking()
                 .Where(x => x.JobCategory.Name == categoryName)
+                .OrderByDescending(x => x.CreatedOn)
+                .Skip((page - 1) * GlobalConstants.ItemsPerPage)
+                .Take(GlobalConstants.ItemsPerPage)
                 .To<T>()
                 .ToList();
 

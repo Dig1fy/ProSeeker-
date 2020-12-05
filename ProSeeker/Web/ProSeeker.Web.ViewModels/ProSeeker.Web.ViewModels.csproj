@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Data\ProSeeker.Data.Models\ProSeeker.Data.Models.csproj" />
+    <ProjectReference Include="..\..\ProSeeker.Common\ProSeeker.Common.csproj" />
     <ProjectReference Include="..\..\Services\ProSeeker.Services.Mapping\ProSeeker.Services.Mapping.csproj" />
   </ItemGroup>
 

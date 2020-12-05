@@ -12,6 +12,6 @@
 
         public const string DefaultProfileImagePath = "/images/ProfileImage/defaultUser.png";
 
-        public const int ItemsPerPage = 12;
+        public const int ItemsPerPage = 2;
     }
 }

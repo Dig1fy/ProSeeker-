@@ -1,6 +1,6 @@
-﻿namespace ProSeeker.Web.ViewModels.Pages
+﻿namespace ProSeeker.Web.ViewModels.Pagination
 {
-    using System;
+    using ProSeeker.Common;
 
     // XXXViewModel : XXXPagingViewModel : BasePagingViewModel
     public abstract class BasePagingViewModel
@@ -13,6 +13,6 @@
 
         public int NextPageNumber => this.PageNumber + 1;
 
-        public int ItemsPerPage { get; set; }
+        public int ItemsPerPage => GlobalConstants.ItemsPerPage;
     }
 }

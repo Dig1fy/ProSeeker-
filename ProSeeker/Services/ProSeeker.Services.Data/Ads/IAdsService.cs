@@ -14,7 +14,7 @@
         IEnumerable<T> GetMyAds<T>(string id);
 
         // IEnumerable<T> GetByCreatedOn<T>(int skip = 0);
-        IEnumerable<T> GetByCategory<T>(string categoryName, int skip = 0);
+        IEnumerable<T> GetByCategory<T>(string categoryName, int page);
 
         int AllAdsCount();
 

@@ -76,21 +76,17 @@
         }
 
         // [Authorize]
-        public IActionResult GetByCategory(string id, int page = 1)
+        public IActionResult GetByCategory(string categoryName, int page = 1)
         {
             // this id is actually the category name. We pass it as id because of the SelectListItems (Value, Name) in the view
-            if (page <= 0)
-            {
-                return this.NotFound();
-            }
+            page = page < 1 ? 1 : page;
 
-            var adsByCategory = this.adsService.GetByCategory<AdsShortDetailsViewModel>(id);
             var model = new GetAllViewModel
             {
-                Ads = adsByCategory,
+                CategoryName = categoryName,
                 PageNumber = page,
-                AdsCount = this.adsService.AllAdsByCategoryCount(id),
-                ItemsPerPage = GlobalConstants.ItemsPerPage,
+                AdsCount = this.adsService.AllAdsByCategoryCount(categoryName),
+                Ads = this.adsService.GetByCategory<AdsShortDetailsViewModel>(categoryName, page),
             };
 
             return this.View(model);
