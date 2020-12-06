@@ -18,6 +18,7 @@ namespace ProSeeker.Data.Models
             this.Opinions = new HashSet<Opinion>();
             this.Ads = new HashSet<Ad>();
             this.Offers = new HashSet<Offer>();
+            this.Inquiries = new HashSet<Inquiry>();
 
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
@@ -71,5 +72,7 @@ namespace ProSeeker.Data.Models
         public virtual ICollection<Ad> Ads { get; set; }
 
         public virtual ICollection<Offer> Offers { get; set; }
+
+        public virtual ICollection<Inquiry> Inquiries { get; set; }
     }
 }

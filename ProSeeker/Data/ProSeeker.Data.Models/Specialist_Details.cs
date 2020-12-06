@@ -15,6 +15,7 @@
             this.Services = new HashSet<Service>();
             this.Ratings = new HashSet<Rating>();
             this.Offers = new HashSet<Offer>();
+            this.Inquiries = new HashSet<Inquiry>();
 
             // this.Opinions = new HashSet<Opinion>();
             // this.Recommendations = new HashSet<Recommendation>();
@@ -47,6 +48,8 @@
         public virtual ICollection<Rating> Ratings { get; set; }
 
         public virtual ICollection<Offer> Offers { get; set; }
+
+        public virtual ICollection<Inquiry> Inquiries { get; set; }
 
         // public virtual ICollection<Opinion> Opinions { get; set; }
         // public virtual ICollection<Recommendation> Recommendations { get; set; }

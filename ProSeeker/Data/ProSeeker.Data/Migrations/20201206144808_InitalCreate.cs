@@ -356,6 +356,37 @@ namespace ProSeeker.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Inquiries",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    Content = table.Column<string>(nullable: true),
+                    ValidUntil = table.Column<DateTime>(nullable: false),
+                    SpecialistDetailsId = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Inquiries", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Inquiries_Specialist_Details_SpecialistDetailsId",
+                        column: x => x.SpecialistDetailsId,
+                        principalTable: "Specialist_Details",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Inquiries_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Offer",
                 columns: table => new
                 {
@@ -566,6 +597,21 @@ namespace ProSeeker.Data.Migrations
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Inquiries_IsDeleted",
+                table: "Inquiries",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Inquiries_SpecialistDetailsId",
+                table: "Inquiries",
+                column: "SpecialistDetailsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Inquiries_UserId",
+                table: "Inquiries",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_JobCategories_BaseJobCategoryId",
                 table: "JobCategories",
                 column: "BaseJobCategoryId");
@@ -679,6 +725,9 @@ namespace ProSeeker.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Inquiries");
 
             migrationBuilder.DropTable(
                 name: "Offer");

@@ -41,6 +41,8 @@
 
         public DbSet<Ad> Ads { get; set; }
 
+        public DbSet<Inquiry> Inquiries { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

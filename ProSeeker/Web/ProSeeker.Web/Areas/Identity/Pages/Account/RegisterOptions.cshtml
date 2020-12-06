@@ -3,39 +3,7 @@
     ViewData["Title"] = "Register";
 }
 
-<style>
 
-    .stars {
-        position: relative;
-        float: left;
-        font-size: 50pt;
-        height: 1em;
-        line-height: 1em;
-    }
-
-        .stars:before {
-            content: "\2606\2606\2606\2606\2606";
-            float: left;
-            z-index: 1;
-        }
-
-        .stars .percent {
-            position: absolute;
-            left: 0;
-            float: left;
-            overflow: hidden;
-            z-index: -1;
-        }
-
-            .stars .percent:after {
-                content: "\2605\2605\2605\2605\2605";
-                color: rgb(255, 200, 0);
-            }
-
-    li {
-        display: table;
-    }
-</style>
 
 <section class="nav-item">
     <a class="nav-link text-dark" asp-route-id="1" asp-area="Identity" asp-page="/Account/Register">SPECIALIST REGISTRATION</a>
@@ -45,14 +13,38 @@
     <a class="nav-link text-dark" asp-route-id="0" asp-area="Identity" asp-page="/Account/Register">USER REGISTRATION</a>
 </section>
 
-<div class="stars">
-    <div class="percent" style="width: 70%;">
 
-        <div style="padding-right:3px" class="star-fill" data-ratings="1"></div>
-        <div style="padding-right:3px" class="star-fill" data-ratings="2"></div>
-        <div style="padding-right:3px" class="star-fill" data-ratings="3"></div>
-        <div style="padding-right:3px" class="star-fill" data-ratings="4"></div>
-        <div style="padding-right:3px" class="star-fill" data-ratings="5"></div>
 
-    </div>
-</div>
+<style>
+    section {
+        display: none;
+    }
+
+        section:target {
+            display: block;
+        }
+</style>
+
+<nav>
+    <ul>
+        <li><a href="#a">A</a></li>
+        <li><a href="#b">B</a></li>
+        <li><a href="#c">C</a></li>
+    </ul>
+</nav>
+<section id="a">
+    <h1>
+        Section A
+    </h1>
+</section>
+<section id="b">
+    <h1>
+        Section B
+    </h1>
+</section>
+<section id="c">
+    <h1>
+        Section C
+    </h1>
+</section>
+

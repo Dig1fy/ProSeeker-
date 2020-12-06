@@ -10,7 +10,7 @@ using ProSeeker.Data;
 namespace ProSeeker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201204182420_InitalCreate")]
+    [Migration("20201206144808_InitalCreate")]
     partial class InitalCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -378,6 +378,46 @@ namespace ProSeeker.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Cities");
+                });
+
+            modelBuilder.Entity("ProSeeker.Data.Models.Inquiry", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SpecialistDetailsId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("ValidUntil")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("SpecialistDetailsId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Inquiries");
                 });
 
             modelBuilder.Entity("ProSeeker.Data.Models.JobCategory", b =>
@@ -774,6 +814,17 @@ namespace ProSeeker.Data.Migrations
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ProSeeker.Data.Models.Inquiry", b =>
+                {
+                    b.HasOne("ProSeeker.Data.Models.Specialist_Details", "SpecialistDetails")
+                        .WithMany("Inquiries")
+                        .HasForeignKey("SpecialistDetailsId");
+
+                    b.HasOne("ProSeeker.Data.Models.ApplicationUser", "User")
+                        .WithMany("Inquiries")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("ProSeeker.Data.Models.JobCategory", b =>

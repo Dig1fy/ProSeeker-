@@ -37,7 +37,6 @@
             return;
         }
        
-        <div id="averageRatingsCount" style="display:none;">@Model.SpecialistDetails.AverageRating</div>
         <div class="all-opinions-container">
             
             @foreach (var opinion in opinions)
@@ -288,7 +287,6 @@
         document.addEventListener('DOMContentLoaded', function () {
             var num = document.querySelector('#averageRatingValue').textContent;
             let rounded = Math.round(Number(num));
-            //debugger;
            
             for (var i = 0; i < rounded; i++) {
                 $("div[data-ratings]")[i].classList.add("checked");
