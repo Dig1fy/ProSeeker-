@@ -61,6 +61,7 @@
 
             var userId = this.userManager.GetUserId(this.User);
             await this.opinionsService.CreateSpecOpinion(inputModel.SpecialistId, userId, inputModel.Content, parentId);
+            this.TempData["updatedProfile"] = "updated";
             return this.RedirectToAction("GetProfile", "SpecialistsDetails", new { Id = inputModel.SpecialistId });
         }
     }

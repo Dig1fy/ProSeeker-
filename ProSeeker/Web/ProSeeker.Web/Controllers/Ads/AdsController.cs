@@ -144,7 +144,8 @@
 
             await this.adsService.UpdateAdAsync(inputModel);
 
-            this.TempData["Message"] = "Успешно коригирахте своята обява!";
+            // TODO Find a way to show this meesage only after the ad's been adjusted
+            //this.TempData["Message"] = "Успешно коригирахте своята обява!";
             return this.RedirectToAction(nameof(this.MyAds));
         }
 

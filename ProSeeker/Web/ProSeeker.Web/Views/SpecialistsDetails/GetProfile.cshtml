@@ -13,6 +13,12 @@
     <link href="~/css/MyCustomCss/Profile/user-common.css" rel="stylesheet" />
 }
 
+<style>
+    .checked {
+        color: orange;
+    }
+</style>
+
 @*=====================================
       View function for the recursion
     ==================================*@
@@ -30,9 +36,10 @@
         {
             return;
         }
-
+       
+        <div id="averageRatingsCount" style="display:none;">@Model.SpecialistDetails.AverageRating</div>
         <div class="all-opinions-container">
-
+            
             @foreach (var opinion in opinions)
             {
                 <div class="row justify-content-center  mb-3">
@@ -89,6 +96,7 @@
                 <h6>
                     @Model.SpecialistDetails.JobCategory.Name - гр. @Model.City.Name
                 </h6>
+
 
                 <div>
                     <div class="item-rating d-inline-flex" id="ratingContainer" style="padding-bottom:10px">
@@ -240,9 +248,9 @@
 
 @section Scripts
 {
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script>
+    <script asp-append-version="true" src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script asp-append-version="true" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script asp-append-version="true">
         $("div[data-ratings]").each(function () {
 
         $(this).click(function () {
@@ -259,12 +267,33 @@
                 },
                 success: function (data) {
                     $('#averageRatingValue').html(data.averageRatings.toFixed(1));
-                    $('#ratingsCount').html(data.ratingsCount)
+                    $('#ratingsCount').html(data.ratingsCount);
+                    FillStars(data.averageRatings)
                 },
                 contentType: 'application/json',
             });
         })
-    });
+        });
+
+        function FillStars(averageRatings) {
+            let rounded = Math.round(Number(averageRatings));
+            for (var i = 0; i < 5; i++) {
+                $("div[data-ratings]")[i].classList.remove("checked");
+            }
+            for (var i = 0; i < rounded; i++) {
+                $("div[data-ratings]")[i].classList.add("checked");
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var num = document.querySelector('#averageRatingValue').textContent;
+            let rounded = Math.round(Number(num));
+            //debugger;
+           
+            for (var i = 0; i < rounded; i++) {
+                $("div[data-ratings]")[i].classList.add("checked");
+            }
+        }, false);
     </script>
 
     <script asp-append-version="true">
