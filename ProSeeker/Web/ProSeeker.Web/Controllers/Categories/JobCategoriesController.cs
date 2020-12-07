@@ -1,10 +1,11 @@
 ﻿namespace ProSeeker.Web.Controllers.Category
 {
+    using System.Linq;
+
     using Microsoft.AspNetCore.Mvc;
     using ProSeeker.Services.Data.CategoriesService;
     using ProSeeker.Services.Data.Specialists;
     using ProSeeker.Web.ViewModels.Categories;
-    using System.Linq;
 
     public class JobCategoriesController : BaseController
     {
