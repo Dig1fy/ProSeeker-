@@ -126,3 +126,13 @@
     cursor: pointer;
     text-decoration: none;
 }
+
+/* ============================
+               TEXT
+   ============================ */
+.custom-golden-text {
+    color: rgb(110, 97, 97);
+    text-shadow: 1.1px 1.4px 1.4px rgb(4, 44, 17);
+    font-size: 25px;
+    text-align: center;
+}

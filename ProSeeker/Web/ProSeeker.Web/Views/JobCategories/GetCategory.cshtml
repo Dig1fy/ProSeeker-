@@ -8,7 +8,7 @@
 </style>
 
     <div class="custom-heading-title">
-        <h3 style="text-shadow: 1px 1px 1px rgba(31, 247, 241, 0.55);" class="text-center mb-4">Добре дошли в категория '@Model.Name'!</h3>
+        <h3  class="text-center mb-4 custom-golden-text">Добре дошли в категория '@Model.Name'!</h3>
         <div class="text-center" style="font-style:oblique; text-shadow: 1px 1px 1px rgba(20, 137, 248, 0.55);">
             <h4 style="text-shadow: 1px 1px 1px rgba(11, 86, 84, 0.25);">"@Model.Description"</h4> <hr />
         </div>
@@ -17,7 +17,7 @@
     @if (!Model.SpecialistsDetails.Any())
     {
 
-        <h2 class="text-center" style="font-style:oblique; font-family:'Ink Free'; text-shadow: 1px 1px 1px rgba(11, 86, 84, 0.55);">Все още няма регистрирани специалисти в тази категория.</h2>
+        <h2 class="custom-golden-text" style="font-style:oblique; font-family:'Ink Free';">Все още няма регистрирани специалисти в тази категория.</h2>
     }
     else
     {

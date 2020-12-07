@@ -24,7 +24,7 @@
             answerB: "Реклама в друг сайт",
             answerC: "Случайност",
             answerD: "Реклама по телевизията",
-            imgSrc: "../images/quiz/1",
+            imgSrc: "../images/quiz/1.png",
         },
         {
             question: "What is your ideal work environment?",
@@ -32,7 +32,7 @@
             answerB: "Somewhere I feel appreciated for my work",
             answerC: "Surrounded by cool gadgets and toys",
             answerD: "Inside a cozy room or garage at home",
-            imgSrc: "../images/quiz/2"
+            imgSrc: "../images/quiz/2.png"
         },
         {
             question: "Who are your role models?",
@@ -40,7 +40,7 @@
             answerB: "People who make sacrifices to help others",
             answerC: "Creative, artistic, and expressive people",
             answerD: "People who build innovative products",
-            imgSrc: "../images/quiz/3"
+            imgSrc: "../images/quiz/3.png"
         },
         {
             question: "What do you do when you encounter a difficult problem?",

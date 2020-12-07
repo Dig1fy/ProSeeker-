@@ -6,8 +6,10 @@
 #quiz-container {
     margin: 10px auto;
     background-color: white;
-    height: 600px;
-    width: 900px;
+    /*height: 600px;*/
+    /*width: 900px;*/
+    width:65rem;
+    height:45rem;
     border-radius: 5px;
     box-shadow: 10px 15px 15px 0px;
     position: relative;
