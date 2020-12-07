@@ -12,13 +12,6 @@
     <link href="~/css/MyCustomCss/Profile/userProfile.css" rel="stylesheet" />
     <link href="~/css/MyCustomCss/Profile/user-common.css" rel="stylesheet" />
 }
-
-<style>
-    .checked {
-        color: orange;
-    }
-</style>
-
 @*=====================================
       View function for the recursion
     ==================================*@
@@ -28,7 +21,7 @@
         @*=================
                All opinions
             ==================*@
-        var opinions = Model.Opinions
+        var opinions = Model.SpecialistDetails.Opinions
     .Where(o => o.AdId == null)
     .Where(x => x.ParentOpinionId == parentOpinionId).ToList();
 

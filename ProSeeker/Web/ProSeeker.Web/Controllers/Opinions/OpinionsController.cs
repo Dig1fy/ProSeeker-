@@ -1,11 +1,12 @@
 ﻿namespace ProSeeker.Web.Controllers.Opinions
 {
+    using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Data.Opinions;
     using ProSeeker.Web.ViewModels.Opinions;
-    using System.Threading.Tasks;
 
     public class OpinionsController : BaseController
     {

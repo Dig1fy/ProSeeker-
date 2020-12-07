@@ -38,7 +38,7 @@
             var user =
                 this.usersRepository
                     .All()
-                    .Where(x => x.SpecialistDetails.Id == id)
+                    .Where(x => x.SpecialistDetailsId == id)
                     .To<T>()
                     .FirstOrDefault();
 

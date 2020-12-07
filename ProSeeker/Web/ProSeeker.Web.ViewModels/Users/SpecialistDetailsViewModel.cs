@@ -7,6 +7,8 @@
     using Ganss.XSS;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;
+    using ProSeeker.Web.ViewModels.Categories;
+    using ProSeeker.Web.ViewModels.Opinions;
     using ProSeeker.Web.ViewModels.Services;
 
     public class SpecialistDetailsViewModel : IMapFrom<Specialist_Details>, IHaveCustomMappings
@@ -35,7 +37,9 @@
 
         public ICollection<ServiceViewModel> Services { get; set; }
 
-        public virtual JobCategory JobCategory { get; set; }
+        public virtual ICollection<OpinionViewModel> Opinions { get; set; }
+
+        public virtual CategorySimpleViewModel JobCategory { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {

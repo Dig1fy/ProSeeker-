@@ -5,6 +5,7 @@
 
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;
+    using ProSeeker.Web.ViewModels.Cities;
     using ProSeeker.Web.ViewModels.Opinions;
     using ProSeeker.Web.ViewModels.Users.Specialists;
 
@@ -18,7 +19,7 @@
 
         public string FullName => $"{this.FirstName} {this.LastName}";
 
-        public City City { get; set; }
+        public CitySimpleViewModel City { get; set; }
 
         public string ProfilePicture { get; set; }
 

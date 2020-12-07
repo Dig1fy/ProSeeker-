@@ -5,7 +5,6 @@
     using Ganss.XSS;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;
-    using ProSeeker.Web.ViewModels.Users;
 
     public class OpinionViewModel : IMapFrom<Opinion>
     {
