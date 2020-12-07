@@ -140,7 +140,13 @@
                 </div>
             }
             <div>
-                <a type="button" href="#" class="float-right" onclick="showOpinionsSection(0)"><i class="fa fa-comment-dots"></i>&nbsp; (@Model.Opinions.Count()) Мнения</a>
+                <a type="button" href="#" style="text-decoration:none;" class="float-right" onclick="showOpinionsSection(0)">
+                    <i class="fa fa-comment-dots"></i>&nbsp; (@Model.Opinions.Count())
+                    @if (@Model.Opinions.Count() == 1)
+                    {<p class="d-inline">Мнение</p>}
+                    else
+                    { <p class="d-inline">Мнения</p>}
+                </a>
                 <div class="clearfix"></div>
             </div>
         </div>

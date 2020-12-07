@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+
     using AutoMapper;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;

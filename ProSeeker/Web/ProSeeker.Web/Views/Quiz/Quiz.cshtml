@@ -1,0 +1,37 @@
+﻿<div id="quiz-container">
+    <div class="exit-quiz-wrapper">
+        <a class="exit-quiz-btn">X</a>
+    </div>
+    <p class='quiz-intro'>Lets see what kind of computer scientist are you?</p>
+    <p class="start-quiz"> The quiz will begin in <br><br><span id="countdowntimer">5 </span></p>
+
+    {{!-- time loader --}}
+    <div class="progress-load-wrapper">
+        <div class="progress-load"></div>
+    </div>
+
+    <div id="quiz-content" style="display: none">
+        <div id="quiz-question"></div>
+        <div id="quiz-qImg"></div>
+        <div id="quiz-choice-container">
+
+            <strong class="choices-letter">a)<label class="choices" id="quiz-answer-A"></label></strong>
+            <br>
+            <strong class="choices-letter">b)<label class="choices" id="quiz-answer-B"></label></strong>
+            <br>
+            <strong class="choices-letter">c)<label class="choices" id="quiz-answer-C"></label></strong>
+            <br>
+            <strong class="choices-letter">d)<label class="choices" id="quiz-answer-D"></label></strong>
+            <br>
+        </div>
+
+        <div id="quiz-timer">
+            <div id="quiz-counter"></div>
+        </div>
+        <div id="quiz-progress"></div>
+
+    </div>
+    <div class="backward-btn-wrapper" style="display: none">
+        <a class="fa fa-backward" id="quiz-backward-btn"></a>
+    </div>
+</div>

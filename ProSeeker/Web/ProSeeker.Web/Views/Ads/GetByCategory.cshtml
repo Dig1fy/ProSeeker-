@@ -12,20 +12,20 @@ else
             <h3 class="card-header">
                 @ad.ShortTitle
             </h3>
-            <div style="padding:8px 8px 8px 8px;">
-                <span class="card-text d-block">
+            <div class="pl-2">
+                <span class="card-text d-block pt-2">
                     <span>@Html.Raw(@ad.SanitizedShortDescription)<br></span>
 
                 </span>
-                <div class="row" style="margin-top:-20px;">
+                <div class="row">
                     <div class="col-lg-4 item">
-                        <b class="d-block mb-5"><i class="fas fa-city"> гр.</i> @ad.City.Name</b>
+                        <b class="d-block "><i class="fas fa-city"> гр.</i> @ad.City.Name</b>
                     </div>
-                    <div class="col-lg-4 item">
-                        <i class="far fa-calendar-alt d-inline"></i> От: <time class="d-block mb-5 d-inline" datetime="@ad.CreatedOn.ToString("O")"> </time>
+                    <div class="col-lg-4 item d-flex">
+                        <i style="margin-top:4px;" class="far fa-calendar-alt d-inline pr-1"></i> <p class="d-inline pr-1">От: </p><time class="d-block d-inline" datetime="@ad.CreatedOn.ToString("O")"> </time>
                     </div>
-                    <div class="col-lg-4 item">
-                        <b class="d-block mb-5"><i class="fas fa-hand-holding-usd"> Предвиден бюджет:</i> @ad.PreparedBudget</b>
+                    <div class="col-lg-4 item mb-2">
+                        <b class="d-block "><i class="fas fa-hand-holding-usd"> Предвиден бюджет:</i> @ad.PreparedBudget</b>
                     </div>
                 </div>
 
@@ -33,18 +33,35 @@ else
                     {
 
                     }*@
-                <div class="button-container">
-                    <div style="margin-bottom:1px;">
-                        <form method="post">
-                            <button type="submit" class="custom-submit-button" style="width:145px; margin-bottom:7px;" asp-route-id="@ad.Id" asp-controller="Ads" asp-action="GetById">Детайли</button>
-                        </form>
+                <div class="clearfix">
+                    <div class="button-container float-left">
+                        <div style="margin-bottom:1px;">
+                            <form method="post">
+                                <button type="submit" class="custom-submit-button" style="width:145px; margin-bottom:7px;" asp-route-id="@ad.Id" asp-controller="Ads" asp-action="GetById">Детайли</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="text-muted d-flex float-right mr-2">
+                        <div class="mr-3">
+                            <i class="fa fa-comment-dots"></i>&nbsp; (@ad.OpinionsCount) @if (@ad.OpinionsCount == 1)
+                            {<p class="d-inline">Мнение</p>}
+                            else
+                            { <p class="d-inline">Мнения</p>}
+                        </div>
+                        <div class="mr-1">
+                            <i class="fa fa-thumbs-up d-inline"></i>
+                            <div class="text-muted d-inline" id="upVotesCount">@ad.UpVotesCount</div>
+                            <div class="d-inline"> / </div>
+                        </div>
+                        <div class="ml-1">
+                            <i class="fa fa-thumbs-down d-inline"></i>
+                            <div class="d-inline" id="downVotesCount">@ad.DownVotesCount</div>
+
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-        <div>@ad.OpinionsCount Мнения</div>
-        <div>@ad.UpVotesCount Likes</div>
-        <div>@ad.DownVotesCount Dislikes</div>
     }
 
     <partial name="_AdsPerCategoryPagingPartial" model="@Model" />
