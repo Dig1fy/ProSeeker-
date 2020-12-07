@@ -10,6 +10,7 @@
     using Microsoft.EntityFrameworkCore;
     using ProSeeker.Data.Common.Models;
     using ProSeeker.Data.Models;
+    using ProSeeker.Data.Models.Quiz;
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
@@ -42,6 +43,15 @@
         public DbSet<Ad> Ads { get; set; }
 
         public DbSet<Inquiry> Inquiries { get; set; }
+
+        // Quizz
+        public DbSet<Quiz> Quizzes { get; set; }
+
+        public DbSet<Question> Questions { get; set; }
+
+        public DbSet<Answer> Answers { get; set; }
+
+        public DbSet<UserQuiz> UsersQuizes { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
@@ -94,6 +104,8 @@
                 .HasOne(user => user.SpecialistDetails)
                 .WithOne(sd => sd.User)
                 .HasForeignKey<Specialist_Details>(fk => fk.UserId);
+
+            builder.Entity<UserQuiz>().HasKey(x => new { x.UserId, x.QuizId });
 
             // builder.Entity<Vote>().HasKey(x => new { x.UserId, x.OpinionId });
         }
