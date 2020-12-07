@@ -76,26 +76,6 @@
         text-decoration: none;
     }
 
-
-/*Transform*/
-#custom-shadow-transform {
-    transition: ease-in-out 0.4s;
-    border: none;
-    box-shadow: inset 0px 1px 0px -5px rgba(50, 65, 49, 0.2), 0px 1px 11px 1px rgb(69, 71, 87);
-    background-color: rgba(0, 255, 255, 0.05);
-}
-
-    #custom-shadow-transform:hover {
-        background-color: rgb(255, 255, 255);
-        /* transition      : ease 0.5s; */
-        box-shadow: inset 10px 10px 21px -5px rgba(50, 65, 49, 0.2), 19px 15px 11px 1px rgb(69, 71, 87);
-        transform: scale(1.02);
-        transition: ease-in-out 0.4s;
-        z-index: 1;
-        background-color: rgba(0, 255, 255, 0.05);
-    }
-
-
 .dropdown-item:hover{
     cursor:pointer;
 }
@@ -139,7 +119,34 @@
     text-align: center;
 }
 
+.custom-input-text {
+    text-shadow: 1px 1px 1px rgba(4, 39, 62, 0.50);
+    font-size:16px;
+}
+
 .custom-heading-title {
     background: -webkit-linear-gradient(bottom, rgba(24, 174, 241, 0.45), rgba(91, 135, 239, 0.23), rgba(24, 174, 241, 0.45));
     text-align:center;
+}
+
+/*Transform*/
+#custom-shadow-transform {
+    transition: ease-in-out 0.4s;
+    border: none;
+    box-shadow: inset 0px 1px 0px -5px rgba(50, 65, 49, 0.2), 0px 1px 11px 1px rgb(69, 71, 87);
+    background-color: rgba(0, 255, 255, 0.01);
+}
+
+    #custom-shadow-transform:hover {
+        background-color: rgb(255, 255, 255);
+        /* transition      : ease 0.5s; */
+        box-shadow: inset 10px 10px 21px -5px rgba(50, 65, 49, 0.2), 19px 15px 11px 1px rgb(69, 71, 87);
+        transform: scale(1.02);
+        transition: ease-in-out 0.4s;
+        z-index: 1;
+        background-color: rgba(0, 255, 255, 0.05);
+    }
+
+.checked {
+    color: orange;
 }
