@@ -36,9 +36,9 @@
         {
             return;
         }
-       
+
         <div class="all-opinions-container">
-            
+
             @foreach (var opinion in opinions)
             {
                 <div class="row justify-content-center  mb-3">
@@ -142,7 +142,9 @@
                                        WORK INVITATION
             ====================================================================*@
         <div class="col-md-2">
-            <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Покани за съвместна работа" />
+            <form>
+                <button type="submit" asp-controller="Inquiries" asp-action="Create" name="specialistId" value ="@Model.SpecialistDetails.Id">Направи запитване</button>
+            </form>
         </div>
     </div>
     <div class="row">
@@ -287,7 +289,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             var num = document.querySelector('#averageRatingValue').textContent;
             let rounded = Math.round(Number(num));
-           
+
             for (var i = 0; i < rounded; i++) {
                 $("div[data-ratings]")[i].classList.add("checked");
             }

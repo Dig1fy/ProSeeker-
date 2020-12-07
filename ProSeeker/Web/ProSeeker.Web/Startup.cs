@@ -23,6 +23,7 @@
     using ProSeeker.Services.Data.Cities;
     using ProSeeker.Services.Data.Cloud;
     using ProSeeker.Services.Data.Home;
+    using ProSeeker.Services.Data.Inquiries;
     using ProSeeker.Services.Data.Offers;
     using ProSeeker.Services.Data.Opinions;
     using ProSeeker.Services.Data.Raitings;
@@ -119,6 +120,7 @@
             services.AddTransient<IOffersService, OffersService>();
             services.AddTransient<IOpinionsService, OpinionsService>();
             services.AddTransient<IVotesService, VotesService>();
+            services.AddTransient<IInquiriesService, InquiriesService>();
 
             // services.AddTransient<IApplicationUsersController, ApplicationUsersController>();
         }

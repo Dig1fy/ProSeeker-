@@ -1,1 +1,84 @@
-﻿
+﻿@model ProSeeker.Web.ViewModels.Inquiries.InquiryInputModel
+
+<style>
+    .inquiry-notes {
+        font-family: 'Matura MT Script Capitals';
+        font-style: italic;
+        color: forestgreen;
+        font-size: 19px;
+    }
+</style>
+<div class="hero-wrap hero-wrap-2" style="background-image: url('https://thumbs.dreamstime.com/z/author-office-writer-concept-desk-background-top-view-mock-up-professional-white-work-89923761.jpg');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+
+</div>
+<div class="text-center">
+
+    <h1>Запитване към специалист</h1>
+</div>
+<section class="ftco-section bg-light">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12 col-lg-12 mb-5">
+                <form method="post" class="p-5 bg-transparent">
+                    <article class="inquiry-notes">
+                        Направете подробно и изчерпателно описание на запитването, за да получите възможно най-добрата и адекватна оферта от специалиста:
+                        - работа, която трябва да бъде свършена;
+                        - допълнителни услуги;
+                        - очаквани срокове за стартиране и завършване на работата;
+                        - др.
+
+                    </article>
+                    <div class="row form-group">
+                        <div class="col-md-12 mb-3 mb-md-0">
+                            <div class="form-group ">
+                                <h4>
+                                    <label asp-for="@Model.Content"></label>
+                                </h4>
+                                <textarea asp-for="@Model.Content" class="form-control tinymce-textarea"></textarea>
+                                <input hidden asp-for="@Model.SpecialistDetailsId" />
+                                <span asp-validation-for="@Model.Content" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row form-group mb-4">
+                        <div class="col-md-12 mb-3 mb-md-0">
+                            <h4>
+                                <label asp-for="@Model.ValidUntil"></label>
+                            </h4>
+                            <input value="@DateTime.UtcNow" asp-for="@Model.ValidUntil" class="form-control text" />
+                            <span asp-validation-for="@Model.ValidUntil" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3 mb-md-0">
+                        <h4>
+                            <label>Град</label>
+                        </h4>
+                        <select asp-for="@Model.CityId" class="form-control" asp-items="@Model.Cities.Select(x=>new SelectListItem { Text = x.Name, Value = x.Id.ToString()})">
+                            <option disabled selected> - Select city - </option>
+                        </select>
+                        <span asp-validation-for="@Model.CityId" class="text-danger"></span>
+                    </div>
+
+                    <hr />
+
+                    <div class="row ">
+                        <div class="col-md-6 custom-submit-button-wrapper">
+                            <button asp-controller="Inquiries" asp-action="Create" class="col-md-12 custom-submit-button">Изпрати</button>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script src="/lib/tinymce/tinymce.min.js" type="text/javascript"></script>
+    <script src="~/js/TinyMCE/TinyMce.js" type="text/javascript"></script>
+}

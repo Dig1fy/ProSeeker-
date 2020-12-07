@@ -20,6 +20,7 @@
         {
             var cities = this.citiesRepository
                 .AllAsNoTracking()
+                .OrderBy(c => c.Name)
                 .To<T>()
                 .ToList();
 

@@ -39,11 +39,11 @@
             var allCities = this.citiesService.GetAllCities<CitySimpleViewModel>();
             var allcategories = this.categoriesService.GetAllCategories<CategorySimpleViewModel>();
 
-            var createModel = new
-                CreateAdInputModel();
-
-            createModel.Categories = allcategories;
-            createModel.Cities = allCities.OrderBy(x => x.Name);
+            var createModel = new CreateAdInputModel
+            {
+                Categories = allcategories,
+                Cities = allCities,
+            };
 
             return this.View(createModel);
         }
@@ -54,13 +54,11 @@
         {
             if (!this.ModelState.IsValid)
             {
-                var allCities = this.citiesService.GetAllCities<CitySimpleViewModel>();
-                var allcategories = this.categoriesService.GetAllCategories<CategorySimpleViewModel>();
-
-                var createModel = new CreateAdInputModel();
-
-                createModel.Categories = allcategories;
-                createModel.Cities = allCities.OrderBy(x => x.Name);
+                var createModel = new CreateAdInputModel
+                {
+                    Categories = this.categoriesService.GetAllCategories<CategorySimpleViewModel>(),
+                    Cities = this.citiesService.GetAllCities<CitySimpleViewModel>(),
+                };
 
                 return this.View(createModel);
             }
@@ -68,8 +66,8 @@
             var user = await this.userManager.GetUserAsync(this.User);
             var newAdId = await this.adsService.CreateAsync(input, user.Id);
 
-            this.TempData["Message"] = "Успешно създадохте нова обява!"; //ТОДО - CHANGE REDIRECT
-            return this.Redirect("/");
+            this.TempData["Message"] = "Успешно създадохте нова обява!";
+            return this.RedirectToAction(nameof(this.MyAds));
 
             // return this.RedirectToAction("GetDetails", new { id = id });
             // TODO: USE SANITIZER WHEN SHOWING AD DETAILS !!!!
