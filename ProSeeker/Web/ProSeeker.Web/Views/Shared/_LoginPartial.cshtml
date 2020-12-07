@@ -18,7 +18,7 @@
         <li class="btn-group">
             <i id="fas-pic" class="fas fa-chevron-circle-down" style="padding-right: 10px; font-size:17px; margin:auto 0; color: cornflowerblue;" data-toggle="dropdown">
             </i>
-            <div class="dropdown-menu custom-dropdown-content containerz" style="margin-top:-8px;">
+            <div class="dropdown-menu custom-dropdown-content" style="margin-top:-8px;">
                 <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Акаунт</a>
                 <a class="dropdown-item" asp-area="" asp-controller="Ads" asp-action="MyAds">Моите обяви</a>
                 <a class="dropdown-item" asp-area="" asp-controller="Ads" asp-action="GetMyAds">нищо няма тук</a>
@@ -29,6 +29,15 @@
             </div>
         </li>
 
+        
+        <li class="nav-item dropdown collapse navbar-collapse">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Messages</a>
+            <div class="dropdown-menu">
+                <a href="#" class="dropdown-item">Inbox</a>
+                <a href="#" class="dropdown-item">Sent</a>
+                <a href="#" class="dropdown-item">Drafts</a>
+            </div>
+        </li>
         if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
         {
             <li class="nav-item">

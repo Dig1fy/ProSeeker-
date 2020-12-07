@@ -2,7 +2,7 @@
 
 @foreach (var baseCategory in Model.BaseCategories)
 {
-<div style="width:17rem;">
+<div style="width:15rem;">
     <div class="dropdown-header"><strong style="font-size:18px; color:cornflowerblue">@baseCategory.CategoryName</strong></div>
 
     @foreach (var category in baseCategory.JobCategories.OrderBy(x=>x.Name))

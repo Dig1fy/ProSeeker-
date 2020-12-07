@@ -54,7 +54,7 @@
                     },
                     new JobCategory
                     {
-                        Name = "Консултант-недвижими имоти",
+                        Name = "Консултант /брокер/",
                         Description = "Понякога са нужни...",
                         PictureUrl = string.Format(homeTemplate, "брокер"),
                     },

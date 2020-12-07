@@ -12,6 +12,9 @@
 
         public const string DefaultProfileImagePath = "/images/ProfileImage/defaultUser.png";
 
+        // Paging
         public const int ItemsPerPage = 2;
+
+        public const int SpecialistsPerPage = 3;
     }
 }

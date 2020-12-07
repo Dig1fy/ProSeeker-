@@ -4,8 +4,9 @@
 
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;
+    using ProSeeker.Web.ViewModels.Pagination;
 
-    public class CategoriesViewModel : IMapFrom<JobCategory>
+    public class CategoriesViewModel : SpecialistsPagingViewModel, IMapFrom<JobCategory>
     {
         public int Id { get; set; }
 
