@@ -102,7 +102,7 @@
     color: rgb(110, 97, 97);
     text-shadow: 1.1px 2px 2px rgb(4, 44, 17);
     display: inline-block;
-    width: 500px;
+    width: 550px;
     text-align: left;
     border: 1px solid rgb(255, 254, 254);
     border-radius: 25px;
@@ -118,7 +118,7 @@
     }
 
 #quiz-choice-container {
-    width: 480px;
+    width: 580px;
     position: absolute;
     right: 25px;
     top: 125px;
@@ -127,7 +127,7 @@
 
 .choices {
     color: rgb(196, 180, 157);
-    text-shadow: 1.1px 2px 2px rgb(4, 44, 17);
+    text-shadow: 1.1px 1px 1px rgb(4, 44, 17);
     padding: 0px;
     font-size: 23px;
     cursor: pointer;
@@ -192,8 +192,8 @@
 .backward-btn-wrapper {
     position: absolute;
     width: 30px;
-    bottom: 80px;
-    left: 400px;
+    bottom: 230px;
+    left: 450px;
     margin: auto;
 }
 

@@ -22,34 +22,33 @@
             question: "Как разбрахте са нашата платформа?",
             answerA: "От приятел",
             answerB: "Реклама в друг сайт",
-            answerC: "Случайност",
+            answerC: "Случайно, докато си сърфирах в мрежата",
             answerD: "Реклама по телевизията",
             imgSrc: "../images/quiz/1.png",
         },
         {
-            question: "What is your ideal work environment?",
-            answerA: "Inside a high tech lab with lots of fancy equipment",
-            answerB: "Somewhere I feel appreciated for my work",
-            answerC: "Surrounded by cool gadgets and toys",
-            answerD: "Inside a cozy room or garage at home",
+            question: "Какво в нашата платформа не Ви допада?",
+            answerA: "Менюто е доста объркващо",
+            answerB: "Цветовете не са взаимно съвместими",
+            answerC: "Не разбирам, как точно работи",
+            answerD: "Всичко е добре направено и ми допада",
             imgSrc: "../images/quiz/2.png"
         },
         {
-            question: "Who are your role models?",
-            answerA: "People who make great discoveries",
-            answerB: "People who make sacrifices to help others",
-            answerC: "Creative, artistic, and expressive people",
-            answerD: "People who build innovative products",
+            question: "Каква функционалност бихте искали да добавим?",
+            answerA: "Възможност за качване на постове ",
+            answerB: "По-детайлен профил на потребителите",
+            answerC: "Повече категории / видове специалисти",
+            answerD: "Не мога да преценя",
             imgSrc: "../images/quiz/3.png"
         },
         {
-            question: "What do you do when you encounter a difficult problem?",
-            answerA: "Try to find the solution yourself (online, in a book, etc.)",
-            answerB: "Ask someone for help",
-            answerC: "Take a break, because it helps you be more creative",
-            answerD: "Jump in and try different solutions until one works",
+            question: "Как бихте оценили нашата платформа?",
+            answerA: "Ужасна",
+            answerB: "Нищо особено",
+            answerC: "Добра",
+            answerD: "Страхотна",
             imgSrc: "../images/quiz/4.png"
-
         }
     ]
 
@@ -83,7 +82,7 @@
 
         if (runningQuestion <= lastQuestion) {
             let currentQuestion = questions[runningQuestion]
-            html.question.innerHTML = `<p> ${currentQuestion.question} </p>`;
+            html.question.innerHTML = `<p class="text-center"> ${currentQuestion.question} </p>`;
             html.qImg.innerHTML = `<img src="${currentQuestion.imgSrc}">`;
             html.choiceA.textContent = currentQuestion.answerA;
             html.choiceB.textContent = currentQuestion.answerB;
@@ -92,7 +91,7 @@
 
         } else { //showing the backward btn and hides the quizz after the last question
             html.backBtn.style.display = "none";
-            html.quiz.innerHTML = `<h1 class="end-quiz"> Thank you for participating! </h1>`;
+            html.quiz.innerHTML = `<h1 class="end-quiz"> Благодарим Ви за отделеното време! </h1>`;
             setTimeout(redirect, 2000)
         }
     }
