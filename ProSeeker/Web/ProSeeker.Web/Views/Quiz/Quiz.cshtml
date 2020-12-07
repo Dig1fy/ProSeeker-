@@ -1,11 +1,16 @@
-﻿<div id="quiz-container">
+﻿
+   <link href="~/css/MyCustomCss/Quiz/quiz.css" rel="stylesheet" asp-append-version="true" />
+   
+
+
+<div id="quiz-container">
     <div class="exit-quiz-wrapper">
         <a class="exit-quiz-btn">X</a>
     </div>
     <p class='quiz-intro'>Lets see what kind of computer scientist are you?</p>
     <p class="start-quiz"> The quiz will begin in <br><br><span id="countdowntimer">5 </span></p>
 
-    {{!-- time loader --}}
+     @*Loading timer*@
     <div class="progress-load-wrapper">
         <div class="progress-load"></div>
     </div>
@@ -35,3 +40,6 @@
         <a class="fa fa-backward" id="quiz-backward-btn"></a>
     </div>
 </div>
+
+
+<script asp-append-version="true" src="~/js/Quiz/quiz.js"></script>
