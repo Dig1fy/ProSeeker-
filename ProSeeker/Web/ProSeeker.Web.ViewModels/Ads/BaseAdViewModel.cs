@@ -49,6 +49,18 @@
                    options.MapFrom(p => p.Votes.Where(x => x.VoteType == VoteType.DownVote)
                .Select(x => x.VoteType).Count());
                });
+
+            configuration.CreateMap<Ad, AdsShortDetailsViewModel>()
+              .ForMember(x => x.UpVotesCount, options =>
+              {
+                  options.MapFrom(p => p.Votes.Where(x => x.VoteType == VoteType.UpVote)
+              .Select(x => x.VoteType).Count());
+              })
+              .ForMember(x => x.DownVotesCount, options =>
+              {
+                  options.MapFrom(p => p.Votes.Where(x => x.VoteType == VoteType.DownVote)
+              .Select(x => x.VoteType).Count());
+              });
         }
     }
 }

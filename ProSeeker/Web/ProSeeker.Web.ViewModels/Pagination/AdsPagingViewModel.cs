@@ -9,6 +9,8 @@
     // XXXViewModel : AdsPagingViewModel : BasePagingViewModel
     public class AdsPagingViewModel : BasePagingViewModel, IMapFrom<Ad>
     {
+        public int OpinionsCount { get; set; }
+
         public string CategoryName { get; set; }
 
         public int AdsCount { get; set; }

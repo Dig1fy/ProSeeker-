@@ -28,6 +28,7 @@ else
                         <b class="d-block mb-5"><i class="fas fa-hand-holding-usd"> Предвиден бюджет:</i> @ad.PreparedBudget</b>
                     </div>
                 </div>
+
                 @*@if (this.User.IsInRole("Specialist")) - Add this when the logic has been tested
                     {
 
@@ -41,6 +42,9 @@ else
                 </div>
             </div>
         </section>
+        <div>@ad.OpinionsCount Мнения</div>
+        <div>@ad.UpVotesCount Likes</div>
+        <div>@ad.DownVotesCount Dislikes</div>
     }
 
     <partial name="_AdsPerCategoryPagingPartial" model="@Model" />
