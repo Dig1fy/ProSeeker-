@@ -52,7 +52,7 @@
                                 <label>Град</label>
                             </h4>
                             <select asp-for="@Model.CityId" class="form-control" asp-items="@Model.Cities.Select(x=>new SelectListItem { Text = x.Name, Value = x.Id.ToString()})">
-                                <option selected> @Model.Cities.Where(x=>x.Id == Model.CityId).Select(z=>z.Name) </option>
+                                <option selected> @Model.Cities.Where(x =>x.Id == Model.CityId).Select(z => z.Name) </option>
                             </select>
                             <span asp-validation-for="@Model.CityId" class="text-danger"></span>
                         </div>
