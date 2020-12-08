@@ -30,8 +30,8 @@
         {
             var userId = this.userManager.GetUserId(this.User);
             await this.votesService.VoteAsync(input.AdId, userId, input.IsUpVote);
-            var upVotes = this.votesService.GetUpVotes(input.AdId);
-            var downVotes = this.votesService.GetDownVotes(input.AdId);
+            var upVotes = await this.votesService.GetUpVotesAsync(input.AdId);
+            var downVotes = await this.votesService.GetDownVotesAsync(input.AdId);
 
             return new VotesCountModel
             {

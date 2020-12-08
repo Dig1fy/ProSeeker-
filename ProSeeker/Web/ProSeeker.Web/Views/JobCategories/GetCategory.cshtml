@@ -13,7 +13,7 @@
 }
 else
 {
-    @if (Model.SpecialistsDetails.Count > 0)
+    @if (Model.SpecialistsDetails.Count() > 0)
     {
         <div class="list-group m-5">
             <div class="row">
@@ -57,20 +57,4 @@ else
 <script asp-append-version="true">
     // Run getRatings when DOM loads
     document.addEventListener('DOMContentLoaded', getRatings);
-
-    function getRatings() {
-        let ratings = document.querySelectorAll('.number-rating');
-        let starsRef = document.querySelectorAll('.stars-inner');
-        const starsTotal = 5;
-
-        for (i = 0; i < ratings.length; i++) {
-            let rating = ratings[i].textContent;            
-            // Get percentage
-            const starPercentage = (rating / starsTotal) * 100;
-            // Round to nearest 10
-            const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
-            // Set width of stars-inner to percentage            
-            starsRef[i].style.width = starPercentageRounded;
-        }
-    }
 </script>

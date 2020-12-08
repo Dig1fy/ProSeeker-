@@ -1,15 +1,17 @@
 ﻿namespace ProSeeker.Services.Data.UsersService
 {
+    using System.Threading.Tasks;
+
     public interface IUsersService
     {
-        string GetUserProfilePicture(string userId);
+        Task<string> GetUserProfilePictureAsync(string userId);
 
-        string GetUserFirstNameById(string userId);
+        Task<string> GetUserFirstNameByIdAsync(string userId);
 
-        T GetUserById<T>(string id);
+        Task<T> GetUserByIdAsync<T>(string id);
 
-        int GetAllSpecialistsCount();
+        Task<int> GetAllSpecialistsCountAsync();
 
-        int GetAllClientsCount();
+        Task<int> GetAllClientsCountAsync();
     }
 }

@@ -3,6 +3,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.EntityFrameworkCore;
     using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;
 
@@ -19,22 +20,21 @@
             this.specialistsDetailsRepository = specialistsDetailsRepository;
         }
 
-        public double GetAverageRating(string specialistId)
+        public async Task<double> GetAverageRatingAsync(string specialistId)
         {
-            var averageRating = this.ratingsRepository.AllAsNoTracking()
+            var averageRating = await this.ratingsRepository.AllAsNoTracking()
                 .Where(x => x.SpecialistDetailsId == specialistId)
-                .Average(a => a.Value);
+                .AverageAsync(a => a.Value);
 
             return averageRating;
         }
 
-        public int GetRatingsCount(string specialistId)
+        public async Task<int> GetRatingsCountAsync(string specialistId)
         {
-            var ratingsCount = this.ratingsRepository
+            var ratingsCount = await this.ratingsRepository
                 .AllAsNoTracking()
                 .Where(x => x.SpecialistDetailsId == specialistId)
-                 .ToList()
-                 .Count();
+                 .CountAsync();
 
             return ratingsCount;
         }

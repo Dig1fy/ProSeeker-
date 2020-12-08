@@ -1,7 +1,7 @@
 ﻿namespace ProSeeker.Web.Controllers
 {
     using System.Diagnostics;
-
+    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
     using ProSeeker.Services.Data.Home;
     using ProSeeker.Services.Data.UsersService;
@@ -21,15 +21,15 @@
             this.usersService = usersService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var viewModel = new IndexViewModel()
             {
-                BaseCategories = this.homeService.GetAllBaseCategories<BaseJobCategoryViewModel>(),
+                BaseCategories = await this.homeService.GetAllBaseCategoriesAsync<BaseJobCategoryViewModel>(),
                 Counters = new IndexCountersViewModel
                 {
-                    AllClients = this.usersService.GetAllClientsCount(),
-                    AllSpecialists = this.usersService.GetAllSpecialistsCount(),
+                    AllClients = await this.usersService.GetAllClientsCountAsync(),
+                    AllSpecialists = await this.usersService.GetAllSpecialistsCountAsync(),
                 },
             };
 

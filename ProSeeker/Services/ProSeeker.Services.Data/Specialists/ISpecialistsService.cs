@@ -1,11 +1,12 @@
 ﻿namespace ProSeeker.Services.Data.Specialists
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     public interface ISpecialistsService
     {
-        int GetSpecialistsCountByCategory(int categoryId);
+        Task<int> GetSpecialistsCountByCategoryAsync(int categoryId);
 
-        IEnumerable<T> GetAllSpecialistsPerCategory<T>(int categoryId, int page);
+        Task<IEnumerable<T>> GetAllSpecialistsPerCategoryAsync<T>(int categoryId, int page);
     }
 }

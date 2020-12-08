@@ -1,6 +1,7 @@
 ﻿namespace ProSeeker.Web.Controllers.Category
 {
     using System.Linq;
+    using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
     using ProSeeker.Services.Data.CategoriesService;
@@ -20,17 +21,17 @@
             this.specialistsService = specialistsService;
         }
 
-        public IActionResult GetCategory(int id, int page = 1)
+        public async Task<IActionResult> GetCategoryAsync(int id, int page = 1)
         {
             // Explicitly check the page in case someone wants to cheat :)
             page = page < 1 ? 1 : page;
 
-            var viewModel = this.categoriesService.GetById<CategoriesViewModel>(id);
+            var viewModel = await this.categoriesService.GetByIdAsync<CategoriesViewModel>(id);
             viewModel.JobCategoryId = id;
             viewModel.PageNumber = page;
-            viewModel.SpecialistsCount = this.specialistsService.GetSpecialistsCountByCategory(id);
+            viewModel.SpecialistsCount = await this.specialistsService.GetSpecialistsCountByCategoryAsync(id);
 
-            var specialistsPerPage = this.specialistsService.GetAllSpecialistsPerCategory<SpecialistsInCategoryViewModel>(id, page).ToList();
+            var specialistsPerPage = await this.specialistsService.GetAllSpecialistsPerCategoryAsync<SpecialistsInCategoryViewModel>(id, page);
             viewModel.SpecialistsDetails = specialistsPerPage;
 
             return this.View(viewModel);

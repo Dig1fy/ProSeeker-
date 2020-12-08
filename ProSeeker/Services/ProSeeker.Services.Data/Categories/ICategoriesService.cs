@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-
-namespace ProSeeker.Services.Data.CategoriesService
+﻿namespace ProSeeker.Services.Data.CategoriesService
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     public interface ICategoriesService
     {
-        T GetById<T>(int id);
+        Task<T> GetByIdAsync<T>(int id);
 
-        IEnumerable<T> GetAllCategories<T>();
+        Task<IEnumerable<T>> GetAllCategoriesAsync<T>();
     }
 }

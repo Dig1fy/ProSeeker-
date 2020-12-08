@@ -26,12 +26,12 @@
             this.userManager = userManager;
         }
 
-        public IActionResult Create(string specialistId)
+        public async Task<IActionResult> Create(string specialistId)
         {
             var model = new InquiryInputModel
             {
                 SpecialistDetailsId = specialistId,
-                Cities = this.citiesService.GetAllCities<CitySimpleViewModel>(),
+                Cities = await this.citiesService.GetAllCitiesAsync<CitySimpleViewModel>(),
             };
 
             return this.View(model);

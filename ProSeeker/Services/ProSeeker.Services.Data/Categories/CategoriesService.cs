@@ -2,7 +2,9 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
+    using Microsoft.EntityFrameworkCore;
     using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;
@@ -16,23 +18,23 @@
             this.categoriesRepository = categoriesRepository;
         }
 
-        public IEnumerable<T> GetAllCategories<T>()
+        public async Task<IEnumerable<T>> GetAllCategoriesAsync<T>()
         {
-            var allCategories = this.categoriesRepository
+            var allCategories = await this.categoriesRepository
                 .AllAsNoTracking()
                 .To<T>()
-                .ToList();
+                .ToListAsync();
 
             return allCategories;
         }
 
-        public T GetById<T>(int id)
+        public async Task<T> GetByIdAsync<T>(int id)
         {
-            var category = this.categoriesRepository
+            var category = await this.categoriesRepository
                  .All()
                  .Where(x => x.Id == id)
                  .To<T>()
-                 .FirstOrDefault();
+                 .FirstOrDefaultAsync();
 
             return category;
         }

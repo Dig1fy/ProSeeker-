@@ -34,10 +34,10 @@
         }
 
         // [Authorize(Roles = "User")]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            var allCities = this.citiesService.GetAllCities<CitySimpleViewModel>();
-            var allcategories = this.categoriesService.GetAllCategories<CategorySimpleViewModel>();
+            var allCities = await this.citiesService.GetAllCitiesAsync<CitySimpleViewModel>();
+            var allcategories = await this.categoriesService.GetAllCategoriesAsync<CategorySimpleViewModel>();
 
             var createModel = new CreateAdInputModel
             {
@@ -56,8 +56,8 @@
             {
                 var createModel = new CreateAdInputModel
                 {
-                    Categories = this.categoriesService.GetAllCategories<CategorySimpleViewModel>(),
-                    Cities = this.citiesService.GetAllCities<CitySimpleViewModel>(),
+                    Categories = await this.categoriesService.GetAllCategoriesAsync<CategorySimpleViewModel>(),
+                    Cities = await this.citiesService.GetAllCitiesAsync<CitySimpleViewModel>(),
                 };
 
                 return this.View(createModel);
@@ -74,7 +74,7 @@
         }
 
         // [Authorize]
-        public IActionResult GetByCategory(string categoryName, int page = 1)
+        public async Task<IActionResult> GetByCategory(string categoryName, int page = 1)
         {
             // Explicitly check the page in case someone wants to cheat :)
             page = page < 1 ? 1 : page;
@@ -83,8 +83,8 @@
             {
                 CategoryName = categoryName,
                 PageNumber = page,
-                AdsCount = this.adsService.AllAdsByCategoryCount(categoryName),
-                Ads = this.adsService.GetByCategory<AdsShortDetailsViewModel>(categoryName, page),
+                AdsCount = await this.adsService.AllAdsByCategoryCountAsync(categoryName),
+                Ads = await this.adsService.GetByCategoryAsync<AdsShortDetailsViewModel>(categoryName, page),
             };
 
             return this.View(model);
@@ -97,8 +97,8 @@
             page = page < 1 ? 1 : page;
 
             var user = await this.userManager.GetUserAsync(this.User);
-            var adsPerPage = this.adsService.GetMyAds<AdsShortDetailsViewModel>(user.Id, page);
-            var allMyAdsCount = this.adsService.GetAdsCountByUserId(user.Id);
+            var adsPerPage = await this.adsService.GetMyAdsAsync<AdsShortDetailsViewModel>(user.Id, page);
+            var allMyAdsCount = await this.adsService.GetAdsCountByUserIdAsync(user.Id);
 
             var model = new GetAllViewModel
             {
@@ -113,16 +113,16 @@
         // [Authorize]
         public async Task<IActionResult> Delete(string id)
         {
-            await this.adsService.DeleteById(id);
+            await this.adsService.DeleteByIdAsync(id);
             return this.RedirectToAction(nameof(this.MyAds));
         }
 
         // [Authorize]
-        public IActionResult Edit(string id)
+        public async Task<IActionResult> Edit(string id)
         {
-            var model = this.adsService.GetAdDetailsById<UpdateInputModel>(id);
-            var allCities = this.citiesService.GetAllCities<CitySimpleViewModel>();
-            var allcategories = this.categoriesService.GetAllCategories<CategorySimpleViewModel>();
+            var model = await this.adsService.GetAdDetailsByIdAsync<UpdateInputModel>(id);
+            var allCities = await this.citiesService.GetAllCitiesAsync<CitySimpleViewModel>();
+            var allcategories = await this.categoriesService.GetAllCategoriesAsync<CategorySimpleViewModel>();
 
             model.Cities = allCities;
             model.Categories = allcategories;
@@ -135,21 +135,21 @@
         {
             if (!this.ModelState.IsValid)
             {
-                inputModel.Cities = this.citiesService.GetAllCities<CitySimpleViewModel>();
-                inputModel.Categories = this.categoriesService.GetAllCategories<CategorySimpleViewModel>();
+                inputModel.Cities = await this.citiesService.GetAllCitiesAsync<CitySimpleViewModel>();
+                inputModel.Categories = await this.categoriesService.GetAllCategoriesAsync<CategorySimpleViewModel>();
                 return this.View(inputModel);
             }
 
             await this.adsService.UpdateAdAsync(inputModel);
 
             // TODO Find a way to show this meesage only after the ad's been adjusted
-            //this.TempData["Message"] = "Успешно коригирахте своята обява!";
+            // this.TempData["Message"] = "Успешно коригирахте своята обява!";
             return this.RedirectToAction(nameof(this.MyAds));
         }
 
-        public IActionResult GetById(string id)
+        public async Task<IActionResult> GetById(string id)
         {
-            var ad = this.adsService.GetAdDetailsById<AdsFullDetailsViewModel>(id);
+            var ad = await this.adsService.GetAdDetailsByIdAsync<AdsFullDetailsViewModel>(id);
             return this.View(ad);
         }
     }

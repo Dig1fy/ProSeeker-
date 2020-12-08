@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.EntityFrameworkCore;
     using ProSeeker.Common;
     using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;
@@ -34,11 +35,11 @@
             var ad = new Ad
             {
                 CityId = adtInputModel.CityId,
-                City = this.citiesRepository.All().FirstOrDefault(x => x.Id == adtInputModel.CityId),
+                City = await this.citiesRepository.All().FirstOrDefaultAsync(x => x.Id == adtInputModel.CityId),
                 IsVip = false,
                 UserId = userId,
                 JobCategoryId = adtInputModel.JobCategoryId,
-                JobCategory = this.categoriesRepository.All().FirstOrDefault(x => x.Id == adtInputModel.JobCategoryId),
+                JobCategory = await this.categoriesRepository.All().FirstOrDefaultAsync(x => x.Id == adtInputModel.JobCategoryId),
                 Opinions = new List<Opinion>(),
                 PreparedBudget = adtInputModel.PreparedBudget,
                 Title = adtInputModel.Title,
@@ -64,74 +65,72 @@
             await this.adsRepository.SaveChangesAsync();
         }
 
-        public int AllAdsByCategoryCount(string name)
+        public async Task<int> AllAdsByCategoryCountAsync(string name)
         {
-            var count = this.adsRepository.All()
+            var count = await this.adsRepository.AllAsNoTracking()
                 .Where(x => x.JobCategory.Name == name)
-                .ToList()
-                .Count();
+                .CountAsync();
 
             return count;
         }
+        
+        public async Task<int> AllAdsCountAsync()
+            => await this.adsRepository.AllAsNoTracking().CountAsync();
 
-        public int AllAdsCount()
-            => this.adsRepository.All().Count();
-
-        public IEnumerable<T> GetByCategory<T>(string categoryName, int page)
+        public async Task<IEnumerable<T>> GetByCategoryAsync<T>(string categoryName, int page)
         {
-            var allByCategory = this.adsRepository
+            var allByCategory = await this.adsRepository
                 .AllAsNoTracking()
                 .Where(x => x.JobCategory.Name == categoryName)
                 .OrderByDescending(x => x.CreatedOn)
                 .Skip((page - 1) * GlobalConstants.ItemsPerPage)
                 .Take(GlobalConstants.ItemsPerPage)
                 .To<T>()
-                .ToList();
+                .ToListAsync();
 
             return allByCategory;
         }
 
-        public T GetAdDetailsById<T>(string id)
+        public async Task<T> GetAdDetailsByIdAsync<T>(string id)
         {
-            var ad = this.adsRepository
+            var ad = await this.adsRepository
                 .All()
                 .Where(x => x.Id == id)
                 .To<T>()
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             return ad;
         }
 
-        public IEnumerable<T> GetMyAds<T>(string id, int page)
+        public async Task<IEnumerable<T>> GetMyAdsAsync<T>(string id, int page)
         {
             var adsToSkip = (page - 1) * GlobalConstants.ItemsPerPage;
 
-            var allMyAds = this.adsRepository
+            var allMyAds = await this.adsRepository
                 .AllAsNoTracking()
                 .Where(x => x.UserId == id)
                 .OrderByDescending(x => x.CreatedOn)
                 .Skip(adsToSkip)
                 .Take(GlobalConstants.ItemsPerPage)
                 .To<T>()
-                .ToList();
+                .ToListAsync();
 
             return allMyAds;
         }
 
-        public async Task DeleteById(string id)
+        public async Task DeleteByIdAsync(string id)
         {
             var ad = await this.adsRepository.GetByIdWithDeletedAsync(id);
             this.adsRepository.Delete(ad);
             await this.adsRepository.SaveChangesAsync();
         }
 
-        public int GetAdsCountByUserId(string id)
+        public async Task<int> GetAdsCountByUserIdAsync(string id)
         {
-            var allUserAds = this.adsRepository
+            var allUserAds = await this.adsRepository
                 .AllAsNoTracking()
                 .Where(x => x.UserId == id)
-                .ToList()
-                .Count();
+                .CountAsync();
 
             return allUserAds;
         }

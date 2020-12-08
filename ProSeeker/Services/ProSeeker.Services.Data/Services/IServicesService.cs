@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-
-namespace ProSeeker.Services.Data.ServicesService
+﻿namespace ProSeeker.Services.Data.ServicesService
 {
+    using System.Threading.Tasks;
+
     public interface IServicesService
     {
         Task DeleteAsync(int id);

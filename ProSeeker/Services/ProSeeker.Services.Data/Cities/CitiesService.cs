@@ -2,7 +2,9 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
+    using Microsoft.EntityFrameworkCore;
     using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;
@@ -16,13 +18,13 @@
             this.citiesRepository = citiesRepository;
         }
 
-        public IEnumerable<T> GetAllCities<T>()
+        public async Task<IEnumerable<T>> GetAllCitiesAsync<T>()
         {
-            var cities = this.citiesRepository
-                .AllAsNoTracking()
+            var cities = await this.citiesRepository
+                .All()
                 .OrderBy(c => c.Name)
                 .To<T>()
-                .ToList();
+                .ToListAsync();
 
             return cities;
         }

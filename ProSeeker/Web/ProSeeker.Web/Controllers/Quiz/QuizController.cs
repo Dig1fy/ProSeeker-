@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace ProSeeker.Web.Controllers.Quiz
+﻿namespace ProSeeker.Web.Controllers.Quiz
 {
+    using Microsoft.AspNetCore.Mvc;
+
     public class QuizController : BaseController
     {
         public IActionResult Quiz()

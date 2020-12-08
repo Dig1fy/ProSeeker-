@@ -16,6 +16,6 @@
 
         public string Description { get; set; }
 
-        public virtual ICollection<SpecialistsInCategoryViewModel> SpecialistsDetails { get; set; }
+        public virtual IEnumerable<SpecialistsInCategoryViewModel> SpecialistsDetails { get; set; }
     }
 }

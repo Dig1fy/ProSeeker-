@@ -6,8 +6,8 @@
     {
         Task SetRatingAsync(string specialistId, string userId, int ratingValue);
 
-        double GetAverageRating(string specialistId);
+        Task<double> GetAverageRatingAsync(string specialistId);
 
-        int GetRatingsCount(string specialistId);
+        Task<int> GetRatingsCountAsync(string specialistId);
     }
 }

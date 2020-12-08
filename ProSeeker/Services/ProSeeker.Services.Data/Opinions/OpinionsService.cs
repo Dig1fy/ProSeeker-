@@ -3,6 +3,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.EntityFrameworkCore;
     using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;
 
@@ -25,7 +26,7 @@
             this.specialistsRepository = specialistsRepository;
         }
 
-        public async Task CreateAdOpinion(string currentAdId, string userId, string content, int? parentOpinionId = null)
+        public async Task CreateAdOpinionAsync(string currentAdId, string userId, string content, int? parentOpinionId = null)
         {
             var ad = this.adsRepository.All().FirstOrDefault(x => x.Id == currentAdId);
 
@@ -34,7 +35,6 @@
                 Content = content,
                 Ad = ad,
                 AdId = ad.Id,
-                //Creator = user,
                 CreatorId = userId,
                 ParentOpinionId = parentOpinionId,
             };
@@ -43,7 +43,7 @@
             await this.opinionsRepository.SaveChangesAsync();
         }
 
-        public async Task CreateSpecOpinion(string specialistId, string userId, string content, int? parentId = null)
+        public async Task CreateSpecOpinionAsync(string specialistId, string userId, string content, int? parentId = null)
         {
             var specialist = this.specialistsRepository.All().FirstOrDefault(x => x.Id == specialistId);
 
@@ -60,26 +60,26 @@
             await this.opinionsRepository.SaveChangesAsync();
         }
 
-        public bool IsInAdId(int opinionId, string currentAdId)
+        public async Task<bool> IsInAdIdAsync(int opinionId, string currentAdId)
         {
-            var opinionAdId = this.opinionsRepository
+            var opinionAdId = await this.opinionsRepository
                 .AllAsNoTracking()
                 .Where(o => o.SpecialistDetailsId == null)
                 .Where(x => x.Id == opinionId)
                 .Select(y => y.AdId)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             return opinionAdId == currentAdId;
         }
 
-        public bool IsInSpecialistId(int opinionId, string currentSpecialistId)
+        public async Task<bool> IsInSpecialistIdAsync(int opinionId, string currentSpecialistId)
         {
-            var specOpinionId = this.opinionsRepository
+            var specOpinionId = await this.opinionsRepository
              .AllAsNoTracking()
              .Where(o => o.AdId == null)
              .Where(x => x.Id == opinionId)
              .Select(z => z.SpecialistDetailsId)
-             .FirstOrDefault();
+             .FirstOrDefaultAsync();
 
             return specOpinionId == currentSpecialistId;
         }

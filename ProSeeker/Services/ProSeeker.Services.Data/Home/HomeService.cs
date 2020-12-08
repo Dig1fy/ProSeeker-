@@ -2,7 +2,8 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-
+    using System.Threading.Tasks;
+    using Microsoft.EntityFrameworkCore;
     using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;
@@ -10,25 +11,21 @@
     public class HomeService : IHomeService
     {
         // Our services will work either with the corresponding repository or with the DbContext
-        private readonly IDeletableEntityRepository<BaseJobCategory> categoriesRepository;
+        private readonly IDeletableEntityRepository<BaseJobCategory> baseCategoriesRepository;
 
-        public HomeService(IDeletableEntityRepository<BaseJobCategory> categoriesRepository)
+        public HomeService(IDeletableEntityRepository<BaseJobCategory> baseCategoriesRepository)
         {
-            this.categoriesRepository = categoriesRepository;
+            this.baseCategoriesRepository = baseCategoriesRepository;
         }
 
-        public IEnumerable<T> GetAllBaseCategories<T>(int? count = null)
+        public async Task<IEnumerable<T>> GetAllBaseCategoriesAsync<T>(int? count = null)
         {
-            var query = this.categoriesRepository.All();
+            var query = await this.baseCategoriesRepository
+                .AllAsNoTracking()
+                .To<T>()
+                .ToListAsync();
 
-            // Check if the controller needs a specific count of entities from the db (in case we need pagination)
-            if (count.HasValue)
-            {
-                query = query.Take(count.Value);
-            }
-
-            // We let the controller take the decision for "To<T>"
-            return query.To<T>().ToList();
+            return query;
         }
     }
 }

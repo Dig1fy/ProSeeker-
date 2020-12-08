@@ -1,9 +1,10 @@
 ﻿namespace ProSeeker.Services.Data.Cities
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     public interface ICitiesService
     {
-        IEnumerable<T> GetAllCities<T>();
+        Task<IEnumerable<T>> GetAllCitiesAsync<T>();
     }
 }

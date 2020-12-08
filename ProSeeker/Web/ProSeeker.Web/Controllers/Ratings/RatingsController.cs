@@ -29,8 +29,8 @@
             var userId = this.userManager.GetUserId(this.User);
             await this.ratingsService.SetRatingAsync(inputModel.SpecialistDetailsId, userId, inputModel.Value);
 
-            var averageRaiting = this.ratingsService.GetAverageRating(inputModel.SpecialistDetailsId);
-            var ratingsCount = this.ratingsService.GetRatingsCount(inputModel.SpecialistDetailsId);
+            var averageRaiting = await this.ratingsService.GetAverageRatingAsync(inputModel.SpecialistDetailsId);
+            var ratingsCount = await this.ratingsService.GetRatingsCountAsync(inputModel.SpecialistDetailsId);
 
             var model = new PostRatingResponseViewModel
             {

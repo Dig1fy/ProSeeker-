@@ -1,11 +1,13 @@
 ﻿namespace ProSeeker.Services.Data.Specialists
 {
+    using Microsoft.EntityFrameworkCore;
     using ProSeeker.Common;
     using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     public class SpecialistsService : ISpecialistsService
     {
@@ -16,27 +18,27 @@
             this.specialistsRepository = specialistsRepository;
         }
 
-        public IEnumerable<T> GetAllSpecialistsPerCategory<T>(int categoryId, int page)
+        public async Task<IEnumerable<T>> GetAllSpecialistsPerCategoryAsync<T>(int categoryId, int page)
         {
             var specialistsToSkip = (page - 1) * GlobalConstants.SpecialistsPerPage;
 
-            var specialists = this.specialistsRepository
+            var specialists = await this.specialistsRepository
                 .AllAsNoTracking()
                 .Where(x => x.JobCategoryId == categoryId)
                 .Skip(specialistsToSkip)
                 .Take(GlobalConstants.SpecialistsPerPage)
                 .To<T>()
-                .ToList();
+                .ToListAsync();
 
             return specialists;
         }
 
-        public int GetSpecialistsCountByCategory(int categoryId)
+        public async Task<int> GetSpecialistsCountByCategoryAsync(int categoryId)
         {
-            var specialistsCount = this.specialistsRepository
+            var specialistsCount = await this.specialistsRepository
                 .AllAsNoTracking()
                 .Where(x => x.JobCategoryId == categoryId)
-                .Count();
+                .CountAsync();
 
             return specialistsCount;
         }

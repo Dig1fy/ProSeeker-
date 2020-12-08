@@ -3,6 +3,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.EntityFrameworkCore;
     using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;
 
@@ -15,24 +16,24 @@
             this.votesRepository = votesRepository;
         }
 
-        public int GetUpVotes(string currentAdId)
+        public async Task<int> GetUpVotesAsync(string currentAdId)
         {
-            var votes = this.votesRepository.All()
+            var votes = await this.votesRepository.All()
                .Where(x => x.AdId == currentAdId)
                .Where(x => x.VoteType == VoteType.UpVote)
-               .Select(x => x.VoteType) //THIS WILL FAIL... probably
-               .Count();
+               .Select(x => x.VoteType)
+               .CountAsync();
 
             return votes;
         }
 
-        public int GetDownVotes(string currentAdId)
+        public async Task<int> GetDownVotesAsync(string currentAdId)
         {
-            var votes = this.votesRepository.All()
+            var votes = await this.votesRepository.All()
                .Where(x => x.AdId.Equals(currentAdId))
                .Where(x => x.VoteType == VoteType.DownVote)
                .Select(x => x.VoteType)
-               .Count();
+               .CountAsync();
 
             return votes;
         }

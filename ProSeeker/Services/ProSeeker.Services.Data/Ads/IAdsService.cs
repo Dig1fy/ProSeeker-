@@ -9,20 +9,20 @@
     {
         Task<string> CreateAsync(CreateAdInputModel adtInputModel, string userId);
 
-        T GetAdDetailsById<T>(string id);
+        Task<T> GetAdDetailsByIdAsync<T>(string id);
 
-        int GetAdsCountByUserId(string id);
+        Task<int> GetAdsCountByUserIdAsync(string id);
 
-        IEnumerable<T> GetMyAds<T>(string id, int page);
+        Task<IEnumerable<T>> GetMyAdsAsync<T>(string id, int page);
 
         // IEnumerable<T> GetByCreatedOn<T>(int skip = 0);
-        IEnumerable<T> GetByCategory<T>(string categoryName, int page);
+        Task<IEnumerable<T>> GetByCategoryAsync<T>(string categoryName, int page);
 
-        int AllAdsCount();
+        Task<int> AllAdsCountAsync();
 
-        int AllAdsByCategoryCount(string name);
+        Task<int> AllAdsByCategoryCountAsync(string name);
 
-        Task DeleteById(string id);
+        Task DeleteByIdAsync(string id);
 
         Task UpdateAdAsync(UpdateInputModel model);
 

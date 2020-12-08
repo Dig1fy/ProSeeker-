@@ -15,9 +15,9 @@
             this.usersService = usersService;
         }
 
-        public IActionResult GetProfile(string id)
+        public async Task<IActionResult> GetProfile(string id)
         {
-            var profile = this.usersService.GetUserById<UserViewModel>(id);
+            var profile = await this.usersService.GetUserByIdAsync<UserViewModel>(id);
 
             if (profile == null)
             {

@@ -1,7 +1,9 @@
 ﻿namespace ProSeeker.Services.Data.UsersService
 {
     using System.Linq;
+    using System.Threading.Tasks;
 
+    using Microsoft.EntityFrameworkCore;
     using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;
@@ -15,58 +17,52 @@
             this.usersRepository = usersRepository;
         }
 
-        public string GetUserFirstNameById(string userId)
+        public async Task<string> GetUserFirstNameByIdAsync(string userId)
         {
-            return this.usersRepository
+            return await this.usersRepository
                 .All()
                 .Where(user => user.Id == userId)
                 .Select(user => user.FirstName)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
         }
 
-        public string GetUserProfilePicture(string userId)
+        public async Task<string> GetUserProfilePictureAsync(string userId)
         {
-            return this.usersRepository
+            return await this.usersRepository
                 .All()
                 .Where(user => user.Id == userId)
                 .Select(user => user.ProfilePicture)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
         }
 
-        public T GetUserById<T>(string id)
+        public async Task<T> GetUserByIdAsync<T>(string id)
         {
             var user =
-                this.usersRepository
+               await this.usersRepository
                     .All()
                     .Where(x => x.SpecialistDetailsId == id)
                     .To<T>()
-                    .FirstOrDefault();
+                    .FirstOrDefaultAsync();
 
             return user;
         }
 
-        public int GetAllSpecialistsCount()
+        public async Task<int> GetAllSpecialistsCountAsync()
         {
-            var allSpecialists = this.usersRepository
+            var allSpecialists = await this.usersRepository
                 .All()
                 .Where(x => x.IsSpecialist == true)
-                .Count();
+                .CountAsync();
 
             return allSpecialists;
         }
 
-        public int GetAllClientsCount()
+        public async Task<int> GetAllClientsCountAsync()
         {
-            var allClients = this.usersRepository
+            var allClients = await this.usersRepository
                 .All()
                 .Where(x => x.IsSpecialist == false)
-                .Count();
-
-
-            //var all2 = allClients.Where(x => !x.IsSpecialist).ToArray();
-            //var all3 = all2.Count();
-            //.Select(x => !x.IsSpecialist)
-            //.Count();
+                .CountAsync();
 
             return allClients;
         }

@@ -4,12 +4,12 @@
 
     public interface IOpinionsService
     {
-        Task CreateAdOpinion(string currentAdId, string userId, string content, int? parentId = null);
+        Task CreateAdOpinionAsync(string currentAdId, string userId, string content, int? parentId = null);
 
-        bool IsInAdId(int opinionId, string currentAdId);
+        Task<bool> IsInAdIdAsync(int opinionId, string currentAdId);
 
-        Task CreateSpecOpinion(string specialistId, string userId, string content, int? parentId = null);
+        Task CreateSpecOpinionAsync(string specialistId, string userId, string content, int? parentId = null);
 
-        bool IsInSpecialistId(int opinionId, string specialistId);
+        Task<bool> IsInSpecialistIdAsync(int opinionId, string specialistId);
     }
 }

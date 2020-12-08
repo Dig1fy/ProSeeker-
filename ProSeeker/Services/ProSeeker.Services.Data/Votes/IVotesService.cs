@@ -7,8 +7,8 @@
         // If isUpVote -> up vote, else - down vote
         Task VoteAsync(string currentAdId, string userId, bool isUpVote);
 
-        int GetUpVotes(string currentAdId);
+        Task<int> GetUpVotesAsync(string currentAdId);
 
-        int GetDownVotes(string currentAdId);
+        Task<int> GetDownVotesAsync(string currentAdId);
     }
 }

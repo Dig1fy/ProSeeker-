@@ -32,14 +32,14 @@
 
             if (parentId.HasValue)
             {
-                if (!this.opinionsService.IsInAdId(parentId.Value, inputModel.AdId))
+                if (!await this.opinionsService.IsInAdIdAsync(parentId.Value, inputModel.AdId))
                 {
                     return this.BadRequest();
                 }
             }
 
             var userId = this.userManager.GetUserId(this.User);
-            await this.opinionsService.CreateAdOpinion(inputModel.AdId, userId, inputModel.Content, parentId);
+            await this.opinionsService.CreateAdOpinionAsync(inputModel.AdId, userId, inputModel.Content, parentId);
             return this.RedirectToAction("GetById", "Ads", new { Id = inputModel.AdId });
         }
 
@@ -54,14 +54,14 @@
 
             if (parentId.HasValue)
             {
-                if (!this.opinionsService.IsInSpecialistId(parentId.Value, inputModel.SpecialistId))
+                if (!await this.opinionsService.IsInSpecialistIdAsync(parentId.Value, inputModel.SpecialistId))
                 {
                     return this.BadRequest();
                 }
             }
 
             var userId = this.userManager.GetUserId(this.User);
-            await this.opinionsService.CreateSpecOpinion(inputModel.SpecialistId, userId, inputModel.Content, parentId);
+            await this.opinionsService.CreateSpecOpinionAsync(inputModel.SpecialistId, userId, inputModel.Content, parentId);
             this.TempData["updatedProfile"] = "updated";
             return this.RedirectToAction("GetProfile", "SpecialistsDetails", new { Id = inputModel.SpecialistId });
         }
