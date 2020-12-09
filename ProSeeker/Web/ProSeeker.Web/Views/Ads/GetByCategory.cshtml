@@ -6,6 +6,25 @@
 }
 else
 {
+    <nav class="navbar navbar-expand-lg custom-golden-text badge-pill dropleft">
+        
+        <div class="navbar-collapse" id="navbarNavDropdown" style="margin-left:-22px;">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown ">
+                    <a class="nav-link dropdown-toggle" style="font-size:18px;" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Сортирай
+                    </a>
+                    <div class="dropdown-menu custom-dropdown-content ml-3 mt-2" style="min-width:200px;" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" style="font-size:17px;" href="#">Име</a>
+                        <a class="dropdown-item" style="font-size:17px;" href="#">Най-нови</a>
+                        <a class="dropdown-item" style="font-size:17px;" href="#">Брой коментари</a>
+                        <a class="dropdown-item" style="font-size:17px;" href="#">Брой харесвания</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
     @foreach (var ad in Model.Ads)
     {
         <section class="card border-info mb-3" id="custom-shadow-transform">

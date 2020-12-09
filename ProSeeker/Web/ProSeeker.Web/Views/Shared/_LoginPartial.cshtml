@@ -21,8 +21,8 @@
             <div class="dropdown-menu custom-dropdown-content" style="margin-top:-8px;">
                 <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Акаунт</a>
                 <a class="dropdown-item" asp-area="" asp-controller="Ads" asp-action="MyAds">Моите обяви</a>
-                <a class="dropdown-item" asp-area="" asp-controller="Ads" asp-action="GetMyAds">нищо няма тук</a>
-                <a class="dropdown-item" asp-area="" asp-controller="Ads" asp-action="Create">оф</a>
+                <a class="dropdown-item" asp-area="" asp-controller="Ads" asp-action="Create">Запитвания</a>
+                <a class="dropdown-item" asp-area="" asp-controller="Ads" asp-action="Create">Оферти</a>
                 <a onclick="SubmitForm()" class="dropdown-item">
                     <form id="submitForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">Изход </form>
                 </a>
@@ -31,7 +31,7 @@
 
         
         <li class="nav-item dropdown collapse navbar-collapse">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Messages</a>
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Известия</a>
             <div class="dropdown-menu">
                 <a href="#" class="dropdown-item">Inbox</a>
                 <a href="#" class="dropdown-item">Sent</a>
