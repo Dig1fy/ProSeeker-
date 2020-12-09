@@ -18,11 +18,11 @@
             this.specialistsRepository = specialistsRepository;
         }
 
-        public async Task<IEnumerable<T>> GetAllSpecialistsPerCategoryAsync<T>(int categoryId, string sortBy, int page)
+        public async Task<IEnumerable<T>> GetAllSpecialistsPerCategoryAsync<T>(int categoryId, string sortBy, int cityId, int page)
         {
             sortBy = sortBy == null ? GlobalConstants.ByDateDescending : sortBy;
             var specialistsToSkip = (page - 1) * GlobalConstants.SpecialistsPerPage;
-            var sortedSpecialists = this.SortSpecialists(categoryId, sortBy);
+            var sortedSpecialists = this.SortSpecialists(categoryId, sortBy, cityId);
 
             var specialists = await sortedSpecialists
                 .Skip(specialistsToSkip)
@@ -44,11 +44,16 @@
         }
 
         // TODO: Try with reflection
-        private IQueryable<Specialist_Details> SortSpecialists(int categoryId, string sortBy)
+        private IQueryable<Specialist_Details> SortSpecialists(int categoryId, string sortBy, int cityId)
         {
             var specialists = this.specialistsRepository
                 .AllAsNoTracking()
                 .Where(x => x.JobCategoryId == categoryId);
+
+            if (cityId != 0)
+            {
+                specialists = specialists.Where(x => x.User.CityId == cityId);
+            }
 
             return sortBy switch
             {

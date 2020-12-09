@@ -1,4 +1,4 @@
-﻿@using ProSeeker.Common 
+﻿@using ProSeeker.Common
 @model ProSeeker.Web.ViewModels.Categories.CategoriesViewModel
 
 <div class="custom-heading-title">
@@ -14,25 +14,36 @@
 }
 else
 {
-    <nav class="navbar navbar-expand-lg custom-golden-text badge-pill dropleft">
-        <div class="navbar-collapse" id="navbarNavDropdown" style="margin-left:-22px;">
-            <ul class="navbar-nav">
-                <li class="nav-item dropdown ">
-                    <a class="nav-link dropdown-toggle" style="font-size:18px;" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Сортирай <label class="text-muted">/текущо сортиране: по @GlobalMethods.TranslateVoteType(Model.SortBy)/</label>
-                    </a>
-
-                    <div class="dropdown-menu custom-dropdown-content ml-3 mt-2" style="min-width:200px;" aria-labelledby="navbarDropdownMenuLink">
-                        <form>
-                            <a class="dropdown-item fs17" asp-action="GetCategory" asp-route-Id="@Model.JobCategoryId" asp-route-sortBy="@GlobalConstants.ByDateDescending" asp-route-page="@Model.PageNumber">Най-нови</a>
-                            <a class="dropdown-item fs17" asp-action="GetCategory" asp-route-Id="@Model.JobCategoryId" asp-route-sortBy="@GlobalConstants.ByOpinionsDescending" asp-route-page="@Model.PageNumber">Най-коментирани</a>
-                            <a class="dropdown-item fs17" asp-action="GetCategory" asp-route-Id="@Model.JobCategoryId" asp-route-sortBy="@GlobalConstants.ByRatingDesc" asp-route-page="@Model.PageNumber">С най-висок рейтинг</a>
-                        </form>
-                    </div>
-                </li>
-            </ul>
+    <form>
+        <div class="col-md-6 mb-3 mb-md-0">
+            <h4>
+                <label>Град</label>
+            </h4>
+            <select asp-for="@Model.CityId" class="form-control" asp-items="@Model.Cities.Select(x=>new SelectListItem { Text = x.Name, Value = x.Id.ToString()})">
+                <option disabled selected> - Select city - </option>
+            </select>
+            
+            <button asp-route-cityId="@Model.CityId" asp-action="GetCategory" asp-route-Id="@Model.JobCategoryId" asp-route-page="@Model.PageNumber">Повърди</button>
         </div>
-    </nav>
+        
+        <nav class="navbar navbar-expand-lg custom-golden-text badge-pill dropleft">
+            <div class="navbar-collapse" id="navbarNavDropdown" style="margin-left:-22px;">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown ">
+                        <a class="nav-link dropdown-toggle" style="font-size:18px;" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Сортирай <label class="text-muted">/текущо сортиране: по @GlobalMethods.TranslateVoteType(Model.SortBy)/</label>
+                        </a>
+
+                        <div class="dropdown-menu custom-dropdown-content ml-3 mt-2" style="min-width:200px;" aria-labelledby="navbarDropdownMenuLink">                            
+                            <a type="submit" class="dropdown-item fs17" asp-route-cityId="@Model.CityId" asp-action="GetCategory" asp-route-Id="@Model.JobCategoryId" asp-route-sortBy="@GlobalConstants.ByDateDescending" asp-route-page="@Model.PageNumber">Най-нови</a>
+                            <a type="submit" class="dropdown-item fs17" asp-route-cityId="@Model.CityId" asp-action="GetCategory" asp-route-Id="@Model.JobCategoryId" asp-route-sortBy="@GlobalConstants.ByOpinionsDescending" asp-route-page="@Model.PageNumber">Най-коментирани</a>
+                            <a type="submit" class="dropdown-item fs17" asp-route-cityId="@Model.CityId" asp-action="GetCategory" asp-route-Id="@Model.JobCategoryId" asp-route-sortBy="@GlobalConstants.ByRatingDesc" asp-route-page="@Model.PageNumber">С най-висок рейтинг</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </form>
 
     @if (Model.SpecialistsDetails.Count() > 0)
     {

@@ -6,6 +6,8 @@
 
     public class SpecialistsPagingViewModel : BasePagingViewModel
     {
+        public int CityId { get; set; }
+
         public string SortBy { get; set; }
 
         public int JobCategoryId { get; set; }
