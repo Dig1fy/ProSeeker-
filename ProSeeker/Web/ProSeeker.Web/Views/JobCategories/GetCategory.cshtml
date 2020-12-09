@@ -1,7 +1,7 @@
 ﻿@using ProSeeker.Common
 @model ProSeeker.Web.ViewModels.Categories.CategoriesViewModel
 
-<div class="custom-heading-title">
+<div class="custom-heading-title" style="min-width:255px;">
     <h3 class="text-center mb-4 custom-golden-text">Добре дошли в категория '@Model.Name'!</h3>
     <div class="text-center" style="font-style:oblique; text-shadow: 1px 1px 1px rgba(20, 137, 248, 0.55);">
         <h4 style="text-shadow: 1px 1px 1px rgba(11, 86, 84, 0.25);">"@Model.Description"</h4> <hr />
@@ -15,26 +15,25 @@
 else
 {
     <form>
-        <div class="col-md-6 mb-3 mb-md-0">
-            <h4>
-                <label>Град</label>
-            </h4>
-            <select asp-for="@Model.CityId" class="form-control" asp-items="@Model.Cities.Select(x=>new SelectListItem { Text = x.Name, Value = x.Id.ToString()})">
-                <option disabled selected> - Select city - </option>
-            </select>
+        <div class="col-md-6 mb-3 mb-md-0 d-flex" style="min-width:255px;">
             
-            <button asp-route-cityId="@Model.CityId" asp-action="GetCategory" asp-route-Id="@Model.JobCategoryId" asp-route-page="@Model.PageNumber">Повърди</button>
+            <select asp-for="@Model.CityId" class="form-control" style="margin-left: -15px; max-width:225px;" asp-items="@Model.Cities.Select(x=>new SelectListItem { Text = x.Name, Value = x.Id.ToString()})">
+                <option disabled selected> - Изберете град - </option>
+            </select>
+
+            <button class="custom-success-btn" asp-action="GetCategory" asp-route-cityId="@Model.CityId" asp-route-Id="@Model.JobCategoryId" asp-route-page="@Model.PageNumber" style="background-color:darkgreen; width:100px;">
+                Потвърди
+            </button>
         </div>
-        
-        <nav class="navbar navbar-expand-lg custom-golden-text badge-pill dropleft">
+        <nav class="navbar custom-golden-text badge-pill dropleft navbar-expand-lg">
             <div class="navbar-collapse" id="navbarNavDropdown" style="margin-left:-22px;">
                 <ul class="navbar-nav">
-                    <li class="nav-item dropdown ">
+                    <li class="nav-item dropdown" style="max-width:300px; z-index:1">
                         <a class="nav-link dropdown-toggle" style="font-size:18px;" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Сортирай <label class="text-muted">/текущо сортиране: по @GlobalMethods.TranslateVoteType(Model.SortBy)/</label>
+                            Сортирай <label class="text-muted media-body">/текущо сортиране: по @GlobalMethods.TranslateVoteType(Model.SortBy)/</label>
                         </a>
 
-                        <div class="dropdown-menu custom-dropdown-content ml-3 mt-2" style="min-width:200px;" aria-labelledby="navbarDropdownMenuLink">                            
+                        <div class="dropdown-menu custom-dropdown-content ml-3 mt-3" style="min-width:185px;" aria-labelledby="navbarDropdownMenuLink">
                             <a type="submit" class="dropdown-item fs17" asp-route-cityId="@Model.CityId" asp-action="GetCategory" asp-route-Id="@Model.JobCategoryId" asp-route-sortBy="@GlobalConstants.ByDateDescending" asp-route-page="@Model.PageNumber">Най-нови</a>
                             <a type="submit" class="dropdown-item fs17" asp-route-cityId="@Model.CityId" asp-action="GetCategory" asp-route-Id="@Model.JobCategoryId" asp-route-sortBy="@GlobalConstants.ByOpinionsDescending" asp-route-page="@Model.PageNumber">Най-коментирани</a>
                             <a type="submit" class="dropdown-item fs17" asp-route-cityId="@Model.CityId" asp-action="GetCategory" asp-route-Id="@Model.JobCategoryId" asp-route-sortBy="@GlobalConstants.ByRatingDesc" asp-route-page="@Model.PageNumber">С най-висок рейтинг</a>

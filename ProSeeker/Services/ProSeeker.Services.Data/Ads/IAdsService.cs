@@ -16,7 +16,7 @@
         Task<IEnumerable<T>> GetMyAdsAsync<T>(string id, int page);
 
         // IEnumerable<T> GetByCreatedOn<T>(int skip = 0);
-        Task<IEnumerable<T>> GetByCategoryAsync<T>(string categoryName, string sortBy, int page);
+        Task<IEnumerable<T>> GetByCategoryAsync<T>(string categoryName, string sortBy, int cityId, int page);
 
         Task<int> AllAdsCountAsync();
 

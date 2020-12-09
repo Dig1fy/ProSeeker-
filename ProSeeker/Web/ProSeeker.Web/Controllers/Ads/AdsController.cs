@@ -74,7 +74,7 @@
         }
 
         // [Authorize]
-        public async Task<IActionResult> GetByCategory(string categoryName, string sortBy, int page = 1)
+        public async Task<IActionResult> GetByCategory(string categoryName, string sortBy, int cityId, string categoryname, int jobcategoryid, int id, int page = 1)
         {
             // Explicitly check the page in case someone wants to cheat :)
             page = page < 1 ? 1 : page;
@@ -82,12 +82,22 @@
             var model = new GetAllViewModel
             {
                 SortBy = sortBy == null ? GlobalConstants.ByDateDescending : sortBy,
-                CategoryName = categoryName,
+                CityId = cityId,
                 PageNumber = page,
-                AdsCount = await this.adsService.AllAdsByCategoryCountAsync(categoryName),
-                Ads = await this.adsService.GetByCategoryAsync<AdsShortDetailsViewModel>(categoryName, sortBy, page),
+                CategoryName = categoryName,
             };
 
+            // First time we access this controller, category won't be null.
+            // The second time (when hit the submit button), it will be null and we don't want to override it.
+            if (categoryName != null)
+            {
+                model.CategoryName = categoryName;
+            }
+
+            categoryName = categoryName == null ? model.CategoryName : categoryName;
+            model.AdsCount = await this.adsService.AllAdsByCategoryCountAsync(categoryName);
+            model.Ads = await this.adsService.GetByCategoryAsync<AdsShortDetailsViewModel>(categoryName, sortBy, model.CityId, page);
+            model.Cities = await this.citiesService.GetAllCitiesAsync<CitySimpleViewModel>();
             return this.View(model);
         }
 

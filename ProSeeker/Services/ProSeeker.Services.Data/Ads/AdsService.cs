@@ -77,11 +77,11 @@
         public async Task<int> AllAdsCountAsync()
             => await this.adsRepository.AllAsNoTracking().CountAsync();
 
-        public async Task<IEnumerable<T>> GetByCategoryAsync<T>(string categoryName, string sortBy, int page)
+        public async Task<IEnumerable<T>> GetByCategoryAsync<T>(string categoryName, string sortBy, int cityId, int page)
         {
             sortBy = sortBy == null ? GlobalConstants.ByDateDescending : sortBy;
 
-            var sortedAds = this.SortAds(categoryName, sortBy);
+            var sortedAds = this.SortAds(categoryName, sortBy, cityId);
             var allByCategory = await sortedAds
                 .Skip((page - 1) * GlobalConstants.ItemsPerPage)
                 .Take(GlobalConstants.ItemsPerPage)
@@ -136,11 +136,16 @@
         }
 
         // TODO: Try with reflection
-        private IQueryable<Ad> SortAds(string categoryName, string sortBy)
+        private IQueryable<Ad> SortAds(string categoryName, string sortBy, int cityId)
         {
             var ads = this.adsRepository
                 .AllAsNoTracking()
                 .Where(x => x.JobCategory.Name == categoryName);
+
+            if (cityId != 0)
+            {
+                ads = ads.Where(x => x.CityId == cityId);
+            }
 
             return sortBy switch
             {

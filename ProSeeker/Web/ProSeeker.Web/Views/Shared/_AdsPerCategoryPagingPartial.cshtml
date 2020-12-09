@@ -4,13 +4,13 @@
     <form method="post">
         <ul class="pagination justify-content-center">
             <li class="page-item @if (!Model.HasPreviousPage) { <text>disabled</text> }">
-                <a class="page-link" asp-action="GetByCategory" asp-route-categoryName="@Model.CategoryName" asp-route-sortBy="@Model.SortBy" asp-route-page="@Model.PreviousPageNumber">Previous</a>
+                <a class="page-link" asp-action="GetByCategory" asp-route-cityId="@Model.CityId" asp-route-categoryName="@Model.CategoryName" asp-route-sortBy="@Model.SortBy" asp-route-page="@Model.PreviousPageNumber">Previous</a>
             </li>
             @for (int i = Model.PageNumber - 4; i < Model.PageNumber; i++)
             {
                 if (i > 0)
                 {
-                    <li class="page-item"><a class="page-link" asp-route-categoryName="@Model.CategoryName" asp-route-sortBy="@Model.SortBy" asp-action="GetByCategory" asp-route-page="@i" >@i</a></li>
+                    <li class="page-item"><a class="page-link" asp-route-cityId="@Model.CityId" asp-route-categoryName="@Model.CategoryName" asp-route-sortBy="@Model.SortBy" asp-action="GetByCategory" asp-route-page="@i" >@i</a></li>
                 }
             }
             <li class="page-item active" aria-current="page">
@@ -23,11 +23,11 @@
             {
                 if (i <= Model.PagesCount)
                 {
-                    <li class="page-item"><a class="page-link" asp-action="GetByCategory" asp-route-categoryName="@Model.CategoryName" asp-route-sortBy="@Model.SortBy" asp-route-page="@i">@i</a></li>
+                    <li class="page-item"><a class="page-link" asp-action="GetByCategory" asp-route-cityId="@Model.CityId" asp-route-categoryName="@Model.CategoryName" asp-route-sortBy="@Model.SortBy" asp-route-page="@i">@i</a></li>
                 }
             }
             <li class="page-item @if (!Model.HasNextPage) { <text>disabled</text> }">
-                <a class="page-link" asp-action="GetByCategory" asp-route-categoryName="@Model.CategoryName" asp-route-sortBy="@Model.SortBy" asp-route-page="@Model.NextPageNumber">Next</a>
+                <a class="page-link" asp-action="GetByCategory" asp-route-categoryName="@Model.CategoryName" asp-route-cityId="@Model.CityId" asp-route-sortBy="@Model.SortBy" asp-route-page="@Model.NextPageNumber">Next</a>
             </li>
         </ul>
     </form>
