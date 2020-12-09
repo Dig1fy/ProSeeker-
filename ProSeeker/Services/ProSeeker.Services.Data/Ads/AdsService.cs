@@ -73,22 +73,37 @@
 
             return count;
         }
-        
+
         public async Task<int> AllAdsCountAsync()
             => await this.adsRepository.AllAsNoTracking().CountAsync();
 
-        public async Task<IEnumerable<T>> GetByCategoryAsync<T>(string categoryName, int page)
+        public async Task<IEnumerable<T>> GetByCategoryAsync<T>(string categoryName, string sortBy, int page)
         {
-            var allByCategory = await this.adsRepository
-                .AllAsNoTracking()
-                .Where(x => x.JobCategory.Name == categoryName)
-                .OrderByDescending(x => x.CreatedOn)
+            sortBy = sortBy == null ? GlobalConstants.ByDateDescending : sortBy;
+
+            var allAdsByCategory = this.SortAds(categoryName, sortBy);
+            var allByCategory = await allAdsByCategory
                 .Skip((page - 1) * GlobalConstants.ItemsPerPage)
                 .Take(GlobalConstants.ItemsPerPage)
                 .To<T>()
                 .ToListAsync();
 
             return allByCategory;
+        }
+
+        private IQueryable<Ad> SortAds(string categoryName, string sortBy)
+        {
+            var ads = this.adsRepository
+                .AllAsNoTracking()
+                .Where(x => x.JobCategory.Name == categoryName);
+
+            return sortBy switch
+            {
+                GlobalConstants.ByDateDescending => ads.OrderByDescending(x => x.CreatedOn),
+                GlobalConstants.ByOpinionsDescending => ads.OrderByDescending(x => x.Opinions.Count),
+                GlobalConstants.ByVotesDescending => ads.OrderByDescending(x => x.Votes.Count),
+                _ => ads,
+            };
         }
 
         public async Task<T> GetAdDetailsByIdAsync<T>(string id)

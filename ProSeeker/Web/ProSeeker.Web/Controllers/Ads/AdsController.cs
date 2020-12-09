@@ -74,17 +74,18 @@
         }
 
         // [Authorize]
-        public async Task<IActionResult> GetByCategory(string categoryName, int page = 1)
+        public async Task<IActionResult> GetByCategory(string categoryName, string sortBy, int page = 1)
         {
             // Explicitly check the page in case someone wants to cheat :)
             page = page < 1 ? 1 : page;
 
             var model = new GetAllViewModel
             {
+                SortBy = sortBy == null ? GlobalConstants.ByDateDescending : sortBy,
                 CategoryName = categoryName,
                 PageNumber = page,
                 AdsCount = await this.adsService.AllAdsByCategoryCountAsync(categoryName),
-                Ads = await this.adsService.GetByCategoryAsync<AdsShortDetailsViewModel>(categoryName, page),
+                Ads = await this.adsService.GetByCategoryAsync<AdsShortDetailsViewModel>(categoryName, sortBy, page),
             };
 
             return this.View(model);

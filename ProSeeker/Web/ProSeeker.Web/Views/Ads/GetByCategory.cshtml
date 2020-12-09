@@ -1,5 +1,10 @@
-﻿@model ProSeeker.Web.ViewModels.Ads.GetAllViewModel
-
+﻿@using ProSeeker.Common
+@model ProSeeker.Web.ViewModels.Ads.GetAllViewModel
+<style>
+    .fs17 {
+        font-size: 17px;
+    }
+</style>
 @if (!Model.Ads.Any())
 {
     <h2 class="custom-golden-text">Все още няма регистрирани обяви в тази категория!</h2>
@@ -7,18 +12,20 @@
 else
 {
     <nav class="navbar navbar-expand-lg custom-golden-text badge-pill dropleft">
-        
+
         <div class="navbar-collapse" id="navbarNavDropdown" style="margin-left:-22px;">
             <ul class="navbar-nav">
                 <li class="nav-item dropdown ">
                     <a class="nav-link dropdown-toggle" style="font-size:18px;" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Сортирай
                     </a>
+                    <label>Текущо сортиране: по @Model.SortByTranslated</label>
                     <div class="dropdown-menu custom-dropdown-content ml-3 mt-2" style="min-width:200px;" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" style="font-size:17px;" href="#">Име</a>
-                        <a class="dropdown-item" style="font-size:17px;" href="#">Най-нови</a>
-                        <a class="dropdown-item" style="font-size:17px;" href="#">Брой коментари</a>
-                        <a class="dropdown-item" style="font-size:17px;" href="#">Брой харесвания</a>
+                        <form>
+                            <a class="dropdown-item fs17" asp-action="GetByCategory" asp-route-categoryName="@Model.CategoryName" asp-route-sortBy="@GlobalConstants.ByDateDescending" asp-route-page="@Model.PageNumber">Най-нови</a>
+                            <a class="dropdown-item fs17" asp-action="GetByCategory" asp-route-categoryName="@Model.CategoryName" asp-route-sortBy="@GlobalConstants.ByOpinionsDescending" asp-route-page="@Model.PageNumber">Най-коментирани</a>
+                            <a class="dropdown-item fs17" asp-action="GetByCategory" asp-route-categoryName="@Model.CategoryName" asp-route-sortBy="@GlobalConstants.ByVotesDescending" asp-route-page="@Model.PageNumber">Най-харесвани</a>
+                        </form>
                     </div>
                 </li>
             </ul>

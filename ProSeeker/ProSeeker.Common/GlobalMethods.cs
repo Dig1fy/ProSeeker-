@@ -1,6 +1,8 @@
 ﻿namespace ProSeeker.Common
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Text;
 
     public static class GlobalMethods
@@ -14,7 +16,6 @@
             }
 
             var stringBuilder = new StringBuilder();
-
 
             if (input.Contains(' '))
             {
