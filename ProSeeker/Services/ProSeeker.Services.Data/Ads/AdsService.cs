@@ -81,29 +81,14 @@
         {
             sortBy = sortBy == null ? GlobalConstants.ByDateDescending : sortBy;
 
-            var allAdsByCategory = this.SortAds(categoryName, sortBy);
-            var allByCategory = await allAdsByCategory
+            var sortedAds = this.SortAds(categoryName, sortBy);
+            var allByCategory = await sortedAds
                 .Skip((page - 1) * GlobalConstants.ItemsPerPage)
                 .Take(GlobalConstants.ItemsPerPage)
                 .To<T>()
                 .ToListAsync();
 
             return allByCategory;
-        }
-
-        private IQueryable<Ad> SortAds(string categoryName, string sortBy)
-        {
-            var ads = this.adsRepository
-                .AllAsNoTracking()
-                .Where(x => x.JobCategory.Name == categoryName);
-
-            return sortBy switch
-            {
-                GlobalConstants.ByDateDescending => ads.OrderByDescending(x => x.CreatedOn),
-                GlobalConstants.ByOpinionsDescending => ads.OrderByDescending(x => x.Opinions.Count),
-                GlobalConstants.ByVotesDescending => ads.OrderByDescending(x => x.Votes.Count),
-                _ => ads,
-            };
         }
 
         public async Task<T> GetAdDetailsByIdAsync<T>(string id)
@@ -148,6 +133,23 @@
                 .CountAsync();
 
             return allUserAds;
+        }
+
+        // TODO: Try with reflection
+        private IQueryable<Ad> SortAds(string categoryName, string sortBy)
+        {
+            var ads = this.adsRepository
+                .AllAsNoTracking()
+                .Where(x => x.JobCategory.Name == categoryName);
+
+            return sortBy switch
+            {
+                GlobalConstants.ByDateDescending => ads.OrderByDescending(x => x.CreatedOn),
+                GlobalConstants.ByOpinionsDescending => ads.OrderByDescending(x => x.Opinions.Count),
+                GlobalConstants.ByUpVotesDescending => ads.OrderByDescending(x => x.Votes.Where(v => v.VoteType == VoteType.UpVote).Count()),
+                GlobalConstants.ByDownVotesDescending => ads.OrderByDescending(x => x.Votes.Where(v => v.VoteType == VoteType.DownVote).Count()),
+                _ => ads,
+            };
         }
     }
 }

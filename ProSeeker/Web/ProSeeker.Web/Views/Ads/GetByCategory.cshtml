@@ -12,19 +12,19 @@
 else
 {
     <nav class="navbar navbar-expand-lg custom-golden-text badge-pill dropleft">
-
         <div class="navbar-collapse" id="navbarNavDropdown" style="margin-left:-22px;">
             <ul class="navbar-nav">
                 <li class="nav-item dropdown ">
                     <a class="nav-link dropdown-toggle" style="font-size:18px;" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Сортирай
+                        Сортирай <label class="text-muted">/текущо сортиране: по @GlobalMethods.TranslateVoteType(Model.SortBy)/</label>
                     </a>
-                    <label>Текущо сортиране: по @Model.SortByTranslated</label>
+                    
                     <div class="dropdown-menu custom-dropdown-content ml-3 mt-2" style="min-width:200px;" aria-labelledby="navbarDropdownMenuLink">
                         <form>
                             <a class="dropdown-item fs17" asp-action="GetByCategory" asp-route-categoryName="@Model.CategoryName" asp-route-sortBy="@GlobalConstants.ByDateDescending" asp-route-page="@Model.PageNumber">Най-нови</a>
                             <a class="dropdown-item fs17" asp-action="GetByCategory" asp-route-categoryName="@Model.CategoryName" asp-route-sortBy="@GlobalConstants.ByOpinionsDescending" asp-route-page="@Model.PageNumber">Най-коментирани</a>
-                            <a class="dropdown-item fs17" asp-action="GetByCategory" asp-route-categoryName="@Model.CategoryName" asp-route-sortBy="@GlobalConstants.ByVotesDescending" asp-route-page="@Model.PageNumber">Най-харесвани</a>
+                            <a class="dropdown-item fs17" asp-action="GetByCategory" asp-route-categoryName="@Model.CategoryName" asp-route-sortBy="@GlobalConstants.ByUpVotesDescending" asp-route-page="@Model.PageNumber">Най-харесвани</a>
+                            <a class="dropdown-item fs17" asp-action="GetByCategory" asp-route-categoryName="@Model.CategoryName" asp-route-sortBy="@GlobalConstants.ByDownVotesDescending" asp-route-page="@Model.PageNumber">Най-нехаресвани</a>
                         </form>
                     </div>
                 </li>

@@ -20,8 +20,12 @@
         // Ad Sorting options
         public const string ByDateDescending = "CreatedOn";
 
-        public const string ByVotesDescending = "UpVotesCount";
+        public const string ByUpVotesDescending = "UpVotesCount";
+
+        public const string ByDownVotesDescending = "DownVotesCount";
 
         public const string ByOpinionsDescending = "OpinionsCount";
+
+        public const string ByRatingDesc = "AverageRating";
     }
 }

@@ -44,5 +44,18 @@
 
             return stringBuilder.ToString().Trim();
         }
+
+        public static string TranslateVoteType(string input)
+        {
+            return input switch
+            {
+                GlobalConstants.ByDateDescending => "дата",
+                GlobalConstants.ByOpinionsDescending => "брой коментари",
+                GlobalConstants.ByUpVotesDescending => "брой харесвания",
+                GlobalConstants.ByDownVotesDescending => "брой нехаресвания",
+                GlobalConstants.ByRatingDesc => "най-висок рейтинг",
+                _ => string.Empty,
+            };
+        }
     }
 }

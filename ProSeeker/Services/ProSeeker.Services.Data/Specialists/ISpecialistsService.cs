@@ -7,6 +7,6 @@
     {
         Task<int> GetSpecialistsCountByCategoryAsync(int categoryId);
 
-        Task<IEnumerable<T>> GetAllSpecialistsPerCategoryAsync<T>(int categoryId, int page);
+        Task<IEnumerable<T>> GetAllSpecialistsPerCategoryAsync<T>(int categoryId, string sortBy, int page);
     }
 }

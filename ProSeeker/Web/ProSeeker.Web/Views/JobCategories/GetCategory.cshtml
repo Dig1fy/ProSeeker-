@@ -1,4 +1,5 @@
-﻿@model ProSeeker.Web.ViewModels.Categories.CategoriesViewModel
+﻿@using ProSeeker.Common 
+@model ProSeeker.Web.ViewModels.Categories.CategoriesViewModel
 
 <div class="custom-heading-title">
     <h3 class="text-center mb-4 custom-golden-text">Добре дошли в категория '@Model.Name'!</h3>
@@ -13,6 +14,26 @@
 }
 else
 {
+    <nav class="navbar navbar-expand-lg custom-golden-text badge-pill dropleft">
+        <div class="navbar-collapse" id="navbarNavDropdown" style="margin-left:-22px;">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown ">
+                    <a class="nav-link dropdown-toggle" style="font-size:18px;" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Сортирай <label class="text-muted">/текущо сортиране: по @GlobalMethods.TranslateVoteType(Model.SortBy)/</label>
+                    </a>
+
+                    <div class="dropdown-menu custom-dropdown-content ml-3 mt-2" style="min-width:200px;" aria-labelledby="navbarDropdownMenuLink">
+                        <form>
+                            <a class="dropdown-item fs17" asp-action="GetCategory" asp-route-Id="@Model.JobCategoryId" asp-route-sortBy="@GlobalConstants.ByDateDescending" asp-route-page="@Model.PageNumber">Най-нови</a>
+                            <a class="dropdown-item fs17" asp-action="GetCategory" asp-route-Id="@Model.JobCategoryId" asp-route-sortBy="@GlobalConstants.ByOpinionsDescending" asp-route-page="@Model.PageNumber">Най-коментирани</a>
+                            <a class="dropdown-item fs17" asp-action="GetCategory" asp-route-Id="@Model.JobCategoryId" asp-route-sortBy="@GlobalConstants.ByRatingDesc" asp-route-page="@Model.PageNumber">С най-висок рейтинг</a>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
     @if (Model.SpecialistsDetails.Count() > 0)
     {
         <div class="list-group m-5">
@@ -27,23 +48,23 @@ else
                         <p>@specialist.JobCategoryName - @specialist.UserCityName</p>
                         <p><i class="fas fa-user"></i> @specialist.UserUserName</p>
                         <p><i class="fas fa-hourglass-end"></i> Членство от: <time class="d-block mb-5" datetime="@specialist.CreatedOn.ToString("O")"> </time></p>
-                        <div class="stars-container" style="margin-left:-5px;">                           
-                                <div class="stars-outer">
-                                    <div class="stars-inner"></div>
-                                </div>
-                                <span class="number-rating" style="color:darkolivegreen"><strong>@specialist.AverageRating</strong></span>
-                                <span>
-                                    (
-                                    @specialist.RatingsCount
-                                    @if (@specialist.RatingsCount == 1)
-                                    {
-                                        <span> глас )</span>
-                                    }
-                                    else
-                                    {
-                                        <span> гласа )</span>
-                                    }
-                                </span>                           
+                        <div class="stars-container" style="margin-left:-5px;">
+                            <div class="stars-outer">
+                                <div class="stars-inner"></div>
+                            </div>
+                            <span class="number-rating" style="color:darkolivegreen"><strong>@specialist.AverageRating</strong></span>
+                            <span>
+                                (
+                                @specialist.RatingsCount
+                                @if (@specialist.RatingsCount == 1)
+                                {
+                                    <span> глас )</span>
+                                }
+                                else
+                                {
+                                    <span> гласа )</span>
+                                }
+                            </span>
                         </div>
                     </div>
                 }
@@ -68,7 +89,7 @@ else
             const starPercentage = (rating / starsTotal) * 100;
             // Round to nearest 10
             const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
-            // Set width of stars-inner to percentage            
+            // Set width of stars-inner to percentage
             starsRef[i].style.width = starPercentageRounded;
         }
     }
