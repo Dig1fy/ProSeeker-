@@ -27,7 +27,7 @@
                 {
                      UserName = "s@s",
                      Email = "s@s",
-                     CityId = 120,
+                     CityId = 5,
                      EmailConfirmed = true,
                      FirstName = "Георги",
                      LastName = "Георгиев",
@@ -55,7 +55,7 @@
                 {
                      UserName = "s@s2",
                      Email = "s@s2",
-                     CityId = 120,
+                     CityId = 5,
                      EmailConfirmed = true,
                      FirstName = "Иван",
                      LastName = "Иванов",
@@ -83,7 +83,7 @@
                 {
                      UserName = "u@u",
                      Email = "u@u",
-                     CityId = 120,
+                     CityId = 5,
                      EmailConfirmed = true,
                      FirstName = "Стоян",
                      LastName = "Иванов",
