@@ -1,18 +1,10 @@
 ﻿@model ProSeeker.Web.ViewModels.Inquiries.InquiryInputModel
 
-<style>
-    .inquiry-notes {
-        font-family: 'Matura MT Script Capitals';
-        font-style: italic;
-        color: forestgreen;
-        font-size: 19px;
-    }
-</style>
 <div class="hero-wrap hero-wrap-2" style="background-image: url('https://thumbs.dreamstime.com/z/author-office-writer-concept-desk-background-top-view-mock-up-professional-white-work-89923761.jpg');" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
 
 </div>
-<div class="text-center">
+<div class="text-center custom-heading-title custom-golden-text" style="height:60px;">
 
     <h1>Запитване към специалист</h1>
 </div>
@@ -53,14 +45,16 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6 mb-3 mb-md-0">
-                        <h4>
-                            <label>Град</label>
-                        </h4>
-                        <select asp-for="@Model.CityId" class="form-control" asp-items="@Model.Cities.Select(x=>new SelectListItem { Text = x.Name, Value = x.Id.ToString()})">
-                            <option disabled selected> - Select city - </option>
-                        </select>
-                        <span asp-validation-for="@Model.CityId" class="text-danger"></span>
+                    <div class="row form-group mb-4">
+                        <div class="col-md-6">
+                            <h4>
+                                <label>Град</label>
+                            </h4>
+                            <select asp-for="@Model.CityId" class="form-control" asp-items="@Model.Cities.Select(x=>new SelectListItem { Text = x.Name, Value = x.Id.ToString()})">
+                                <option disabled selected> - Select city - </option>
+                            </select>
+                            <span asp-validation-for="@Model.CityId" class="text-danger"></span>
+                        </div>
                     </div>
 
                     <hr />

@@ -2,7 +2,7 @@
 {
     using System.Linq;
     using System.Threading.Tasks;
-
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using ProSeeker.Common;
@@ -129,10 +129,16 @@
             return this.RedirectToAction(nameof(this.MyAds));
         }
 
-        // [Authorize]
+        [Authorize]
         public async Task<IActionResult> Edit(string id)
         {
             var model = await this.adsService.GetAdDetailsByIdAsync<UpdateInputModel>(id);
+
+            if (model.UserId != this.userManager.GetUserId(this.User))
+            {
+                return this.RedirectToAction("AccessDenied", "Errors");
+            }
+
             var allCities = await this.citiesService.GetAllCitiesAsync<CitySimpleViewModel>();
             var allcategories = await this.categoriesService.GetAllCategoriesAsync<CategorySimpleViewModel>();
 
@@ -143,8 +149,14 @@
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Edit(UpdateInputModel inputModel)
         {
+            if (this.userManager.GetUserId(this.User) == inputModel.UserId)
+            {
+                return this.RedirectToAction("AccessDenied", "Errors");
+            }
+
             if (!this.ModelState.IsValid)
             {
                 inputModel.Cities = await this.citiesService.GetAllCitiesAsync<CitySimpleViewModel>();
@@ -161,7 +173,9 @@
 
         public async Task<IActionResult> GetById(string id)
         {
+            var currenUserId = this.userManager.GetUserId(this.User);
             var ad = await this.adsService.GetAdDetailsByIdAsync<AdsFullDetailsViewModel>(id);
+            ad.IsOwnerOfAd = ad.UserId == currenUserId;
             return this.View(ad);
         }
     }

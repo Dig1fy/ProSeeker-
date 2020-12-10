@@ -30,6 +30,8 @@
         [Required(ErrorMessage = "Моля, изберете град от падащото меню!")]
         public int CityId { get; set; }
 
+        public string UserId { get; set; }
+
         public IEnumerable<CitySimpleViewModel> Cities { get; set; }
 
         public IEnumerable<CategorySimpleViewModel> Categories { get; set; }

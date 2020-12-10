@@ -34,7 +34,10 @@
                             <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Обяви</a>
                             <div class="dropdown-menu dropdown-menu-center" aria-labelledby="servicesDropdown">
 
-                                <a id="GUGUTKA" class="text-center custom-a-as-button" asp-area="" asp-controller="Ads" asp-action="Create">Създай обява</a>
+                                @if (this.User.Identity.IsAuthenticated && this.User.IsInRole(GlobalConstants.RegularUserRoleName))
+                                {
+                                    <a id="GUGUTKA" class="text-center custom-a-as-button" asp-area="" asp-controller="Ads" asp-action="Create">Създай обява</a>
+                                }
 
                                 <div class="dropdown-divider"></div>
                                 <div class="d-md-flex align-items-start justify-content-start custom-mega-menu-content">

@@ -16,6 +16,8 @@
 
         public string UserId { get; set; }
 
+        public bool IsOwnerOfAd { get; set; }
+
         public virtual ApplicationUser User { get; set; }
 
         public virtual ICollection<OpinionViewModel> Opinions { get; set; }

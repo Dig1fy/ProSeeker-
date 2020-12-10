@@ -67,18 +67,29 @@
 <div class="row">
     <div class="button-container col-md-2">
         <div class="col-md-12">
-            <div id="">
-                <form>
-                    <div class="text-left">
-                        <button type="submit" class="custom-submit-button mb-3 col-md-12" asp-route-id="@Model.Id" asp-controller="Ads" asp-action="Edit">Промени</button>
+            @if (this.User.Identity.IsAuthenticated)
+            {
+                //if (!Model.IsOwnerOfAd)
+                //{
+                    <form>
+                        <div class="text-left">
+                            <button type="submit" class="custom-submit-button mb-3 col-md-12" asp-route-id="@Model.Id" asp-controller="Offers" asp-action="Create">Направи оферта</button>
+                        </div>
+                    </form>
+                //}
+                //else
+                //{
+                    <form>
+                        <div class="text-left">
+                            <button type="submit" class="custom-submit-button mb-3 col-md-12" asp-route-id="@Model.Id" asp-controller="Ads" asp-action="Edit">Промени</button>
+                        </div>
+                    </form>
+                    <form asp-route-id="@Model.Id" asp-controller="Ads" asp-action="Delete" id="deleteAdForm">
+                    </form>
+                    <button class="custom-submit-button mb-3 col-md-12" data-toggle="modal" data-target="#deleteModal">Изтрий</button>
+                //}
 
-                        <button type="submit" class="custom-submit-button mb-3 col-md-12" asp-route-id="@Model.Id" asp-controller="Offers" asp-action="Create">Направи оферта</button>
-                    </div>
-                </form>
-                <form asp-route-id="@Model.Id" asp-controller="Ads" asp-action="Delete" id="deleteAdForm">
-                </form>
-                <button class="custom-submit-button mb-3 col-md-12" data-toggle="modal" data-target="#deleteModal">Изтрий</button>
-            </div>
+            }
         </div>
     </div>
     <section class="col-md-10" id="custom-shadow-transform">
@@ -105,7 +116,7 @@
             </div>
         </div>
 
-            
+
         <div>
             @if (this.User.Identity.IsAuthenticated)
             {
@@ -126,14 +137,14 @@
             else
             {
                 <div class="text-muted d-flex float-left">
-                    
+
                     <div class="mr-1">
                         <i class="fa fa-thumbs-up d-inline"></i>
                         <div class="text-muted d-inline" id="upVotesCount">@Model.UpVotesCount</div>
                         <div class="d-inline"> / </div>
                     </div>
                     <div class="ml-1">
-                        <i class="fa fa-thumbs-down d-inline"></i> 
+                        <i class="fa fa-thumbs-down d-inline"></i>
                         <div class="d-inline" id="downVotesCount">@Model.DownVotesCount</div>
 
                     </div>
@@ -150,41 +161,41 @@
                 <div class="clearfix"></div>
             </div>
         </div>
-        
+
         @{ DisplayOpinions(null); }
 
 
 
         @*============================
-           New opinion /text area/
-        ===========================*@
+               New opinion /text area/
+            ===========================*@
 
-       
-            <div class="row">
-                <div class="col-md-12">
-                    <form asp-controller="Opinions" asp-action="CreateAdOpinion" method="post" id="addOpinionsForm" style="display:block;">
-                        @if (!Model.Opinions.Any())
-                        {
-                            <h5 class="text-center no-opinions-text">
-                                Все още няма мнения за тази обява.
-                            </h5>
-                        }
-                        @if (this.User.Identity.IsAuthenticated)
-                        {
-                            <input hidden name="adId" value="@Model.Id" />
-                            <input type="hidden" name="ParentId" value="0" />
-                            <div>
-                                <label for="Content"></label>
-                                <textarea placeholder="Напиши своето мнение..." name="Content" id="Content" class="form-control tinymce-textarea"></textarea>
-                            </div>
-                            <div>
-                                <input type="submit" class="btn custom-submit-button" value="Изпрати" />
-                            </div>
-                        }
-                        </form>
-                </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <form asp-controller="Opinions" asp-action="CreateAdOpinion" method="post" id="addOpinionsForm" style="display:block;">
+                    @if (!Model.Opinions.Any())
+                    {
+                        <h5 class="text-center no-opinions-text">
+                            Все още няма мнения за тази обява.
+                        </h5>
+                    }
+                    @if (this.User.Identity.IsAuthenticated)
+                    {
+                        <input hidden name="adId" value="@Model.Id" />
+                        <input type="hidden" name="ParentId" value="0" />
+                        <div>
+                            <label for="Content"></label>
+                            <textarea placeholder="Напиши своето мнение..." name="Content" id="Content" class="form-control tinymce-textarea"></textarea>
+                        </div>
+                        <div>
+                            <input type="submit" class="btn custom-submit-button" value="Изпрати" />
+                        </div>
+                    }
+                </form>
             </div>
-      
+        </div>
+
     </section>
 </div>
 <br />

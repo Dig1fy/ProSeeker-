@@ -191,15 +191,17 @@
                                                 SERVICE TAB
                     ====================================================================*@
                 <div class="tab-pane fade" id="service" role="tabpanel" aria-labelledby="service-tab">
+                    @{ var serviceCounter = 1;} 
                     @foreach (var service in Model.SpecialistDetails.Services)
                     {
                         <div class="card border-info mb-3" style="max-width: 33rem;">
-                            <div class="card-header">@service.Name</div>
+                            <div class="card-header"><strong>@serviceCounter</strong># @service.Name</div>
                             <div class="card-body text-info">
                                 @*<h5 class="card-title">Info Panel title</h5>*@
                                 <p class="card-text">@service.Description</p>
                             </div>
                         </div>
+                        serviceCounter++;
                     }
                 </div>
 
