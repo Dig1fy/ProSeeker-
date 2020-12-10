@@ -22,7 +22,14 @@
                 <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Акаунт</a>
                 <a class="dropdown-item" asp-area="" asp-controller="Ads" asp-action="MyAds">Моите обяви</a>
                 <a class="dropdown-item" asp-area="" asp-controller="Ads" asp-action="Create">Запитвания</a>
-                <a class="dropdown-item" asp-area="" asp-controller="Ads" asp-action="Create">Оферти</a>
+                @if (this.User.IsInRole(GlobalConstants.RegularUserRoleName))
+                {
+                    <a class="dropdown-item" asp-area="" asp-controller="Offers" asp-action="UserOffers">Оферти</a>
+                }
+                else
+                {
+                    <a class="dropdown-item" asp-area="" asp-controller="Offers" asp-action="SpecialistOffers">Оферти</a>
+                }
                 <a onclick="SubmitForm()" class="dropdown-item">
                     <form id="submitForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">Изход </form>
                 </a>

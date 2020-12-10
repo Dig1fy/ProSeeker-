@@ -15,6 +15,8 @@
         [Required]
         public string AdId { get; set; }
 
+        public virtual Ad Ad { get; set; }
+
         [Required]
         public string Description { get; set; }
 
@@ -27,7 +29,7 @@
 
         public string ApplicationUserId { get; set; }
 
-        public virtual ApplicationUser ApplicationUser{ get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
 
         public string SpecialistDetailsId { get; set; }
 

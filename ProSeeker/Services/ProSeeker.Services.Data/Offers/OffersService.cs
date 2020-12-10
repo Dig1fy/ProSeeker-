@@ -1,10 +1,13 @@
 ﻿namespace ProSeeker.Services.Data.Offers
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using AutoMapper;
+    using Microsoft.EntityFrameworkCore;
     using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;
+    using ProSeeker.Services.Mapping;
     using ProSeeker.Web.ViewModels.Offers;
 
     public class OffersService : IOffersService
@@ -45,6 +48,17 @@
             await this.offersRepository.AddAsync(newOffer);
             await this.offersRepository.SaveChangesAsync();
             return newOffer.Id;
+        }
+
+        public async Task<IEnumerable<T>> GetAllUserOffers<T>(string userId)
+        {
+            var allMyOffers = await this.offersRepository
+                .All()
+                .Where(x => x.ApplicationUserId == userId)
+                .To<T>()
+                .ToListAsync();
+
+            return allMyOffers;
         }
     }
 }

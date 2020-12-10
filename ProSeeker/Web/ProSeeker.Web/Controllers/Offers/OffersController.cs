@@ -1,5 +1,6 @@
 ﻿namespace ProSeeker.Web.Controllers.Offers
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Identity;
@@ -44,6 +45,16 @@
             var newOfferId = await this.offersService.CreateAsync(inputModel, specialistId);
 
             return this.Redirect("/");
+        }
+
+        public async Task<IActionResult> UserOffers()
+        {
+            var userId = this.userManager.GetUserId(this.User);
+            var allMyOffers = await this.offersService.GetAllUserOffers<UserOffersViewModel>(userId);
+
+
+            var model = new AllMyOffersViewModel { Offers = allMyOffers };
+            return this.View(model);
         }
     }
 }

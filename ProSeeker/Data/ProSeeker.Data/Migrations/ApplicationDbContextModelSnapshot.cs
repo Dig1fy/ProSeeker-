@@ -468,7 +468,7 @@ namespace ProSeeker.Data.Migrations
 
                     b.Property<string>("AdId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ApplicationUserId")
                         .HasColumnType("nvarchar(450)");
@@ -497,6 +497,8 @@ namespace ProSeeker.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AdId");
 
                     b.HasIndex("ApplicationUserId");
 
@@ -946,6 +948,12 @@ namespace ProSeeker.Data.Migrations
 
             modelBuilder.Entity("ProSeeker.Data.Models.Offer", b =>
                 {
+                    b.HasOne("ProSeeker.Data.Models.Ad", "Ad")
+                        .WithMany()
+                        .HasForeignKey("AdId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("ProSeeker.Data.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("Offers")
                         .HasForeignKey("ApplicationUserId");
