@@ -13,6 +13,7 @@
     using ProSeeker.Web.ViewModels.Ads;
     using ProSeeker.Web.ViewModels.Categories;
     using ProSeeker.Web.ViewModels.Cities;
+    using ProSeeker.Web.ViewModels.Pagination;
 
     public class AdsController : BaseController
     {
@@ -74,18 +75,18 @@
         }
 
         // [Authorize]
-        public async Task<IActionResult> GetByCategory(string categoryName, string sortBy, int cityId, int submitted = 0, int page = 1)
+        public async Task<IActionResult> GetByCategory(AdsPerPageViewModel input)
         {
             // Explicitly check the page in case someone wants to cheat :)
-            page = page < 1 ? 1 : page;
+            input.Page = input.Page < 1 ? 1 : input.Page;
 
             var model = new GetAllViewModel
             {
-                PageNumber = page,
-                AdsCount = await this.adsService.AllAdsByCategoryCountAsync(categoryName, cityId),
-                SortBy = sortBy == null ? GlobalConstants.ByDateDescending : sortBy,
-                CityId = cityId,
-                CategoryName = categoryName,
+                PageNumber = input.Page,
+                AdsCount = await this.adsService.AllAdsByCategoryCountAsync(input.CategoryName, input.CityId),
+                SortBy = input.SortBy == null ? GlobalConstants.ByDateDescending : input.SortBy,
+                CityId = input.CityId,
+                CategoryName = input.CategoryName,
                 Cities = await this.citiesService.GetAllCitiesAsync<CitySimpleViewModel>(),
             };
 
@@ -96,7 +97,7 @@
                 model.PageNumber = 1;
             }
 
-            model.Ads = await this.adsService.GetByCategoryAsync<AdsShortDetailsViewModel>(categoryName, sortBy, cityId, model.PageNumber);
+            model.Ads = await this.adsService.GetByCategoryAsync<AdsShortDetailsViewModel>(input.CategoryName, input.SortBy, input.CityId, model.PageNumber);
 
             return this.View(model);
         }

@@ -1,13 +1,14 @@
 ﻿namespace ProSeeker.Services.Data.Specialists
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     using Microsoft.EntityFrameworkCore;
     using ProSeeker.Common;
     using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     public class SpecialistsService : ISpecialistsService
     {
@@ -49,8 +50,6 @@
                 .Where(x => x.JobCategoryId == categoryId && x.User.CityId == cityId)
                 .CountAsync();
             }
-
-            
         }
 
         // TODO: Try with reflection

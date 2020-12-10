@@ -10,6 +10,7 @@
     using ProSeeker.Services.Data.Specialists;
     using ProSeeker.Web.ViewModels.Categories;
     using ProSeeker.Web.ViewModels.Cities;
+    using ProSeeker.Web.ViewModels.Pagination;
 
     public class JobCategoriesController : BaseController
     {
@@ -27,17 +28,17 @@
             this.citiesService = citiesService;
         }
 
-        public async Task<IActionResult> GetCategory(int id, string sortBy, int cityId, int page = 1)
+        public async Task<IActionResult> GetCategory(SpecialistsPerPageViewtModel input)
         {
             // Explicitly check the page in case someone wants to cheat :)
-            page = page < 1 ? 1 : page;
+            input.Page = input.Page < 1 ? 1 : input.Page;
 
-            var viewModel = await this.categoriesService.GetByIdAsync<CategoriesViewModel>(id);
-            viewModel.CityId = cityId;
-            viewModel.SortBy = sortBy == null ? GlobalConstants.ByDateDescending : sortBy;
-            viewModel.JobCategoryId = id;
-            viewModel.PageNumber = page;
-            viewModel.SpecialistsCount = await this.specialistsService.GetSpecialistsCountByCategoryAsync(id, cityId);
+            var viewModel = await this.categoriesService.GetByIdAsync<CategoriesViewModel>(input.Id);
+            viewModel.CityId = input.CityId;
+            viewModel.SortBy = input.SortBy == null ? GlobalConstants.ByDateDescending : input.SortBy;
+            viewModel.JobCategoryId = input.Id;
+            viewModel.PageNumber = input.Page;
+            viewModel.SpecialistsCount = await this.specialistsService.GetSpecialistsCountByCategoryAsync(input.Id, input.CityId);
 
             if (viewModel.SpecialistsCount <= GlobalConstants.SpecialistsPerPage)
             {
@@ -46,7 +47,8 @@
 
             viewModel.Cities = await this.citiesService.GetAllCitiesAsync<CitySimpleViewModel>();
             var specialistsPerPage = await this.specialistsService
-                .GetAllSpecialistsPerCategoryAsync<SpecialistsInCategoryViewModel>(id, sortBy, viewModel.CityId, viewModel.PageNumber);
+                .GetAllSpecialistsPerCategoryAsync<SpecialistsInCategoryViewModel>(input.Id, input.SortBy, viewModel.CityId, viewModel.PageNumber);
+
             viewModel.SpecialistsDetails = specialistsPerPage;
 
             return this.View(viewModel);
