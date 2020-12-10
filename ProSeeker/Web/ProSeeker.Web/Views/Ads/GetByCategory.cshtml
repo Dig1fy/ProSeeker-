@@ -1,26 +1,23 @@
 ﻿@using ProSeeker.Common
 @model ProSeeker.Web.ViewModels.Ads.GetAllViewModel
-<style>
-    .fs17 {
-        font-size: 17px;
-    }
-</style>
+
 @if (!Model.Ads.Any())
 {
     <h2 class="custom-golden-text">Все още няма регистрирани обяви в тази категория!</h2>
 }
 else
 {
-    <form asp-for="@Model.CategoryName" asp-route-categoryName="@Model.CategoryName">
+    <form asp-for="@Model.CategoryName" asp-route-categoryName="@Model.CategoryName" asp-action="GetByCategory">
         <div class="col-md-6 mb-3 mb-md-0 d-flex" style="min-width:255px;">
 
             <select asp-for="@Model.CityId" class="form-control" style="margin-left: -15px; max-width:225px;" asp-items="@Model.Cities.Select(x=>new SelectListItem { Text = x.Name, Value = x.Id.ToString()})">
                 <option disabled selected> - Изберете град - </option>
             </select>
 
-            <button class="custom-success-btn" asp-action="GetByCategory" asp-route-categoryName="@Model.CategoryName" asp-route-cityId="@Model.CityId" asp-route-page="@Model.PageNumber" style="background-color:darkgreen; width:100px;">
+            <button class="custom-success-btn" asp-route-categoryName="@Model.CategoryName" asp-route-cityId="@Model.CityId" asp-route-page="@Model.PageNumber" style="background-color:darkgreen; width:100px;">
                 Потвърди
             </button>
+
         </div>
         <nav class="navbar navbar-expand-lg custom-golden-text badge-pill dropleft">
             <div class="navbar-collapse" id="navbarNavDropdown" style="margin-left:-22px;">
@@ -31,10 +28,10 @@ else
                         </a>
 
                         <div class="dropdown-menu custom-dropdown-content ml-3 mt-2" style="min-width:200px;" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item fs17" asp-action="GetByCategory" asp-route-categoryName="@Model.CategoryName" asp-route-cityId="@Model.CityId" asp-route-sortBy="@GlobalConstants.ByDateDescending" asp-route-page="@Model.PageNumber">Най-нови</a>
-                            <a class="dropdown-item fs17" asp-action="GetByCategory" asp-route-categoryName="@Model.CategoryName" asp-route-cityId="@Model.CityId" asp-route-sortBy="@GlobalConstants.ByOpinionsDescending" asp-route-page="@Model.PageNumber">Най-коментирани</a>
-                            <a class="dropdown-item fs17" asp-action="GetByCategory" asp-route-categoryName="@Model.CategoryName" asp-route-cityId="@Model.CityId" asp-route-sortBy="@GlobalConstants.ByUpVotesDescending" asp-route-page="@Model.PageNumber">Най-харесвани</a>
-                            <a class="dropdown-item fs17" asp-action="GetByCategory" asp-route-categoryName="@Model.CategoryName" asp-route-cityId="@Model.CityId" asp-route-sortBy="@GlobalConstants.ByDownVotesDescending" asp-route-page="@Model.PageNumber">Най-нехаресвани</a>
+                            <a class="dropdown-item fs17" asp-route-categoryName="@Model.CategoryName" asp-route-cityId="@Model.CityId" asp-route-sortBy="@GlobalConstants.ByDateDescending" asp-route-page="@Model.PageNumber">Най-нови</a>
+                            <a class="dropdown-item fs17" asp-route-categoryName="@Model.CategoryName" asp-route-cityId="@Model.CityId" asp-route-sortBy="@GlobalConstants.ByOpinionsDescending" asp-route-page="@Model.PageNumber">Най-коментирани</a>
+                            <a class="dropdown-item fs17" asp-route-categoryName="@Model.CategoryName" asp-route-cityId="@Model.CityId" asp-route-sortBy="@GlobalConstants.ByUpVotesDescending" asp-route-page="@Model.PageNumber">Най-харесвани</a>
+                            <a class="dropdown-item fs17" asp-route-categoryName="@Model.CategoryName" asp-route-cityId="@Model.CityId" asp-route-sortBy="@GlobalConstants.ByDownVotesDescending" asp-route-page="@Model.PageNumber">Най-нехаресвани</a>
                         </div>
                     </li>
                 </ul>

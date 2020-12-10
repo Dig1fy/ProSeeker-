@@ -91,6 +91,38 @@
                      IsSpecialist = false,
                 },
             };
+
+            for (int i = 0; i < 20; i++)
+            {
+                users.Add(new ApplicationUser
+                {
+                    UserName = $"s@{i}s",
+                    Email = $"s@{i}s",
+                    CityId = 5,
+                    EmailConfirmed = true,
+                    FirstName = $"Г{i}еорги",
+                    LastName = $"Г{i}еоргиев",
+                    ProfilePicture = GlobalConstants.DefaultProfileImagePath,
+                    IsSpecialist = true,
+                    SpecialistDetails = new Specialist_Details
+                    {
+                        JobCategoryId = 2,
+                        AboutMe = "Добър майстор!",
+                        CompanyName = "I/MeAndMyself",
+                        Experience = "1. Правил съм това. " +
+                         "2, Правил съм и това.",
+                        Services = new List<Service>
+                         {
+                             new Service
+                             {
+                                 Name = "Правя това. ",
+                                 Description = "Така, после така, накрая така",
+                             },
+                         },
+                        Qualification = "Имам специлизация в сферата на...",
+                    },
+                });
+            }
             foreach (var user in users)
             {
                 await userManager.CreateAsync(user, "123123");

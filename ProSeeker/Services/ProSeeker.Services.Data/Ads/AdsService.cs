@@ -65,13 +65,20 @@
             await this.adsRepository.SaveChangesAsync();
         }
 
-        public async Task<int> AllAdsByCategoryCountAsync(string name)
+        public async Task<int> AllAdsByCategoryCountAsync(string categoryName, int cityId)
         {
-            var count = await this.adsRepository.AllAsNoTracking()
-                .Where(x => x.JobCategory.Name == name)
+            if (cityId == 0)
+            {
+                return await this.adsRepository.AllAsNoTracking()
+                .Where(x => x.JobCategory.Name == categoryName)
                 .CountAsync();
-
-            return count;
+            }
+            else
+            {
+                return await this.adsRepository.AllAsNoTracking()
+               .Where(x => x.JobCategory.Name == categoryName && x.CityId == cityId)
+               .CountAsync();
+            }
         }
 
         public async Task<int> AllAdsCountAsync()

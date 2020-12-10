@@ -74,30 +74,30 @@
         }
 
         // [Authorize]
-        public async Task<IActionResult> GetByCategory(string categoryName, string sortBy, int cityId, string categoryname, int jobcategoryid, int id, int page = 1)
+        public async Task<IActionResult> GetByCategory(string categoryName, string sortBy, int cityId, int submitted = 0, int page = 1)
         {
             // Explicitly check the page in case someone wants to cheat :)
             page = page < 1 ? 1 : page;
 
             var model = new GetAllViewModel
             {
+                PageNumber = page,
+                AdsCount = await this.adsService.AllAdsByCategoryCountAsync(categoryName, cityId),
                 SortBy = sortBy == null ? GlobalConstants.ByDateDescending : sortBy,
                 CityId = cityId,
-                PageNumber = page,
                 CategoryName = categoryName,
+                Cities = await this.citiesService.GetAllCitiesAsync<CitySimpleViewModel>(),
             };
 
-            // First time we access this controller, category won't be null.
-            // The second time (when hit the submit button), it will be null and we don't want to override it.
-            if (categoryName != null)
+            // If we're on page 4 and decide to filter by city, and the ads count are not enough for 4 pages, pagination will break.
+            // Therefore, we need to explicitly check each time and then get all model Ads.
+            if (model.AdsCount <= GlobalConstants.ItemsPerPage)
             {
-                model.CategoryName = categoryName;
+                model.PageNumber = 1;
             }
 
-            categoryName = categoryName == null ? model.CategoryName : categoryName;
-            model.AdsCount = await this.adsService.AllAdsByCategoryCountAsync(categoryName);
-            model.Ads = await this.adsService.GetByCategoryAsync<AdsShortDetailsViewModel>(categoryName, sortBy, model.CityId, page);
-            model.Cities = await this.citiesService.GetAllCitiesAsync<CitySimpleViewModel>();
+            model.Ads = await this.adsService.GetByCategoryAsync<AdsShortDetailsViewModel>(categoryName, sortBy, cityId, model.PageNumber);
+
             return this.View(model);
         }
 

@@ -157,3 +157,7 @@
 .checked {
     color: rgba(204, 196, 1, 0.80);
 }
+
+.fs17 {
+    font-size: 17px;
+}

@@ -20,7 +20,7 @@
 
         Task<int> AllAdsCountAsync();
 
-        Task<int> AllAdsByCategoryCountAsync(string name);
+        Task<int> AllAdsByCategoryCountAsync(string categoryName, int cityId = 0);
 
         Task DeleteByIdAsync(string id);
 

@@ -14,14 +14,14 @@
 }
 else
 {
-    <form>
+    <form asp-action="GetCategory">
         <div class="col-md-6 mb-3 mb-md-0 d-flex" style="min-width:255px;">
             
             <select asp-for="@Model.CityId" class="form-control" style="margin-left: -15px; max-width:225px;" asp-items="@Model.Cities.Select(x=>new SelectListItem { Text = x.Name, Value = x.Id.ToString()})">
                 <option disabled selected> - Изберете град - </option>
             </select>
 
-            <button class="custom-success-btn" asp-action="GetCategory" asp-route-cityId="@Model.CityId" asp-route-Id="@Model.JobCategoryId" asp-route-page="@Model.PageNumber" style="background-color:darkgreen; width:100px;">
+            <button class="custom-success-btn"  asp-route-cityId="@Model.CityId" asp-route-Id="@Model.JobCategoryId" asp-route-page="@Model.PageNumber" style="background-color:darkgreen; width:100px;">
                 Потвърди
             </button>
         </div>
@@ -34,9 +34,9 @@ else
                         </a>
 
                         <div class="dropdown-menu custom-dropdown-content ml-3 mt-3" style="min-width:185px;" aria-labelledby="navbarDropdownMenuLink">
-                            <a type="submit" class="dropdown-item fs17" asp-route-cityId="@Model.CityId" asp-action="GetCategory" asp-route-Id="@Model.JobCategoryId" asp-route-sortBy="@GlobalConstants.ByDateDescending" asp-route-page="@Model.PageNumber">Най-нови</a>
-                            <a type="submit" class="dropdown-item fs17" asp-route-cityId="@Model.CityId" asp-action="GetCategory" asp-route-Id="@Model.JobCategoryId" asp-route-sortBy="@GlobalConstants.ByOpinionsDescending" asp-route-page="@Model.PageNumber">Най-коментирани</a>
-                            <a type="submit" class="dropdown-item fs17" asp-route-cityId="@Model.CityId" asp-action="GetCategory" asp-route-Id="@Model.JobCategoryId" asp-route-sortBy="@GlobalConstants.ByRatingDesc" asp-route-page="@Model.PageNumber">С най-висок рейтинг</a>
+                            <a type="submit" class="dropdown-item fs17" asp-route-cityId="@Model.CityId"  asp-route-Id="@Model.JobCategoryId" asp-route-sortBy="@GlobalConstants.ByDateDescending" asp-route-page="@Model.PageNumber">Най-нови</a>
+                            <a type="submit" class="dropdown-item fs17" asp-route-cityId="@Model.CityId"  asp-route-Id="@Model.JobCategoryId" asp-route-sortBy="@GlobalConstants.ByOpinionsDescending" asp-route-page="@Model.PageNumber">Най-коментирани</a>
+                            <a type="submit" class="dropdown-item fs17" asp-route-cityId="@Model.CityId"  asp-route-Id="@Model.JobCategoryId" asp-route-sortBy="@GlobalConstants.ByRatingDesc" asp-route-page="@Model.PageNumber">С най-висок рейтинг</a>
                         </div>
                     </li>
                 </ul>
