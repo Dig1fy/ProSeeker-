@@ -37,10 +37,16 @@
             viewModel.SortBy = sortBy == null ? GlobalConstants.ByDateDescending : sortBy;
             viewModel.JobCategoryId = id;
             viewModel.PageNumber = page;
-            viewModel.SpecialistsCount = await this.specialistsService.GetSpecialistsCountByCategoryAsync(id);
-            viewModel.Cities = await this.citiesService.GetAllCitiesAsync<CitySimpleViewModel>();
+            viewModel.SpecialistsCount = await this.specialistsService.GetSpecialistsCountByCategoryAsync(id, cityId);
 
-            var specialistsPerPage = await this.specialistsService.GetAllSpecialistsPerCategoryAsync<SpecialistsInCategoryViewModel>(id, sortBy, viewModel.CityId, page);
+            if (viewModel.SpecialistsCount <= GlobalConstants.SpecialistsPerPage)
+            {
+                viewModel.PageNumber = 1;
+            }
+
+            viewModel.Cities = await this.citiesService.GetAllCitiesAsync<CitySimpleViewModel>();
+            var specialistsPerPage = await this.specialistsService
+                .GetAllSpecialistsPerCategoryAsync<SpecialistsInCategoryViewModel>(id, sortBy, viewModel.CityId, viewModel.PageNumber);
             viewModel.SpecialistsDetails = specialistsPerPage;
 
             return this.View(viewModel);

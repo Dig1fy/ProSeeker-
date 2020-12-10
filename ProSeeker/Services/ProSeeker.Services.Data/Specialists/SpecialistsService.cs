@@ -33,14 +33,24 @@
             return specialists;
         }
 
-        public async Task<int> GetSpecialistsCountByCategoryAsync(int categoryId)
+        public async Task<int> GetSpecialistsCountByCategoryAsync(int categoryId, int cityId)
         {
-            var specialistsCount = await this.specialistsRepository
+            if (cityId == 0)
+            {
+                return await this.specialistsRepository
                 .AllAsNoTracking()
                 .Where(x => x.JobCategoryId == categoryId)
                 .CountAsync();
+            }
+            else
+            {
+                return await this.specialistsRepository
+                .AllAsNoTracking()
+                .Where(x => x.JobCategoryId == categoryId && x.User.CityId == cityId)
+                .CountAsync();
+            }
 
-            return specialistsCount;
+            
         }
 
         // TODO: Try with reflection
