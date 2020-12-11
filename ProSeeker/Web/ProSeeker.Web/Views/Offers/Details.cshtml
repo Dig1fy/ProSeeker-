@@ -2,7 +2,6 @@
 
 <style>
     .custom-dash-border {
-        
         background-color: rgba(220, 250, 248, 0.06);
         box-shadow: 5px 5px 32px rgb(34, 191, 177);
     }
@@ -12,39 +11,20 @@
     <div class="row">
         <div class="button-container col-md-2">
             <div class="col-md-12">
-                <div class="mt-2">
-                    <form asp-controller="Offers" asp-action="Details" asp-route-offerId="@Model.Id" method="post">
-                        <button type="submit" style="text-decoration:none; width:170px;" class="custom-submit-button">Приеми офертата</button>
-                    </form>
-                </div>
-                <div class="mt-2">
-                    <form asp-controller="Offers" asp-action="Details" asp-route-offerId="@Model.Id" method="post">
-                        <button type="submit" style="text-decoration:none; width:170px;" class="custom-submit-button text-center">Изтрий офертата</button>
-                    </form>
-                </div>
-                @*@if (this.User.Identity.IsAuthenticated)
-                    {
-                        if (!Model.IsOwnerOfAd && this.User.IsInRole(GlobalConstants.SpecialistRoleName))
-                        {
-                            <form>
-                                <div class="text-left">
-                                    <button type="submit" class="custom-submit-button mb-3 col-md-12" asp-route-id="@Model.Id" asp-controller="Offers" asp-action="Create">Направи оферта</button>
-                                </div>
-                            </form>
-                        }
-                        else if (Model.IsOwnerOfAd)
-                        {
-                            <form>
-                                <div class="text-left">
-                                    <button type="submit" class="custom-submit-button mb-3 col-md-12" asp-route-id="@Model.Id" asp-controller="Ads" asp-action="Edit">Промени</button>
-                                </div>
-                            </form>
-                            <form asp-route-id="@Model.Id" asp-controller="Ads" asp-action="Delete" id="deleteAdForm">
-                            </form>
-                            <button class="custom-submit-button mb-3 col-md-12" data-toggle="modal" data-target="#deleteModal">Изтрий</button>
-                        }
+                @if (this.User.Identity.IsAuthenticated && Model.IsAcountsOwner)
+                {
+                    <div class="mt-2">
+                        <form asp-controller="Offers" asp-action="Details" asp-route-offerId="@Model.Id" method="post">
+                            <button type="submit" style="text-decoration:none; width:170px;" class="custom-submit-button">Приеми офертата</button>
+                        </form>
+                    </div>
+                    <div class="mt-2">
+                        <form id="deleteOfferForm" asp-controller="Offers" asp-action="Delete" asp-route-offerId="@Model.Id" method="post">
+                        </form>
+                        <button style="text-decoration:none; width:170px;" class="custom-submit-button text-center" data-toggle="modal" data-target="#deleteOfferModal">Изтрий офертата</button>
+                    </div>
+                }
 
-                    }*@
             </div>
         </div>
         <div class="col-md-10 ">
@@ -81,4 +61,21 @@
         </div>
     </div>
     <hr class="custom-dash-border mr-3" />
+</div>
+
+@*=================================
+       MODAL - delete confirmation
+    ===========================*@
+<div class="modal" tabindex="-1" role="dialog" id="deleteOfferModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="background-color:azure">
+            <div class="modal-body d-flex justify-content-center">
+                <p class="custom-text-shadows">Наистина ли желаете да изтриете тази оферта?</p>
+            </div>
+            <div class="modal-footer row d-flex justify-content-center">
+                <button type="button" class="custom-danger-btn col-md-4 text-center" onclick="deleteOfferForm.submit()">Да</button>
+                <button type="button" class="custom-success-btn col-md-4 text-center" data-dismiss="modal">Не</button>
+            </div>
+        </div>
+    </div>
 </div>

@@ -122,7 +122,8 @@
             return this.View(model);
         }
 
-        // [Authorize]
+        [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Delete(string id)
         {
             await this.adsService.DeleteByIdAsync(id);

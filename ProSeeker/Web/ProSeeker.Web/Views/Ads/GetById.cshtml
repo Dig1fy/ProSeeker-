@@ -85,7 +85,7 @@
                             <button type="submit" class="custom-submit-button mb-3 col-md-12" asp-route-id="@Model.Id" asp-controller="Ads" asp-action="Edit">Промени</button>
                         </div>
                     </form>
-                    <form asp-route-id="@Model.Id" asp-controller="Ads" asp-action="Delete" id="deleteAdForm">
+                    <form asp-route-id="@Model.Id" asp-controller="Ads" asp-action="Delete" id="deleteAdForm" method="post">
                     </form>
                     <button class="custom-submit-button mb-3 col-md-12" data-toggle="modal" data-target="#deleteModal">Изтрий</button>
                 }

@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using AutoMapper;
+
     using Microsoft.EntityFrameworkCore;
     using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;
@@ -50,7 +50,14 @@
             return newOffer.Id;
         }
 
-        public async Task<IEnumerable<T>> GetAllUserOffers<T>(string userId)
+        public async Task DeleteByIdAsync(string id)
+        {
+            var offer = await this.offersRepository.All().FirstOrDefaultAsync(x => x.Id == id);
+            this.offersRepository.Delete(offer);
+            await this.offersRepository.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<T>> GetAllUserOffersAsync<T>(string userId)
         {
             var allMyOffers = await this.offersRepository
                 .All()

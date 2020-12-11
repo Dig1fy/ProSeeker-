@@ -9,8 +9,10 @@
     {
         Task<string> CreateAsync(CreateOfferInputModel inputModel, string specialistId);
 
-        Task<IEnumerable<T>> GetAllUserOffers<T>(string userId);
+        Task<IEnumerable<T>> GetAllUserOffersAsync<T>(string userId);
 
         Task<T> GetDetailsByIdAsync<T>(string offerId);
+
+        Task DeleteByIdAsync(string id);
     }
 }
