@@ -18,6 +18,10 @@
 
         public decimal Price { get; set; }
 
+        public DateTime CreatedOn { get; set; }
+
+        public string SentTimeSpan => GlobalMethods.CalculateElapsedTime(this.CreatedOn, false);
+
         public DateTime ExpirationDate { get; set; }
 
         public string ExpirationCalculated => GlobalMethods.CalculateElapsedTime(this.ExpirationDate, true);

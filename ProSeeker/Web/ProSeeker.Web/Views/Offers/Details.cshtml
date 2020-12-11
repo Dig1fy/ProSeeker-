@@ -1,74 +1,84 @@
 ﻿@model ProSeeker.Web.ViewModels.Offers.OfferDetailsViewModel
 
+<style>
+    .custom-dash-border {
+        
+        background-color: rgba(220, 250, 248, 0.06);
+        box-shadow: 5px 5px 32px rgb(34, 191, 177);
+    }
+</style>
 
+<div class="details-container" style="background-color:rgba(245, 249, 250, 0.19)">
+    <div class="row">
+        <div class="button-container col-md-2">
+            <div class="col-md-12">
+                <div class="mt-2">
+                    <form asp-controller="Offers" asp-action="Details" asp-route-offerId="@Model.Id" method="post">
+                        <button type="submit" style="text-decoration:none; width:170px;" class="custom-submit-button">Приеми офертата</button>
+                    </form>
+                </div>
+                <div class="mt-2">
+                    <form asp-controller="Offers" asp-action="Details" asp-route-offerId="@Model.Id" method="post">
+                        <button type="submit" style="text-decoration:none; width:170px;" class="custom-submit-button text-center">Изтрий офертата</button>
+                    </form>
+                </div>
+                @*@if (this.User.Identity.IsAuthenticated)
+                    {
+                        if (!Model.IsOwnerOfAd && this.User.IsInRole(GlobalConstants.SpecialistRoleName))
+                        {
+                            <form>
+                                <div class="text-left">
+                                    <button type="submit" class="custom-submit-button mb-3 col-md-12" asp-route-id="@Model.Id" asp-controller="Offers" asp-action="Create">Направи оферта</button>
+                                </div>
+                            </form>
+                        }
+                        else if (Model.IsOwnerOfAd)
+                        {
+                            <form>
+                                <div class="text-left">
+                                    <button type="submit" class="custom-submit-button mb-3 col-md-12" asp-route-id="@Model.Id" asp-controller="Ads" asp-action="Edit">Промени</button>
+                                </div>
+                            </form>
+                            <form asp-route-id="@Model.Id" asp-controller="Ads" asp-action="Delete" id="deleteAdForm">
+                            </form>
+                            <button class="custom-submit-button mb-3 col-md-12" data-toggle="modal" data-target="#deleteModal">Изтрий</button>
+                        }
 
-<div class="row">
-    <div class="button-container col-md-2">
-        <div class="col-md-12">
-            <div class="mt-2">
-                <form asp-controller="Offers" asp-action="Details" asp-route-offerId="@Model.Id" method="post">
-                    <button type="submit" style="text-decoration:none; width:170px;" class="custom-submit-button">Приеми офертата</button>
-                </form>
+                    }*@
             </div>
-            <div class="mt-2">
-                <form asp-controller="Offers" asp-action="Details" asp-route-offerId="@Model.Id" method="post">
-                    <button type="submit" style="text-decoration:none; width:170px;" class="custom-submit-button text-center">Изтрий офертата</button>
-                </form>
-            </div>
-            @*@if (this.User.Identity.IsAuthenticated)
-        {
-            if (!Model.IsOwnerOfAd && this.User.IsInRole(GlobalConstants.SpecialistRoleName))
-            {
-                <form>
-                    <div class="text-left">
-                        <button type="submit" class="custom-submit-button mb-3 col-md-12" asp-route-id="@Model.Id" asp-controller="Offers" asp-action="Create">Направи оферта</button>
-                    </div>
-                </form>
-            }
-            else if (Model.IsOwnerOfAd)
-            {
-                <form>
-                    <div class="text-left">
-                        <button type="submit" class="custom-submit-button mb-3 col-md-12" asp-route-id="@Model.Id" asp-controller="Ads" asp-action="Edit">Промени</button>
-                    </div>
-                </form>
-                <form asp-route-id="@Model.Id" asp-controller="Ads" asp-action="Delete" id="deleteAdForm">
-                </form>
-                <button class="custom-submit-button mb-3 col-md-12" data-toggle="modal" data-target="#deleteModal">Изтрий</button>
-            }
-
-        }*@
         </div>
-    </div>
-    <div class="col-md-10 ">
-        <div class="card m-2 custom-background-shadows">
-            <div class="custom-background-shadows">
-                <div class="">
-                    <div class="col-md-3 ">
-                        <img src="@Model.SpecialistDetails.User.ProfilePicture" style="width:200px;height:190px; border-radius:1%;" class="float-left img-fluid">
-                    </div>
-                    <div class="col-md-12 text-right ">
-                        <p class="card-title custom-input-text">@Model.SpecialistDetails.User.FullName</p>
-                        <p class="card-title"><i style="color:cornflowerblue" class="fas fa-globe-americas"></i> @Model.SpecialistDetails.User.City.Name</p>
-                        <p class="card-title"><i style="color:cornflowerblue" class="fas fa-briefcase"></i> @Model.SpecialistDetails.JobCategory.Name</p>
-                    </div>
-                    <div class="col-md-12 text-right">
-                        <form asp-controller="SpecialistsDetails" asp-action="GetProfile" asp-route-id="@Model.SpecialistDetails.Id">
-                            <button class="custom-submit-button text-right" style="box-shadow:none;">Виж профил</button>
-                        </form>
+        <div class="col-md-10 ">
+            <div class="card m-2 custom-background-shadows">
+                <div class="custom-background-shadows">
+                    <div class="">
+                        <div class="col-md-3 position-static">
+                            <img src="@Model.SpecialistDetails.User.ProfilePicture" style="min-width:200px;min-height:190px; border-radius:1%;" class="float-left img-fluid">
+                        </div>
+                        <div class="col-md-12 text-right ">
+                            <p class="card-title custom-input-text">@Model.SpecialistDetails.User.FullName</p>
+                            <p class="card-title"><i style="color:cornflowerblue" class="fas fa-globe-americas"></i> @Model.SpecialistDetails.User.City.Name</p>
+                            <p class="card-title"><i style="color:cornflowerblue" class="fas fa-briefcase"></i> @Model.SpecialistDetails.JobCategory.Name</p>
+                        </div>
+                        <div class="col-md-12 text-right">
+                            <form asp-controller="SpecialistsDetails" asp-action="GetProfile" asp-route-id="@Model.SpecialistDetails.Id">
+                                <button class="custom-submit-button text-right" style="box-shadow:none;">Виж профил</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>    
-</div>
-<div class="row mt-5">
-    <div class="col-md-12">
-        <div class="custom-text-shadows">
-            <div class="">Офертна цена: @Model.Price лева</div>
-            <div class="">Офертата изтича на: @Model.ExpirationDate.ToShortDateString() /след @Model.ExpirationCalculated/</div>
-            <div class="">Офертна цена: @Model.Price лева</div>
-            <div class="">@Html.Raw(Model.SanitizedDescription)</div>
-        </div>        
     </div>
+    <hr class="custom-dash-border" />
+    <div class="row">
+        <div class="col-md-12 mt-5">
+            <div class="custom-text-shadows">
+                <div class="mt-1"><strong>Валидна от</strong>: @Model.CreatedOn.ToShortDateString() /преди @Model.SentTimeSpan/</div>
+                <div class="mt-1"><strong>Валидна до</strong>: @Model.ExpirationDate.ToShortDateString() /още @Model.ExpirationCalculated/</div>
+                <div class="mt-1"><strong>Офертна цена</strong>: @Model.Price лева</div>
+                <div class="mt-4 custom-textarea-text">@Html.Raw(Model.SanitizedDescription)</div>
+            </div>
+        </div>
+    </div>
+    <hr class="custom-dash-border mr-3" />
 </div>
