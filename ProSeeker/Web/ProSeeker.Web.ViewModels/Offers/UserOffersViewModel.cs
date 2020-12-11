@@ -3,6 +3,7 @@
     using System;
 
     using Ganss.XSS;
+    using ProSeeker.Common;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;
     using ProSeeker.Web.ViewModels.Ads;
@@ -17,6 +18,10 @@
         public string ShortSanitizedDescription => new HtmlSanitizer().Sanitize(this.ShortDescription);
 
         public decimal Price { get; set; }
+
+        public DateTime CreatedOn { get; set; }
+
+        public string SentTimeSpan => GlobalMethods.CalculateElapsedTime(this.CreatedOn);
 
         public DateTime ExpirationDate { get; set; }
 

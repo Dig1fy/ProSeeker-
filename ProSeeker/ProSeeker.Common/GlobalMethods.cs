@@ -57,5 +57,43 @@
                 _ => string.Empty,
             };
         }
+
+        public static string CalculateElapsedTime(DateTime initialTime)
+        {
+            var currentTime = DateTime.UtcNow;
+            TimeSpan timeSpan = currentTime - initialTime;
+
+            if (timeSpan.TotalMinutes < 1)
+            {
+                return "по-малко от минута";
+            }
+
+            if (timeSpan.TotalHours < 1)
+            {
+                return (int)timeSpan.TotalMinutes == 1 ? "1 минута" : $"{(int)timeSpan.TotalMinutes} минути";
+            }
+
+            if (timeSpan.TotalDays < 1)
+            {
+                return (int)timeSpan.TotalHours == 1 ? "1 час" : $"{(int)timeSpan.TotalHours} часа";
+            }
+
+            if (timeSpan.TotalDays < 7)
+            {
+                return (int)timeSpan.TotalDays == 1 ? "1 ден" : $"{(int)timeSpan.TotalDays} дни";
+            }
+
+            if (timeSpan.TotalDays < 30.4368)
+            {
+                return (int)(timeSpan.TotalDays / 7) == 1 ? "1 седмица" : $"{(int)(timeSpan.TotalDays / 7)} седмици";
+            }
+
+            if (timeSpan.TotalDays < 365.242)
+            {
+                return (int)(timeSpan.TotalDays / 30.4368) == 1 ? "1 месец" : $"{(int)(timeSpan.TotalDays / 30.4368)} месеца";
+            }
+
+            return (int)(timeSpan.TotalDays / 365.242) == 1 ? "1 година" : $"{(int)(timeSpan.TotalDays / 365.242)} години";
+        }
     }
 }

@@ -51,7 +51,12 @@
         {
             var userId = this.userManager.GetUserId(this.User);
             var allMyOffers = await this.offersService.GetAllUserOffers<UserOffersViewModel>(userId);
-            var model = new AllMyOffersViewModel { Offers = allMyOffers };
+
+            var model = new AllMyOffersViewModel
+            {
+                Offers = allMyOffers,
+            };
+
             return this.View(model);
         }
 
