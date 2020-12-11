@@ -2,7 +2,8 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-
+    using System.Globalization;
+    using ProSeeker.Common.CustomValidationAttributes;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;
 
@@ -18,12 +19,15 @@
         [RegularExpression(@"^[1-9][\.\d]*(,\d+)?$", ErrorMessage = "Цената не може да съдържа букви. Примери за валидна цена: '2500', '1200.25', '10.55'")]
         public decimal Price { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Моля, попълнете, кога можете да започнете работа /в свободен текст/")]
         [Display(Name = "Кога можете да започнете работа (свободен текст)")]
         public string StartDate { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Моля, посочете, до кога е валидна офертата Ви!")]
         [Display(Name = "Офертата Ви е валидна до:")]
+        //[DisplayFormat(DataFormatString = "{yyyy-MM-dd}")]
+        [DataType(DataType.Date)]
+        [CustomFutureDateTimeValidationAttribute]
         public DateTime ExpirationDate { get; set; }
 
         public string SpecialistDetailsId { get; set; }
