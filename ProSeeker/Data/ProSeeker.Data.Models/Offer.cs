@@ -29,6 +29,8 @@
 
         public string ApplicationUserId { get; set; }
 
+        public bool IsRed { get; set; }
+
         public virtual ApplicationUser ApplicationUser { get; set; }
 
         public string SpecialistDetailsId { get; set; }

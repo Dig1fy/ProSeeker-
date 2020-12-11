@@ -14,5 +14,7 @@
         Task<T> GetDetailsByIdAsync<T>(string offerId);
 
         Task DeleteByIdAsync(string id);
+
+        Task MarkOfferAsRedAsync(string offerId);
     }
 }

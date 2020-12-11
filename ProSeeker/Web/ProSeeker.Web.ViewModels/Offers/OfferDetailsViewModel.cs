@@ -22,6 +22,8 @@
 
         public DateTime CreatedOn { get; set; }
 
+        public bool IsRed { get; set; }
+
         public string SentTimeSpan => GlobalMethods.CalculateElapsedTime(this.CreatedOn, false);
 
         public DateTime ExpirationDate { get; set; }

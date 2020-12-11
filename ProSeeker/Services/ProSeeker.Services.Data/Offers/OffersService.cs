@@ -78,5 +78,16 @@
 
             return offer;
         }
+
+        public async Task MarkOfferAsRedAsync(string offerId)
+        {
+            var offer = await this.offersRepository
+                .All()
+                .FirstOrDefaultAsync(x => x.Id == offerId);
+
+            offer.IsRed = true;
+            this.offersRepository.Update(offer);
+            await this.offersRepository.SaveChangesAsync();
+        }
     }
 }

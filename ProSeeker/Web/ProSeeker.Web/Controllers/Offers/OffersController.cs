@@ -76,6 +76,12 @@
                 return this.RedirectToAction("AccessDenied", "Errors");
             }
 
+            if (!offer.IsRed)
+            {
+                offer.IsRed = true;
+                await this.offersService.MarkOfferAsRedAsync(offerId);
+            }
+
             offer.IsAcountsOwner = offer.ApplicationUserId == currenUserId;
             return this.View(offer);
         }
