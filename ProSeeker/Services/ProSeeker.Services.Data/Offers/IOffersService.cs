@@ -1,6 +1,5 @@
 ﻿namespace ProSeeker.Services.Data.Offers
 {
-    using System.Collections;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -11,5 +10,7 @@
         Task<string> CreateAsync(CreateOfferInputModel inputModel, string specialistId);
 
         Task<IEnumerable<T>> GetAllUserOffers<T>(string userId);
+
+        Task<T> GetDetailsByIdAsync<T>(string offerId);
     }
 }

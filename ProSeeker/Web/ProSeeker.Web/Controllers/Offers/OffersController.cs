@@ -51,10 +51,20 @@
         {
             var userId = this.userManager.GetUserId(this.User);
             var allMyOffers = await this.offersService.GetAllUserOffers<UserOffersViewModel>(userId);
-
-
             var model = new AllMyOffersViewModel { Offers = allMyOffers };
             return this.View(model);
+        }
+
+        public async Task<IActionResult> Details(string offerId)
+        {
+            var offer = await this.offersService.GetDetailsByIdAsync<OfferDetailsViewModel>(offerId);
+
+            if (offer is null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(offer);
         }
     }
 }

@@ -60,5 +60,16 @@
 
             return allMyOffers;
         }
+
+        public async Task<T> GetDetailsByIdAsync<T>(string offerId)
+        {
+            var offer = await this.offersRepository
+                .All()
+                .Where(x => x.Id == offerId)
+                .To<T>()
+                .FirstOrDefaultAsync();
+
+            return offer;
+        }
     }
 }
