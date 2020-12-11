@@ -16,5 +16,10 @@
         Task DeleteByIdAsync(string id);
 
         Task MarkOfferAsRedAsync(string offerId);
+
+        // These two are being called from VC so they cannot be async
+        bool IsThereUnredOffer(string userId);
+
+        int GetUnredOffersCount(string userId);
     }
 }

@@ -79,6 +79,25 @@
             return offer;
         }
 
+        public int GetUnredOffersCount(string userId)
+        {
+            var unredOffersCount = this.offersRepository
+                .AllAsNoTracking()
+                .Where(x => x.ApplicationUserId == userId && x.IsRed == false)
+                .Count();
+
+            return unredOffersCount;
+        }
+
+        public bool IsThereUnredOffer(string userId)
+        {
+            var unredOffer = this.offersRepository
+                .AllAsNoTracking()
+                .Where(x => x.ApplicationUserId == userId && x.IsRed == false)
+                .Any();
+            return unredOffer;
+        }
+
         public async Task MarkOfferAsRedAsync(string offerId)
         {
             var offer = await this.offersRepository

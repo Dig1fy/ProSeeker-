@@ -2,8 +2,11 @@
 {
     using System.Diagnostics;
     using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using ProSeeker.Data.Models;
     using ProSeeker.Services.Data.Home;
+    using ProSeeker.Services.Data.Offers;
     using ProSeeker.Services.Data.UsersService;
     using ProSeeker.Web.ViewModels;
     using ProSeeker.Web.ViewModels.Home;
@@ -12,17 +15,24 @@
     {
         private readonly IHomeService homeService;
         private readonly IUsersService usersService;
+        private readonly IOffersService offersSerivice;
+        private readonly UserManager<ApplicationUser> userManager;
 
         public HomeController(
             IHomeService homeService,
-            IUsersService usersService)
+            IUsersService usersService,
+            IOffersService offersSerivice,
+            UserManager<ApplicationUser> userManager)
         {
             this.homeService = homeService;
             this.usersService = usersService;
+            this.offersSerivice = offersSerivice;
+            this.userManager = userManager;
         }
 
         public async Task<IActionResult> Index()
         {
+            var userId = this.userManager.GetUserId(this.User);
             var viewModel = new IndexViewModel()
             {
                 BaseCategories = await this.homeService.GetAllBaseCategoriesAsync<BaseJobCategoryViewModel>(),
