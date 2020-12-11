@@ -21,7 +21,7 @@
 
         public DateTime CreatedOn { get; set; }
 
-        public string SentTimeSpan => GlobalMethods.CalculateElapsedTime(this.CreatedOn);
+        public string SentTimeSpan => GlobalMethods.CalculateElapsedTime(this.CreatedOn, false);
 
         public DateTime ExpirationDate { get; set; }
 

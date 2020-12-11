@@ -3,6 +3,7 @@
     using System;
 
     using Ganss.XSS;
+    using ProSeeker.Common;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;
     using ProSeeker.Web.ViewModels.Users;
@@ -18,6 +19,8 @@
         public decimal Price { get; set; }
 
         public DateTime ExpirationDate { get; set; }
+
+        public string ExpirationCalculated => GlobalMethods.CalculateElapsedTime(this.ExpirationDate, true);
 
         public virtual SimpleSpecialistDetailsViewModel SpecialistDetails { get; set; }
     }

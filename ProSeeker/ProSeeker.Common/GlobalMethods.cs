@@ -58,10 +58,21 @@
             };
         }
 
-        public static string CalculateElapsedTime(DateTime initialTime)
+        public static string CalculateElapsedTime(DateTime initialTime, bool isItFutureTime)
         {
-            var currentTime = DateTime.UtcNow;
-            TimeSpan timeSpan = currentTime - initialTime;
+            DateTime currentTime = DateTime.UtcNow;
+            TimeSpan timeSpan;
+
+            // If we want to calculate the elapsed time (isItFutureTime = false)
+            // In case of calculating a period until something happens -> isitFutureTime = true
+            if (!isItFutureTime)
+            {
+                timeSpan = currentTime - initialTime;
+            }
+            else
+            {
+                timeSpan = initialTime - currentTime;
+            }
 
             if (timeSpan.TotalMinutes < 1)
             {
