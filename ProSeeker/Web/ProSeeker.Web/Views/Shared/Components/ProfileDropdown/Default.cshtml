@@ -1,0 +1,41 @@
+﻿@using ProSeeker.Common
+@model ProSeeker.Web.ViewModels.Offers.ProfileDropdownViewModel
+
+<li class="btn-group">
+
+    <i id="fas-pic" class="fas fa-chevron-circle-down" style="padding-right: 10px; font-size:17px; margin:auto 0; color: cornflowerblue;" data-toggle="dropdown">
+        @if (Model.IsThereUnredOffer && this.User.IsInRole(GlobalConstants.RegularUserRoleName))
+        {
+            <a style="text-decoration:none;">Имате ново известие</a>
+        }
+    </i>
+    <div class="dropdown-menu custom-dropdown-content" style="margin-top:-8px;">
+        <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Акаунт</a>
+        <a class="dropdown-item" asp-area="" asp-controller="Ads" asp-action="MyAds">Моите обяви</a>
+        <a class="dropdown-item" asp-area="" asp-controller="Ads" asp-action="Create">Запитвания</a>
+        @if (this.User.IsInRole(GlobalConstants.RegularUserRoleName))
+        {
+            <a class="dropdown-item d-inline" id="userNavBarOffers" asp-area="" asp-controller="Offers" asp-action="UserOffers">Оферти</a>
+
+            @if (Model.IsThereUnredOffer)
+            {
+                if (Model.Count == 1)
+                {
+                    <div class="d-inline" style="color:rgb(202, 8, 8); font-style:oblique; font-weight:bold;">@Model.Count новo*</div>
+                }
+                else
+                {
+                    <div class="d-inline" style="color:rgb(202, 8, 8); font-style:oblique; font-weight:bold;">@Model.Count нови*</div>
+                }
+            }
+        }
+        else
+        {
+            <a class="dropdown-item" asp-area="" asp-controller="Offers" asp-action="SpecialistOffers">Оферти</a>
+        }
+        <a onclick="SubmitForm()" class="dropdown-item">
+            <form id="submitForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">Изход </form>
+        </a>
+    </div>
+</li>
+

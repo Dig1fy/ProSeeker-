@@ -5,14 +5,13 @@
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Data.Offers;
     using ProSeeker.Web.ViewModels.Offers;
-    using System.Threading.Tasks;
 
-    public class NewOffersViewComponent : ViewComponent
+    public class ProfileDropdownViewComponent : ViewComponent
     {
         private readonly IOffersService offersService;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public NewOffersViewComponent(
+        public ProfileDropdownViewComponent(
             IOffersService offersService,
             UserManager<ApplicationUser> userManager)
         {
@@ -24,7 +23,7 @@
         {
             var userId = this.userManager.GetUserId((System.Security.Claims.ClaimsPrincipal)this.User);
 
-            var model = new OffersNavbarViewModel
+            var model = new ProfileDropdownViewModel
             {
                 Count = this.offersService.GetUnredOffersCount(userId),
                 IsThereUnredOffer = this.offersService.IsThereUnredOffer(userId),

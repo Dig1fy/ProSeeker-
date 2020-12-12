@@ -2,7 +2,7 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using System.Globalization;
+
     using ProSeeker.Common.CustomValidationAttributes;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;
@@ -25,7 +25,6 @@
 
         [Required(ErrorMessage = "Моля, посочете, до кога е валидна офертата Ви!")]
         [Display(Name = "Офертата Ви е валидна до:")]
-        //[DisplayFormat(DataFormatString = "{yyyy-MM-dd}")]
         [DataType(DataType.Date)]
         [CustomFutureDateTimeValidationAttribute]
         public DateTime ExpirationDate { get; set; }
