@@ -5,12 +5,15 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Routing;
     using ProSeeker.Common;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Data.Ads;
+    using ProSeeker.Services.Data.CategoriesService;
     using ProSeeker.Services.Data.Offers;
     using ProSeeker.Services.Data.UsersService;
     using ProSeeker.Web.ViewModels.Offers;
+    using ProSeeker.Web.ViewModels.Pagination;
 
     public class OffersController : BaseController
     {
@@ -18,17 +21,20 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IUsersService usersService;
         private readonly IAdsService adsService;
+        private readonly ICategoriesService categoriesService;
 
         public OffersController(
             IOffersService offersService,
             UserManager<ApplicationUser> userManager,
             IUsersService usersService,
-            IAdsService adsService)
+            IAdsService adsService,
+            ICategoriesService categoriesService)
         {
             this.offersService = offersService;
             this.userManager = userManager;
             this.usersService = usersService;
             this.adsService = adsService;
+            this.categoriesService = categoriesService;
         }
 
         [Authorize(Roles = GlobalConstants.SpecialistRoleName)]
@@ -36,11 +42,11 @@
         {
             var specialist = await this.userManager.GetUserAsync(this.User);
             var userId = await this.adsService.GetUserIdByAdIdAsync(viewModel.Id);
-            var isAlreadyOffered = await this.offersService.CheckIfOfferHasBeenAlreadyMadeAsync(viewModel.Id, userId, specialist.SpecialistDetailsId);
+            var existingOffer = await this.offersService.GetExistingOfferAsync<ExistingOfferViewModel>(viewModel.Id, userId, specialist.SpecialistDetailsId);
 
-            if (isAlreadyOffered)
+            if (existingOffer != null)
             {
-                return this.View(nameof(this.ExistingOffer));
+                return this.View(nameof(this.ExistingOffer), existingOffer);
             }
 
             var userPhoneNumber = specialist.PhoneNumber;
@@ -119,8 +125,19 @@
         [Authorize]
         public async Task<IActionResult> Delete(string offerId)
         {
+            var categoryName = await this.categoriesService.GetCategoryNameByOfferIdAsync(offerId);
+            var currentUser = await this.userManager.GetUserAsync(this.User);
             await this.offersService.DeleteByIdAsync(offerId);
-            return this.RedirectToAction(nameof(this.UserOffers));
+
+            if (currentUser.IsSpecialist)
+            {
+                var model = new AdsPerPageViewModel { CategoryName = categoryName };
+                return this.RedirectToAction("GetByCategory", "Ads", new AdsPerPageViewModel { CategoryName = categoryName });
+            }
+            else
+            {
+                return this.RedirectToAction(nameof(this.UserOffers));
+            }
         }
 
         [Authorize]

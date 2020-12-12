@@ -17,7 +17,7 @@
 
         Task MarkOfferAsRedAsync(string offerId);
 
-        Task<bool> CheckIfOfferHasBeenAlreadyMadeAsync(string currentAdId, string userId, string specialistId);
+        Task<T> GetExistingOfferAsync<T>(string currentAdId, string userId, string specialistId);
 
         // These two are being called from VC so they cannot be async
         bool IsThereUnredOffer(string userId);

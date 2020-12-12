@@ -12,10 +12,17 @@
     public class CategoriesService : ICategoriesService
     {
         private readonly IDeletableEntityRepository<JobCategory> categoriesRepository;
+        private readonly IDeletableEntityRepository<Ad> adsRepository;
+        private readonly IRepository<Offer> offersRepository;
 
-        public CategoriesService(IDeletableEntityRepository<JobCategory> categoriesRepository)
+        public CategoriesService(
+            IDeletableEntityRepository<JobCategory> categoriesRepository,
+            IDeletableEntityRepository<Ad> adsRepository,
+            IRepository<Offer> offersRepository)
         {
             this.categoriesRepository = categoriesRepository;
+            this.adsRepository = adsRepository;
+            this.offersRepository = offersRepository;
         }
 
         public async Task<IEnumerable<T>> GetAllCategoriesAsync<T>()
@@ -37,6 +44,25 @@
                  .FirstOrDefaultAsync();
 
             return category;
+        }
+
+        public async Task<string> GetCategoryNameByOfferIdAsync(string offerId)
+        {
+            var offer = await this.offersRepository
+                .All()
+                .Where(x => x.Id == offerId)
+                .FirstOrDefaultAsync();
+
+            var ad = await this.adsRepository
+                .AllAsNoTracking()
+                .FirstOrDefaultAsync(a => a.Id == offer.AdId);
+
+            var category = await this.categoriesRepository
+                .AllAsNoTracking()
+                .Where(x => x.Id == ad.JobCategoryId)
+                .FirstOrDefaultAsync();
+
+            return category.Name;
         }
     }
 }

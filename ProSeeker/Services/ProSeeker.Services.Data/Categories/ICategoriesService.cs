@@ -8,5 +8,7 @@
         Task<T> GetByIdAsync<T>(int id);
 
         Task<IEnumerable<T>> GetAllCategoriesAsync<T>();
+
+        Task<string> GetCategoryNameByOfferIdAsync (string offerId);
     }
 }

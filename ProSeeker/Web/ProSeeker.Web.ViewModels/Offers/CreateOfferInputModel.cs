@@ -13,6 +13,7 @@
 
         [Required(ErrorMessage = "Моля, попълнете полето 'Описание на оферта'")]
         [Display(Name = "Описание / допълнителна инфомация")]
+        [MinLength(25, ErrorMessage ="Описанието на офертата трябва да бъде поне 25 символа!")]
         public string Description { get; set; }
 
         [Display(Name = "Офертна цена /български левове/")]

@@ -27,9 +27,9 @@
 
         public DateTime ExpirationDate { get; set; }
 
-        public string ApplicationUserId { get; set; }
-
         public bool IsRed { get; set; }
+
+        public string ApplicationUserId { get; set; }
 
         public virtual ApplicationUser ApplicationUser { get; set; }
 
