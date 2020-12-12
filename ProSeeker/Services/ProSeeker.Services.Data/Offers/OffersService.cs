@@ -26,6 +26,16 @@
             this.adsRepository = adsRepository;
         }
 
+        public async Task<bool> CheckIfOfferHasBeenAlreadyMadeAsync(string currentAdId, string userId, string specialistId)
+        {
+            var isThereAnOffer = await this.offersRepository
+                .AllAsNoTracking()
+                .Where(x => x.AdId == currentAdId && x.ApplicationUserId == userId && x.SpecialistDetailsId == specialistId)
+                .AnyAsync();
+
+            return isThereAnOffer;
+        }
+
         public async Task<string> CreateAsync(CreateOfferInputModel inputModel, string specialistId)
         {
             var applicationUserId = this.adsRepository

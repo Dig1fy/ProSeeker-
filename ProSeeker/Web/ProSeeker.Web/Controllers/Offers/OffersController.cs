@@ -7,6 +7,7 @@
     using Microsoft.AspNetCore.Mvc;
     using ProSeeker.Common;
     using ProSeeker.Data.Models;
+    using ProSeeker.Services.Data.Ads;
     using ProSeeker.Services.Data.Offers;
     using ProSeeker.Services.Data.UsersService;
     using ProSeeker.Web.ViewModels.Offers;
@@ -16,22 +17,33 @@
         private readonly IOffersService offersService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IUsersService usersService;
+        private readonly IAdsService adsService;
 
         public OffersController(
             IOffersService offersService,
             UserManager<ApplicationUser> userManager,
-            IUsersService usersService)
+            IUsersService usersService,
+            IAdsService adsService)
         {
             this.offersService = offersService;
             this.userManager = userManager;
             this.usersService = usersService;
+            this.adsService = adsService;
         }
 
         [Authorize(Roles = GlobalConstants.SpecialistRoleName)]
         public async Task<IActionResult> Create(CreateOfferViewModel viewModel)
         {
-            var currentUser = await this.userManager.GetUserAsync(this.User);
-            var userPhoneNumber = currentUser.PhoneNumber;
+            var specialist = await this.userManager.GetUserAsync(this.User);
+            var userId = await this.adsService.GetUserIdByAdIdAsync(viewModel.Id);
+            var isAlreadyOffered = await this.offersService.CheckIfOfferHasBeenAlreadyMadeAsync(viewModel.Id, userId, specialist.SpecialistDetailsId);
+
+            if (isAlreadyOffered)
+            {
+                return this.View(nameof(this.ExistingOffer));
+            }
+
+            var userPhoneNumber = specialist.PhoneNumber;
 
             var inputModel = new CreateOfferInputModel
             {
@@ -109,6 +121,12 @@
         {
             await this.offersService.DeleteByIdAsync(offerId);
             return this.RedirectToAction(nameof(this.UserOffers));
+        }
+
+        [Authorize]
+        public IActionResult ExistingOffer()
+        {
+            return this.View();
         }
     }
 }

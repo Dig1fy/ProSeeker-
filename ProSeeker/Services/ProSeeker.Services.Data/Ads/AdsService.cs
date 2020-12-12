@@ -142,6 +142,17 @@
             return allUserAds;
         }
 
+        public async Task<string> GetUserIdByAdIdAsync(string currentAdId)
+        {
+            var userId = await this.adsRepository
+                .AllAsNoTracking()
+                .Where(x => x.Id == currentAdId)
+                .Select(y => y.UserId)
+                .FirstOrDefaultAsync();
+
+            return userId;
+        }
+
         // TODO: Try with reflection
         private IQueryable<Ad> SortAds(string categoryName, string sortBy, int cityId)
         {
