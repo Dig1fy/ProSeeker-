@@ -8,25 +8,35 @@
     using ProSeeker.Common;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Data.Offers;
+    using ProSeeker.Services.Data.UsersService;
     using ProSeeker.Web.ViewModels.Offers;
 
     public class OffersController : BaseController
     {
         private readonly IOffersService offersService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IUsersService usersService;
 
-        public OffersController(IOffersService offersService, UserManager<ApplicationUser> userManager)
+        public OffersController(
+            IOffersService offersService,
+            UserManager<ApplicationUser> userManager,
+            IUsersService usersService)
         {
             this.offersService = offersService;
             this.userManager = userManager;
+            this.usersService = usersService;
         }
 
         [Authorize(Roles = GlobalConstants.SpecialistRoleName)]
-        public IActionResult Create(CreateOfferViewModel viewModel)
+        public async Task<IActionResult> Create(CreateOfferViewModel viewModel)
         {
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var userPhoneNumber = currentUser.PhoneNumber;
+
             var inputModel = new CreateOfferInputModel
             {
                 AdId = viewModel.Id,
+                PhoneNumber = userPhoneNumber,
             };
 
             return this.View(inputModel);
@@ -42,6 +52,13 @@
             }
 
             var user = await this.userManager.GetUserAsync(this.User);
+
+            if (inputModel.PhoneNumber != user.PhoneNumber)
+            {
+                user.PhoneNumber = inputModel.PhoneNumber;
+                await this.userManager.UpdateAsync(user);
+            }
+
             var specialistId = user.SpecialistDetailsId;
             var newOfferId = await this.offersService.CreateAsync(inputModel, specialistId);
 

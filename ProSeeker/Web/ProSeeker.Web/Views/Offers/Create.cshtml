@@ -15,10 +15,8 @@
             <div class="col-md-12 col-lg-12 mb-5">
                 <form method="post" class="p-5 bg-transparent">
                     <article class="inquiry-notes">
-                        
-                        - За да направите оферта е нужно <strong>да сте попълнили телефонния си номер</strong> в настройките на профила Ви! <br />
-                        - В случай, че отстрещната страна приеме офертата Ви, ще получи вашия телефонен номер и имейл адрес, за да се свърже с Вас. 
-
+                        - За да направите оферта е нужно <strong>да сте попълнили актуалния си телефонен номер</strong> в настройките на профила Ви! <br />
+                        - В случай, че отстрещната страна приеме офертата Ви, ще получи вашия телефонен номер и имейл адрес, за да се свърже с Вас.
                     </article>
                     <div class="row form-group mb-4">
                         <div class="col-md-12 mb-3 mb-md-0">
@@ -50,17 +48,30 @@
                             <span asp-validation-for="@Model.StartDate" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="row form-group mb-4">
-                        <div class="col-md-6 mb-3 mb-md-0">
-                            <h4>
-                                <label asp-for="@Model.ExpirationDate"></label>
-                            </h4>
-                            @*value="@DateTime.UtcNow.AddYears(1).ToString("yyyy-MM-dd")" - decide if it's better to set initial date value*@
-                            <input value="xxx" asp-for="@Model.ExpirationDate" class="form-control text" />
-                            <span asp-validation-for="@Model.ExpirationDate" class="text-danger"></span>
+                    <div class="row">
+                        <div class="form-group col-md-6 mb-4">
+                            
+                                <h4>
+                                    <label asp-for="@Model.ExpirationDate"></label>
+                                </h4>
+                                @*value="@DateTime.UtcNow.AddYears(1).ToString("yyyy-MM-dd")" - decide if it's better to set initial date value*@
+                                <input value="xxx" asp-for="@Model.ExpirationDate" class="form-control text" />
+                                <span asp-validation-for="@Model.ExpirationDate" class="text-danger"></span>
+                            
                         </div>
+                        @*оасдсаок*@
+                       
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <h4>
+                                    <label asp-for="@Model.PhoneNumber"></label>
+                                </h4>
+                                <input asp-for="@Model.PhoneNumber" class="form-control text" /> 
+                                <p class="inquiry-notes">Ако попълните друг телефонен номер, промяната ще бъде отчетена и в профила Ви.</p>
+                                <span asp-validation-for="@Model.PhoneNumber" class="text-danger"></span>
+                            </div>
+                       
                     </div>
-
+                    @*сдада*@
                     <hr />
 
                     <div class="row ">
