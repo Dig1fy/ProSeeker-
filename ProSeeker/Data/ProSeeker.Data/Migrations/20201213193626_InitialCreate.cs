@@ -486,12 +486,19 @@ namespace ProSeeker.Data.Migrations
                     Price = table.Column<decimal>(nullable: false),
                     StartDate = table.Column<string>(nullable: false),
                     ExpirationDate = table.Column<DateTime>(nullable: false),
+                    IsRed = table.Column<bool>(nullable: false),
                     ApplicationUserId = table.Column<string>(nullable: true),
                     SpecialistDetailsId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Offer", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Offer_Ads_AdId",
+                        column: x => x.AdId,
+                        principalTable: "Ads",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Offer_AspNetUsers_ApplicationUserId",
                         column: x => x.ApplicationUserId,
@@ -718,6 +725,11 @@ namespace ProSeeker.Data.Migrations
                 name: "IX_JobCategories_IsDeleted",
                 table: "JobCategories",
                 column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Offer_AdId",
+                table: "Offer",
+                column: "AdId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Offer_ApplicationUserId",

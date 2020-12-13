@@ -10,7 +10,7 @@ using ProSeeker.Data;
 namespace ProSeeker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201208133750_InitialCreate")]
+    [Migration("20201213193626_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -470,7 +470,7 @@ namespace ProSeeker.Data.Migrations
 
                     b.Property<string>("AdId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ApplicationUserId")
                         .HasColumnType("nvarchar(450)");
@@ -484,6 +484,9 @@ namespace ProSeeker.Data.Migrations
 
                     b.Property<DateTime>("ExpirationDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRed")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
@@ -499,6 +502,8 @@ namespace ProSeeker.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AdId");
 
                     b.HasIndex("ApplicationUserId");
 
@@ -948,6 +953,12 @@ namespace ProSeeker.Data.Migrations
 
             modelBuilder.Entity("ProSeeker.Data.Models.Offer", b =>
                 {
+                    b.HasOne("ProSeeker.Data.Models.Ad", "Ad")
+                        .WithMany()
+                        .HasForeignKey("AdId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("ProSeeker.Data.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("Offers")
                         .HasForeignKey("ApplicationUserId");
