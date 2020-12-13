@@ -148,6 +148,27 @@
     text-shadow: 0px 1px 1px rgba(1, 9, 12, 0.68);
 }
 
+#imageResult {
+    width: 300px;
+    height: 270px;
+    border-radius: 15px 15px;
+}
+
+.custom-input-field {
+    height: 3rem;
+    box-sizing: border-box;
+    border-color: rgba(164, 226, 241, 0.38);
+    border-radius: 25px 25px;
+    border-image-repeat: round;
+    font-size: 16px;
+    transition: width 0.4s ease-in-out;
+}
+
+    .custom-input-field:focus {
+        border: 0.1px rgb(67, 138, 143);
+        width: 103%;
+    }
+
 .custom-background-shadows {
     background: -webkit-linear-gradient(bottom, rgba(92, 142, 230, 0.13), rgba(246, 244, 231, 0.28), rgba(110, 214, 237, 0.05));
 }
@@ -176,4 +197,10 @@
 
 .fs17 {
     font-size: 17px;
+}
+
+.label-description-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(102, 179, 255);
 }

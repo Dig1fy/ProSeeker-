@@ -65,12 +65,6 @@
     <Content Update="wwwroot\css\MyCustomCss\Common\common.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\css\MyCustomCss\Profile\user-common.css">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\css\MyCustomCss\Profile\userProfile.css">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Update="wwwroot\images\CategoryImages\Home\архитект.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
