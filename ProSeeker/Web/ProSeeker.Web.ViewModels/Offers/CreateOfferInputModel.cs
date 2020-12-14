@@ -16,6 +16,7 @@
         [MinLength(25, ErrorMessage ="Описанието на офертата трябва да бъде поне 25 символа!")]
         public string Description { get; set; }
 
+        [Required(ErrorMessage ="Моля, попълнете офертната цена!")]
         [Display(Name = "Офертна цена /български левове/")]
         [RegularExpression(@"^[1-9][\.\d]*(,\d+)?$", ErrorMessage = "Цената трябва да бъде попълнена и да не съдържа букви. Примери за валидна цена: '2500', '1200.25', '10.55'")]
         public decimal Price { get; set; }
@@ -31,7 +32,6 @@
         public DateTime ExpirationDate { get; set; }
 
         [Display(Name = "Актуален телефонен номер:")]
-
         [Required(ErrorMessage ="Моля, попълнете телефонния си номер!")]
         public string PhoneNumber { get; set; }
 

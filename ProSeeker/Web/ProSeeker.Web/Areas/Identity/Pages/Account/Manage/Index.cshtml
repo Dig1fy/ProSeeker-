@@ -15,7 +15,7 @@
                 <input hidden id="upload" class="col-md-10" name="imageFile" type="file" onchange="RenderTheImage();">
             </div>
 
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger custom-input-text"></div>
             <div class="form-group col-md-6 text-center">
                 <label asp-for="Input.Username" class="custom-text-shadows"></label>
                 <input asp-for="Input.Username" class="form-control custom-input-field" disabled />
@@ -23,24 +23,24 @@
             <div class="form-group col-md-6 text-center">
                 <label asp-for="Input.PhoneNumber" class="custom-text-shadows"></label>
                 <input asp-for="Input.PhoneNumber" class="form-control custom-input-field custom-input-text" />
-                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger custom-input-text"></span>
             </div>
             <div class="form-group col-md-6 text-center">
                 <label asp-for="Input.FirstName" class="custom-text-shadows"></label>
                 <input asp-for="Input.FirstName" class="form-control custom-input-field custom-input-text" />
-                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                <span asp-validation-for="Input.FirstName" class="text-danger custom-input-text"></span>
             </div>
             <div class="form-group col-md-6 text-center">
                 <label asp-for="Input.LastName" class="custom-text-shadows"></label>
                 <input asp-for="Input.LastName" class="form-control custom-input-field custom-input-text" />
-                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                <span asp-validation-for="Input.LastName" class="text-danger custom-input-text"></span>
             </div>
             <div class="form-group col-md-6 text-center">
                 <label asp-for="Input.City.Name" class="custom-text-shadows">Град</label>
                 <select asp-for="Input.City.Name" class="form-control custom-input-field custom-input-text" asp-items="Model.AllCities">
                     <option selected> @Model.Input.City.Name </option>
                 </select>
-                <span asp-validation-for="Input.City.Name" class="text-danger"></span>
+                <span asp-validation-for="Input.City.Name" class="text-danger custom-input-text"></span>
             </div>
 
             @if (Model.Input.IsSpecialist == true)
@@ -48,27 +48,27 @@
                 <div class="form-group col-md-6 text-center">
                     <label asp-for="Input.SpecialistDetails.CompanyName" class="custom-text-shadows"></label>
                     <input asp-for="Input.SpecialistDetails.CompanyName" class="form-control custom-input-field custom-input-text" />
-                    <span asp-validation-for="Input.SpecialistDetails.CompanyName" class="text-danger"></span>
+                    <span asp-validation-for="Input.SpecialistDetails.CompanyName" class="text-danger custom-input-text"></span>
                 </div>
                 <div class="form-group col-md-6 text-center">
                     <label asp-for="Input.SpecialistDetails.Website" class="custom-text-shadows"></label>
                     <input asp-for="Input.SpecialistDetails.Website" class="form-control custom-input-field custom-input-text" />
-                    <span asp-validation-for="Input.SpecialistDetails.Website" class="text-danger"></span>
+                    <span asp-validation-for="Input.SpecialistDetails.Website" class="text-danger custom-input-text"></span>
                 </div>
                 <div class="form-group col-md-10">
                     <label asp-for="Input.SpecialistDetails.AboutMe" class="custom-text-shadows"></label>
                     <textarea asp-for="Input.SpecialistDetails.AboutMe" class="form-control tinymce-textarea"></textarea>
-                    <span asp-validation-for="Input.SpecialistDetails.AboutMe" class="text-danger"></span>
+                    <span asp-validation-for="Input.SpecialistDetails.AboutMe" class="text-danger custom-input-text"></span>
                 </div>
                 <div class="form-group col-md-10">
                     <label asp-for="Input.SpecialistDetails.Experience" class="custom-text-shadows"></label>
                     <textarea asp-for="Input.SpecialistDetails.Experience" class="form-control tinymce-textarea"></textarea>
-                    <span asp-validation-for="Input.SpecialistDetails.Experience" class="text-danger"></span>
+                    <span asp-validation-for="Input.SpecialistDetails.Experience" class="text-danger custom-input-text"></span>
                 </div>
                 <div class="form-group col-md-10">
                     <label asp-for="Input.SpecialistDetails.Qualification" class="custom-text-shadows"></label>
                     <textarea asp-for="Input.SpecialistDetails.Qualification" class="form-control tinymce-textarea"></textarea>
-                    <span asp-validation-for="Input.SpecialistDetails.Qualification" class="text-danger"></span>
+                    <span asp-validation-for="Input.SpecialistDetails.Qualification" class="text-danger custom-input-text"></span>
                 </div>
 
                 <div class="col col-md-10">
