@@ -50,5 +50,16 @@
             await this.inquiriesService.CreateAsync(inputModel);
             return this.Redirect("/");   // TODO: Redirect to MyEnquiries when you create that section.
         }
+
+        public async Task<IActionResult> MyInquiries()
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+            var model = new AllMyInquiriesViewModel();
+
+            model.Inquiries = await this.inquiriesService.GetSpecialistEnquiriesAsync<InquiriesViewModel>(user.SpecialistDetailsId);
+
+
+            return this.View(model);
+        }
     }
 }

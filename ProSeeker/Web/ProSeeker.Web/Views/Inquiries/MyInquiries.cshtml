@@ -1,0 +1,52 @@
+﻿@model ProSeeker.Web.ViewModels.Inquiries.AllMyInquiriesViewModel
+
+@foreach (var inquiry in Model.Inquiries)
+{
+    <p>@inquiry.CityId</p>
+    <p>@Html.Raw(inquiry.ShortSanitizedContent)</p>
+    <p>@inquiry.SpecialistDetailsId</p>// TODO: Клиентите ше изпращат запитвания, спецовете ще могат да пращат директно оферта или да изтрият запитването.
+}
+
+@if (!Model.Inquiries.Any())
+{
+    <h2 class="custom-golden-text">Все още няма направени оферти към Вас!</h2>
+}
+<div class="row text-left">
+    @foreach (var inquiry in Model.Inquiries)
+    {
+        <div class="col-md-3 m-2 ">
+            <div class="card m-2 custom-background-shadows" style="width: 18rem;">
+                <div class="card-body custom-background-shadows">
+                    @if (inquiry.IsRed == false)
+                    {
+                        <p class="custom-unred-attention-text text-center">НЕПРОЧЕТЕНО</p>
+                    }
+
+                    <div class="row">
+                        <div class="col-md-3 position-absolute ">
+                            <img src="@inquiry.User.ProfilePicture" style="width:100px;height:100px; border-radius:50%;" class="float-left">
+                        </div>
+                        <div class="col-md-12 text-right ">
+                            <p class="card-title custom-input-text">@inquiry.User.FullName</p>
+                            <p class="card-title"><i style="color:cornflowerblue" class="fas fa-globe-americas"></i> @inquiry.User.City.Name</p>
+                        </div>
+                        @*<div class="col-md-12">
+                            <form asp-controller="SpecialistsDetails" asp-action="GetProfile" asp-route-id="@inquiry.Id">
+                                <button class="col-md-12 custom-submit-button text-center" style="box-shadow:none;">Виж профил</button>
+                            </form>
+                        </div>*@
+                    </div>
+                </div>
+                <ul class="list-group list-group-flush custom-text-shadows">
+                    <li class="list-group-item">Изпратена преди: @inquiry.SentTimeSpan</li>
+                    <li class="list-group-item">@Html.Raw(inquiry.ShortSanitizedContent)</li>
+                </ul>
+                <div class="card-body text-center">
+                    <form asp-controller="Offers" asp-action="Details" asp-route-offerId="@inquiry.Id" method="post">
+                        <button type="submit" style="text-decoration:none;" class="custom-submit-button text-center">Отвори детайли</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</div>

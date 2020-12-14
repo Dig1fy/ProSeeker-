@@ -1,17 +1,5 @@
 ﻿@model ProSeeker.Web.ViewModels.Offers.AllMyOffersViewModel
 
-<style>
-    .custom-unred-attention-text {
-        position: absolute;
-        top: -11px;
-        left: 0;
-        color: rgb(76, 255, 0);
-        text-shadow: 1px 1px 1px rgb(232, 154, 99);
-        background-color: rgb(0, 0, 0);
-        border-bottom-right-radius: 45%;
-        min-width: 130px;
-    }
-</style>
 @if (!Model.Offers.Any())
 {
     <h2 class="custom-golden-text">Все още няма направени оферти към Вас!</h2>
@@ -24,7 +12,7 @@
                 <div class="card-body custom-background-shadows">
                     @if (offer.IsRed == false)
                     {
-                        <p class="custom-unred-attention-text text-center">НЕПРОЧЕТЕНА</p>
+                        <p class="custom-unred-attention-text text-center">НЕПРОЧЕТЕНО</p>
                     }
 
                     <div class="row">

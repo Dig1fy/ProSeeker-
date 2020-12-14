@@ -15,6 +15,8 @@
 
         public DateTime ValidUntil { get; set; }
 
+        public bool IsRed { get; set; }
+
         public string SpecialistDetailsId { get; set; }
 
         public virtual Specialist_Details SpecialistDetails { get; set; }

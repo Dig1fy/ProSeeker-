@@ -169,6 +169,17 @@
         width: 103%;
     }
 
+.custom-unred-attention-text {
+    position: absolute;
+    top: -11px;
+    left: 0;
+    color: rgb(76, 255, 0);
+    text-shadow: 1px 1px 1px rgb(232, 154, 99);
+    background-color: rgb(0, 0, 0);
+    border-bottom-right-radius: 45%;
+    min-width: 130px;
+}
+
 .custom-background-shadows {
     background: -webkit-linear-gradient(bottom, rgba(92, 142, 230, 0.13), rgba(246, 244, 231, 0.28), rgba(110, 214, 237, 0.05));
 }

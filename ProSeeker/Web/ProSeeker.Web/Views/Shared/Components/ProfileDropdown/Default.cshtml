@@ -11,10 +11,15 @@
     </i>
     <div class="dropdown-menu custom-dropdown-content" style="margin-top:-8px;">
         <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Акаунт</a>
-        <a class="dropdown-item" asp-area="" asp-controller="Ads" asp-action="MyAds">Моите обяви</a>
-        <a class="dropdown-item" asp-area="" asp-controller="Ads" asp-action="Create">Запитвания</a>
+
+        @if (this.User.IsInRole(GlobalConstants.SpecialistRoleName))
+        {
+            <a class="dropdown-item" asp-area="" asp-controller="Inquiries" asp-action="MyInquiries">Запитвания</a>
+        }
+
         @if (this.User.IsInRole(GlobalConstants.RegularUserRoleName))
         {
+            <a class="dropdown-item" asp-area="" asp-controller="Ads" asp-action="MyAds">Моите обяви</a>
             <a class="dropdown-item d-inline" id="userNavBarOffers" asp-area="" asp-controller="Offers" asp-action="UserOffers">Оферти</a>
 
             @if (Model.IsThereUnredOffer)
@@ -28,10 +33,6 @@
                     <div class="d-inline" style="color:rgb(202, 8, 8); font-style:oblique; font-weight:bold;">@Model.Count нови*</div>
                 }
             }
-        }
-        else
-        {
-            <a class="dropdown-item" asp-area="" asp-controller="Offers" asp-action="SpecialistOffers">Оферти</a>
         }
         <a onclick="SubmitForm()" class="dropdown-item">
             <form id="submitForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">Изход </form>

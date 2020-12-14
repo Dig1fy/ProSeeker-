@@ -12,7 +12,6 @@
             this.Id = Guid.NewGuid().ToString();        // TODO - Add user/specialist [Required] when the logic's been implemented and tested!
         }
 
-        [Required]
         public string AdId { get; set; }
 
         public virtual Ad Ad { get; set; }
