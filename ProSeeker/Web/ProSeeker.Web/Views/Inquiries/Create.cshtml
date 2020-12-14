@@ -1,4 +1,4 @@
-﻿@model ProSeeker.Web.ViewModels.Inquiries.InquiryInputModel
+﻿@model ProSeeker.Web.ViewModels.Inquiries.CreateInquiryInputModel
 
 <div class="hero-wrap hero-wrap-2" style="background-image: url('https://thumbs.dreamstime.com/z/author-office-writer-concept-desk-background-top-view-mock-up-professional-white-work-89923761.jpg');" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
@@ -40,7 +40,7 @@
                             <h4>
                                 <label asp-for="@Model.ValidUntil"></label>
                             </h4>
-                            <input value="@DateTime.UtcNow" asp-for="@Model.ValidUntil" class="form-control text" />
+                            <input value="xxx" asp-for="@Model.ValidUntil" class="form-control text" />
                             <span asp-validation-for="@Model.ValidUntil" class="text-danger"></span>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
 
                     <div class="row ">
                         <div class="col-md-6 custom-submit-button-wrapper">
-                            <button asp-controller="Inquiries" asp-action="Create" class="col-md-12 custom-submit-button">Изпрати</button>
+                            <button asp-controller="Inquiries" asp-action="Create" asp-route-specialistId="@Model.SpecialistDetailsId" class="col-md-12 custom-submit-button">Изпрати</button>
                         </div>
                     </div>
 

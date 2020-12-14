@@ -4,11 +4,12 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+    using ProSeeker.Common.CustomValidationAttributes;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;
     using ProSeeker.Web.ViewModels.Cities;
 
-    public class InquiryInputModel : IMapFrom<Inquiry>
+    public class CreateInquiryInputModel : IMapFrom<Inquiry>
     {
         [Required(ErrorMessage = "Моля, попълнете полето 'Подробно описание'")]
         [Display(Name = "Подробно описание")]
@@ -16,6 +17,8 @@
 
         [Required(ErrorMessage = "Моля, посочете, до кога е валидно вашето запитване!")]
         [Display(Name = "Запитването Ви е валидно до:")]
+        [DataType(DataType.Date)]
+        [CustomFutureDateTimeValidationAttribute]
         public DateTime ValidUntil { get; set; }
 
         public string SpecialistDetailsId { get; set; }

@@ -1,6 +1,7 @@
 ﻿namespace ProSeeker.Web.Controllers.Inquiries
 {
     using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -29,7 +30,7 @@
         [Authorize]
         public async Task<IActionResult> Create(string specialistId)
         {
-            var model = new InquiryInputModel
+            var model = new CreateInquiryInputModel
             {
                 SpecialistDetailsId = specialistId,
                 Cities = await this.citiesService.GetAllCitiesAsync<CitySimpleViewModel>(),
@@ -40,10 +41,11 @@
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Create(InquiryInputModel inputModel)
+        public async Task<IActionResult> Create(CreateInquiryInputModel inputModel)
         {
             if (!this.ModelState.IsValid)
             {
+                inputModel.Cities = await this.citiesService.GetAllCitiesAsync<CitySimpleViewModel>();
                 return this.View(inputModel);
             }
 

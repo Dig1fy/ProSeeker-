@@ -19,7 +19,7 @@
             this.inquiriesRepository = inquiriesRepository;
         }
 
-        public async Task CreateAsync(InquiryInputModel inputModel)
+        public async Task CreateAsync(CreateInquiryInputModel inputModel)
         {
             var inquiry = new Inquiry
             {

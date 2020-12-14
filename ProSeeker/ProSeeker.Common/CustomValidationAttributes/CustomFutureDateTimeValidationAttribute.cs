@@ -17,7 +17,7 @@
 
             if (result < DateTime.UtcNow)
             {
-                return new ValidationResult("Невалидна дата! Моля, посочете бъдеща дата за валидност на офертата Ви!");
+                return new ValidationResult("Невалидна дата! Моля, посочете бъдеща дата за валидност на Вашето предложение!");
             }
 
             return ValidationResult.Success;

@@ -7,7 +7,7 @@
 
     public interface IInquiriesService
     {
-        Task CreateAsync(InquiryInputModel inputModel);
+        Task CreateAsync(CreateInquiryInputModel inputModel);
 
         Task<IEnumerable<T>> GetSpecialistEnquiriesAsync<T>(string specialistId);
 
