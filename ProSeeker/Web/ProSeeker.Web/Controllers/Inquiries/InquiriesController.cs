@@ -1,7 +1,7 @@
 ﻿namespace ProSeeker.Web.Controllers.Inquiries
 {
     using System.Threading.Tasks;
-
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using ProSeeker.Data.Models;
@@ -26,6 +26,7 @@
             this.userManager = userManager;
         }
 
+        [Authorize]
         public async Task<IActionResult> Create(string specialistId)
         {
             var model = new InquiryInputModel
@@ -37,6 +38,7 @@
             return this.View(model);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create(InquiryInputModel inputModel)
         {
@@ -58,8 +60,40 @@
 
             model.Inquiries = await this.inquiriesService.GetSpecialistEnquiriesAsync<InquiriesViewModel>(user.SpecialistDetailsId);
 
-
             return this.View(model);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Details(string inquiryId)
+        {
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var inquiry = await this.inquiriesService.GetDetailsByIdAsync<InquiryDetailsViewModel>(inquiryId);
+
+            if (inquiry == null || currentUser == null)
+            {
+                return this.NotFound();
+            }
+
+            if (inquiry.SpecialistDetailsId != currentUser.SpecialistDetailsId)
+            {
+                return this.RedirectToAction("AccessDenied", "Errors");
+            }
+
+            if (!inquiry.IsRed)
+            {
+                inquiry.IsRed = true;
+                await this.inquiriesService.MarkInquiryAsRedAsync(inquiryId);
+            }
+
+            inquiry.IsAcountOwner = inquiry.SpecialistDetailsId == currentUser.SpecialistDetailsId;
+            return this.View(inquiry);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Delete(string inquiryId)
+        {
+
         }
     }
 }

@@ -10,5 +10,11 @@
         Task CreateAsync(InquiryInputModel inputModel);
 
         Task<IEnumerable<T>> GetSpecialistEnquiriesAsync<T>(string specialistId);
+
+        Task<T> GetDetailsByIdAsync<T>(string inquiryId);
+
+        Task MarkInquiryAsRedAsync(string inquiryId);
+
+        Task DeleteByIdAsync(string inquiryId);
     }
 }

@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Microsoft.EntityFrameworkCore;
     using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;
@@ -33,6 +34,23 @@
             await this.inquiriesRepository.SaveChangesAsync();
         }
 
+        public async Task DeleteByIdAsync(string inquiryId)
+        {
+            await this.inquiriesRepository.GetByIdWithDeletedAsync(inquiryId);
+            await this.inquiriesRepository.SaveChangesAsync();
+        }
+
+        public async Task<T> GetDetailsByIdAsync<T>(string inquiryId)
+        {
+            var inquiry = await this.inquiriesRepository
+                .All()
+                .Where(x => x.Id == inquiryId)
+                .To<T>()
+                .FirstOrDefaultAsync();
+
+            return inquiry;
+        }
+
         public async Task<IEnumerable<T>> GetSpecialistEnquiriesAsync<T>(string specialistId)
         {
             var specialisEnquiries = await this.inquiriesRepository
@@ -42,6 +60,17 @@
                 .ToListAsync();
 
             return specialisEnquiries;
+        }
+
+        public async Task MarkInquiryAsRedAsync(string inquiryId)
+        {
+            var inquiry = await this.inquiriesRepository
+               .All()
+               .FirstOrDefaultAsync(x => x.Id == inquiryId);
+
+            inquiry.IsRed = true;
+            this.inquiriesRepository.Update(inquiry);
+            await this.inquiriesRepository.SaveChangesAsync();
         }
     }
 }
