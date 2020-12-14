@@ -93,7 +93,17 @@
         [Authorize]
         public async Task<IActionResult> Delete(string inquiryId)
         {
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+            await this.inquiriesService.DeleteByIdAsync(inquiryId);
 
+            if (currentUser.IsSpecialist)
+            {
+                return this.RedirectToAction(nameof(this.MyInquiries));
+            }
+            else
+            {
+                return this.RedirectToAction("UserOffers", "Offers");
+            }
         }
     }
 }

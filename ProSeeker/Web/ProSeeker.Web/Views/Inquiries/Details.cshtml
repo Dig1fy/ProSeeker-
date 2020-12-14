@@ -15,14 +15,14 @@
                 @*@if (this.User.Identity.IsAuthenticated && Model.IsAcountOwner)
                 {*@
                     <div class="mt-2">
-                        <form asp-controller="Offers" asp-action="Details" asp-route-offerId="@Model.Id" method="post">
+                        <form asp-controller="Offers" asp-action="Create" asp-route-inquiryId="@Model.Id" method="post">
                             <button type="submit" style="text-decoration:none; width:170px;" class="custom-submit-button">Направи оферта</button>
                         </form>
                     </div>
                     <div class="mt-2">
-                        <form id="deleteInquiryForm" asp-controller="Inquiries" asp-action="Delete" asp-route-offerId="@Model.Id" method="post">
+                        <form id="deleteInquiryForm" asp-controller="Inquiries" asp-action="Delete" asp-route-inquiryId="@Model.Id" method="post">
                         </form>
-                        <button style="text-decoration:none; width:170px;" class="custom-submit-button text-center" data-toggle="modal" data-target="#deleteInquiryModal">Изтрий офертата</button>
+                        <button style="text-decoration:none; width:170px;" class="custom-submit-button text-center" data-toggle="modal" data-target="#deleteInquiryModal">Изтрий запитването</button>
                     </div>
                 @*}*@
 
@@ -48,8 +48,8 @@
     <div class="row">
         <div class="col-md-12 mt-5">
             <div class="custom-text-shadows">
-                <div class="mt-1"><strong>Валидна от</strong>: @Model.CreatedOn.ToShortDateString() /преди @Model.SentTimeSpan/</div>
-                <div class="mt-1"><strong>Валидна до</strong>: @Model.ValidUntil.ToShortDateString() /още @Model.ValidUntilTimeSpan/</div>
+                <div class="mt-1"><strong>Валидно от</strong>: @Model.CreatedOn.ToShortDateString() /преди @Model.SentTimeSpan/</div>
+                <div class="mt-1"><strong>Валидно до</strong>: @Model.ValidUntil.ToShortDateString() /още @Model.ValidUntilTimeSpan/</div>
                 <div class="mt-4 custom-textarea-text">@Html.Raw(Model.SanitizedContent)</div>
             </div>
         </div>
@@ -64,7 +64,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="background-color:azure">
             <div class="modal-body d-flex justify-content-center">
-                <p class="custom-text-shadows">Наистина ли желаете да изтриете тази оферта?</p>
+                <p class="custom-text-shadows">Наистина ли желаете да изтриете това запитване?</p>
             </div>
             <div class="modal-footer row d-flex justify-content-center">
                 <button type="button" class="custom-danger-btn col-md-4 text-center" onclick="deleteInquiryForm.submit()">Да</button>

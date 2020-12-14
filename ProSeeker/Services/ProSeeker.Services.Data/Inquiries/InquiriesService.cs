@@ -36,7 +36,8 @@
 
         public async Task DeleteByIdAsync(string inquiryId)
         {
-            await this.inquiriesRepository.GetByIdWithDeletedAsync(inquiryId);
+            var inquiry = await this.inquiriesRepository.GetByIdWithDeletedAsync(inquiryId);
+            this.inquiriesRepository.Delete(inquiry);
             await this.inquiriesRepository.SaveChangesAsync();
         }
 
