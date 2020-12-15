@@ -145,5 +145,12 @@
         {
             return this.View();
         }
+
+        [Authorize]
+        public async Task<IActionResult> Accept(string offerId)
+        {
+            await this.offersService.AcceptOffer(offerId);
+            return this.RedirectToAction(nameof(this.Details), new { offerId });
+        }
     }
 }

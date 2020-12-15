@@ -19,6 +19,8 @@
 
         Task<T> GetExistingOfferAsync<T>(string currentAdId, string userId, string specialistId);
 
+        Task AcceptOffer(string offerId);
+
         // These two are being called from VC so they cannot be async
         bool IsThereUnredOffer(string userId);
 

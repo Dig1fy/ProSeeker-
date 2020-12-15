@@ -15,6 +15,11 @@
                         <p class="custom-unred-attention-text text-center">НЕПРОЧЕТЕНО</p>
                     }
 
+                    @if (offer.IsAccepted)
+                    {
+                        <p class="custom-accepted-attention-text text-center">Офертата е приета!</p>
+                    }
+
                     <div class="row">
                         <div class="col-md-3 position-absolute ">
                             <img src="@offer.SpecialistDetails.User.ProfilePicture" style="width:100px;height:100px; border-radius:50%;" class="float-left">

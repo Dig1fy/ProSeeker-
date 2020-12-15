@@ -6,18 +6,30 @@
         box-shadow: 5px 5px 32px rgb(34, 191, 177);
     }
 </style>
-
+@if (Model.IsAccepted)
+{
+<article class="custom-golden-text">Тази оферта е приета и можете да се свържете със специалиста чрез контактите, посочени по-долу.</article>
+}
+else
+{
+    <article class="inquiry-notes" style="font-size:21px; font-weight:bold;">
+        Ако приемете тази оферта, ще получите контактите на специалиста, както и той - вашите, за да установите контакт и да започнете съвместна работа.
+    </article>
+}
 <div class="details-container" style="background-color:rgba(245, 249, 250, 0.19)">
     <div class="row">
         <div class="button-container col-md-2">
             <div class="col-md-12">
                 @if (this.User.Identity.IsAuthenticated && Model.IsAcountsOwner)
                 {
-                    <div class="mt-2">
-                        <form asp-controller="Offers" asp-action="Details" asp-route-offerId="@Model.Id" method="post">
-                            <button type="submit" style="text-decoration:none; width:170px;" class="custom-submit-button">Приеми офертата</button>
-                        </form>
-                    </div>
+                    if (!Model.IsAccepted)
+                    {
+                        <div class="mt-2">
+                            <form asp-controller="Offers" asp-action="Accept" asp-route-offerId="@Model.Id" method="post">
+                                <button type="submit" style="text-decoration:none; width:170px;" class="custom-submit-button">Приеми офертата</button>
+                            </form>
+                        </div>
+                    }
                     <div class="mt-2">
                         <form id="deleteOfferForm" asp-controller="Offers" asp-action="Delete" asp-route-offerId="@Model.Id" method="post">
                         </form>
@@ -38,6 +50,12 @@
                             <p class="card-title custom-input-text">@Model.SpecialistDetails.User.FullName</p>
                             <p class="card-title"><i style="color:cornflowerblue" class="fas fa-globe-americas"></i> @Model.SpecialistDetails.User.City.Name</p>
                             <p class="card-title"><i style="color:cornflowerblue" class="fas fa-briefcase"></i> @Model.SpecialistDetails.JobCategory.Name</p>
+                            @if (Model.IsAccepted)
+                            {
+                                <p class="custom-input-text"><strong>Контакти:</strong></p>
+                                <p class="card-title custom-input-text">телефон: @Model.SpecialistDetails.User.PhoneNumber</p>
+                                <p class="card-title custom-input-text">имейл: @Model.SpecialistDetails.User.Email</p>
+                            }
                         </div>
                         <div class="col-md-12 text-right">
                             <form asp-controller="SpecialistsDetails" asp-action="GetProfile" asp-route-id="@Model.SpecialistDetails.Id">

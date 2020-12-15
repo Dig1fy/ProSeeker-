@@ -21,6 +21,8 @@
 
         public bool IsRed { get; set; }
 
+        public bool IsAccepted { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public string SentTimeSpan => GlobalMethods.CalculateElapsedTime(this.CreatedOn, false);

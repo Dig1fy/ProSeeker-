@@ -15,6 +15,7 @@
         @if (this.User.IsInRole(GlobalConstants.SpecialistRoleName))
         {
             <a class="dropdown-item" asp-area="" asp-controller="Inquiries" asp-action="MyInquiries">Запитвания</a>
+            <a class="dropdown-item d-inline" id="userNavBarOffers" asp-area="" asp-controller="Offers" asp-action="SpecialistOffers">Оферти</a>
         }
 
         @if (this.User.IsInRole(GlobalConstants.RegularUserRoleName))

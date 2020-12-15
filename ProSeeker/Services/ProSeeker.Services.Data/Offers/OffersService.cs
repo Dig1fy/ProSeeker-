@@ -119,5 +119,13 @@
             this.offersRepository.Update(offer);
             await this.offersRepository.SaveChangesAsync();
         }
+
+        public async Task AcceptOffer(string offerId)
+        {
+            var offer = await this.offersRepository.All().Where(x => x.Id == offerId).FirstOrDefaultAsync();
+            offer.IsAccepted = true;
+            this.offersRepository.Update(offer);
+            await this.offersRepository.SaveChangesAsync();
+        }
     }
 }
