@@ -37,7 +37,7 @@
             return existingOffer;
         }
 
-        public async Task<string> CreateAsync(CreateOfferInputModel inputModel, string specialistId)
+        public async Task<string> CreateFromAdAsync(CreateOfferInputModel inputModel)
         {
             var applicationUserId = this.adsRepository
                 .All()
@@ -51,7 +51,7 @@
                 ApplicationUserId = applicationUserId,
                 Description = inputModel.Description,
                 Price = inputModel.Price,
-                SpecialistDetailsId = specialistId,
+                SpecialistDetailsId = inputModel.SpecialistDetailsId,
                 StartDate = inputModel.StartDate,
                 ExpirationDate = inputModel.ExpirationDate,
             };

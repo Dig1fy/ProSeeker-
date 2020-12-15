@@ -7,7 +7,9 @@
 
     public interface IOffersService
     {
-        Task<string> CreateAsync(CreateOfferInputModel inputModel, string specialistId);
+        Task<string> CreateFromAdAsync(CreateOfferInputModel inputModel);
+
+        //Task CreateFromInquiryAsync(CreateOfferInputModel inputModel);
 
         Task<IEnumerable<T>> GetAllUserOffersAsync<T>(string userId);
 

@@ -16,6 +16,7 @@
                 {*@
                     <div class="mt-2">
                         <form >
+                            <input hidden name="ApplicationUserId" value="@Model.UserId" />
                             <button asp-controller="Offers"  asp-action="Create" asp-route-inquiryId="@Model.Id" style="text-decoration:none; width:170px;" class="custom-submit-button">Направи оферта</button>
                         </form>
                     </div>

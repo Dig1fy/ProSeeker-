@@ -42,12 +42,14 @@
         public async Task<IActionResult> Create(CreateOfferViewModel viewModel)
         {
             var specialist = await this.userManager.GetUserAsync(this.User);
-            var userId = await this.adsService.GetUserIdByAdIdAsync(viewModel.Id);
+            var userId = string.Empty;
 
             // The specialist can make an offer in two ways - from inquiry/from Ad. If the offer is being made from an inquiry, the Ad is null.
             // The logic of the app: only 1 offer by Ad / many offers by inquiry
-            if (viewModel.AdId != null)
+            // viewModel.Id => offer ID
+            if (viewModel.Id != null)
             {
+                userId = await this.adsService.GetUserIdByAdIdAsync(viewModel.Id);
                 var existingOffer = await this.offersService.GetExistingOfferAsync<ExistingOfferViewModel>(viewModel.Id, userId, specialist.SpecialistDetailsId);
 
                 if (existingOffer != null)
@@ -58,6 +60,8 @@
 
             var inputModel = new CreateOfferInputModel
             {
+                SpecialistDetailsId = specialist.SpecialistDetailsId,
+                ApplicationUserId = userId,
                 AdId = viewModel.Id,
                 PhoneNumber = specialist.PhoneNumber,
             };
@@ -82,8 +86,20 @@
                 await this.userManager.UpdateAsync(user);
             }
 
-            var specialistId = user.SpecialistDetailsId;
-            var newOfferId = await this.offersService.CreateAsync(inputModel, specialistId);
+            inputModel.SpecialistDetailsId = user.SpecialistDetailsId;
+
+            // If the offer comes from an Ad
+            if (inputModel.AdId != null)
+            {
+                await this.offersService.CreateFromAdAsync(inputModel);
+            }
+
+            // The offer comes from an Inquiry
+            else
+            {
+
+            }
+
 
             return this.Redirect("/");
         }

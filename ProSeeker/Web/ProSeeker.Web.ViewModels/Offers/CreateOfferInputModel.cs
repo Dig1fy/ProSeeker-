@@ -35,6 +35,8 @@
         [Required(ErrorMessage ="Моля, попълнете телефонния си номер!")]
         public string PhoneNumber { get; set; }
 
+        public string ApplicationUserId { get; set; }
+
         public string SpecialistDetailsId { get; set; }
 
         public virtual Specialist_Details SpecialistDetails { get; set; }
