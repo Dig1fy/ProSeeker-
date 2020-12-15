@@ -37,24 +37,29 @@
             this.categoriesService = categoriesService;
         }
 
+        [HttpGet]
         [Authorize(Roles = GlobalConstants.SpecialistRoleName)]
         public async Task<IActionResult> Create(CreateOfferViewModel viewModel)
         {
             var specialist = await this.userManager.GetUserAsync(this.User);
             var userId = await this.adsService.GetUserIdByAdIdAsync(viewModel.Id);
-            var existingOffer = await this.offersService.GetExistingOfferAsync<ExistingOfferViewModel>(viewModel.Id, userId, specialist.SpecialistDetailsId);
 
-            if (existingOffer != null)
+            // The specialist can make an offer in two ways - from inquiry/from Ad. If the offer is being made from an inquiry, the Ad is null.
+            // The logic of the app: only 1 offer by Ad / many offers by inquiry
+            if (viewModel.AdId != null)
             {
-                return this.View(nameof(this.ExistingOffer), existingOffer);
-            }
+                var existingOffer = await this.offersService.GetExistingOfferAsync<ExistingOfferViewModel>(viewModel.Id, userId, specialist.SpecialistDetailsId);
 
-            var userPhoneNumber = specialist.PhoneNumber;
+                if (existingOffer != null)
+                {
+                    return this.View(nameof(this.ExistingOffer), existingOffer);
+                }
+            }
 
             var inputModel = new CreateOfferInputModel
             {
                 AdId = viewModel.Id,
-                PhoneNumber = userPhoneNumber,
+                PhoneNumber = specialist.PhoneNumber,
             };
 
             return this.View(inputModel);
