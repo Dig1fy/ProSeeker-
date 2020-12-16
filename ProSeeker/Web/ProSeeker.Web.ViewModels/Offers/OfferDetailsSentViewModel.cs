@@ -6,9 +6,11 @@
     using ProSeeker.Common;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;
+    using ProSeeker.Web.ViewModels.Ads;
+    using ProSeeker.Web.ViewModels.Inquiries;
     using ProSeeker.Web.ViewModels.Users;
 
-    public class OfferDetailsViewModel : IMapFrom<Offer>
+    public class OfferDetailsSentViewModel : IMapFrom<Offer>
     {
         public string Id { get; set; }
 
@@ -21,8 +23,6 @@
         public bool IsAcountsOwner { get; set; }
 
         public DateTime CreatedOn { get; set; }
-
-        public bool IsRed { get; set; }
 
         public bool IsAccepted { get; set; }
 
@@ -39,6 +39,12 @@
 
         public string ExpirationCalculated => GlobalMethods.CalculateElapsedTime(this.ExpirationDate, true);
 
-        public virtual SimpleSpecialistDetailsViewModel SpecialistDetails { get; set; }
+        public virtual SimpleUserViewModel ApplicationUser { get; set; }
+
+        public string SpecialistDetailsId { get; set; }
+
+        public virtual InquiryDetailsViewModel Inquiry { get; set; }
+
+        public virtual AdsFullDetailsViewModel Ad { get; set; }
     }
 }

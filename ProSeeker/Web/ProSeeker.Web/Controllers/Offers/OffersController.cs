@@ -113,7 +113,20 @@
             var userId = this.userManager.GetUserId(this.User);
             var allMyOffers = await this.offersService.GetAllUserOffersAsync<UserOffersViewModel>(userId);
 
-            var model = new AllMyOffersViewModel
+            var model = new AllMyUserOffersViewModel
+            {
+                Offers = allMyOffers,
+            };
+
+            return this.View(model);
+        }
+
+        public async Task<IActionResult> SpecialistOffers()
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+            var allMyOffers = await this.offersService.GetAllSpecialistOffersAsync<SpecialistOffersViewModel>(user.SpecialistDetailsId);
+
+            var model = new AllMySpecialistOffersViewModel
             {
                 Offers = allMyOffers,
             };
@@ -143,6 +156,25 @@
             }
 
             offer.IsAcountsOwner = offer.ApplicationUserId == currenUserId;
+            return this.View(offer);
+        }
+
+        public async Task<IActionResult> DetailsSent(string offerId)
+        {
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var offer = await this.offersService.GetDetailsByIdAsync<OfferDetailsSentViewModel>(offerId);
+
+            if (offer is null)
+            {
+                return this.NotFound();
+            }
+
+            if (offer.SpecialistDetailsId != currentUser.SpecialistDetailsId)
+            {
+                return this.RedirectToAction("AccessDenied", "Errors");
+            }
+
+            offer.IsAcountsOwner = offer.SpecialistDetailsId == currentUser.SpecialistDetailsId;
             return this.View(offer);
         }
 

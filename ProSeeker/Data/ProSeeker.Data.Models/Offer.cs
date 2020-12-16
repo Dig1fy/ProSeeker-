@@ -5,7 +5,7 @@
 
     using ProSeeker.Data.Common.Models;
 
-    public class Offer : BaseModel<string>
+    public class Offer : BaseDeletableModel<string>
     {
         public Offer()
         {
@@ -33,6 +33,8 @@
         public bool IsRed { get; set; }
 
         public bool IsAccepted { get; set; }
+
+        public DateTime? AcceptedOn{ get; set; }
 
         public string ApplicationUserId { get; set; }
 

@@ -13,6 +13,8 @@
 
         Task<IEnumerable<T>> GetAllUserOffersAsync<T>(string userId);
 
+        Task<IEnumerable<T>> GetAllSpecialistOffersAsync<T>(string specialistId);
+
         Task<T> GetDetailsByIdAsync<T>(string offerId);
 
         Task DeleteByIdAsync(string id);

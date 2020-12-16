@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class AllMyOffersViewModel
+    public class AllMyUserOffersViewModel
     {
         public IEnumerable<UserOffersViewModel> Offers { get; set; }
     }

@@ -1,5 +1,6 @@
 ﻿namespace ProSeeker.Services.Data.Offers
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -12,12 +13,12 @@
 
     public class OffersService : IOffersService
     {
-        private readonly IRepository<Offer> offersRepository;
+        private readonly IDeletableEntityRepository<Offer> offersRepository;
         private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
         private readonly IDeletableEntityRepository<Ad> adsRepository;
 
         public OffersService(
-            IRepository<Offer> offersRepository,
+            IDeletableEntityRepository<Offer> offersRepository,
             IDeletableEntityRepository<ApplicationUser> usersRepository,
             IDeletableEntityRepository<Ad> adsRepository)
         {
@@ -96,6 +97,17 @@
             return allMyOffers;
         }
 
+        public async Task<IEnumerable<T>> GetAllSpecialistOffersAsync<T>(string specialistId)
+        {
+            var allMyOffers = await this.offersRepository
+                .All()
+                .Where(x => x.SpecialistDetailsId == specialistId)
+                .To<T>()
+                .ToListAsync();
+
+            return allMyOffers;
+        }
+
         public async Task<T> GetDetailsByIdAsync<T>(string offerId)
         {
             var offer = await this.offersRepository
@@ -140,6 +152,7 @@
         public async Task AcceptOffer(string offerId)
         {
             var offer = await this.offersRepository.All().Where(x => x.Id == offerId).FirstOrDefaultAsync();
+            offer.AcceptedOn = DateTime.UtcNow;
             offer.IsAccepted = true;
             this.offersRepository.Update(offer);
             await this.offersRepository.SaveChangesAsync();

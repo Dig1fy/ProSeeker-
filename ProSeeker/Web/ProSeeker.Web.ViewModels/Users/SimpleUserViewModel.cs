@@ -21,7 +21,5 @@
         public string ProfilePicture { get; set; }
 
         public CitySimpleViewModel City { get; set; }
-
-
     }
 }

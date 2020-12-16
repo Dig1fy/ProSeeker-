@@ -4,6 +4,7 @@
     using System.Linq;
 
     using AutoMapper;
+    using ProSeeker.Common;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;
     using ProSeeker.Web.ViewModels.Categories;
@@ -34,6 +35,8 @@
         public int OpinionsCount { get; set; }
 
         public DateTime CreatedOn { get; set; }
+
+        public string SentTimeSpan => GlobalMethods.CalculateElapsedTime(this.CreatedOn, false);
 
         public CategorySimpleViewModel JobCategory { get; set; }
 

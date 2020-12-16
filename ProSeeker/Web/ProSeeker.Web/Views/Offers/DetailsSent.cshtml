@@ -1,0 +1,122 @@
+﻿@model ProSeeker.Web.ViewModels.Offers.OfferDetailsSentViewModel
+
+<style>
+    .custom-dash-border {
+        background-color: rgba(220, 250, 248, 0.06);
+        box-shadow: 5px 5px 32px rgb(34, 191, 177);
+    }
+</style>
+
+@if (Model.IsAccepted)
+{
+    <article class="custom-golden-text" style="font-size:20px;">Тази оферта е приета и клиентът е получил вашите контакти. Ако все още не се е свързал с Вас, поемете инициативата и Вие се свържете с него, чрез посочените контакти по-долу.</article>
+}
+else
+{
+    <article class="inquiry-notes" style="font-size:21px; font-weight:bold;">
+        Ако клиентът приеме тази оферта, ще получите неговите контакти, както и той - вашите, за да установите връзка и да започнете съвместна работа.
+    </article>
+}
+<div class="details-container" style="background-color:rgba(245, 249, 250, 0.19)">
+    <div class="row">
+        <div class="button-container col-md-2">
+            <div class="col-md-12">
+                @if (this.User.Identity.IsAuthenticated && Model.IsAcountsOwner)
+                {
+                    <div class="mt-2">
+                        <form id="deleteSpecialistOfferForm" asp-controller="Offers" asp-action="Delete" asp-route-offerId="@Model.Id" method="post">
+                        </form>
+                        <button style="text-decoration:none; width:170px;" class="custom-submit-button text-center" data-toggle="modal" data-target="#deleteSpecialistOfferModal">Изтрий офертата</button>
+                    </div>
+                }
+
+            </div>
+        </div>
+        <div class="col-md-10 ">
+            <div class="card m-2 custom-background-shadows">
+                <div class="custom-background-shadows">
+                    <div class="">
+                        <div class="col-md-3 position-static">
+                            <img src="@Model.ApplicationUser.ProfilePicture" style="min-width:200px;min-height:190px; border-radius:1%;" class="float-left img-fluid">
+                        </div>
+                        <div class="col-md-12 text-right ">
+                            <p class="card-title custom-input-text">@Model.ApplicationUser.FullName</p>
+                            <p class="card-title"><i style="color:cornflowerblue" class="fas fa-globe-americas"></i> @Model.ApplicationUser.City.Name</p>
+                            @if (Model.IsAccepted)
+                            {
+                                <p class="custom-input-text"><strong>Контакти:</strong></p>
+                                <p class="card-title custom-input-text">телефон: @Model.ApplicationUser.PhoneNumber</p>
+                                <p class="card-title custom-input-text">имейл: @Model.ApplicationUser.Email</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @if (Model.Inquiry != null)
+    {
+        <hr class="custom-dash-border" />
+        <div class="row">
+            <div class="text-center col-md-12">
+                <article class="custom-text-shadows">Запитване от клиента:</article>
+            </div>
+            <div class="col-md-12 mt-5">
+                <div class="custom-text-shadows">
+                    <div class="mt-1"><strong>Валидно от</strong>: @Model.Inquiry.CreatedOn.ToShortDateString() /преди @Model.Inquiry.SentTimeSpan/</div>
+                    <div class="mt-1"><strong>Валидно до</strong>: @Model.Inquiry.ValidUntil.ToShortDateString() /още @Model.Inquiry.ValidUntilTimeSpan/</div>
+                    <div class="mt-4 custom-textarea-text">@Html.Raw(Model.Inquiry.SanitizedContent)</div>
+                </div>
+            </div>
+        </div>
+    }
+    else if (Model.Ad != null)
+    {
+        <hr class="custom-dash-border" />
+        <div class="row">
+            <div class="text-center col-md-12">
+                <article class="custom-text-shadows">Обява на клиента:</article>
+            </div>
+            <div class="col-md-12 mt-5">
+                <div class="custom-text-shadows">
+                    <div class="mt-1"><strong>Валидно от</strong>: @Model.Ad.CreatedOn.ToShortDateString() /преди @Model.Ad.SentTimeSpan/</div>
+                    <div class="mt-4 custom-textarea-text">@Html.Raw(Model.Ad.SanitizedDescription)</div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <hr class="custom-dash-border" />
+    <div class="row">
+        <div class="text-center col-md-12">
+            <article class="custom-text-shadows">Вашата оферта:</article>
+        </div>
+        <div class="col-md-12 mt-5">
+            <div class="custom-text-shadows">
+                <div class="mt-1"><strong>Приета от клиента на:</strong>: @Model.AcceptedOn /преди @Model.SentTimeSpan/</div>
+                <div class="mt-1"><strong>Изпратена на</strong>: @Model.CreatedOn.ToShortDateString() /преди @Model.SentTimeSpan/</div>
+                <div class="mt-1"><strong>Валидна до</strong>: @Model.ExpirationDate.ToShortDateString() /още @Model.ExpirationCalculated/</div>
+                <div class="mt-1"><strong>Офертна цена</strong>: @Model.Price лева</div>
+                <div class="mt-4 custom-textarea-text">@Html.Raw(Model.SanitizedDescription)</div>
+            </div>
+        </div>
+    </div>
+    <hr class="custom-dash-border mr-3" />
+</div>
+
+@*=================================
+       MODAL - delete confirmation
+    ===========================*@
+<div class="modal" tabindex="-1" role="dialog" id="deleteSpecialistOfferModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="background-color:azure">
+            <div class="modal-body d-flex justify-content-center">
+                <p class="custom-text-shadows">Наистина ли желаете да изтриете тази оферта?</p>
+            </div>
+            <div class="modal-footer row d-flex justify-content-center">
+                <button type="button" class="custom-danger-btn col-md-4 text-center" onclick="deleteSpecialistOfferForm.submit()">Да</button>
+                <button type="button" class="custom-success-btn col-md-4 text-center" data-dismiss="modal">Не</button>
+            </div>
+        </div>
+    </div>
+</div>

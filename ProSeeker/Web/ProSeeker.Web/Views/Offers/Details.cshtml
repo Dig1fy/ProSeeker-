@@ -71,8 +71,16 @@ else
     <div class="row">
         <div class="col-md-12 mt-5">
             <div class="custom-text-shadows">
+                @if (Model.IsAccepted)
+                {
+                    <div class="mt-1"><strong>Офертата е изпратена на:</strong>: @Model.CreatedOn.ToShortDateString() /преди @Model.SentTimeSpan/</div>
+                    <div class="mt-1"><strong>Приели сте офертата на:</strong>: @Model.AcceptedOn /преди @Model.AcceptedSentTimeSpan/</div>
+                }
+                else
+                {
                 <div class="mt-1"><strong>Валидна от</strong>: @Model.CreatedOn.ToShortDateString() /преди @Model.SentTimeSpan/</div>
                 <div class="mt-1"><strong>Валидна до</strong>: @Model.ExpirationDate.ToShortDateString() /още @Model.ExpirationCalculated/</div>
+                }
                 <div class="mt-1"><strong>Офертна цена</strong>: @Model.Price лева</div>
                 <div class="mt-4 custom-textarea-text">@Html.Raw(Model.SanitizedDescription)</div>
             </div>

@@ -1,0 +1,52 @@
+﻿@model ProSeeker.Web.ViewModels.Offers.AllMySpecialistOffersViewModel
+
+@if (!Model.Offers.Any())
+{
+    <h2 class="custom-golden-text">Все още нямате направени оферти!</h2>
+}
+
+<div class="row text-left">
+    @foreach (var offer in Model.Offers)
+    {
+        <div class="col-md-3 m-2 ">
+            <div class="card m-2 custom-background-shadows" style="width: 18rem;">
+                <div class="card-body custom-background-shadows">
+
+                    @if (offer.IsAccepted)
+                    {
+                        <p class="custom-accepted-attention-text text-center">Офертата е приета!</p>
+                    }
+
+                    <div class="row">
+                        <div class="col-md-3 position-absolute ">
+                            <img src="@offer.ApplicationUser.ProfilePicture" style="width:100px;height:100px; border-radius:50%;" class="float-left">
+                        </div>
+                        <div class="col-md-12 text-right ">
+                            <p class="card-title custom-input-text">@offer.ApplicationUser.FullName</p>
+                            <p class="card-title"><i style="color:cornflowerblue" class="fas fa-globe-americas"></i> @offer.ApplicationUser.City.Name</p>
+                        </div>
+                    </div>
+                </div>
+                <ul class="list-group list-group-flush custom-text-shadows">
+                    <li class="list-group-item">Изпратена преди: @offer.SentTimeSpan</li>
+
+                    @if (offer.Ad == null)
+                    {
+                        <li class="list-group-item">За запитване: @Html.Raw(offer.Inquiry.SanitizedContent)</li>
+                    }
+                    else
+                    {
+                        <li class="list-group-item">За обява: @offer.Ad.ShortTitle</li>
+                    }
+                    <li class="list-group-item">Вашата оферта е: @offer.Price лева</li>
+                    <li class="list-group-item">@Html.Raw(offer.ShortSanitizedDescription)</li>
+                </ul>
+                <div class="card-body text-center">
+                    <form asp-controller="Offers" asp-action="DetailsSent" asp-route-offerId="@offer.Id" method="post">
+                        <button type="submit" style="text-decoration:none;" class="custom-submit-button text-center">Отвори детайли</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</div>
