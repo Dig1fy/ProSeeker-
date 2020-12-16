@@ -11,6 +11,8 @@
     {
         public string AdId { get; set; }
 
+        public string InquiryId { get; set; }
+
         [Required(ErrorMessage = "Моля, попълнете полето 'Описание на оферта'")]
         [Display(Name = "Описание / допълнителна инфомация")]
         [MinLength(25, ErrorMessage ="Описанието на офертата трябва да бъде поне 25 символа!")]

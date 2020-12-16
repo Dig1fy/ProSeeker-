@@ -132,8 +132,12 @@
 }
 
 .custom-heading-title {
-    background: -webkit-linear-gradient(bottom, rgba(24, 174, 241, 0.45), rgba(91, 135, 239, 0.23), rgba(24, 174, 241, 0.45));
+    border-radius: 25px 25px 1px 1px;
+    /*background: -webkit-linear-gradient(bottom, rgba(24, 174, 241, 0.45), rgba(91, 135, 239, 0.23), rgba(24, 174, 241, 0.45));*/
+    background: rgb(29,143,156);
+    background: linear-gradient(175deg, rgba(29,143,156,1) 5%, rgba(241,251,252,1) 8%, rgba(133,224,254,1) 9%, rgba(114,206,230,1) 9%, rgba(32,124,121,1) 12%, rgba(255,255,255,1) 13%, rgba(211,237,242,1) 14%, rgba(196,236,244,1) 33%, rgba(189,232,240,1) 50%, rgba(200,235,242,1) 53%, rgba(174,226,240,1) 86%, rgba(221,252,255,1) 89%, rgba(7,110,125,1) 89%, rgba(143,207,213,1) 92%, rgba(212,247,252,1) 93%, rgba(103,195,204,1) 95%, rgba(10,118,144,1) 100%);
     text-align: center;
+    min-height: 40px;
 }
 
 .inquiry-notes {
@@ -192,22 +196,22 @@
 }
 
 .custom-background-shadows {
-    background: -webkit-linear-gradient(bottom, rgba(92, 142, 230, 0.13), rgba(246, 244, 231, 0.28), rgba(110, 214, 237, 0.05));
+    background: -webkit-linear-gradient(bottom, rgba(92, 142, 230, 0.13), rgba(246, 244, 231, 0.28), rgba(110, 214, 237, 0.05));    
 }
 
 /*Transform*/
 #custom-shadow-transform {
     transition: ease-in-out 0.4s;
     border: none;
-    box-shadow: inset 0px 1px 0px -5px rgba(50, 65, 49, 0.2), 0px 1px 11px 1px rgb(69, 71, 87);
+    box-shadow: inset 0px 0px 0px -12px rgba(50, 65, 49, 0.2), 0px 0px 3px 1px rgb(69, 71, 87);
     background-color: rgba(0, 255, 255, 0.01);
+    border-radius: 25px 25px;
 }
 
     #custom-shadow-transform:hover {
         background-color: rgb(255, 255, 255);
-        /* transition      : ease 0.5s; */
-        box-shadow: inset 10px 10px 21px -5px rgba(50, 65, 49, 0.2), 19px 15px 11px 1px rgb(69, 71, 87);
-        transform: scale(1.02);
+        box-shadow: inset 1px 1px 3px -5px rgba(50, 65, 49, 0.2), 5px 5px 11px 0px rgb(69, 71, 87);
+        transform: scale(1.01);
         transition: ease-in-out 0.4s;
         z-index: 1;
         background-color: rgba(0, 255, 255, 0.05);

@@ -7,6 +7,7 @@
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;
     using ProSeeker.Web.ViewModels.Ads;
+    using ProSeeker.Web.ViewModels.Inquiries;
     using ProSeeker.Web.ViewModels.Users;
 
     public class UserOffersViewModel : IMapFrom<Offer>
@@ -32,6 +33,8 @@
         public string ApplicationUserId { get; set; }
 
         public AdsShortDetailsViewModel Ad { get; set; }
+
+        public InquirySimpleInfoViewModel Inquiry { get; set; }
 
         public virtual SimpleSpecialistDetailsViewModel SpecialistDetails { get; set; }
 

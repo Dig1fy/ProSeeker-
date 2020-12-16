@@ -57,12 +57,17 @@
                     return this.View(nameof(this.ExistingOffer), existingOffer);
                 }
             }
+            else
+            {
+                userId = viewModel.ApplicationUserId;
+            }
 
             var inputModel = new CreateOfferInputModel
             {
                 SpecialistDetailsId = specialist.SpecialistDetailsId,
                 ApplicationUserId = userId,
                 AdId = viewModel.Id,
+                InquiryId = viewModel.InquiryId,
                 PhoneNumber = specialist.PhoneNumber,
             };
 
@@ -97,9 +102,8 @@
             // The offer comes from an Inquiry
             else
             {
-
+                await this.offersService.CreateFromInquiryAsync(inputModel);
             }
-
 
             return this.Redirect("/");
         }
@@ -146,6 +150,7 @@
         [Authorize]
         public async Task<IActionResult> Delete(string offerId)
         {
+            //TODO: IMPLEMENT LOGIC - IF THE OFFERS COMES FROM AD/INQUIRY
             var categoryName = await this.categoriesService.GetCategoryNameByOfferIdAsync(offerId);
             var currentUser = await this.userManager.GetUserAsync(this.User);
             await this.offersService.DeleteByIdAsync(offerId);

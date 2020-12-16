@@ -9,7 +9,7 @@
     {
         Task<string> CreateFromAdAsync(CreateOfferInputModel inputModel);
 
-        //Task CreateFromInquiryAsync(CreateOfferInputModel inputModel);
+        Task CreateFromInquiryAsync(CreateOfferInputModel inputModel);
 
         Task<IEnumerable<T>> GetAllUserOffersAsync<T>(string userId);
 

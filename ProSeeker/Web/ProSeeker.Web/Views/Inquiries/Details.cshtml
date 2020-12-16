@@ -15,9 +15,10 @@
                 @*@if (this.User.Identity.IsAuthenticated && Model.IsAcountOwner)
                 {*@
                     <div class="mt-2">
-                        <form >
+                        <form>
                             <input hidden name="ApplicationUserId" value="@Model.UserId" />
-                            <button asp-controller="Offers"  asp-action="Create" asp-route-inquiryId="@Model.Id" style="text-decoration:none; width:170px;" class="custom-submit-button">Направи оферта</button>
+                            <input hidden name="InquiryId" value="@Model.Id" />
+                            <button asp-controller="Offers" asp-action="Create" asp-route-inquiryId="@Model.Id" style="text-decoration:none; width:170px;" class="custom-submit-button">Направи оферта</button>
                         </form>
                     </div>
                     <div class="mt-2">

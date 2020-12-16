@@ -93,12 +93,13 @@
             }
         </div>
     </div>
-    <section class="col-md-10" id="custom-shadow-transform">
-        <h2 class="card-header text-center custom-golden-text custom-heading-title col-md-12">
-            @Model.Title
-        </h2>
-
-        <div style="padding:1px 1px 1px 1px;" class="mt-2">
+    <section class="col-md-8" id="custom-shadow-transform">
+        <div class="text-center custom-golden-text custom-heading-title col-md-12 position-absolute " style="left:0; right:0;">
+            <h4 class="position-relative">
+                @Model.Title
+            </h4>
+        </div><br />
+        <div style="padding:1px 1px 1px 1px;" class="mt-5">
             <span class="card-text d-block custom-input-text">
                 <span>@Html.Raw(Model.SanitizedDescription)<br></span>
 
@@ -168,8 +169,8 @@
 
 
         @*============================
-               New opinion /text area/
-            ===========================*@
+           New opinion /text area/
+        ===========================*@
 
 
         <div class="row">

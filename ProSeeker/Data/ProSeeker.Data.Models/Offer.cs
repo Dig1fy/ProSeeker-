@@ -12,6 +12,10 @@
             this.Id = Guid.NewGuid().ToString();        // TODO - Add user/specialist [Required] when the logic's been implemented and tested!
         }
 
+        public string InquiryId { get; set; }
+
+        public virtual Inquiry Inquiry { get; set; }
+
         public string AdId { get; set; }
 
         public virtual Ad Ad { get; set; }

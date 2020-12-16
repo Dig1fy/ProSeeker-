@@ -38,7 +38,15 @@
                 </div>
                 <ul class="list-group list-group-flush custom-text-shadows">
                     <li class="list-group-item">Изпратена преди: @offer.SentTimeSpan</li>
-                    <li class="list-group-item">За обява: @offer.Ad.ShortTitle</li>
+
+                    @if (offer.Ad == null)
+                    {
+                        <li class="list-group-item">От запитване: @Html.Raw(offer.Inquiry.SanitizedContent)</li>
+                    }
+                    else
+                    {
+                        <li class="list-group-item">От обява: @offer.Ad.ShortTitle</li>
+                    }
                     <li class="list-group-item">Офертна цена: @offer.Price лева</li>
                     <li class="list-group-item">@Html.Raw(offer.ShortSanitizedDescription)</li>
                 </ul>

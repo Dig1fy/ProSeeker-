@@ -11,6 +11,7 @@
     public abstract class BaseAdInputModel : IMapFrom<Ad>
     {
         [Required(ErrorMessage = "Моля, попълнете полето 'Заглавие на обява'")]
+        [StringLength(95, ErrorMessage = "Заглавието трябва да бъде поне 5 символа.", MinimumLength = 5)]
         [Display(Name = "Заглавие на обява")]
         public string Title { get; set; }
 

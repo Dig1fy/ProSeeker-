@@ -61,6 +61,23 @@
             return newOffer.Id;
         }
 
+        public async Task CreateFromInquiryAsync(CreateOfferInputModel inputModel)
+        {
+            var newOffer = new Offer
+            {
+                InquiryId = inputModel.InquiryId,
+                ApplicationUserId = inputModel.ApplicationUserId,
+                Description = inputModel.Description,
+                Price = inputModel.Price,
+                SpecialistDetailsId = inputModel.SpecialistDetailsId,
+                StartDate = inputModel.StartDate,
+                ExpirationDate = inputModel.ExpirationDate,
+            };
+
+            await this.offersRepository.AddAsync(newOffer);
+            await this.offersRepository.SaveChangesAsync();
+        }
+
         public async Task DeleteByIdAsync(string id)
         {
             var offer = await this.offersRepository.All().FirstOrDefaultAsync(x => x.Id == id);
