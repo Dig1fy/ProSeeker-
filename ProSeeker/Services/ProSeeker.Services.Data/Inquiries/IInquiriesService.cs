@@ -18,5 +18,10 @@
         Task DeleteByIdAsync(string inquiryId);
 
         Task<T> CheckForExistingOfferAsync<T>(string inquiryId);
+
+        // These two cannot be async since they're being used in view component
+        bool IsThereUnredInquiry(string userId);
+
+        int UnredInquiriesCount(string userId);
     }
 }

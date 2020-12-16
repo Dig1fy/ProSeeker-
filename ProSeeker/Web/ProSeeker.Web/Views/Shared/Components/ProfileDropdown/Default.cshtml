@@ -8,14 +8,30 @@
         {
             <a style="text-decoration:none;">Имате ново известие</a>
         }
+        @if (Model.IsThereUnredInquiry && this.User.IsInRole(GlobalConstants.SpecialistRoleName))
+        {
+            <a style="text-decoration:none;">Имате ново известие</a>
+        }
     </i>
     <div class="dropdown-menu custom-dropdown-content" style="margin-top:-8px;">
         <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Акаунт</a>
 
         @if (this.User.IsInRole(GlobalConstants.SpecialistRoleName))
         {
-            <a class="dropdown-item" asp-area="" asp-controller="Inquiries" asp-action="MyInquiries">Запитвания</a>
-            <a class="dropdown-item d-inline" id="userNavBarOffers" asp-area="" asp-controller="Offers" asp-action="SpecialistOffers">Оферти</a>
+            <a class="dropdown-item d-inline mb-4" asp-area="" asp-controller="Inquiries" asp-action="MyInquiries">Запитвания</a>
+            @if (Model.IsThereUnredInquiry)
+            {
+                if (Model.UnredInquiriesCount == 1)
+                {
+                    <div class="d-inline" style="color:rgb(202, 8, 8); font-style:oblique; font-weight:bold;">@Model.UnredInquiriesCount новo*</div>
+                }
+                else
+                {
+                    <div class="d-inline" style="color:rgb(202, 8, 8);  font-style:oblique; font-weight:bold;">@Model.UnredInquiriesCount нови*</div>
+                }
+                <br />
+            }
+            <a class="dropdown-item" id="userNavBarOffers" asp-area="" asp-controller="Offers" asp-action="SpecialistOffers">Оферти</a>
         }
 
         @if (this.User.IsInRole(GlobalConstants.RegularUserRoleName))
@@ -25,16 +41,17 @@
 
             @if (Model.IsThereUnredOffer)
             {
-                if (Model.Count == 1)
+                if (Model.UnredOffersCount == 1)
                 {
-                    <div class="d-inline" style="color:rgb(202, 8, 8); font-style:oblique; font-weight:bold;">@Model.Count новo*</div>
+                    <div class="d-inline" style="color:rgb(202, 8, 8); font-style:oblique; font-weight:bold;">@Model.UnredOffersCount новo*</div>
                 }
                 else
                 {
-                    <div class="d-inline" style="color:rgb(202, 8, 8); font-style:oblique; font-weight:bold;">@Model.Count нови*</div>
+                    <div class="d-inline" style="color:rgb(202, 8, 8); font-style:oblique; font-weight:bold;">@Model.UnredOffersCount нови*</div>
                 }
             }
         }
+
         <a onclick="SubmitForm()" class="dropdown-item">
             <form id="submitForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">Изход </form>
         </a>

@@ -14,11 +14,16 @@
     {
         private readonly IDeletableEntityRepository<Inquiry> inquiriesRepository;
         private readonly IDeletableEntityRepository<Offer> offersRepository;
+        private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
 
-        public InquiriesService(IDeletableEntityRepository<Inquiry> inquiriesRepository, IDeletableEntityRepository<Offer> offersRepository)
+        public InquiriesService(
+            IDeletableEntityRepository<Inquiry> inquiriesRepository,
+            IDeletableEntityRepository<Offer> offersRepository,
+            IDeletableEntityRepository<ApplicationUser> usersRepository)
         {
             this.inquiriesRepository = inquiriesRepository;
             this.offersRepository = offersRepository;
+            this.usersRepository = usersRepository;
         }
 
         public async Task<T> CheckForExistingOfferAsync<T>(string inquiryId)
@@ -76,6 +81,20 @@
             return specialisEnquiries;
         }
 
+        public bool IsThereUnredInquiry(string userId)
+        {
+            var specialistId = this.usersRepository
+                .AllAsNoTracking()
+                .Where(x => x.Id == userId)
+                .Select(s => s.SpecialistDetailsId)
+                .FirstOrDefault();
+
+            return this.inquiriesRepository
+                .All()
+                .Where(x => x.SpecialistDetailsId == specialistId && x.IsRed == false)
+                .Any();
+        }
+
         public async Task MarkInquiryAsRedAsync(string inquiryId)
         {
             var inquiry = await this.inquiriesRepository
@@ -85,6 +104,20 @@
             inquiry.IsRed = true;
             this.inquiriesRepository.Update(inquiry);
             await this.inquiriesRepository.SaveChangesAsync();
+        }
+
+        public int UnredInquiriesCount(string userId)
+        {
+            var specialistId = this.usersRepository
+               .AllAsNoTracking()
+               .Where(x => x.Id == userId)
+               .Select(s => s.SpecialistDetailsId)
+               .FirstOrDefault();
+
+            return this.inquiriesRepository
+                .All()
+                .Where(x => x.SpecialistDetailsId == specialistId && x.IsRed == false)
+                .Count();
         }
     }
 }

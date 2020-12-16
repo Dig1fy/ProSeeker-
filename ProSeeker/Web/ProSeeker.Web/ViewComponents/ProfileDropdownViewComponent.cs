@@ -3,6 +3,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using ProSeeker.Data.Models;
+    using ProSeeker.Services.Data.Inquiries;
     using ProSeeker.Services.Data.Offers;
     using ProSeeker.Web.ViewModels.Offers;
 
@@ -10,13 +11,16 @@
     {
         private readonly IOffersService offersService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IInquiriesService inquiriesService;
 
         public ProfileDropdownViewComponent(
             IOffersService offersService,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            IInquiriesService inquiriesService)
         {
             this.offersService = offersService;
             this.userManager = userManager;
+            this.inquiriesService = inquiriesService;
         }
 
         public IViewComponentResult Invoke()
@@ -25,8 +29,10 @@
 
             var model = new ProfileDropdownViewModel
             {
-                Count = this.offersService.GetUnredOffersCount(userId),
+                UnredOffersCount = this.offersService.GetUnredOffersCount(userId),
                 IsThereUnredOffer = this.offersService.IsThereUnredOffer(userId),
+                UnredInquiriesCount = this.inquiriesService.UnredInquiriesCount(userId),
+                IsThereUnredInquiry = this.inquiriesService.IsThereUnredInquiry(userId),
             };
 
             return this.View(model);
