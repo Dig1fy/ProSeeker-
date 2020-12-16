@@ -52,7 +52,7 @@
             var user = await this.userManager.GetUserAsync(this.User);
             inputModel.UserId = user.Id;
             await this.inquiriesService.CreateAsync(inputModel);
-            return this.Redirect("/");   // TODO: Redirect to MyEnquiries when you create that section.
+            return this.RedirectToAction("GetProfile", "SpecialistsDetails", new { id = inputModel.SpecialistDetailsId });   // TODO: Redirect to MyEnquiries when you create that section.
         }
 
         public async Task<IActionResult> MyInquiries()

@@ -150,17 +150,18 @@
         [Authorize]
         public async Task<IActionResult> Delete(string offerId, string id)
         {
-            var categoryName = await this.categoriesService.GetCategoryNameByOfferIdAsync(offerId);
             var currentUser = await this.userManager.GetUserAsync(this.User);
-            await this.offersService.DeleteByIdAsync(offerId);
 
             if (currentUser.IsSpecialist)
             {
+                var categoryName = await this.categoriesService.GetCategoryNameByOfferIdAsync(offerId);
                 var model = new AdsPerPageViewModel { CategoryName = categoryName };
+                await this.offersService.DeleteByIdAsync(offerId);
                 return this.RedirectToAction("GetByCategory", "Ads", new AdsPerPageViewModel { CategoryName = categoryName });
             }
             else
             {
+                await this.offersService.DeleteByIdAsync(offerId);
                 return this.RedirectToAction(nameof(this.UserOffers));
             }
         }
