@@ -30,14 +30,21 @@
                 <ul class="list-group list-group-flush custom-text-shadows">
                     <li class="list-group-item">Изпратена преди: @offer.SentTimeSpan</li>
 
-                    @if (offer.Ad == null)
+                    @if (offer.Ad != null)
+                    {
+                        <li class="list-group-item">За обява: @offer.Ad.ShortTitle</li>
+
+                    }
+                    else if (offer.Inquiry != null)
                     {
                         <li class="list-group-item">За запитване: @Html.Raw(offer.Inquiry.SanitizedContent)</li>
                     }
                     else
                     {
-                        <li class="list-group-item">За обява: @offer.Ad.ShortTitle</li>
+                        <li class="list-group-item custom-input-text">ОБЯВАТА Е ИЗТРИТА</li>
+                        <li class="list-group-item custom-unred-attention-text">ОБЯВАТА Е ИЗТРИТА</li>
                     }
+
                     <li class="list-group-item">Вашата оферта е: @offer.Price лева</li>
                     <li class="list-group-item">@Html.Raw(offer.ShortSanitizedDescription)</li>
                 </ul>

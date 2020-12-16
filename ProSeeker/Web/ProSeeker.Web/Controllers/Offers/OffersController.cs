@@ -184,17 +184,22 @@
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
+            /* We have 3 redirections:
+             - 2 for specialists - delete request comes from attempt to send 2 offers for 1 ad / delete inquiry which has related offers to it
+             - 1 for user */
             if (currentUser.IsSpecialist)
             {
                 var categoryName = await this.categoriesService.GetCategoryNameByOfferIdAsync(offerId);
                 await this.offersService.DeleteByIdAsync(offerId);
+
                 if (categoryName == string.Empty)
                 {
+                    // If the delete request comes from "MyInquiries", the category name could not be taken and the redirect has to be different.
                     return this.RedirectToAction("MyInquiries", "Inquiries");
                 }
                 else
                 {
-                return this.RedirectToAction("GetByCategory", "Ads", new AdsPerPageViewModel { CategoryName = categoryName });
+                    return this.RedirectToAction("GetByCategory", "Ads", new AdsPerPageViewModel { CategoryName = categoryName });
                 }
             }
             else
