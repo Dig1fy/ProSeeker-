@@ -148,9 +148,8 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Delete(string offerId)
+        public async Task<IActionResult> Delete(string offerId, string id)
         {
-            //TODO: IMPLEMENT LOGIC - IF THE OFFERS COMES FROM AD/INQUIRY
             var categoryName = await this.categoriesService.GetCategoryNameByOfferIdAsync(offerId);
             var currentUser = await this.userManager.GetUserAsync(this.User);
             await this.offersService.DeleteByIdAsync(offerId);
