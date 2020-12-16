@@ -10,12 +10,8 @@ namespace ProSeeker.Web.ViewModels.Inquiries
     using ProSeeker.Web.ViewModels.Offers;
     using ProSeeker.Web.ViewModels.Users;
 
-    public class InquiryDetailsViewModel : IMapFrom<Inquiry>
+    public class InquiryDetailsViewModel : BaseInquiryViewModel
     {
-        public string Id { get; set; }
-
-        public string Content { get; set; }
-
         public string SanitizedContent => new HtmlSanitizer().Sanitize(this.Content);
 
         public bool IsAcountOwner { get; set; }
