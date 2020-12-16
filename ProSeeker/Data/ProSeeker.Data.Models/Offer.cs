@@ -34,7 +34,7 @@
 
         public bool IsAccepted { get; set; }
 
-        public DateTime? AcceptedOn{ get; set; }
+        public DateTime? AcceptedOn { get; set; }
 
         public string ApplicationUserId { get; set; }
 

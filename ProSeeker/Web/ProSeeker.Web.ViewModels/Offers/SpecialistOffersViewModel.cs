@@ -10,25 +10,11 @@
     using ProSeeker.Web.ViewModels.Inquiries;
     using ProSeeker.Web.ViewModels.Users;
 
-    public class SpecialistOffersViewModel : IMapFrom<Offer>
+    public class SpecialistOffersViewModel : BaseOfferViewModel
     {
-        public string Id { get; set; }
-
-        public string Description { get; set; }
-
         public string ShortSanitizedDescription => new HtmlSanitizer().Sanitize(this.ShortDescription);
 
-        public decimal Price { get; set; }
-
-        public bool IsAccepted { get; set; }
-
-        public DateTime CreatedOn { get; set; }
-
         public string SentTimeSpan => GlobalMethods.CalculateElapsedTime(this.CreatedOn, false);
-
-        public DateTime ExpirationDate { get; set; }
-
-        public string ApplicationUserId { get; set; }
 
         public AdsShortDetailsViewModel Ad { get; set; }
 
