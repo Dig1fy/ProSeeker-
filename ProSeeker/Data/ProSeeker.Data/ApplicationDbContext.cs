@@ -42,6 +42,8 @@
 
         public DbSet<Ad> Ads { get; set; }
 
+        public DbSet<Offer> Offers { get; set; }
+
         public DbSet<Inquiry> Inquiries { get; set; }
 
         // Quizz

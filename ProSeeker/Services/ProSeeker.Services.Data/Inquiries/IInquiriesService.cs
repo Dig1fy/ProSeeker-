@@ -16,5 +16,7 @@
         Task MarkInquiryAsRedAsync(string inquiryId);
 
         Task DeleteByIdAsync(string inquiryId);
+
+        Task<T> CheckForExistingOfferAsync<T>(string inquiryId);
     }
 }

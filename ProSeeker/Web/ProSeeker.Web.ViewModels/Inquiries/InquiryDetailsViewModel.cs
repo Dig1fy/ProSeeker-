@@ -7,6 +7,7 @@ namespace ProSeeker.Web.ViewModels.Inquiries
     using ProSeeker.Common;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;
+    using ProSeeker.Web.ViewModels.Offers;
     using ProSeeker.Web.ViewModels.Users;
 
     public class InquiryDetailsViewModel : IMapFrom<Inquiry>
@@ -36,5 +37,7 @@ namespace ProSeeker.Web.ViewModels.Inquiries
         public virtual SimpleUserViewModel User { get; set; }
 
         public int CityId { get; set; }
+
+        public virtual ExistingOfferViewModel Offer{ get; set; }
     }
 }

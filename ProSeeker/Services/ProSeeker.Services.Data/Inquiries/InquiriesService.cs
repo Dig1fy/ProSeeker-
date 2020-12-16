@@ -13,10 +13,23 @@
     public class InquiriesService : IInquiriesService
     {
         private readonly IDeletableEntityRepository<Inquiry> inquiriesRepository;
+        private readonly IDeletableEntityRepository<Offer> offersRepository;
 
-        public InquiriesService(IDeletableEntityRepository<Inquiry> inquiriesRepository)
+        public InquiriesService(IDeletableEntityRepository<Inquiry> inquiriesRepository, IDeletableEntityRepository<Offer> offersRepository)
         {
             this.inquiriesRepository = inquiriesRepository;
+            this.offersRepository = offersRepository;
+        }
+
+        public async Task<T> CheckForExistingOfferAsync<T>(string inquiryId)
+        {
+            var existingOffer = await this.offersRepository
+                .All()
+                .Where(x => x.InquiryId == inquiryId)
+                .To<T>()
+                .FirstOrDefaultAsync();
+
+            return existingOffer;
         }
 
         public async Task CreateAsync(CreateInquiryInputModel inputModel)

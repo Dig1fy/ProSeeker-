@@ -37,29 +37,6 @@
                 await dbContext.SaveChangesAsync();
                 logger.LogInformation($"Seeder {seeder.GetType().Name} done.");
             }
-
-            // FOR YOUR CAR
-            // tinsmith - тенекиджия
-            // car painter
-            // car mechanic
-            // car gasman
-            // carwash
-
-            // FOR YOUR NEW HOME
-            // interior designer
-            // designer
-            // surveyor
-            // real estate agent
-            // urbanist
-
-            // OTHERS
-            // lawyer
-            // taxi driver
-            // dentist
-            // psychologist
-            // photographer
-            // accountant
-            // hairdresser
         }
     }
 }

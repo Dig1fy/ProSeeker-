@@ -10,6 +10,7 @@
     using ProSeeker.Services.Data.Inquiries;
     using ProSeeker.Web.ViewModels.Cities;
     using ProSeeker.Web.ViewModels.Inquiries;
+    using ProSeeker.Web.ViewModels.Offers;
 
     public class InquiriesController : BaseController
     {
@@ -52,7 +53,7 @@
             var user = await this.userManager.GetUserAsync(this.User);
             inputModel.UserId = user.Id;
             await this.inquiriesService.CreateAsync(inputModel);
-            return this.RedirectToAction("GetProfile", "SpecialistsDetails", new { id = inputModel.SpecialistDetailsId });   // TODO: Redirect to MyEnquiries when you create that section.
+            return this.RedirectToAction("GetProfile", "SpecialistsDetails", new { id = inputModel.SpecialistDetailsId });
         }
 
         public async Task<IActionResult> MyInquiries()
@@ -96,6 +97,14 @@
         public async Task<IActionResult> Delete(string inquiryId)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
+            var existingOffer = await this.inquiriesService.CheckForExistingOfferAsync<ExistingOfferViewModel>(inquiryId);
+
+            // If there is an offer related to the inquiry, the offer needs to be deleted first.
+            if (existingOffer != null)
+            {
+                return this.View("ExistingOffer", existingOffer);
+            }
+
             await this.inquiriesService.DeleteByIdAsync(inquiryId);
 
             if (currentUser.IsSpecialist)

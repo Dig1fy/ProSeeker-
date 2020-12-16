@@ -57,6 +57,12 @@
                 .AllAsNoTracking()
                 .FirstOrDefaultAsync(a => a.Id == offer.AdId);
 
+            // If the request for delete comes from Inquiries
+            if (ad == null)
+            {
+                return string.Empty;
+            }
+
             var category = await this.categoriesRepository
                 .AllAsNoTracking()
                 .Where(x => x.Id == ad.JobCategoryId)
