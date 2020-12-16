@@ -3,25 +3,13 @@
     using System;
     using System.Collections.Generic;
 
-    using ProSeeker.Data.Models;
-    using ProSeeker.Services.Mapping;
     using ProSeeker.Web.ViewModels.Cities;
     using ProSeeker.Web.ViewModels.Opinions;
     using ProSeeker.Web.ViewModels.Users.Specialists;
 
-    public class UserViewModel : IMapFrom<ApplicationUser>
+    public class UserViewModel : BaseUserViewModel
     {
-        public string Id { get; set; }
-
-        public string FirstName { get; set; }
-
-        public string LastName { get; set; }
-
-        public string FullName => $"{this.FirstName} {this.LastName}";
-
         public CitySimpleViewModel City { get; set; }
-
-        public string ProfilePicture { get; set; }
 
         public DateTime CreatedOn { get; set; }
 
