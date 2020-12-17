@@ -24,9 +24,9 @@
 
         [Required]
         [ForeignKey(nameof(ApplicationUser))]
-        public string ApplicationUserId { get; set; }
+        public string SenderId { get; set; }
 
-        public ApplicationUser ApplicationUser { get; set; }
+        public ApplicationUser Sender { get; set; }
 
         [Required]
         public string ReceiverUsername { get; set; }
