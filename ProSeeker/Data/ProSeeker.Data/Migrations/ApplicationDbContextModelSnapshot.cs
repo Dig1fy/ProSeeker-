@@ -357,117 +357,6 @@ namespace ProSeeker.Data.Migrations
                     b.ToTable("BaseJobCategories");
                 });
 
-            modelBuilder.Entity("ProSeeker.Data.Models.Chat.ChatMessage", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("GroupId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ReceiverId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ReceiverUsername")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SenderId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GroupId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("SenderId");
-
-                    b.ToTable("ChatMessages");
-                });
-
-            modelBuilder.Entity("ProSeeker.Data.Models.Chat.Group", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(70)")
-                        .HasMaxLength(70);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.ToTable("Groups");
-                });
-
-            modelBuilder.Entity("ProSeeker.Data.Models.Chat.UserGroup", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ApplicationUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("GroupId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("GroupId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.ToTable("UsersGroups");
-                });
-
             modelBuilder.Entity("ProSeeker.Data.Models.City", b =>
                 {
                     b.Property<int>("Id")
@@ -689,6 +578,94 @@ namespace ProSeeker.Data.Migrations
                     b.HasIndex("SpecialistDetailsId");
 
                     b.ToTable("Opinions");
+                });
+
+            modelBuilder.Entity("ProSeeker.Data.Models.PrivateChat.ChatMessage", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConversationId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ReceiverId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("ConversationId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("ChatMessages");
+                });
+
+            modelBuilder.Entity("ProSeeker.Data.Models.PrivateChat.Conversation", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ReceiverId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SenderId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Conversations");
+                });
+
+            modelBuilder.Entity("ProSeeker.Data.Models.PrivateChat.UserConversation", b =>
+                {
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConversationId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ApplicationUserId", "ConversationId");
+
+                    b.HasIndex("ConversationId");
+
+                    b.ToTable("UsersConversations");
                 });
 
             modelBuilder.Entity("ProSeeker.Data.Models.Quiz.Answer", b =>
@@ -1063,36 +1040,6 @@ namespace ProSeeker.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ProSeeker.Data.Models.Chat.ChatMessage", b =>
-                {
-                    b.HasOne("ProSeeker.Data.Models.Chat.Group", "Group")
-                        .WithMany("ChatMessages")
-                        .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("ProSeeker.Data.Models.ApplicationUser", "Sender")
-                        .WithMany("ChatMessages")
-                        .HasForeignKey("SenderId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ProSeeker.Data.Models.Chat.UserGroup", b =>
-                {
-                    b.HasOne("ProSeeker.Data.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("UsersGroups")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("ProSeeker.Data.Models.Chat.Group", "Group")
-                        .WithMany("UsersGroups")
-                        .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("ProSeeker.Data.Models.Inquiry", b =>
                 {
                     b.HasOne("ProSeeker.Data.Models.Specialist_Details", "SpecialistDetails")
@@ -1147,6 +1094,36 @@ namespace ProSeeker.Data.Migrations
                     b.HasOne("ProSeeker.Data.Models.Specialist_Details", "SpecialistDetails")
                         .WithMany("Opinions")
                         .HasForeignKey("SpecialistDetailsId");
+                });
+
+            modelBuilder.Entity("ProSeeker.Data.Models.PrivateChat.ChatMessage", b =>
+                {
+                    b.HasOne("ProSeeker.Data.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("ChatMessages")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ProSeeker.Data.Models.PrivateChat.Conversation", "Conversation")
+                        .WithMany("ChatMessages")
+                        .HasForeignKey("ConversationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ProSeeker.Data.Models.PrivateChat.UserConversation", b =>
+                {
+                    b.HasOne("ProSeeker.Data.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ProSeeker.Data.Models.PrivateChat.Conversation", "Conversation")
+                        .WithMany("UsersConversations")
+                        .HasForeignKey("ConversationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ProSeeker.Data.Models.Quiz.Answer", b =>

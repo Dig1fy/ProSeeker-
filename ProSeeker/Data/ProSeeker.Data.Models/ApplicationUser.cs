@@ -7,7 +7,7 @@ namespace ProSeeker.Data.Models
 
     using Microsoft.AspNetCore.Identity;
     using ProSeeker.Data.Common.Models;
-    using ProSeeker.Data.Models.Chat;
+    using ProSeeker.Data.Models.PrivateChat;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
@@ -20,7 +20,6 @@ namespace ProSeeker.Data.Models
             this.Ads = new HashSet<Ad>();
             this.Offers = new HashSet<Offer>();
             this.Inquiries = new HashSet<Inquiry>();
-            this.UsersGroups = new HashSet<UserGroup>();
             this.ChatMessages = new HashSet<ChatMessage>();
 
             this.Roles = new HashSet<IdentityUserRole<string>>();
@@ -77,8 +76,6 @@ namespace ProSeeker.Data.Models
         public virtual ICollection<Offer> Offers { get; set; }
 
         public virtual ICollection<Inquiry> Inquiries { get; set; }
-
-        public virtual ICollection<UserGroup> UsersGroups { get; set; }
 
         public virtual ICollection<ChatMessage> ChatMessages { get; set; }
     }

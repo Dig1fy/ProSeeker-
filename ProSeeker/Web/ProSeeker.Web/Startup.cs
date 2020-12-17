@@ -26,7 +26,6 @@
     using ProSeeker.Services.Data.Inquiries;
     using ProSeeker.Services.Data.Offers;
     using ProSeeker.Services.Data.Opinions;
-    using ProSeeker.Services.Data.PrivateChat;
     using ProSeeker.Services.Data.Raitings;
     using ProSeeker.Services.Data.ServicesService;
     using ProSeeker.Services.Data.Specialists;
@@ -129,7 +128,6 @@
             services.AddTransient<IVotesService, VotesService>();
             services.AddTransient<IInquiriesService, InquiriesService>();
             services.AddTransient<ISpecialistsService, SpecialistsService>();
-            services.AddTransient<IPrivateChatService, PrivateChatService>();
 
             // services.AddTransient<IApplicationUsersController, ApplicationUsersController>();
         }

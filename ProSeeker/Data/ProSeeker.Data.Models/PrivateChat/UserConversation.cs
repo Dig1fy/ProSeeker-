@@ -1,15 +1,13 @@
-﻿namespace ProSeeker.Data.Models.Chat
+﻿namespace ProSeeker.Data.Models.PrivateChat
 {
     using System.ComponentModel.DataAnnotations;
 
-    using ProSeeker.Data.Common.Models;
-
-    public class UserGroup : BaseDeletableModel<string>
+    public class UserConversation
     {
         [Required]
-        public string GroupId { get; set; }
+        public string ConversationId { get; set; }
 
-        public Group Group { get; set; }
+        public Conversation Conversation { get; set; }
 
         [Required]
         public string ApplicationUserId { get; set; }

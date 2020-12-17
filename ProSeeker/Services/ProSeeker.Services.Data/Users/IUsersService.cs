@@ -13,7 +13,5 @@
         Task<int> GetAllSpecialistsCountAsync();
 
         Task<int> GetAllClientsCountAsync();
-
-        Task<T> GetUserByUsernameAsync<T>(string username);
     }
 }
