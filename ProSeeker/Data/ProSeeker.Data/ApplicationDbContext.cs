@@ -10,6 +10,7 @@
     using Microsoft.EntityFrameworkCore;
     using ProSeeker.Data.Common.Models;
     using ProSeeker.Data.Models;
+    using ProSeeker.Data.Models.Chat;
     using ProSeeker.Data.Models.Quiz;
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
@@ -54,6 +55,13 @@
         public DbSet<Answer> Answers { get; set; }
 
         public DbSet<UserQuiz> UsersQuizes { get; set; }
+
+        // Chat
+        public DbSet<ChatMessage> ChatMessages { get; set; }
+
+        public DbSet<Group> Groups { get; set; }
+
+        public DbSet<UserGroup> UsersGroups { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 

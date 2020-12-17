@@ -1,13 +1,11 @@
 ﻿namespace ProSeeker.Common
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Text;
 
     public static class GlobalMethods
     {
-        // starA zAgora -> Stara Zagora; george-johnson -> George-Johnson
+        // starA zAgoRa -> Stara Zagora; george-johnson -> George-Johnson
         public static string UpperFirstLetterOfEachWord(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
