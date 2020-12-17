@@ -140,6 +140,15 @@
     min-height: 40px;
 }
 
+.custom-heading-title-v2 {
+    background: rgb(162,205,215);
+    background: linear-gradient(190deg, rgba(162,205,215,1) 2%, rgba(54,64,66,1) 3%, rgba(36,191,230,1) 4%, rgba(79,86,88,1) 4%, rgba(63,125,138,1) 6%, rgba(99,163,179,1) 8%, rgba(150,199,210,1) 9%, rgba(127,164,172,1) 10%, rgba(89,103,106,1) 11%, rgba(54,80,84,1) 11%, rgba(146,175,182,1) 12%, rgba(180,219,230,1) 12%, rgba(204,223,228,1) 13%, rgba(196,230,240,1) 22%, rgba(208,247,255,0.6278886554621849) 39%, rgba(206,237,245,0.8995973389355743) 55%, rgba(184,224,235,0.7875525210084033) 82%, rgba(188,222,231,1) 88%, rgba(177,213,222,1) 91%, rgba(115,171,185,1) 91%, rgba(176,216,227,1) 92%, rgba(59,93,102,1) 93%, rgba(110,168,182,1) 96%, rgba(127,206,227,1) 99%, rgba(51,96,107,1) 100%);
+    border-radius: 25px 25px 1px 1px;
+    /*background: -webkit-linear-gradient(bottom, rgba(24, 174, 241, 0.45), rgba(91, 135, 239, 0.23), rgba(24, 174, 241, 0.45));*/
+    text-align: center;
+    min-height: 40px;
+}
+
 .inquiry-notes {
     font-family: 'Matura MT Script Capitals';
     font-style: italic;

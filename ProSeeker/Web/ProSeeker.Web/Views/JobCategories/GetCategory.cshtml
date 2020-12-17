@@ -8,42 +8,42 @@
     </div>
 </div>
 
+<form asp-action="GetCategory">
+    <div class="col-md-6 mb-3 mb-md-0 d-flex" style="min-width:255px;">
+
+        <select asp-for="@Model.CityId" class="form-control" style="margin-left: -15px; max-width:225px;" asp-items="@Model.Cities.Select(x=>new SelectListItem { Text = x.Name, Value = x.Id.ToString()})">
+            <option disabled selected> - Изберете град - </option>
+        </select>
+
+        <button class="custom-success-btn" asp-route-cityId="@Model.CityId" asp-route-Id="@Model.JobCategoryId" asp-route-page="@Model.PageNumber" style="background-color:darkgreen; width:100px;">
+            Потвърди
+        </button>
+    </div>
+    <nav class="navbar custom-golden-text badge-pill dropleft navbar-expand-lg">
+        <div class="navbar-collapse" id="navbarNavDropdown" style="margin-left:-22px;">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown" style="max-width:300px; z-index:1">
+                    <a class="nav-link dropdown-toggle" style="font-size:18px;" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Сортирай <label class="text-muted media-body">/текущо сортиране: по @GlobalMethods.TranslateVoteType(Model.SortBy)/</label>
+                    </a>
+
+                    <div class="dropdown-menu custom-dropdown-content ml-3 mt-3" style="min-width:185px;" aria-labelledby="navbarDropdownMenuLink">
+                        <a type="submit" class="dropdown-item fs17" asp-route-cityId="@Model.CityId" asp-route-Id="@Model.JobCategoryId" asp-route-sortBy="@GlobalConstants.ByDateDescending" asp-route-page="@Model.PageNumber">Най-нови</a>
+                        <a type="submit" class="dropdown-item fs17" asp-route-cityId="@Model.CityId" asp-route-Id="@Model.JobCategoryId" asp-route-sortBy="@GlobalConstants.ByOpinionsDescending" asp-route-page="@Model.PageNumber">Най-коментирани</a>
+                        <a type="submit" class="dropdown-item fs17" asp-route-cityId="@Model.CityId" asp-route-Id="@Model.JobCategoryId" asp-route-sortBy="@GlobalConstants.ByRatingDesc" asp-route-page="@Model.PageNumber">С най-висок рейтинг</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</form>
+
 @if (!Model.SpecialistsDetails.Any())
 {
-    <h2 class="custom-golden-text" style="font-style:oblique; font-family:'Ink Free';">Все още няма регистрирани специалисти в тази категория.</h2>
+    <h2 class="custom-golden-text mt-5" style="font-style:oblique; font-family:'Ink Free';">Все още няма регистрирани специалисти в тази категория.</h2>
 }
 else
 {
-    <form asp-action="GetCategory">
-        <div class="col-md-6 mb-3 mb-md-0 d-flex" style="min-width:255px;">
-            
-            <select asp-for="@Model.CityId" class="form-control" style="margin-left: -15px; max-width:225px;" asp-items="@Model.Cities.Select(x=>new SelectListItem { Text = x.Name, Value = x.Id.ToString()})">
-                <option disabled selected> - Изберете град - </option>
-            </select>
-
-            <button class="custom-success-btn"  asp-route-cityId="@Model.CityId" asp-route-Id="@Model.JobCategoryId" asp-route-page="@Model.PageNumber" style="background-color:darkgreen; width:100px;">
-                Потвърди
-            </button>
-        </div>
-        <nav class="navbar custom-golden-text badge-pill dropleft navbar-expand-lg">
-            <div class="navbar-collapse" id="navbarNavDropdown" style="margin-left:-22px;">
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown" style="max-width:300px; z-index:1">
-                        <a class="nav-link dropdown-toggle" style="font-size:18px;" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Сортирай <label class="text-muted media-body">/текущо сортиране: по @GlobalMethods.TranslateVoteType(Model.SortBy)/</label>
-                        </a>
-
-                        <div class="dropdown-menu custom-dropdown-content ml-3 mt-3" style="min-width:185px;" aria-labelledby="navbarDropdownMenuLink">
-                            <a type="submit" class="dropdown-item fs17" asp-route-cityId="@Model.CityId"  asp-route-Id="@Model.JobCategoryId" asp-route-sortBy="@GlobalConstants.ByDateDescending" asp-route-page="@Model.PageNumber">Най-нови</a>
-                            <a type="submit" class="dropdown-item fs17" asp-route-cityId="@Model.CityId"  asp-route-Id="@Model.JobCategoryId" asp-route-sortBy="@GlobalConstants.ByOpinionsDescending" asp-route-page="@Model.PageNumber">Най-коментирани</a>
-                            <a type="submit" class="dropdown-item fs17" asp-route-cityId="@Model.CityId"  asp-route-Id="@Model.JobCategoryId" asp-route-sortBy="@GlobalConstants.ByRatingDesc" asp-route-page="@Model.PageNumber">С най-висок рейтинг</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </form>
-
     @if (Model.SpecialistsDetails.Count() > 0)
     {
         <div class="list-group m-5">
