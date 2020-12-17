@@ -69,6 +69,28 @@
             }
         }
 
+        public async Task<ICollection<ChatMessage>> GetAllMessages(string groupId)
+        {
+            var messages = await this.messagesRepository.All().Where(x => x.GroupId == groupId).OrderByDescending(d => d.CreatedOn).ToListAsync();
+
+            foreach (var message in messages)
+            {
+                message.Sender = await this.usersRepository.All().FirstOrDefaultAsync(u => u.Id == message.SenderId);
+            }
+
+            return messages;
+        }
+
+        public Task<string> GetGroupNameById(string groupId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<string> GetSenderId(string senderUsername)
+        {
+            var senderId = await this.usersRepository.All().Where(x => x.UserName == senderUsername).Select(z => z.Id).FirstOrDefaultAsync();
+            return senderId;
+        }
 
         public async Task<string> SendMessageToUser(string groupId, string senderUsername, string receiverUsername, string message)
         {
@@ -84,6 +106,7 @@
                 SenderId = sender.Id,
                 CreatedOn = DateTime.UtcNow,
                 ReceiverUsername = receiver.UserName,
+                ReceiverId = receiver.Id,
                 Content = new HtmlSanitizer().Sanitize(message.Trim()),
             };
 
@@ -91,7 +114,5 @@
             await this.messagesRepository.SaveChangesAsync();
             return receiver.Id;
         }
-
-
     }
 }

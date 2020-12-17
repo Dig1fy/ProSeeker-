@@ -9,5 +9,7 @@
         public string PhoneNumber { get; set; }
 
         public CitySimpleViewModel City { get; set; }
+
+        public bool IsSpecialist { get; set; }
     }
 }

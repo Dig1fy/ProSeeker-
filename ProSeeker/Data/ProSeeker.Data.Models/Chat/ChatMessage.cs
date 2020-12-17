@@ -30,5 +30,7 @@
 
         [Required]
         public string ReceiverUsername { get; set; }
+
+        public string ReceiverId { get; set; }
     }
 }

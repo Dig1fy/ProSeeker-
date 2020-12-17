@@ -66,5 +66,16 @@
 
             return allClients;
         }
+
+        public async Task<T> GetUserByUsernameAsync<T>(string username)
+        {
+            var user = await this.usersRepository
+                .All()
+                .Where(u => u.UserName == username)
+                .To<T>()
+                .FirstOrDefaultAsync();
+
+            return user;
+        }
     }
 }
