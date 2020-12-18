@@ -11,6 +11,6 @@
 
         Task<string> GetConversationBySenderAndReceiverIdsAsync(string senderId, string receiverId);
 
-        Task<ICollection<T>> GetAllConversationMessagesAsync<T>(string conversationId);
+        Task<IEnumerable<T>> GetAllConversationMessagesAsync<T>(string conversationId);
     }
 }

@@ -90,6 +90,16 @@
                     <button class="custom-submit-button mb-3 col-md-12" data-toggle="modal" data-target="#deleteModal">Изтрий</button>
                 }
 
+                if (this.User.IsInRole(GlobalConstants.RegularUserRoleName) && !Model.IsOwnerOfAd)
+                {
+                    <form>
+                        <div class="text-left">
+                            <button type="submit" class="custom-submit-button mb-3 col-md-12" asp-controller="PrivateChat" asp-action="Index">Стартирай чат</button>
+                            <input hidden name="receiverId" asp-for="@Model.UserId" />
+                        </div>
+                    </form>
+                }
+
             }
         </div>
     </div>

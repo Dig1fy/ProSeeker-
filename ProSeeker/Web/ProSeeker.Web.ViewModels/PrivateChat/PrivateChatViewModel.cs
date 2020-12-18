@@ -10,7 +10,7 @@
 
         public ApplicationUser Receiver { get; set; }
 
-        public ICollection<MessageViewModel> ChatMessages { get; set; } = new HashSet<MessageViewModel>();
+        public IEnumerable<MessageViewModel> ChatMessages { get; set; } = new HashSet<MessageViewModel>();
 
         public string ConversationId { get; set; }
     }

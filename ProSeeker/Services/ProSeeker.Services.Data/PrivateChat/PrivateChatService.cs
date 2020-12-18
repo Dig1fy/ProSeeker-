@@ -44,10 +44,10 @@
             return newMessage;
         }
 
-        public async Task<ICollection<T>> GetAllConversationMessagesAsync<T>(string conversationId)
+        public async Task<IEnumerable<T>> GetAllConversationMessagesAsync<T>(string conversationId)
         {
-            var messages = await this.conversationRepository.All().Where(x => x.Id == conversationId)
-                .Select(m => m.ChatMessages)
+            var messages = await this.messageRepository.All()
+                .Where(x => x.ConversationId == conversationId)
                 .To<T>()
                 .ToListAsync();
 

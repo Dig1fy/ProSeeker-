@@ -31,10 +31,16 @@
             this.privateChatService = privateChatService;
         }
 
-        public async Task<IActionResult> Index (string receiverId, string group)
+        public async Task<IActionResult> Index (string receiverId)
         {
             var user = await this.userManager.GetUserAsync(this.User);
             var receiver = await this.userManager.FindByIdAsync(receiverId);
+
+            if (user.Id.Equals(receiver.Id))
+            {
+                return this.Redirect("/");
+            }
+
             var conversationId = await this.privateChatService.GetConversationBySenderAndReceiverIdsAsync(user.Id, receiver.Id);
             var conversationMessages = await this.privateChatService.GetAllConversationMessagesAsync<MessageViewModel>(conversationId);
 
