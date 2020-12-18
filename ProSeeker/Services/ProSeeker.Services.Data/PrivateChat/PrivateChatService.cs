@@ -9,26 +9,31 @@
     using ProSeeker.Data.Models;
     using ProSeeker.Data.Models.PrivateChat;
     using ProSeeker.Services.Mapping;
+    using ProSeeker.Web.ViewModels.PrivateChat;
 
     public class PrivateChatService : IPrivateChatService
     {
         private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
         private readonly IDeletableEntityRepository<ChatMessage> messageRepository;
         private readonly IDeletableEntityRepository<Conversation> conversationRepository;
+        private readonly IRepository<UserConversation> userConversationRepository;
 
         public PrivateChatService(
             IDeletableEntityRepository<ApplicationUser> usersRepository,
             IDeletableEntityRepository<ChatMessage> messageRepository,
-            IDeletableEntityRepository<Conversation> conversationRepository)
+            IDeletableEntityRepository<Conversation> conversationRepository,
+            IRepository<UserConversation> userConversationRepository)
         {
             this.usersRepository = usersRepository;
             this.messageRepository = messageRepository;
             this.conversationRepository = conversationRepository;
+            this.userConversationRepository = userConversationRepository;
         }
 
-        public async Task<ChatMessage> CreateNewMessage(string message, string senderId, string receiverId)
+        public async Task<MessageViewModel> SendMessageToUserAsync(string message, string receiverId, string senderId, string conversationId)
         {
             var user = await this.usersRepository.All().FirstOrDefaultAsync(x => x.Id == senderId);
+            var conversation = await this.conversationRepository.All().FirstOrDefaultAsync(c => c.ReceiverId == receiverId && c.SenderId == senderId);
 
             var newMessage = new ChatMessage
             {
@@ -36,12 +41,22 @@
                 ApplicationUser = user,
                 ApplicationUserId = user.Id,
                 ReceiverId = receiverId,
+                Conversation = conversation,
+                ConversationId = conversation.Id,
             };
 
             await this.messageRepository.AddAsync(newMessage);
             await this.messageRepository.SaveChangesAsync();
 
-            return newMessage;
+            return new MessageViewModel
+            {
+                Content = newMessage.Content,
+                Id = newMessage.Id,
+                ConversationId = newMessage.ConversationId,
+                CreatedOn = newMessage.CreatedOn,
+                ReceiverId = newMessage.ReceiverId,
+                SenderId = newMessage.ApplicationUserId,
+            };
         }
 
         public async Task<IEnumerable<T>> GetAllConversationMessagesAsync<T>(string conversationId)
@@ -67,21 +82,10 @@
                 var sender = await this.usersRepository.All().FirstOrDefaultAsync(s => s.Id == senderId);
                 var receiver = await this.usersRepository.All().FirstOrDefaultAsync(r => r.Id == receiverId);
 
-                var newConversation = new Conversation();
-
-                newConversation.UsersConversations.Add(new UserConversation
-                {
-                    Conversation = newConversation,
-                    ConversationId = newConversation.Id,
-                    ApplicationUser = sender,
-                });
-
-                newConversation.UsersConversations.Add(new UserConversation
-                {
-                    Conversation = newConversation,
-                    ConversationId = newConversation.Id,
-                    ApplicationUser = receiver,
-                });
+                var newConversation = new Conversation {
+                ReceiverId = receiver.Id,
+                SenderId = sender.Id,
+                };
 
                 await this.conversationRepository.AddAsync(newConversation);
                 await this.conversationRepository.SaveChangesAsync();

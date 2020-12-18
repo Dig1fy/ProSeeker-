@@ -8,8 +8,7 @@
         </div>
     </div>
 
-    <input asp-for="@Model.ConversationId" type="hidden" value="@Model.ConversationId" />
-    <input asp-for="@Model.SenderId" type="hidden" value="@Model.SenderId" />
-    <span asp-validation-for="@Model.SenderId" class="text-danger"></span>
-    <input asp-for="@Model.ReceiverId" type="hidden" value="@Model.ReceiverId" />
+    <input name="conversationId" asp-for="@Model.ConversationId" type="hidden" />
+    <input name="senderId" asp-for="@Model.SenderId" type="hidden" />
+    <input name="receiverId" asp-for="@Model.ReceiverId" type="hidden" />
 </div>

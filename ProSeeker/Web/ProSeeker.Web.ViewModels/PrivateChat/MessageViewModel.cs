@@ -1,9 +1,9 @@
 ﻿namespace ProSeeker.Web.ViewModels.PrivateChat
 {
+    using System;
+
     using ProSeeker.Data.Models.PrivateChat;
     using ProSeeker.Services.Mapping;
-    using ProSeeker.Web.ViewModels.Users;
-    using System;
 
     public class MessageViewModel : IMapFrom<ChatMessage>
     {

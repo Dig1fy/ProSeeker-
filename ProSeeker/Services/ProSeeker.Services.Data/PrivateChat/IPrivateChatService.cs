@@ -4,10 +4,11 @@
     using System.Threading.Tasks;
 
     using ProSeeker.Data.Models.PrivateChat;
+    using ProSeeker.Web.ViewModels.PrivateChat;
 
     public interface IPrivateChatService
     {
-        Task<ChatMessage> CreateNewMessage(string message, string userId, string receiverId);
+        Task<MessageViewModel> SendMessageToUserAsync(string message, string receiverId, string senderId, string conversationId);
 
         Task<string> GetConversationBySenderAndReceiverIdsAsync(string senderId, string receiverId);
 
