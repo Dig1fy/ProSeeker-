@@ -26,6 +26,7 @@
     using ProSeeker.Services.Data.Inquiries;
     using ProSeeker.Services.Data.Offers;
     using ProSeeker.Services.Data.Opinions;
+    using ProSeeker.Services.Data.PrivateChat;
     using ProSeeker.Services.Data.Raitings;
     using ProSeeker.Services.Data.ServicesService;
     using ProSeeker.Services.Data.Specialists;
@@ -33,6 +34,7 @@
     using ProSeeker.Services.Data.Votes;
     using ProSeeker.Services.Mapping;
     using ProSeeker.Services.Messaging;
+    using ProSeeker.Web.Hubs;
     using ProSeeker.Web.ViewModels;
 
     public class Startup
@@ -128,6 +130,7 @@
             services.AddTransient<IVotesService, VotesService>();
             services.AddTransient<IInquiriesService, InquiriesService>();
             services.AddTransient<ISpecialistsService, SpecialistsService>();
+            services.AddTransient<IPrivateChatService, PrivateChatService>();
 
             // services.AddTransient<IApplicationUsersController, ApplicationUsersController>();
         }
@@ -168,7 +171,7 @@
             app.UseEndpoints(
                 endpoints =>
                     {
-                        //endpoints.MapHub<PrivateChatHub>("/chat");
+                        endpoints.MapHub<PrivateChatHub>("/chat");
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("JobCategories", "jobcategories/{name:minlength(2)}", new { controller = "JobCategories", action = "ByName" });

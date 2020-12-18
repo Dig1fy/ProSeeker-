@@ -21,6 +21,7 @@ namespace ProSeeker.Data.Models
             this.Offers = new HashSet<Offer>();
             this.Inquiries = new HashSet<Inquiry>();
             this.ChatMessages = new HashSet<ChatMessage>();
+            this.UserConversations = new HashSet<UserConversation>();
 
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
@@ -78,5 +79,7 @@ namespace ProSeeker.Data.Models
         public virtual ICollection<Inquiry> Inquiries { get; set; }
 
         public virtual ICollection<ChatMessage> ChatMessages { get; set; }
+
+        public virtual ICollection<UserConversation> UserConversations { get; set; }
     }
 }

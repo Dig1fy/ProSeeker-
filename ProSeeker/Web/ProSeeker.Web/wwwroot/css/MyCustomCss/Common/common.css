@@ -178,6 +178,7 @@
 }
 
     .custom-input-field:focus {
+        
         border: 0.1px rgb(67, 138, 143);
         width: 103%;
     }
@@ -185,13 +186,13 @@
 .custom-rounded-input-field {
     height: 2.5rem;
     box-sizing: border-box;
-    border-color: rgba(164, 226, 241, 0.38);
+    border-color: rgba(45, 120, 138, 0.38);
     border-radius: 25px 25px;
     border-image-repeat: round;
     font-size: 16px;
 }
 
-    .custom-rounded-input-field:focus {
+    .custom-rounded-input-field:focus, .custom-rounded-input-field:active {
         border: 0.1px rgb(67, 138, 143);
     }
 

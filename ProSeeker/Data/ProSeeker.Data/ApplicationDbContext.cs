@@ -57,11 +57,11 @@
         public DbSet<UserQuiz> UsersQuizes { get; set; }
 
         // Chat
-        public DbSet<Conversation> Conversations{ get; set; }
+        public DbSet<Conversation> Conversations { get; set; }
 
-        public DbSet<UserConversation> UsersConversations{ get; set; }
+        public DbSet<UserConversation> UsersConversations { get; set; }
 
-        public DbSet<ChatMessage> ChatMessages{ get; set; }
+        public DbSet<ChatMessage> ChatMessages { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
@@ -115,9 +115,11 @@
                 .WithOne(sd => sd.User)
                 .HasForeignKey<Specialist_Details>(fk => fk.UserId);
 
-            builder.Entity<UserQuiz>().HasKey(x => new { x.UserId, x.QuizId });
+            builder.Entity<UserQuiz>()
+                .HasKey(x => new { x.UserId, x.QuizId });
 
-            builder.Entity<UserConversation>().HasKey(x => new { x.ApplicationUserId, x.ConversationId});
+            builder.Entity<UserConversation>()
+                .HasKey(x => new { x.ApplicationUserId, x.ConversationId });
 
             // builder.Entity<Vote>().HasKey(x => new { x.UserId, x.OpinionId });
         }

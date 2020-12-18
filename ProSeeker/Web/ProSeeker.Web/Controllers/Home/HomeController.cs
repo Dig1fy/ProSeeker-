@@ -1,5 +1,7 @@
 ﻿namespace ProSeeker.Web.Controllers
 {
+    using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Identity;
@@ -10,6 +12,7 @@
     using ProSeeker.Services.Data.UsersService;
     using ProSeeker.Web.ViewModels;
     using ProSeeker.Web.ViewModels.Home;
+    using ProSeeker.Web.ViewModels.PrivateChat;
 
     public class HomeController : BaseController
     {
