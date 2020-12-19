@@ -4,7 +4,7 @@
 <p>@Model</p>
 @foreach (var message in Model.ChatMessages)
 {
-    if (Model.Sender.Email == User.Identity.Name)
+    if (Model.Sender.Id == message.SenderId)
     {
         <div class="media w-50 ml-auto mb-3 element-with-date">
             <div class="media-body">
@@ -14,7 +14,7 @@
                 </div>
                 <p class="small text-muted local-date">@message.CreatedOn</p>
             </div>
-            <div style="display: none">
+            <div style="display:none;">
                 <input type="text" class="utc-date" value="@message.CreatedOn" />
             </div>
         </div>
@@ -23,13 +23,13 @@
     {
         <div class="media w-50 mb-3 element-with-date">
             <div class="media-body ml-3">
-                <p class="small text-muted">@Model.Sender.FirstName</p>
+                <p class="small text-muted"> AAAA @Model.Sender.FirstName</p>
                 <div class="bg-light rounded py-2 px-3 mb-2">
                     <p class="text-small mb-0 text-muted">@message.Content</p>
                 </div>
                 <p class="small text-muted local-date">@message.CreatedOn</p>
             </div>
-            <div style="display: none">
+            <div style="display:none;">
                 <input type="text" class="utc-date" value="@message.CreatedOn" />
             </div>
         </div>

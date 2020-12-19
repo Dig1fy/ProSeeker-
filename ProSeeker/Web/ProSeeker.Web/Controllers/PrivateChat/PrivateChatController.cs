@@ -65,7 +65,7 @@
         {
             var sender = await this.userManager.GetUserAsync(this.User);
             var newMessageModel = await this.privateChatService.SendMessageToUserAsync(message, receiverId, sender.Id, conversationId);
-            System.Console.WriteLine("CONTROLLER");
+
             await this.hubContext.Clients.User(newMessageModel.ReceiverId)
                 .SendAsync("SendMessage", newMessageModel);
 
@@ -73,16 +73,6 @@
         }
 
         // TODO : LOGIC IS WORKING ON THE BACK END> HANDLE FRONT END !!!!
-
-
-
-
-
-
-
-
-
-
 
         [HttpPost]
         public async Task<IActionResult> JoinConversation(string connectionId, string conversationName)
