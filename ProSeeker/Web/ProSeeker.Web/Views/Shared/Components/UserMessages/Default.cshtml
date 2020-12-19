@@ -1,0 +1,17 @@
+﻿@model ProSeeker.Web.ViewModels.PrivateChat.AllMyConversationsViewModel
+<style>
+</style>
+
+@foreach (var conversation in Model.Conversations)
+{
+    <form>
+        <div class="text-left">
+
+            <button type="submit" class="custom-submit-button mb-3 col-md-12 text-left ml-2" asp-controller="PrivateChat" asp-action="Index">
+                <img src="@conversation.OtherPersonsPicture" class="d-inline" style="width:30px; height:30px; border-radius:50%;" />
+                <div class="d-inline" style="font-size:17px; color:rgb(86, 80, 8);">@conversation.OtherPersonFullName</div>
+            </button>
+            <input hidden name="receiverId" asp-for="@conversation.OtherPersonsId" />
+        </div>
+    </form>
+}

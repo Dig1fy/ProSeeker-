@@ -97,5 +97,29 @@
 
             return conversationId;
         }
+
+        public async Task<IEnumerable<T>> GetAllUserConversationsAsync<T>(string userId)
+        {
+            var conversations = await this.conversationRepository
+                .All()
+                .Where(x => x.SenderId == userId || x.ReceiverId == userId)
+                .To<T>()
+                .ToListAsync();
+
+            return conversations;
+        }
+
+        public async Task<IEnumerable<ConversationViewModel>> UpdateusersInfoAsync(IEnumerable<ConversationViewModel> conversations, string userId)
+        {
+            foreach (var conv in conversations)
+            {
+                conv.OtherPersonsId = conv.ReceiverId == userId ? conv.SenderId : conv.ReceiverId;
+                var otherUser = await this.usersRepository.AllAsNoTracking().FirstOrDefaultAsync(x => x.Id == conv.OtherPersonsId);
+                conv.OtherPersonsPicture = otherUser.ProfilePicture;
+                conv.OtherPersonFullName = $"{otherUser.FirstName} {otherUser.LastName}";
+            }
+
+            return conversations;
+        }
     }
 }
