@@ -144,7 +144,9 @@
                         <input hidden name="receiverId" asp-for="@Model.UserId" />
                     </div>
                 </form>
-
+            }
+            @if (this.User.IsInRole(GlobalConstants.RegularUserRoleName))
+            {
                 <form class="mt-3 mb-3">
                     <button type="submit" class="custom-submit-button" asp-controller="Inquiries" asp-action="Create" name="specialistId" value="@Model.SpecialistDetails.Id">Поискай оферта</button>
                 </form>

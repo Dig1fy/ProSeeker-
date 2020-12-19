@@ -1,38 +1,42 @@
 ﻿@model ProSeeker.Web.ViewModels.PrivateChat.PrivateChatViewModel
 
-@foreach (var message in Model.ChatMessages)
-{
-    if (Model.Sender.Id == message.SenderId)
+
+<div id="messageContainer">
+    <div id="currentUserUserName" hidden>@User.Identity.Name</div>
+    @foreach (var message in Model.ChatMessages)
     {
-        <div class="media w-50 ml-auto mb-3 element-with-date">
-            <div class="media-body">
-                <p class="small text-muted">Аз</p>
-                <div class="btn-pink rounded py-2 px-3 mb-2">
-                    <p class="text-small mb-0">@message.Content</p>
+        @if (Model.Sender.Id == message.ReceiverId)
+        {
+            <div class="media w-50 ml-auto mb-3 element-with-date">
+                <div class="media-body">
+                    <p class="small text-muted">Той</p>
+                    <div class="btn-pink rounded py-2 px-3 mb-2">
+                        <p class="text-small mb-0">@Html.Raw(message.Content)</p>
+                    </div>
+                    <p class="small text-muted local-date">@message.CreatedOn</p>
                 </div>
-                <p class="small text-muted local-date">@message.CreatedOn</p>
-            </div>
-            <div style="display:none;">
-                <input type="text" class="utc-date" value="@message.CreatedOn" />
-            </div>
-        </div>
-    }
-    else
-    {
-        <div class="media w-50 mb-3 element-with-date">
-            <div class="media-body ml-3">
-                <p class="small text-muted"> AAAA @Model.Sender.FirstName</p>
-                <div class="bg-light rounded py-2 px-3 mb-2">
-                    <p class="text-small mb-0 text-muted">@message.Content</p>
+                <div style="display:none;">
+                    <input type="text" class="utc-date" value="@message.CreatedOn" />
                 </div>
-                <p class="small text-muted local-date">@message.CreatedOn</p>
             </div>
-            <div style="display:none;">
-                <input type="text" class="utc-date" value="@message.CreatedOn" />
+        }
+        else
+        {
+            <div class="media w-50 mb-3 element-with-date">
+                <div class="media-body ml-3">
+                    <p class="small text-muted">Аз</p>
+                    <div class="bg-light rounded py-2 px-3 mb-2">
+                        <p class="text-small mb-0 text-muted">@Html.Raw(message.Content)</p>
+                    </div>
+                    <p class="small text-muted local-date">@message.CreatedOn</p>
+                </div>
+                <div style="display:none;">
+                    <input type="text" class="utc-date" value="@message.CreatedOn" />
+                </div>
             </div>
-        </div>
+        }
     }
-}
+</div>
 
 <form asp-controller="PrivateChat" asp-action="SendMessage" id="sendMessageForm">
     <div class="container">
@@ -50,7 +54,7 @@
     <input name="senderId" asp-for="@Model.Sender.Id" type="hidden" id="hSenderId" />
     <input name="receiverId" asp-for="@Model.Receiver.Id" type="hidden" id="hReceiverId" />
 
-   
+
     @*@await Component.InvokeAsync("PrivateChat",
         new
              {
@@ -68,11 +72,43 @@
         connection.start().catch(function (err) {
             return console.error(err.toString());
         });
-
+        //<p class="small text-muted"> AAAA ${@Model.Sender.FirstName}</p>
         connection.on("SendMessage",
             function (message) {
-                var chatInfo = `<div>[${message.senderId}] ${message.content}</div>`;
-                $("#messagesList").append(chatInfo);
+                var currentUsername = $('#currentUserUserName').text();
+                let escapedMessage = escapeHtml(message.content);
+                var chatInfo = '';
+               
+                if (currentUsername != message.senderUserName) {
+
+                 chatInfo = `<div class="media w-50 ml-auto mb-3 element-with-date">
+                <div class="media-body">
+                    <p class="small text-muted">Той</p>
+                    <div class="btn-pink rounded py-2 px-3 mb-2">
+                        <p class="text-small mb-0">${escapedMessage}</p>
+                    </div>
+                    <p class="small text-muted local-date">${message.createdOn}</p>
+                </div>
+                <div style="display:none;">
+                    <input type="text" class="utc-date" value="${message.createdOn}" />
+                </div>
+            </div>`;
+                } else {
+                    chatInfo = `<div class="media w-50 mb-3 element-with-date">
+                <div class="media-body ml-3">
+                    <p class="small text-muted">Аз</p>
+                    <div class="bg-light rounded py-2 px-3 mb-2">
+                        <p class="text-small mb-0 text-muted">${escapedMessage}</p>
+                    </div>
+                    <p class="small text-muted local-date">${message.createdOn}</p>
+                </div>
+                <div style="display:none;">
+                    <input type="text" class="utc-date" value="${message.createdOn}" />
+                </div>
+            </div>`
+                }
+
+                $("#messageContainer").append(chatInfo);
             });
 
         //message, receiverId, senderId, conversationId
@@ -90,5 +126,15 @@
             return console.error(err.toString());
         });
 
+        // Unfortunately, Sanitizer does not work here :(
+        function escapeHtml(unsafe) {
+            return unsafe
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
     </script>
-} 
+}

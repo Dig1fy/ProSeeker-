@@ -58,6 +58,7 @@
                 CreatedOn = newMessage.CreatedOn,
                 ReceiverId = newMessage.ReceiverId,
                 SenderId = newMessage.ApplicationUserId,
+                SenderUserName = user.UserName,
             };
         }
 
@@ -65,6 +66,7 @@
         {
             var messages = await this.messageRepository.All()
                 .Where(x => x.ConversationId == conversationId)
+                .OrderBy(x => x.CreatedOn)
                 .To<T>()
                 .ToListAsync();
 
@@ -84,9 +86,10 @@
                 var sender = await this.usersRepository.All().FirstOrDefaultAsync(s => s.Id == senderId);
                 var receiver = await this.usersRepository.All().FirstOrDefaultAsync(r => r.Id == receiverId);
 
-                var newConversation = new Conversation {
-                ReceiverId = receiver.Id,
-                SenderId = sender.Id,
+                var newConversation = new Conversation
+                {
+                    ReceiverId = receiver.Id,
+                    SenderId = sender.Id,
                 };
 
                 await this.conversationRepository.AddAsync(newConversation);
@@ -103,6 +106,7 @@
             var conversations = await this.conversationRepository
                 .All()
                 .Where(x => x.SenderId == userId || x.ReceiverId == userId)
+                .OrderBy(x => x.CreatedOn)
                 .To<T>()
                 .ToListAsync();
 
@@ -114,7 +118,7 @@
             foreach (var conv in conversations)
             {
                 conv.OtherPersonsId = conv.ReceiverId == userId ? conv.SenderId : conv.ReceiverId;
-                var otherUser = await this.usersRepository.AllAsNoTracking().FirstOrDefaultAsync(x => x.Id == conv.OtherPersonsId);
+                var otherUser = await this.usersRepository.All().FirstOrDefaultAsync(x => x.Id == conv.OtherPersonsId);
                 conv.OtherPersonsPicture = otherUser.ProfilePicture;
                 conv.OtherPersonFullName = $"{otherUser.FirstName} {otherUser.LastName}";
             }
