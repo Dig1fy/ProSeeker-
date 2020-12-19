@@ -13,5 +13,7 @@
         Task<string> GetConversationBySenderAndReceiverIdsAsync(string senderId, string receiverId);
 
         Task<IEnumerable<T>> GetAllConversationMessagesAsync<T>(string conversationId);
+
+        //Task ReceiveNewMessage(string message, string receiverId, string senderId, string conversationId);
     }
 }
