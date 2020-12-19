@@ -87,6 +87,7 @@
             connection.invoke("Send", message, receiverId, senderId, conversationId);
             $("#messageInput").val("");
         });
+
         connection.start().catch(function (err) {
             return console.error(err.toString());
         });

@@ -33,7 +33,9 @@
         public async Task<MessageViewModel> SendMessageToUserAsync(string message, string receiverId, string senderId, string conversationId)
         {
             var user = await this.usersRepository.All().FirstOrDefaultAsync(x => x.Id == senderId);
-            var conversation = await this.conversationRepository.All().FirstOrDefaultAsync(c => c.ReceiverId == receiverId && c.SenderId == senderId);
+            var conversation = await this.conversationRepository
+                .All()
+                .FirstOrDefaultAsync(c => (c.ReceiverId == receiverId && c.SenderId == senderId) || (c.ReceiverId == senderId && c.SenderId == receiverId));
 
             var newMessage = new ChatMessage
             {
@@ -73,7 +75,7 @@
         {
             var conversationId = await this.conversationRepository
                 .All()
-                .Where(x => x.SenderId == senderId && x.ReceiverId == receiverId)
+                .Where(c => (c.ReceiverId == receiverId && c.SenderId == senderId) || (c.ReceiverId == senderId && c.SenderId == receiverId))
                 .Select(c => c.Id)
                 .FirstOrDefaultAsync();
 
