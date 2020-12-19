@@ -35,6 +35,7 @@
                 .FirstOrDefaultAsync();
         }
 
+        // This won't get the regular user! It's retrieving only the specialist by specialistID
         public async Task<T> GetUserByIdAsync<T>(string id)
         {
             var user =
@@ -65,6 +66,17 @@
                 .CountAsync();
 
             return allClients;
+        }
+
+        public async Task<string> GetUserIdBySpecialistIdAsync(string specialistId)
+        {
+            var userId = await this.usersRepository
+                .All()
+                .Where(x => x.SpecialistDetailsId == specialistId)
+                .Select(u => u.Id)
+                .FirstOrDefaultAsync();
+
+            return userId;
         }
     }
 }

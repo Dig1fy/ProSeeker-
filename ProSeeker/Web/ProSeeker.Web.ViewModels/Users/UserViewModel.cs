@@ -9,6 +9,10 @@
 
     public class UserViewModel : BaseUserViewModel
     {
+        public string UserId { get; set; }
+
+        public bool IsProfileOwner { get; set; }
+
         public CitySimpleViewModel City { get; set; }
 
         public DateTime CreatedOn { get; set; }

@@ -136,9 +136,19 @@
                                        WORK INVITATION
             ====================================================================*@
         <div class="col-md-2">
-            <form class="mt-3 mb-3">
-                <button type="submit" class="custom-submit-button" asp-controller="Inquiries" asp-action="Create" name="specialistId" value ="@Model.SpecialistDetails.Id">Поискай оферта</button>
-            </form>
+            @if (this.User.IsInRole(GlobalConstants.SpecialistRoleName) && !Model.IsProfileOwner)
+            {
+                <form>
+                    <div class="text-left">
+                        <button type="submit" class="custom-submit-button mb-3 col-md-12" asp-controller="PrivateChat" asp-action="Index">Стартирай чат</button>
+                        <input hidden name="receiverId" asp-for="@Model.UserId" />
+                    </div>
+                </form>
+
+                <form class="mt-3 mb-3">
+                    <button type="submit" class="custom-submit-button" asp-controller="Inquiries" asp-action="Create" name="specialistId" value="@Model.SpecialistDetails.Id">Поискай оферта</button>
+                </form>
+            }
         </div>
     </div>
     <div class="row">
@@ -191,7 +201,7 @@
                                                 SERVICE TAB
                     ====================================================================*@
                 <div class="tab-pane fade" id="service" role="tabpanel" aria-labelledby="service-tab">
-                    @{ var serviceCounter = 1;} 
+                    @{ var serviceCounter = 1;}
                     @foreach (var service in Model.SpecialistDetails.Services)
                     {
                         <div class="card border-info mb-3" style="max-width: 33rem;">
@@ -270,7 +280,7 @@
                 },
                 contentType: 'application/json',
             });
-            
+
         })
         });
 

@@ -31,6 +31,13 @@
         [Authorize]
         public async Task<IActionResult> Create(string specialistId)
         {
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+
+            if (currentUser.SpecialistDetailsId == specialistId)
+            {
+                return this.RedirectToAction("AccessDenied", "Errors");
+            }
+
             var model = new CreateInquiryInputModel
             {
                 SpecialistDetailsId = specialistId,
@@ -50,8 +57,14 @@
                 return this.View(inputModel);
             }
 
-            var user = await this.userManager.GetUserAsync(this.User);
-            inputModel.UserId = user.Id;
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+
+            if (currentUser.SpecialistDetailsId == inputModel.SpecialistDetailsId)
+            {
+                return this.RedirectToAction("AccessDenied", "Errors");
+            }
+
+            inputModel.UserId = currentUser.Id;
             await this.inquiriesService.CreateAsync(inputModel);
             return this.RedirectToAction("GetProfile", "SpecialistsDetails", new { id = inputModel.SpecialistDetailsId });
         }

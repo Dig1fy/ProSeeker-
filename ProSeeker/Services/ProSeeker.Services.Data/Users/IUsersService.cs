@@ -13,5 +13,7 @@
         Task<int> GetAllSpecialistsCountAsync();
 
         Task<int> GetAllClientsCountAsync();
+
+        Task<string> GetUserIdBySpecialistIdAsync(string specialistId);
     }
 }
