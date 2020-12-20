@@ -13,7 +13,7 @@
                     <div class="btn-pink rounded py-2 px-3 mb-2">
                         <p class="text-small mb-0">@Html.Raw(message.Content)</p>
                     </div>
-                    <p class="small text-muted local-date">@message.CreatedOn</p>
+                    <time class="small text-muted local-date" datetime="@message.CreatedOn.ToString("O")"></time>
                 </div>
                 <div style="display:none;">
                     <input type="text" class="utc-date" value="@message.CreatedOn" />
@@ -28,7 +28,7 @@
                     <div class="bg-light rounded py-2 px-3 mb-2">
                         <p class="text-small mb-0 text-muted">@Html.Raw(message.Content)</p>
                     </div>
-                    <p class="small text-muted local-date">@message.CreatedOn</p>
+                    <time class="small text-muted local-date" datetime="@message.CreatedOn.ToString("O")"></time>
                 </div>
                 <div style="display:none;">
                     <input type="text" class="utc-date" value="@message.CreatedOn" />
@@ -38,12 +38,12 @@
     }
 </div>
 
-<form asp-controller="PrivateChat" asp-action="SendMessage" id="sendMessageForm">
-    <div class="container">
+<form asp-controller="PrivateChat" onload="updateScroll()" asp-action="SendMessage" id="sendMessageForm">
+    <div class="container" style="overflow:auto">
         <div class="message-container"></div>
         <div id="message-holder" class="mt-3 d-flex justify-content-start">
             <h4>Message</h4>
-            <input class="w-75 ml-4 pl-3" name="message" type="text" id="messageInput" placeholder="Напиши..." />
+            <input class="w-75 ml-4 pl-3" name="message" type="text" id="messageInput" placeholder="Напиши..." style="overflow:auto" />
             <button id="sendButton" class="ml-4 btn btn-dark btn-lg">Send</button>
         </div>
         <hr style="height: 5px;" class="bg-dark" />
@@ -67,6 +67,9 @@
 @section Scripts{
     <script asp-append-version="true">
         "use strict";
+        (function () {
+            updateScroll();
+        }());
 
         var connection = new signalR.HubConnectionBuilder().withUrl("/privateChatHub").build();
         connection.start().catch(function (err) {
@@ -75,11 +78,13 @@
         //<p class="small text-muted"> AAAA ${@Model.Sender.FirstName}</p>
         connection.on("SendMessage",
             function (message) {
-                var currentUsername = $('#currentUserUserName').text();
+                let currentUsername = $('#currentUserUserName').text();
                 let escapedMessage = escapeHtml(message.content);
-                var chatInfo = '';
-               
+                let chatInfo = '';
+
                 if (currentUsername != message.senderUserName) {
+
+                    let formattedDateTime = formatDateTime();
 
                  chatInfo = `<div class="media w-50 ml-auto mb-3 element-with-date">
                 <div class="media-body">
@@ -87,43 +92,45 @@
                     <div class="btn-pink rounded py-2 px-3 mb-2">
                         <p class="text-small mb-0">${escapedMessage}</p>
                     </div>
-                    <p class="small text-muted local-date">${message.createdOn}</p>
+                    <time class="small text-muted local-date" datetime="${message.createdOn.toString("O")}">${formattedDateTime}</time>
                 </div>
                 <div style="display:none;">
                     <input type="text" class="utc-date" value="${message.createdOn}" />
                 </div>
             </div>`;
-                } else {
-                    chatInfo = `<div class="media w-50 mb-3 element-with-date">
-                <div class="media-body ml-3">
-                    <p class="small text-muted">Аз</p>
-                    <div class="bg-light rounded py-2 px-3 mb-2">
-                        <p class="text-small mb-0 text-muted">${escapedMessage}</p>
-                    </div>
-                    <p class="small text-muted local-date">${message.createdOn}</p>
-                </div>
-                <div style="display:none;">
-                    <input type="text" class="utc-date" value="${message.createdOn}" />
-                </div>
-            </div>`
                 }
 
                 $("#messageContainer").append(chatInfo);
+                updateScroll();
             });
 
-        //message, receiverId, senderId, conversationId
+
+
+        function displayMessage(message) {
+            let formattedDateTime = formatDateTime();
+
+            let chatInfo = `<div class="media w-50 mb-3 element-with-date">
+                <div class="media-body ml-3">
+                    <p class="small text-muted">Аз</p>
+                    <div class="bg-light rounded py-2 px-3 mb-2">
+                        <p class="text-small mb-0 text-muted">${message}</p>
+                    </div>
+                    <time class="small text-muted local-date" datetime="${formattedDateTime}">${formattedDateTime}</time>
+                </div>
+            </div>`
+            $("#messageContainer").append(chatInfo);
+        }
+
         $("#sendButton").click(function (e) {
             e.preventDefault();
-            var conversationId = $('#hConversationId').val();
-            var senderId = $('#hSenderId').val();
-            var receiverId = $('#hReceiverId').val();
-            var message = $("#messageInput").val();
+            let conversationId = $('#hConversationId').val();
+            let senderId = $('#hSenderId').val();
+            let receiverId = $('#hReceiverId').val();
+            let message = $("#messageInput").val();
+
+            displayMessage(escapeHtml(message));
             connection.invoke("Send", message, receiverId, senderId, conversationId);
             $("#messageInput").val("");
-        });
-
-        connection.start().catch(function (err) {
-            return console.error(err.toString());
         });
 
         // Unfortunately, Sanitizer does not work here :(
@@ -136,5 +143,19 @@
                 .replace(/'/g, "&#039;");
         }
 
+        function updateScroll() {
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $("#messageInput").offset().top
+            }, 10);
+        }
+
+        function formatDateTime() {
+            let localTime = new Date();
+            let time = moment.utc(localTime).local();
+            let formattedDateTime = time.format("llll");
+            return formattedDateTime;
+        }
     </script>
+
+
 }

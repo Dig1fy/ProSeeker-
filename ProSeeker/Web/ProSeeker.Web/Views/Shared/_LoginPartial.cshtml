@@ -5,81 +5,6 @@
 @inject UserManager<ApplicationUser> UserManager
 @inject ProSeeker.Services.Data.UsersService.IUsersService usersService;
 
-<style>
-
-    .sidebar {
-        height: 100%;
-        width: 0;
-        position: fixed;
-        z-index: 1;
-        top: 0;
-        right: 0;
-        background: rgb(228,255,253);
-        background: linear-gradient(90deg, rgba(228,255,253,1) 0%, rgba(95,151,156,1) 100%);
-        overflow-x: hidden;
-        transition: 0.5s;
-        padding-top: 60px;
-    }
-
-        .sidebar a {
-            padding: 8px 8px 8px 32px;
-            text-decoration: none;
-            font-size: 25px;
-            color: #818181;
-            display: block;
-            transition: 0.3s;
-        }
-
-            .sidebar a:hover {
-                color: #f1f1f1;
-            }
-
-        .sidebar .closebtn {
-            position: absolute;
-            top: 0;
-            right: 25px;
-            font-size: 36px;
-            margin-left: 50px;
-        }
-
-    .openbtn {
-        font-size: 16px;
-        cursor: pointer;
-        color: black;
-        padding: 10px;
-        border: none;
-    }
-
-        .openbtn:hover {
-            text-decoration: none;
-        }
-
-    .closeNavbar{
-        position:fixed;
-        top:-15px;
-        right:15px;
-        color:black;
-        height:5px;
-        width:10px;
-        font-weight:bold;
-
-    }
-
-    .closeNavbar:hover {
-        color:lightseagreen;
-        background-color:black;
-    }
-
-    @@media screen and (max-height: 450px) {
-        .sidebar {
-            padding-top: 15px;
-        }
-
-            .sidebar a {
-                font-size: 18px;
-            }
-    }
-</style>
 <ul class="navbar-nav d-inline-flex">
     @if (this.SignInManager.IsSignedIn(this.User))
     {
@@ -93,17 +18,14 @@
         <vc:profile-dropdown></vc:profile-dropdown>
 
         <li class="nav-item dropdown collapse navbar-collapse">
-            @*<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Съобщения</a>*@
             <div id="mySidebar" class="sidebar">
-                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><p class="closeNavbar">×</p></a>
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><p class="closeNavbar"></p></a>
                 @await Component.InvokeAsync("UserMessages");
-
             </div>
 
             <div id="main">
-                <a class="openbtn"  onclick="openNav()">☰ Съобщения</a>
+                <a class="openbtn" onclick="openNav()">☰ Съобщения</a>
             </div>
-
         </li>
         if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
         {
@@ -123,34 +45,3 @@
     }
 </ul>
 
-<script asp-append-version="true">
-    //function openNav() {
-
-    //    document.getElementById("mySidebar").style.width = "250px";
-    //    //document.getElementById("main").style.marginLeft = "250px";
-    //}
-
-    function closeNav() {
-        document.getElementById("mySidebar").style.width = "0";
-        document.querySelector('.closeNavbar').textContent = "";
-    }
-
-    function openNav() {
-        if (document.getElementById("mySidebar").style.width == "250px") {
-            document.getElementById("mySidebar").style.width = "0"
-            document.querySelector('.closeNavbar').textContent = "";
-        } else {
-            document.getElementById("mySidebar").style.width = "250px";
-            document.querySelector('.closeNavbar').textContent = "x";
-        }
-
-        // document.getElementById("mySidebar").style.width = document.getElementById("mySidebar").style.width == "250px" ? "0" : "250px";
-    }
-
-    function SubmitForm() {
-        //return confirm('Наистина ли искате да изтриете обявата?')
-        if (confirm('Наистина ли излезе от акаунта си?') === true) {
-            $('#submitForm').submit();
-        }
-    }
-</script>

@@ -11,6 +11,7 @@
     <link href="~/css/MyCustomCss/Common/common.css" rel="stylesheet" asp-append-version="true" />
     <link href="~/css/MyCustomCss/Common/buttons.css" rel="stylesheet" asp-append-version="true" />
     <link href="~/css/Bootstrap/chat.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/MyCustomCss/IndexSideBar/sidebar.css" rel="stylesheet" asp-append-version="true" />
     @*<link href="~/css/MyCustomCss/Profile/userProfile.css" rel="stylesheet" asp-append-version="true" />*@
     @await this.RenderSectionAsync("Styles", required: false)
 </head>
@@ -54,7 +55,7 @@
     <div class="container">
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
-            @this.RenderBody()            
+            @this.RenderBody()
         </main>
     </div>
 
@@ -75,6 +76,7 @@
     <script src="~/lib/tinymce/tinymce.min.js" type="text/javascript" asp-append-version='true'></script>
     <script src="~/js/TinyMCE/TinyMce.js" type="text/javascript" asp-append-version='true'></script>
     <script src="~/lib/signalr/dist/browser/signalr.min.js" asp-append-version='true'></script>
+    <script asp-append-version="true" src="~/js/MyCustomJs/indexSidebar.js"></script>
     @await this.RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
