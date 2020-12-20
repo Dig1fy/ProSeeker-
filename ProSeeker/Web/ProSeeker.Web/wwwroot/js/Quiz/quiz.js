@@ -59,7 +59,7 @@
     (function () {
         let progressCount = 5;
 
-        var timeleft = 5;
+        var timeleft = 0; //CHANGE THIS TO 5 WHEN FINISHED WITH TESTING!!!!!
         var downloadTimer = setInterval(function () {
             progressCount += 25;
             timeleft--;
@@ -90,7 +90,7 @@
             html.choiceD.textContent = currentQuestion.answerD;
 
         } else { //showing the backward btn and hides the quizz after the last question
-            html.backBtn.style.display = "none";
+            //html.backBtn.style.display = "none";
             html.quiz.innerHTML = `<h1 class="end-quiz"> Благодарим Ви за отделеното време! </h1>`;
             setTimeout(redirect, 2000)
         }

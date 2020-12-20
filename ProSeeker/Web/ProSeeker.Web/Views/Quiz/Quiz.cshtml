@@ -1,49 +1,105 @@
-﻿
-   <link href="~/css/MyCustomCss/Quiz/quiz.css" rel="stylesheet" asp-append-version="true" />
-   
+﻿@*@section Styles{*@
+@*<link href="~/css/MyCustomCss/Quiz/quiz.css" rel="stylesheet" asp-append-version="true" />*@
+@*}*@
+
+<style>
+    img {
+        min-width: 50px;
+        max-width: 300px;
+        min-height: 50px;
+        max-height: 360px;
+    }
+
+    .choices-letter {
+        font-size: 20px;
+        color: rgb(110, 97, 97);
+        text-shadow: 0.5px 1px 1px rgb(4, 44, 17);
+        display: inline-block;
+        /*width: 550px;*/
+        text-align: left;
+        border: 1px solid rgb(255, 254, 254);
+        border-radius: 25px;
+        cursor: pointer;
+        padding: 10px;
+        padding-right: 0px;
+    }
+
+        .choices-letter:hover {
+            cursor: pointer;
+            background-color: #e3f1f8;
+            font-weight: bold;
+        }
+
+    .choices:hover {
+        cursor: pointer;
+    }
+
+    #quiz-question {
+        font-size: 25px;
+        color: rgb(24, 134, 92);
+        text-shadow: 1.1px 1px 1px rgb(8, 12, 71);
+    }
+
+    #quiz-container {
+        /*  margin: 10px auto;
+        background-color: white;*/
+        /*width: 65rem;
+        height: 45rem;*/
+        border-radius: 5px;
+        -webkit-box-shadow: -5px 6px 8px 0px rgba(74, 83, 14, 0.92);
+        -moz-box-shadow: -5px 6px 8px 0px rgba(74, 83, 14, 0.92);
+        box-shadow: -5px 6px 8px 0px rgba(74, 83, 14, 0.92);
+        /*position: relative;*/
+        opacity: 0.96;
+    }
+</style>
+
+<div class="row">
+    <div id="quiz-container" class="col-md-12">
+        <div class="exit-quiz-wrapper">
+            <a class="exit-quiz-btn">X</a>
+        </div>
+        <p class='quiz-intro text-center'>Благодарим, че допринасяте за подобряването на нашата платформа!</p>
+        <p class="start-quiz text-center"> Анкетата ще започне след: <br><br><span id="countdowntimer">5 </span></p>
+
+        @*Loading timer*@
+        <div class="progress-load-wrapper">
+            <div class="progress-load"></div>
+        </div>
+
+        <div id="quiz-content" style="display: none" class="row">
+            <div id="quiz-question" class="col-md-12"></div>
+            <div class="row">
+                <div id="quiz-qImg" class="col-md-3 d-inline ml-3"></div>
+                <div id="quiz-choice-container" class="col-md-8 float-left">
+
+                    <strong class="choices-letter col-md-11 float-left d-inline mt-1">a) <label class="choices d-inline" id="quiz-answer-A"></label></strong>
+
+                    <strong class="choices-letter col-md-11 float-left d-inline mt-1">b) <label class="choices d-inline" id="quiz-answer-B"></label></strong>
+
+                    <strong class="choices-letter col-md-11 float-left d-inline mt-1">c) <label class="choices d-inline" id="quiz-answer-C"></label></strong>
+
+                    <strong class="choices-letter col-md-11 float-left d-inline mt-1">d) <label class="choices d-inline" id="quiz-answer-D"></label></strong>
 
 
-<div id="quiz-container">
-    <div class="exit-quiz-wrapper">
-        <a class="exit-quiz-btn">X</a>
-    </div>
-    <p class='quiz-intro text-center'>Благодарим, че допринасяте за подобряването на нашата платформа!</p>
-    <p class="start-quiz text-center"> Анкетата ще започне след: <br><br><span id="countdowntimer">5 </span></p>
-
-     @*Loading timer*@
-    <div class="progress-load-wrapper">
-        <div class="progress-load"></div>
-    </div>
-
-    <div id="quiz-content" style="display: none">
-        <div id="quiz-question"></div>
-        <div id="quiz-qImg"></div>
-        <div id="quiz-choice-container">
-
-            <strong class="choices-letter">a) <label class="choices" id="quiz-answer-A"></label></strong>
-            <br>
-            <strong class="choices-letter">b) <label class="choices" id="quiz-answer-B"></label></strong>
-            <br>
-            <strong class="choices-letter">c) <label class="choices" id="quiz-answer-C"></label></strong>
-            <br>
-            <strong class="choices-letter">d) <label class="choices" id="quiz-answer-D"></label></strong>
-            <br>
-            <div class="backward-btn-wrapper" style="display: none">
-                <a class="fa fa-backward" id="quiz-backward-btn"></a>
+                    <a class="fa fa-backward col-md-12 mt-5" id="quiz-backward-btn" style="font-size:20px;"></a>
+                    @*<div class="backward-btn-wrapper col-md-12 mt-3">
+                        </div>*@
+                </div>
             </div>
-        </div>
 
-        <div id="quiz-timer">
-            <div id="quiz-counter"></div>
-        </div>
-        <div id="quiz-progress"></div>
+            <div id="quiz-timer">
+                <div id="quiz-counter"></div>
+            </div>
+            <div id="quiz-progress"></div>
 
-    </div>
-    <div class="backward-btn-wrapper" style="display: none">
-        <a class="fa fa-backward" id="quiz-backward-btn"></a>
+        </div>
+        @*<div class="backward-btn-wrapper col-md-12" style="display: none">
+                <a class="fa fa-backward col-md-12 float-right d-inline" id="quiz-backward-btn"></a>
+            </div>*@
     </div>
 </div>
 
-
-<script asp-append-version="true" src="~/js/Quiz/quiz.js"></script>
-
+@section Scripts{
+    <script asp-append-version="true" src="~/js/Quiz/quiz.js"></script>
+}
