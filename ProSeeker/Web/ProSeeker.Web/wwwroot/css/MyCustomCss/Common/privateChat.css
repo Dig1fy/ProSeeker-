@@ -1,0 +1,30 @@
+﻿.custom-receiver-chat-content {
+    color: white;
+    background: rgb(127,134,139);
+    background: linear-gradient(90deg, rgba(127,134,139,1) 9%, rgba(116,117,128,1) 86%);
+    border-radius: 25px 1px 1px 25px;
+    min-height: 55px;
+    margin: 0 auto;
+    padding: 15px;
+    padding-left: 8px;
+    width: auto;
+}
+
+.custom-sender-chat-content {
+    color: white;
+    background: rgb(3,98,107);
+    background: linear-gradient(90deg, rgba(3,98,107,1) 9%, rgba(4,96,111,1) 86%);
+    border-radius: 1px 25px 25px 1px;
+    min-height: 55px;
+    padding: 15px;
+    padding-left: 8px;
+    margin: 0 auto;
+    width: auto;
+}
+
+#sendButton {
+    border: none;
+    background: rgb(251,251,251);
+    background: linear-gradient(90deg, rgba(251,251,251,1) 83%, rgba(5,17,107,1) 100%);
+    border-radius: 1px 225px 225px 1px;
+}
