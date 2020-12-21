@@ -111,11 +111,11 @@
                         <div id="quiz-choice-container" class="col-md-8 float-left">
                             @{ var counter = 1;}
 
-                            <div class="answers-container" onclick="hideCurrentQuestion(@question.Number)">
+                            <div class="answers-container" onclick="hideCurrentQuestion(@question.Number, event)">
 
                                 @foreach (var answer in question.Answers)
                                 {
-                                    <strong class="choices-letter col-md-11 float-left d-inline mt-1">@counter) <label class="choices d-inline " id="quiz-answer-A">@answer.Text</label></strong>
+                                    <label class="choices-letter col-md-11 float-left d-inline mt-1choices d-inline">@counter) @answer.Text</label>
                                     counter++;
                                 }
                             </div>
@@ -146,9 +146,13 @@
                 - Обявите Ви ще бъдат ВИП и ще се показват преди всички останали.<br />
             </p>
             <form>
-                <div class="user-answers"></div>
-            <button>Потвърди</button>
-
+                <div class="user-answers">
+                    <input hidden />
+                </div>
+                <br /><br /><br /><br /><br /><br /><br /><br />
+                                                          <div class="text-center">
+                                                              <button class="btn" type="submit" asp-controller="Quiz" asp-action="End">Потвърди</button>
+                                                          </div>
             </form>
         </div>
 
@@ -161,16 +165,19 @@
 
 <script asp-append-version="true">
     (function () {
-        let currentQuestionIndex = 0;
-        // keep the user answers
-        var allUserAnswers = [];
         // Make first quesiton visible
         let firstQuestion = document.querySelector('.question-1');
         firstQuestion.style.display = "block"
 
     })()
-    function hideCurrentQuestion(questionNumber) {
 
+    function hideCurrentQuestion(questionNumber, event) {
+        let currentAnswer = event.target;
+
+        if (currentAnswer.nodeName !== "LABEL") {
+            return;
+        }
+        
         let currentQuestion = document.querySelector(`.question-${questionNumber}`)
         currentQuestion.style.display = "none";
         loadNextQuestion(questionNumber)
@@ -178,16 +185,17 @@
 
     function loadNextQuestion(questionNumber) {
         let questionsCount = document.querySelector('.questionsCount').value;
-
+       
         if (questionNumber >= questionsCount) {
-            // TODO: Return!
             let endTextContainer = document.querySelector('.endOfQuizAppearance');
             endTextContainer.style.display = "block";
+            return;
+           
+        } else {
+            questionNumber = Number(questionNumber) + 1;
+            let nextQuestion = document.querySelector(`.question-${questionNumber}`);
+            nextQuestion.style.display = "block";
         }
-
-        questionNumber = Number(questionNumber) + 1;
-        let nextQuestion = document.querySelector(`.question-${questionNumber}`);
-        nextQuestion.style.display = "block";
     }
 
 </script>

@@ -1,5 +1,6 @@
 ﻿namespace ProSeeker.Services.Data.UsersService
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -77,6 +78,15 @@
                 .FirstOrDefaultAsync();
 
             return userId;
+        }
+
+        public async Task MakeUserVip(string userId)
+        {
+            var user = await this.usersRepository.All().FirstOrDefaultAsync(u => u.Id == userId);
+            user.IsVip = true;
+            user.VipExpirationDate = DateTime.UtcNow.AddDays(7);
+            this.usersRepository.Update(user);
+            await this.usersRepository.SaveChangesAsync();
         }
     }
 }

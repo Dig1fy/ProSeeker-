@@ -153,6 +153,28 @@
             return userId;
         }
 
+        public async Task MakeAdsVipAsync(string userId)
+        {
+            var user = await this.usersRepository.All().FirstOrDefaultAsync(x => x.Id == userId);
+
+            if (user == null)
+            {
+                return;
+            }
+
+            var userAds = await this.adsRepository.All().Where(u => u.UserId == userId).ToListAsync();
+            if (userAds.Count > 0)
+            {
+                foreach (var ad in userAds)
+                {
+                    ad.IsVip = true;
+                    ad.VipExpirationDate = user.VipExpirationDate;
+                    this.adsRepository.Update(ad);
+                    await this.adsRepository.SaveChangesAsync();
+                }
+            }
+        }
+
         // TODO: Try with reflection
         private IQueryable<Ad> SortAds(string categoryName, string sortBy, int cityId)
         {

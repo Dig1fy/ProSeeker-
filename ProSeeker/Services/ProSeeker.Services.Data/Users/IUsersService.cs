@@ -15,5 +15,7 @@
         Task<int> GetAllClientsCountAsync();
 
         Task<string> GetUserIdBySpecialistIdAsync(string specialistId);
+
+        Task MakeUserVip(string userId);
     }
 }

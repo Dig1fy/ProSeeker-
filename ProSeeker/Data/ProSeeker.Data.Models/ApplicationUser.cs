@@ -44,6 +44,10 @@ namespace ProSeeker.Data.Models
 
         public bool IsSpecialist { get; set; }
 
+        public bool IsVip { get; set; }
+
+        public DateTime VipExpirationDate { get; set; }
+
         public string ProfilePicture { get; set; }
 
         public string SpecialistDetailsId { get; set; }

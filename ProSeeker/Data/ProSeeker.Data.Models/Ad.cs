@@ -28,6 +28,8 @@
 
         public bool IsVip { get; set; }
 
+        public DateTime VipExpirationDate { get; set; }
+
         public int Views { get; set; }
 
         public string PreparedBudget { get; set; }
