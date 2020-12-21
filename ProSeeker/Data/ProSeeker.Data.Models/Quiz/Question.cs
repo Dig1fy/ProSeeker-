@@ -12,7 +12,7 @@
             this.Id = Guid.NewGuid().ToString();
         }
 
-        public string Name { get; set; }
+        public string Text { get; set; }
 
         public int Number { get; set; }
 

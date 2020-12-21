@@ -188,7 +188,7 @@
     border-color: rgba(45, 120, 138, 0.38);
     border-radius: 25px 25px;
     border-image-repeat: round;
-    font-size: 16px;
+    font-size: 16px;    
 }
 
     .custom-rounded-input-field:focus, .custom-rounded-input-field:active {
