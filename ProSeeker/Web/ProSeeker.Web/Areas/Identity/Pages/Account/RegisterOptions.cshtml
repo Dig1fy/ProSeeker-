@@ -6,7 +6,7 @@
 <div class="text-center">
     <h3 class="custom-golden-text">Регистрирай се като</h3>
     <div class="row mt-5 register-pictures-container">
-        <div class="col-md-6 custom-container-border mx-auto text-center">
+        <div class="col-md-6 custom-container-border mx-auto text-center p-2">
             <a class="list-group text-center" asp-route-id="0" asp-area="Identity" asp-page="/Account/Register" style="text-decoration:none;">
                 <h3 class="custom-title-lg">
                     Потребител
@@ -26,5 +26,17 @@
                 </div>
             </a>
         </div>
+    </div>
+</div>
+
+<div class="mt-4 row">
+    <div class="col-md-12 text-center">
+        <p class="d-inline custom-input-text" style="font-size:17px;">
+            Вече имате регистрация?- Натиснете
+            <a class="d-inline" style="text-decoration:none;" asp-area="Identity" asp-page="/Account/Login">
+                <strong>тук,</strong>
+            </a>
+            за да влезе в акаунта си.
+        </p>
     </div>
 </div>

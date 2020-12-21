@@ -277,6 +277,6 @@
     }
 
 .custom-title-lg {
-    text-shadow: -2px 0px 0px rgba(39,80,206,0.24);
-    color: rgb(6, 36, 52);
+    text-shadow: 1px 1px 1px rgba(149, 150, 55, 0.75);
+    color: rgba(11, 90, 142, 0.86);
 }
