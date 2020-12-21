@@ -10,5 +10,9 @@
         Task<IEnumerable<T>> GetQuestionsByQuizzIdAsync<T>(string quizId);
 
         Task<IEnumerable<T>> GetAnswersByQuestionIdAsync<T>(string questionId);
+
+        Task AddUserToQuizAsync(string userId, string quizId);
+
+        Task<bool> HasItBeenCompletedByThisUser(string userId);
     }
 }

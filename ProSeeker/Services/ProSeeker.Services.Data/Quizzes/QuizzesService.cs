@@ -6,6 +6,7 @@
 
     using Microsoft.EntityFrameworkCore;
     using ProSeeker.Data.Common.Repositories;
+    using ProSeeker.Data.Models;
     using ProSeeker.Data.Models.Quiz;
     using ProSeeker.Services.Mapping;
 
@@ -14,15 +15,36 @@
         private readonly IDeletableEntityRepository<Quiz> quizzesRepository;
         private readonly IDeletableEntityRepository<Question> questionsRepository;
         private readonly IDeletableEntityRepository<Answer> answersRepository;
+        private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
+        private readonly IRepository<UserQuiz> userQuizzesRepository;
 
         public QuizzesService(
             IDeletableEntityRepository<Quiz> quizzesRepository,
             IDeletableEntityRepository<Question> questionsRepository,
-            IDeletableEntityRepository<Answer> answersRepository)
+            IDeletableEntityRepository<Answer> answersRepository,
+            IDeletableEntityRepository<ApplicationUser> usersRepository,
+            IRepository<UserQuiz> userQuizzesRepository)
         {
             this.quizzesRepository = quizzesRepository;
             this.questionsRepository = questionsRepository;
             this.answersRepository = answersRepository;
+            this.usersRepository = usersRepository;
+            this.userQuizzesRepository = userQuizzesRepository;
+        }
+
+        public async Task AddUserToQuizAsync(string userId, string quizId)
+        {
+            var user = await this.usersRepository.All().FirstOrDefaultAsync(x => x.Id == userId);
+
+            var userQuiz = new UserQuiz
+            {
+                User = user,
+                UserId = user.Id,
+                QuizId = quizId,
+            };
+
+            await this.userQuizzesRepository.AddAsync(userQuiz);
+            await this.userQuizzesRepository.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<T>> GetAnswersByQuestionIdAsync<T>(string questionId)
@@ -56,6 +78,15 @@
                 .FirstOrDefaultAsync();
 
             return quiz;
+        }
+
+        public async Task<bool> HasItBeenCompletedByThisUser(string userId)
+        {
+            var userQuiz = await this.userQuizzesRepository
+                .All()
+                .FirstOrDefaultAsync(x => x.UserId == userId);
+
+            return userQuiz != null;
         }
     }
 }

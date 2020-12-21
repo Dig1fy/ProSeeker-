@@ -145,13 +145,14 @@
                 Ако сте потребител:<br />
                 - Обявите Ви ще бъдат ВИП и ще се показват преди всички останали.<br />
             </p>
-            <form>
+            <form asp-controller="Quiz" asp-action="End">
                 <div class="user-answers">
                     <input hidden />
                 </div>
                 <br /><br /><br /><br /><br /><br /><br /><br />
                                                           <div class="text-center">
-                                                              <button class="btn" type="submit" asp-controller="Quiz" asp-action="End">Потвърди</button>
+                                                              <button class="btn" type="submit" >Потвърди</button>
+                                                              <input hidden name="quizId" asp-for="@Model.Id"/>
                                                           </div>
             </form>
         </div>
