@@ -10,6 +10,7 @@
         public Question()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.Answers = new HashSet<Answer>();
         }
 
         public string Text { get; set; }

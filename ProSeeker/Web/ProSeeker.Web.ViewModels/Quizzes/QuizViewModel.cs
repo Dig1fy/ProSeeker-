@@ -11,6 +11,6 @@
 
         public string Title { get; set; }
 
-        public virtual IEnumerable<QuestionViewModel> Question { get; set; }
+        public virtual IEnumerable<QuestionViewModel> Questions { get; set; }
     }
 }
