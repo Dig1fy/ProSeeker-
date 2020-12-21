@@ -48,13 +48,13 @@
         public DbSet<Inquiry> Inquiries { get; set; }
 
         // Quizz
-        public DbSet<Quiz> Quizzes { get; set; }
+        public DbSet<Survey> Surveys { get; set; }
 
         public DbSet<Question> Questions { get; set; }
 
         public DbSet<Answer> Answers { get; set; }
 
-        public DbSet<UserQuiz> UsersQuizes { get; set; }
+        public DbSet<UserSurvey> UsersSurveys { get; set; }
 
         // Chat
         public DbSet<Conversation> Conversations { get; set; }
@@ -115,8 +115,8 @@
                 .WithOne(sd => sd.User)
                 .HasForeignKey<Specialist_Details>(fk => fk.UserId);
 
-            builder.Entity<UserQuiz>()
-                .HasKey(x => new { x.UserId, x.QuizId });
+            builder.Entity<UserSurvey>()
+                .HasKey(x => new { x.UserId, x.SurveyId });
 
             builder.Entity<UserConversation>()
                 .HasKey(x => new { x.ApplicationUserId, x.ConversationId });

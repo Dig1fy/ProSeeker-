@@ -1,0 +1,137 @@
+﻿@*@section Styles{*@
+@*<link href="~/css/MyCustomCss/Quiz/survey.css" rel="stylesheet" asp-append-version="true" />*@
+@*}*@
+
+<style>
+    img {
+        min-width: 50px;
+        max-width: 300px;
+        min-height: 50px;
+        max-height: 360px;
+    }
+
+    .choices-letter {
+        font-size: 20px;
+        color: rgb(110, 97, 97);
+        text-shadow: 0.5px 1px 1px rgb(4, 44, 17);
+        display: inline-block;
+        /*width: 550px;*/
+        text-align: left;
+        border: 1px solid rgb(255, 254, 254);
+        border-radius: 25px;
+        cursor: pointer;
+        padding: 10px;
+        padding-right: 0px;
+    }
+
+        .choices-letter:hover {
+            cursor: pointer;
+            background-color: #e3f1f8;
+            font-weight: bold;
+        }
+
+    .choices:hover {
+        cursor: pointer;
+    }
+
+    #survey-question {
+        font-size: 25px;
+        color: rgb(24, 134, 92);
+        text-shadow: 1.1px 1px 1px rgb(8, 12, 71);
+    }
+
+    #survey-container {
+        /*  margin: 10px auto;
+        background-color: white;*/
+        /*width: 65rem;
+        height: 45rem;*/
+        border-radius: 5px;
+        -webkit-box-shadow: -5px 6px 8px 0px rgba(74, 83, 14, 0.92);
+        -moz-box-shadow: -5px 6px 8px 0px rgba(74, 83, 14, 0.92);
+        box-shadow: -5px 6px 8px 0px rgba(74, 83, 14, 0.92);
+        /*position: relative;*/
+        opacity: 0.96;
+    }
+
+    #survey-timer {
+        position: absolute;
+        height: 100px;
+        width: 200px;
+        bottom: 0px;
+        text-align: center;
+    }
+
+    #survey-counter {
+        font-size: 3em;
+    }
+
+
+
+    #survey-progress {
+        width: 500px;
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        padding: 5px;
+        text-align: right;
+    }
+
+    .prog {
+        width: 30px;
+        height: 30px;
+        border: 1px solid #000;
+        display: inline-block;
+        border-radius: 50%;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+</style>
+
+<div class="row">
+    <div id="survey-container" class="col-md-12">
+        <div class="exit-survey-wrapper">
+            <a class="exit-survey-btn">X</a>
+        </div>
+        @*<p class='survey-intro text-center'>Благодарим, че допринасяте за подобряването на нашата платформа!</p>*@
+        <p class="start-survey text-center"> Анкетата ще започне след: <br><br><span id="countdowntimer">5 </span></p>
+
+        @*Loading timer*@
+        <div class="progress-load-wrapper">
+            <div class="progress-load"></div>
+        </div>
+
+        <div id="survey-content" style="display: none" class="row">
+            <div id="survey-question" class="col-md-12"></div>
+            <div class="row">
+                <div id="survey-qImg" class="col-md-3 d-inline ml-3"></div>
+                <div id="survey-choice-container" class="col-md-8 float-left">
+
+                    <strong class="choices-letter col-md-11 float-left d-inline mt-1">а) <label class="choices d-inline"></label></strong>
+
+                    <strong class="choices-letter col-md-11 float-left d-inline mt-1">б) <label class="choices d-inline"></label></strong>
+
+                    <strong class="choices-letter col-md-11 float-left d-inline mt-1">в) <label class="choices d-inline"></label></strong>
+
+                    <strong class="choices-letter col-md-11 float-left d-inline mt-1">г) <label class="choices d-inline"></label></strong>
+
+
+                    <a class="fa fa-backward col-md-12 mt-5" id="survey-backward-btn" style="font-size:20px;"></a>
+
+                </div>
+            </div>
+
+            <div id="survey-timer">
+                <div id="survey-counter"></div>
+            </div>
+            <div id="survey-progress" class="col-md-6"></div>
+
+        </div>
+        @*<div class="backward-btn-wrapper col-md-12" style="display: none">
+                <a class="fa fa-backward col-md-12 float-right d-inline" id="quiz-backward-btn"></a>
+            </div>*@
+    </div>
+</div>
+
+@section Scripts{
+    <script asp-append-version="true" src="~/js/Quiz/survey.js"></script>
+}

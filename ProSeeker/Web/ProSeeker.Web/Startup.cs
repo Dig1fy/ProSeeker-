@@ -132,7 +132,7 @@
             services.AddTransient<IInquiriesService, InquiriesService>();
             services.AddTransient<ISpecialistsService, SpecialistsService>();
             services.AddTransient<IPrivateChatService, PrivateChatService>();
-            services.AddTransient<IQuizzesService, QuizzesService>();
+            services.AddTransient<ISurveysService, SurveysService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

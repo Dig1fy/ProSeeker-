@@ -71,7 +71,7 @@
     <Content Update="wwwroot\css\MyCustomCss\IndexSideBar\sidebar.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\css\MyCustomCss\Quiz\quiz.css">
+    <Content Update="wwwroot\css\MyCustomCss\Survey\survey.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="wwwroot\images\CategoryImages\Home\архитект.png">
@@ -119,22 +119,22 @@
     <Content Update="wwwroot\images\ProfileImage\defaultUser.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\images\Quiz\1.png">
+    <Content Update="wwwroot\images\Survey\1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\images\Quiz\2.png">
+    <Content Update="wwwroot\images\Survey\2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\images\Quiz\3.png">
+    <Content Update="wwwroot\images\Survey\3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\images\Quiz\4.png">
+    <Content Update="wwwroot\images\Survey\4.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\images\Quiz\5.png">
+    <Content Update="wwwroot\images\Survey\5.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\images\Quiz\animated-load.png">
+    <Content Update="wwwroot\images\Survey\animated-load.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="wwwroot\images\specialist.png">
@@ -158,7 +158,7 @@
     <Content Update="wwwroot\js\MyCustomJs\site.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\js\Quiz\quiz.js">
+    <Content Update="wwwroot\js\Survey\survey.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="wwwroot\js\TinyMCE\TinyMce.js">
@@ -167,7 +167,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\images\Quiz\" />
+    <Folder Include="wwwroot\images\Survey\" />
     <Folder Include="wwwroot\images\ProfileImage\Profiles\" />
   </ItemGroup>
 </Project>
