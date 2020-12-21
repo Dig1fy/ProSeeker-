@@ -1,12 +1,14 @@
 ﻿namespace ProSeeker.Web.Controllers.Users
 {
     using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Data.UsersService;
     using ProSeeker.Web.ViewModels.Users;
 
+    [Authorize]
     public class SpecialistsDetailsController : BaseController
     {
         private readonly IUsersService usersService;

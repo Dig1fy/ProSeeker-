@@ -6,42 +6,42 @@
 
 
 <div class="row">
-<h2 class="mx-auto">@ViewData["Title"]</h2>
+    <h2 class="mx-auto custom-golden-text">@ViewData["Title"]</h2>
     <div class="col-md-12">
         <div style=" justify-content: center; align-items: center;">
             <div class="col-md-4 mx-auto text-center">
                 <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                    
+
                     <hr />
                     <div asp-validation-summary="All" class="text-danger custom-input-text"></div>
                     <div class="form-group">
-                        <label asp-for="Input.Email"></label>
-                        <input asp-for="Input.Email" class="form-control" style="-webkit-box-shadow: 0 0 0 30px white inset;"/>
+                        <label asp-for="Input.Email" class="custom-input-text"></label>
+                        <input asp-for="Input.Email" class="form-control custom-rounded-input-field custom-textarea-text" style="-webkit-box-shadow: 0 0 0 30px white inset;" />
                         <span asp-validation-for="Input.Email" class="text-danger custom-input-text"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Input.Password"></label>
-                        <input asp-for="Input.Password" class="form-control" style="-webkit-box-shadow: 0 0 0 30px white inset;"/>
+                        <label asp-for="Input.Password" class="custom-input-text"></label>
+                        <input asp-for="Input.Password" class="form-control custom-rounded-input-field custom-textarea-text" style="-webkit-box-shadow: 0 0 0 30px white inset;" />
                         <span asp-validation-for="Input.Password" class="text-danger custom-input-text"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Input.ConfirmPassword"></label>
-                        <input asp-for="Input.ConfirmPassword" class="form-control" />
+                        <label asp-for="Input.ConfirmPassword" class="custom-input-text"></label>
+                        <input asp-for="Input.ConfirmPassword" class="form-control custom-rounded-input-field custom-textarea-text" />
                         <span asp-validation-for="Input.ConfirmPassword" class="text-danger custom-input-text"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Input.FirstName"></label>
-                        <input asp-for="Input.FirstName" class="form-control" />
+                        <label asp-for="Input.FirstName" class="custom-input-text"></label>
+                        <input asp-for="Input.FirstName" class="form-control custom-rounded-input-field custom-textarea-text" />
                         <span asp-validation-for="Input.FirstName" class="text-danger custom-input-text"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Input.LastName"></label>
-                        <input asp-for="Input.LastName" class="form-control" />
+                        <label asp-for="Input.LastName" class="custom-input-text"></label>
+                        <input asp-for="Input.LastName" class="form-control custom-rounded-input-field custom-textarea-text" />
                         <span asp-validation-for="Input.LastName" class="text-danger custom-input-text"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Input.CityId"></label>
-                        <select asp-for="Input.CityId" class="form-control" asp-items="Model.AllCities">
+                        <label asp-for="Input.CityId" class="custom-input-text"></label>
+                        <select asp-for="Input.CityId" class="form-control custom-rounded-input-field custom-textarea-text" asp-items="Model.AllCities">
                             <option disabled selected> - Select city - </option>
                         </select>
                         <span asp-validation-for="Input.CityId" class="text-danger custom-input-text"></span>
@@ -53,27 +53,24 @@
                     @if (this.Model.TempIdCheck == 1)
                     {
                         <div class="form-group">
-                            <label asp-for="Input.CompanyName"></label>
-                            <input asp-for="Input.CompanyName" class="form-control" />
+                            <label asp-for="Input.CompanyName" class="custom-input-text"></label>
+                            <input asp-for="Input.CompanyName" class="form-control custom-rounded-input-field custom-textarea-text" />
                             <span asp-validation-for="Input.CompanyName" class="text-danger custom-input-text"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Input.JobCategoryId"></label>
-                            <select id="categorySelector" asp-for="Input.JobCategoryId" class="form-control" asp-items="Model.AllCategories">
-                                <option disabled selected> - Select category - </option>
+                            <label asp-for="Input.JobCategoryId" class="custom-input-text"></label>
+                            <select id="categorySelector" asp-for="Input.JobCategoryId" class="form-control custom-rounded-input-field custom-textarea-text" asp-items="Model.AllCategories">
+                                <option disabled selected class="form-control custom-rounded-input-field custom-textarea-text"> - Select category - </option>
                             </select>
                             <span asp-validation-for="Input.JobCategoryId" class="text-danger custom-input-text"></span>
                         </div>
                         <input hidden name="TempIdCheck" value="1" />
-                        <button type="submit" class="btn btn-primary">Регистрирай ме</button>
                     }
                     else
                     {
-                        <select hidden asp-for="Input.JobCategoryId" class="form-control" asp-items="Model.AllCategories">
-                            <option selected> 5 </option>
-                        </select>
-                        <button type="submit" class="btn btn-primary">Регистрирай ме</button>
+                        <input hidden asp-for="Input.JobCategoryId" value="5" />
                     }
+                    <button type="submit" class="btn btn-primary custom-rounded-input-field col-md-12 mt-4">Регистрирай ме</button>
                 </form>
             </div>
         </div>

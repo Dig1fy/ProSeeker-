@@ -59,7 +59,7 @@
     (function () {
         let progressCount = 5;
 
-        var timeleft = 0; //CHANGE THIS TO 5 WHEN FINISHED WITH TESTING!!!!!
+        var timeleft = 5; //CHANGE THIS TO 5 WHEN FINISHED WITH TESTING!!!!!
         var downloadTimer = setInterval(function () {
             progressCount += 25;
             timeleft--;

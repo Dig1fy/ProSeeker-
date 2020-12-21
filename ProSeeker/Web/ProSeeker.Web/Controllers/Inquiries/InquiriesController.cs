@@ -69,6 +69,7 @@
             return this.RedirectToAction("GetProfile", "SpecialistsDetails", new { id = inputModel.SpecialistDetailsId });
         }
 
+        [Authorize]
         public async Task<IActionResult> MyInquiries()
         {
             var user = await this.userManager.GetUserAsync(this.User);

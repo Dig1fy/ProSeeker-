@@ -3,10 +3,28 @@
     ViewData["Title"] = "Register";
 }
 
-<section class="nav-item">
-    <a class="nav-link text-dark" asp-route-id="1" asp-area="Identity" asp-page="/Account/Register">SPECIALIST REGISTRATION</a>
-</section>
-<section class="nav-item">
-    <form></form>
-    <a class="nav-link text-dark" asp-route-id="0" asp-area="Identity" asp-page="/Account/Register">USER REGISTRATION</a>
-</section>
+<div class="text-center">
+    <h3 class="custom-golden-text">Регистрирай се като</h3>
+    <div class="row mt-5 register-pictures-container">
+        <div class="col-md-6 custom-container-border mx-auto text-center">
+            <a class="list-group text-center" asp-route-id="0" asp-area="Identity" asp-page="/Account/Register" style="text-decoration:none;">
+                <h3 class="custom-title-lg">
+                    Потребител
+                </h3>
+                <div class="text-center">
+                    <img src="~/images/customer.png" style="max-width:285px;" class="mt-5 test-test" />
+                </div>
+            </a>
+        </div>
+        <div class="col-md-6 custom-container-border p-2">
+            <a class="list-group" asp-route-id="1" asp-area="Identity" asp-page="/Account/Register" style="text-decoration:none;">
+                <h3 class="custom-title-lg">
+                    Специалист
+                </h3>
+                <div class="text-center">
+                    <img src="~/images/specialist.png" class="mt-5 p-1 specialist-registration-png" />
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

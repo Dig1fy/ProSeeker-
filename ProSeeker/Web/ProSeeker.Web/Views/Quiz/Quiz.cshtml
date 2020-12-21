@@ -52,6 +52,39 @@
         /*position: relative;*/
         opacity: 0.96;
     }
+
+    #quiz-timer {
+        position: absolute;
+        height: 100px;
+        width: 200px;
+        bottom: 0px;
+        text-align: center;
+    }
+
+    #quiz-counter {
+        font-size: 3em;
+    }
+
+
+
+    #quiz-progress {
+        width: 500px;
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        padding: 5px;
+        text-align: right;
+    }
+
+    .prog {
+        width: 30px;
+        height: 30px;
+        border: 1px solid #000;
+        display: inline-block;
+        border-radius: 50%;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
 </style>
 
 <div class="row">
@@ -59,7 +92,7 @@
         <div class="exit-quiz-wrapper">
             <a class="exit-quiz-btn">X</a>
         </div>
-        <p class='quiz-intro text-center'>Благодарим, че допринасяте за подобряването на нашата платформа!</p>
+        @*<p class='quiz-intro text-center'>Благодарим, че допринасяте за подобряването на нашата платформа!</p>*@
         <p class="start-quiz text-center"> Анкетата ще започне след: <br><br><span id="countdowntimer">5 </span></p>
 
         @*Loading timer*@
@@ -73,25 +106,24 @@
                 <div id="quiz-qImg" class="col-md-3 d-inline ml-3"></div>
                 <div id="quiz-choice-container" class="col-md-8 float-left">
 
-                    <strong class="choices-letter col-md-11 float-left d-inline mt-1">a) <label class="choices d-inline" id="quiz-answer-A"></label></strong>
+                    <strong class="choices-letter col-md-11 float-left d-inline mt-1">а) <label class="choices d-inline" id="quiz-answer-A"></label></strong>
 
-                    <strong class="choices-letter col-md-11 float-left d-inline mt-1">b) <label class="choices d-inline" id="quiz-answer-B"></label></strong>
+                    <strong class="choices-letter col-md-11 float-left d-inline mt-1">б) <label class="choices d-inline" id="quiz-answer-B"></label></strong>
 
-                    <strong class="choices-letter col-md-11 float-left d-inline mt-1">c) <label class="choices d-inline" id="quiz-answer-C"></label></strong>
+                    <strong class="choices-letter col-md-11 float-left d-inline mt-1">в) <label class="choices d-inline" id="quiz-answer-C"></label></strong>
 
-                    <strong class="choices-letter col-md-11 float-left d-inline mt-1">d) <label class="choices d-inline" id="quiz-answer-D"></label></strong>
+                    <strong class="choices-letter col-md-11 float-left d-inline mt-1">г) <label class="choices d-inline" id="quiz-answer-D"></label></strong>
 
 
                     <a class="fa fa-backward col-md-12 mt-5" id="quiz-backward-btn" style="font-size:20px;"></a>
-                    @*<div class="backward-btn-wrapper col-md-12 mt-3">
-                        </div>*@
+                  
                 </div>
             </div>
 
             <div id="quiz-timer">
                 <div id="quiz-counter"></div>
             </div>
-            <div id="quiz-progress"></div>
+            <div id="quiz-progress" class="col-md-6"></div>
 
         </div>
         @*<div class="backward-btn-wrapper col-md-12" style="display: none">

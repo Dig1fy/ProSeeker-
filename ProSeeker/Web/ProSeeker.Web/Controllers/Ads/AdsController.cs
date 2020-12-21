@@ -34,7 +34,7 @@
             this.userManager = userManager;
         }
 
-        // [Authorize(Roles = "User")]
+        [Authorize(Roles = GlobalConstants.RegularUserRoleName)]
         public async Task<IActionResult> Create()
         {
             var allCities = await this.citiesService.GetAllCitiesAsync<CitySimpleViewModel>();
@@ -49,7 +49,7 @@
             return this.View(createModel);
         }
 
-        // [Authorize(Roles = "User")]
+        [Authorize(Roles = GlobalConstants.RegularUserRoleName)]
         [HttpPost]
         public async Task<IActionResult> Create(CreateAdInputModel input)
         {
@@ -102,8 +102,8 @@
             return this.View(model);
         }
 
-        //[Authorize]
-        // Is in role RegularUser
+        [Authorize]
+        [Authorize(Roles = GlobalConstants.RegularUserRoleName)]
         public async Task<IActionResult> MyAds(int page = 1)
         {
             page = page < 1 ? 1 : page;
@@ -130,7 +130,8 @@
             return this.RedirectToAction(nameof(this.MyAds));
         }
 
-        [Authorize]
+        [Authorize(Roles = GlobalConstants.RegularUserRoleName)]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> Edit(string id)
         {
             var model = await this.adsService.GetAdDetailsByIdAsync<UpdateInputModel>(id);
@@ -150,7 +151,8 @@
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = GlobalConstants.RegularUserRoleName)]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> Edit(UpdateInputModel inputModel)
         {
             if (this.userManager.GetUserId(this.User) == inputModel.UserId)
@@ -172,6 +174,7 @@
             return this.RedirectToAction(nameof(this.MyAds));
         }
 
+        [Authorize]
         public async Task<IActionResult> GetById(string id)
         {
             var currenUserId = this.userManager.GetUserId(this.User);

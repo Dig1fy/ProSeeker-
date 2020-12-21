@@ -108,6 +108,7 @@
             return this.Redirect("/");
         }
 
+        [Authorize]
         public async Task<IActionResult> UserOffers()
         {
             var userId = this.userManager.GetUserId(this.User);
@@ -121,6 +122,7 @@
             return this.View(model);
         }
 
+        [Authorize]
         public async Task<IActionResult> SpecialistOffers()
         {
             var user = await this.userManager.GetUserAsync(this.User);
@@ -134,6 +136,7 @@
             return this.View(model);
         }
 
+        [Authorize]
         public async Task<IActionResult> Details(string offerId)
         {
             var currenUserId = this.userManager.GetUserId(this.User);
@@ -159,6 +162,7 @@
             return this.View(offer);
         }
 
+        [Authorize]
         public async Task<IActionResult> DetailsSent(string offerId)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
