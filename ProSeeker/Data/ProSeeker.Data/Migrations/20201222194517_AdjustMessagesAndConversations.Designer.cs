@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProSeeker.Data;
 
 namespace ProSeeker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201222194517_AdjustMessagesAndConversations")]
+    partial class AdjustMessagesAndConversations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -614,7 +616,7 @@ namespace ProSeeker.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsSeenByReceiver")
+                    b.Property<bool>("IsSeenBeReceiver")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsSeenBySender")
@@ -652,7 +654,10 @@ namespace ProSeeker.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsSeen")
+                    b.Property<bool>("IsSeenBeReceiver")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsSeenBySender")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("ModifiedOn")

@@ -25,6 +25,7 @@
             this.usersService = usersService;
         }
 
+        // Refferences are a bit broken... We call this VC in side nav bar (loginPartial) for all active conversations
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var user = await this.userManager.GetUserAsync((ClaimsPrincipal)this.User);

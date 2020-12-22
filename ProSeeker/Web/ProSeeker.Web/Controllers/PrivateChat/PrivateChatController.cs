@@ -31,7 +31,7 @@
             this.privateChatService = privateChatService;
         }
 
-        // chat landing page
+        // Refference: opening a chat in the nav bar (LoginPartial / Съобщения)
         public async Task<IActionResult> Index(string receiverId)
         {
             var user = await this.userManager.GetUserAsync(this.User);
@@ -44,6 +44,7 @@
 
             var conversationId = await this.privateChatService.GetConversationBySenderAndReceiverIdsAsync(user.Id, receiver.Id);
             var conversationMessages = await this.privateChatService.GetAllConversationMessagesAsync<MessageViewModel>(conversationId);
+            await this.privateChatService.MarkAllMessagesOfTheCurrentUserAsSeenAsync(conversationId, user.Id);
 
             foreach (var message in conversationMessages)
             {
@@ -61,24 +62,24 @@
             return this.View(model);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SendMessage(string conversationId, string message, string receiverId)
-        {
-            var sender = await this.userManager.GetUserAsync(this.User);
-            var newMessageModel = await this.privateChatService.SendMessageToUserAsync(message, receiverId, sender.Id, conversationId);
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> SendMessage(string conversationId, string message, string receiverId)
+        //{
+        //    var sender = await this.userManager.GetUserAsync(this.User);
+        //    var newMessageModel = await this.privateChatService.SendMessageToUserAsync(message, receiverId, sender.Id, conversationId);
 
-            await this.hubContext.Clients.User(newMessageModel.ReceiverId)
-                .SendAsync(GlobalConstants.SendMessagePrivateChatMethod, newMessageModel);
+        //    await this.hubContext.Clients.User(newMessageModel.ReceiverId)
+        //        .SendAsync(GlobalConstants.SendMessagePrivateChatMethod, newMessageModel);
 
-            return this.Json(newMessageModel);
-        }
+        //    return this.Json(newMessageModel);
+        //}
 
-        [HttpPost]
-        public async Task<IActionResult> JoinConversation(string connectionId, string conversationName)
-        {
-            await this.hubContext.Groups.AddToGroupAsync(connectionId, conversationName);
-            return this.Ok();
-        }
+        //[HttpPost]
+        //public async Task<IActionResult> JoinConversation(string connectionId, string conversationName)
+        //{
+        //    await this.hubContext.Groups.AddToGroupAsync(connectionId, conversationName);
+        //    return this.Ok();
+        //}
     }
 }

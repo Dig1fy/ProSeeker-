@@ -19,6 +19,10 @@
 
         public virtual ApplicationUser ApplicationUser { get; set; }
 
+        public bool IsSeenBySender { get; set; }
+
+        public bool IsSeenByReceiver { get; set; }
+
         [Required]
         public string ReceiverId { get; set; }
 

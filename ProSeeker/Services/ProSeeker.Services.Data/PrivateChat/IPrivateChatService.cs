@@ -18,6 +18,8 @@
 
         Task<IEnumerable<ConversationViewModel>> UpdateusersInfoAsync(IEnumerable<ConversationViewModel> conversations, string userId);
 
+        Task MarkAllMessagesOfTheCurrentUserAsSeenAsync(string conversationId, string currentUserId);
+
         //Task ReceiveNewMessage(string message, string receiverId, string senderId, string conversationId);
     }
 }

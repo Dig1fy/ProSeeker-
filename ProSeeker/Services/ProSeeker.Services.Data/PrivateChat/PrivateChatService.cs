@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Ganss.XSS;
     using Microsoft.EntityFrameworkCore;
     using ProSeeker.Data.Common.Repositories;
@@ -13,6 +14,8 @@
 
     public class PrivateChatService : IPrivateChatService
     {
+        private const string ReceiverAsString = "Receiver";
+        private const string SenderAsString = "Sender";
         private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
         private readonly IDeletableEntityRepository<ChatMessage> messageRepository;
         private readonly IDeletableEntityRepository<Conversation> conversationRepository;
@@ -121,9 +124,56 @@
                 var otherUser = await this.usersRepository.All().FirstOrDefaultAsync(x => x.Id == conv.OtherPersonsId);
                 conv.OtherPersonsPicture = otherUser.ProfilePicture;
                 conv.OtherPersonFullName = $"{otherUser.FirstName} {otherUser.LastName}";
+
+                // Check if there are any unseen conversations (where messages haven't been seen by the current user)
+                var unredMessages = await this.CheckForUnseenMessages(conv.Id, userId);
+                conv.IsSeen = unredMessages == 0;
+                conv.UnseenMessagesCount = unredMessages;
             }
 
             return conversations;
+        }
+
+        public async Task MarkAllMessagesOfTheCurrentUserAsSeenAsync(string conversationId, string currentUserId)
+        {
+            var conversation = await this.conversationRepository.All().FirstOrDefaultAsync(x => x.Id == conversationId);
+            var messages = await this.messageRepository.All().Where(x => x.ConversationId == conversationId).ToListAsync();
+
+            foreach (var message in conversation.ChatMessages)
+            {
+                var currentUserRole = currentUserId == message.ApplicationUserId ? SenderAsString : ReceiverAsString;
+
+                if (currentUserRole == ReceiverAsString && message.ApplicationUserId != currentUserId)
+                {
+                    message.IsSeenByReceiver = true;
+                    this.messageRepository.Update(message);
+                    await this.messageRepository.SaveChangesAsync();
+                }
+            }
+
+            conversation.IsSeen = true;
+            this.conversationRepository.Update(conversation);
+            await this.conversationRepository.SaveChangesAsync();
+        }
+
+        private async Task<int> CheckForUnseenMessages(string conversationId, string currentUserId)
+        {
+            var unredMessagesCount = await this.messageRepository
+            .All()
+            .Where(x => x.ConversationId == conversationId).ToListAsync();
+
+            var unseenMessagesCount = 0;
+
+            foreach (var message in unredMessagesCount)
+            {
+                var currentUserRole = currentUserId == message.ApplicationUserId ? SenderAsString : ReceiverAsString;
+                if (currentUserRole == ReceiverAsString && !message.IsSeenByReceiver)
+                {
+                    unseenMessagesCount++;
+                }
+            }
+
+            return unseenMessagesCount;
         }
     }
 }

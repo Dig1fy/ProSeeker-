@@ -20,6 +20,8 @@
         [Required]
         public string ReceiverId { get; set; }
 
+        public bool IsSeen { get; set; }
+
         public virtual ICollection<ChatMessage> ChatMessages { get; set; }
 
         public virtual ICollection<UserConversation> UsersConversations { get; set; }

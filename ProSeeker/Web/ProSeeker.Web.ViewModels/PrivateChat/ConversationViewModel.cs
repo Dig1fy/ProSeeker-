@@ -11,6 +11,10 @@
 
         public string SenderId { get; set; }
 
+        public bool IsSeen { get; set; }
+
+        public int UnseenMessagesCount { get; set; }
+
         public string OtherPersonsPicture { get; set; }
 
         public string OtherPersonsId { get; set; }
