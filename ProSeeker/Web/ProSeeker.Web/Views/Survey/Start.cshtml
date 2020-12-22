@@ -1,7 +1,5 @@
 ﻿@model ProSeeker.Web.ViewModels.Quizzes.SurveyViewModel
 
-<p>@Model.Questions</p>
-
 <style>
     img {
         min-width: 50px;
@@ -15,7 +13,6 @@
         color: rgb(110, 97, 97);
         text-shadow: 0.5px 1px 1px rgb(4, 44, 17);
         display: inline-block;
-        /*width: 550px;*/
         text-align: left;
         border: 1px solid rgb(255, 254, 254);
         border-radius: 25px;
@@ -41,15 +38,11 @@
     }
 
     #survey-container {
-        /*  margin: 10px auto;
-        background-color: white;*/
-        /*width: 65rem;
-        height: 45rem;*/
+        /*margin: 10px auto;*/
         border-radius: 5px;
         -webkit-box-shadow: -5px 6px 8px 0px rgba(74, 83, 14, 0.92);
         -moz-box-shadow: -5px 6px 8px 0px rgba(74, 83, 14, 0.92);
         box-shadow: -5px 6px 8px 0px rgba(74, 83, 14, 0.92);
-        /*position: relative;*/
         opacity: 0.96;
     }
 
@@ -64,8 +57,6 @@
     #survey-counter {
         font-size: 3em;
     }
-
-
 
     #survey-progress {
         width: 500px;
@@ -105,13 +96,13 @@
             {
                 <div class="question-@question.Number" style="display: none;">
 
-                    <div id="survey-question" class="col-md-12">@question.Text</div>
-                    <div class="row">
+                    <div id="survey-question" class="col-md-12 text-center">@question.Text</div>
+                    <div class="row mt-1">
                         <div id="survey-qImg" class="col-md-3 d-inline ml-3"></div>
                         <div id="survey-choice-container" class="col-md-8 float-left">
                             @{ var counter = 1;}
 
-                            <div class="answers-container" onclick="hideCurrentQuestion(@question.Number, event)">
+                            <div class="answers-container" onclick="LoadNextQuestion(@question.Number, @Model.Questions.Count(), event)">
 
                                 @foreach (var answer in question.Answers)
                                 {
@@ -119,24 +110,20 @@
                                     counter++;
                                 }
                             </div>
-                            <a class="fa fa-backward col-md-12 mt-5 survey-backward-btn" style="font-size:20px;"></a>
+                            <a class="fa fa-backward col-md-12 mt-5 survey-backward-btn" onclick="GetPreviousQuestion(@question.Number, @Model.Questions.Count(), event)" style="font-size:20px;"></a>
 
                         </div>
                     </div>
                 </div>
             }
             <input hidden class="questionsCount" value=@Model.Questions.Count() />
-            <div id="survey-timer">
-                <div id="survey-counter"></div>
-            </div>
-            <div id="survey-progress" class="col-md-6"></div>
 
         </div>
         <div class="endOfQuizAppearance" style="display:none;">
             <h2 class="text-center custom-golden-text">
                 Благодарим, че помогнахте да подобрим нашата платформа!
             </h2>
-            <p class="inquiry-notes">
+            <p class="inquiry-notes  mt-5">
                 <strong>Успешно попълнихте нашата анкета!</strong> <br />
 
                 Ако сте специалист: <br />
@@ -149,17 +136,13 @@
                 <div class="user-answers">
                     <input hidden />
                 </div>
-                <br /><br /><br /><br /><br /><br /><br /><br />
+                <br /><br /><br /><br />
                 <div class="text-center">
-                    <button class="btn" type="submit">Потвърди</button>
+                    <button class="btn col-md-6 mb-2 custom-btn-no-background" type="submit">Потвърди</button>
                     <input hidden name="surveyId" asp-for="@Model.Id" />
                 </div>
             </form>
         </div>
-
-        @*<div class="backward-btn-wrapper col-md-12" style="display: none">
-            <a class="fa fa-backward col-md-12 float-right d-inline" id="survey-backward-btn"></a>
-        </div>*@
     </div>
 </div>
 
@@ -169,34 +152,40 @@
         // Make first quesiton visible
         let firstQuestion = document.querySelector('.question-1');
         firstQuestion.style.display = "block"
-
     })()
 
-    function hideCurrentQuestion(questionNumber, event) {
-        let currentAnswer = event.target;
+    function GetPreviousQuestion(currentQuestionNum) {
+        // Check if there are any previous questions. If any, hide current one and show the previous
+        if (currentQuestionNum > 1) {
+            let currentQuestion = document.querySelector(`.question-${currentQuestionNum}`);
+            currentQuestion.style.display = "none";
 
+            let previousQuestionNumber = Number(currentQuestionNum) - 1;
+            let previousQuestion = document.querySelector(`.question-${previousQuestionNumber}`);
+            previousQuestion.style.display = "block";
+        }
+    }
+
+    function LoadNextQuestion(currentQuestionNum, numberOfQuestion, event) {
+        let currentAnswer = event.target;
         if (currentAnswer.nodeName !== "LABEL") {
             return;
         }
-        
-        let currentQuestion = document.querySelector(`.question-${questionNumber}`)
-        currentQuestion.style.display = "none";
-        loadNextQuestion(questionNumber)
-    }
 
-    function loadNextQuestion(questionNumber) {
-        let questionsCount = document.querySelector('.questionsCount').value;
-       
-        if (questionNumber >= questionsCount) {
+        // Hide current question
+        let currentQuestion = document.querySelector(`.question-${currentQuestionNum}`);
+        currentQuestion.style.display = "none";
+
+        // Unhide next question if there is any. Otherwise, show the end of the survey
+        if (currentQuestionNum >= numberOfQuestion) {
             let endTextContainer = document.querySelector('.endOfQuizAppearance');
             endTextContainer.style.display = "block";
             return;
-           
+
         } else {
-            questionNumber = Number(questionNumber) + 1;
-            let nextQuestion = document.querySelector(`.question-${questionNumber}`);
+            let nextQuestionNumber = Number(currentQuestionNum) + 1;
+            let nextQuestion = document.querySelector(`.question-${nextQuestionNumber}`);
             nextQuestion.style.display = "block";
         }
     }
-
 </script>
