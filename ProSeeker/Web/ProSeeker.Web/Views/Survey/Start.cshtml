@@ -67,58 +67,90 @@
         text-align: right;
     }
 
-    .prog {
-        width: 30px;
-        height: 30px;
+    .progress-circles {
+        width: 17px;
+        height: 17px;
         border: 1px solid #000;
         display: inline-block;
         border-radius: 50%;
-        margin-left: 15px;
-        margin-right: 15px;
+        margin-left: 11px;
+        margin-right: 11px;
     }
+
+    .survey-backward-btn {
+        color: rgb(24, 134, 92);
+        text-shadow: 0.5px 0.5px 0.5px rgb(8, 12, 71);
+        font-size: 16px;
+    }
+
+        .survey-backward-btn:hover {
+            text-decoration: none;
+            cursor: pointer;
+            color: rgb(6, 67, 151);
+        }
+
+    /* the quiz exit button */
+    .exit-survey-btn {
+        color: rgb(8, 12, 71);
+        font-weight: bold;
+        right: 0;
+    }
+
+        .exit-survey-btn:hover {
+            color: rgb(24, 134, 92);
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+        }
 </style>
 
 <div class="row">
     <div id="survey-container" class="col-md-12">
-        <div class="exit-survey-wrapper">
-            <a class="exit-survey-btn">X</a>
-        </div>
-        @*<p class='survey-intro text-center'>Благодарим, че допринасяте за подобряването на нашата платформа!</p>*@
-        @*<p class="start-survey text-center"> Анкетата ще започне след: <br><br><span id="countdowntimer">5 </span></p>*@
+
 
         @*Loading timer*@
         <div class="progress-load-wrapper">
             <div class="progress-load"></div>
         </div>
-
+        @{var questionNumber = 1;}
         <div id="survey-content" style="display: block" class="row">
             @foreach (var question in Model.Questions)
             {
-                <div class="question-@question.Number" style="display: none;">
-
-                    <div id="survey-question" class="col-md-12 text-center">@question.Text</div>
+                <div class="question-@questionNumber" style="display: none;">
+                    <div class="exit-survey-wrapper float-right d-inline" style=" position:relative; z-index:10;">
+                        <a class="exit-survey-btn" onclick="exitSurvey()">X</a>
+                    </div>
+                    <div class="col-md-12 text-center">
+                        <div id="survey-question" class="col-md-12 text-center d-inline">@question.Text</div>
+                    </div>
                     <div class="row mt-1">
-                        <div id="survey-qImg" class="col-md-3 d-inline ml-3"></div>
+                        <img id="survey-qImg" src="~/images/Survey/1.png" class="col-md-3 d-inline ml-3" />
                         <div id="survey-choice-container" class="col-md-8 float-left">
-                            @{ var counter = 1;}
+                            @{ var answersCounter = 1;}
 
-                            <div class="answers-container" onclick="LoadNextQuestion(@question.Number, @Model.Questions.Count(), event)">
+                            <div class="answers-container" onclick="LoadNextQuestion(@questionNumber, @Model.Questions.Count(), event)">
 
                                 @foreach (var answer in question.Answers)
                                 {
-                                    <label class="choices-letter col-md-11 float-left d-inline mt-1choices d-inline">@counter) @answer.Text</label>
-                                    counter++;
+                                    <label class="choices-letter col-md-11 float-left d-inline mt-1choices d-inline">@answersCounter) @answer.Text</label>
+                                    answersCounter++;
                                 }
                             </div>
-                            <a class="fa fa-backward col-md-12 mt-5 survey-backward-btn" onclick="GetPreviousQuestion(@question.Number, @Model.Questions.Count(), event)" style="font-size:20px;"></a>
-
+                            <div class="float-left">
+                                <a class="fa fa-backward col-md-1 mt-5 survey-backward-btn d-inline" onclick="GetPreviousQuestion(@questionNumber, @Model.Questions.Count(), event)">
+                                    <p class="pl-1 d-inline">Назад</p>
+                                </a>
+                            </div>
                         </div>
                     </div>
+
                 </div>
+                questionNumber++;
             }
             <input hidden class="questionsCount" value=@Model.Questions.Count() />
-
         </div>
+
+        @* ========== Will pop-up when all questions have been rendered ==========*@
         <div class="endOfQuizAppearance" style="display:none;">
             <h2 class="text-center custom-golden-text">
                 Благодарим, че помогнахте да подобрим нашата платформа!
@@ -136,12 +168,20 @@
                 <div class="user-answers">
                     <input hidden />
                 </div>
-                <br /><br /><br /><br />
+                <br /><br />
                 <div class="text-center">
                     <button class="btn col-md-6 mb-2 custom-btn-no-background" type="submit">Потвърди</button>
                     <input hidden name="surveyId" asp-for="@Model.Id" />
                 </div>
             </form>
+        </div>
+
+        @* ========== Progress circles ==========*@
+        <div id="survey-progress" class="col-md-6 mt-5">
+            @for (int qIndex = 1; qIndex <= Model.Questions.Count(); qIndex++)
+            {
+                <div class='progress-circles mt-2' id="currentQ-@qIndex"></div>
+            }
         </div>
     </div>
 </div>
@@ -150,19 +190,18 @@
 <script asp-append-version="true">
     (function () {
         // Make first quesiton visible
-        let firstQuestion = document.querySelector('.question-1');
-        firstQuestion.style.display = "block"
+        document.querySelector('.question-1').style.display = "block";
+        document.querySelector(`#currentQ-1`).style.backgroundColor = "#2f8328";
     })()
 
     function GetPreviousQuestion(currentQuestionNum) {
         // Check if there are any previous questions. If any, hide current one and show the previous
         if (currentQuestionNum > 1) {
-            let currentQuestion = document.querySelector(`.question-${currentQuestionNum}`);
-            currentQuestion.style.display = "none";
+            emptyProgressCircle(currentQuestionNum);
+            document.querySelector(`.question-${currentQuestionNum}`).style.display = "none";
 
             let previousQuestionNumber = Number(currentQuestionNum) - 1;
-            let previousQuestion = document.querySelector(`.question-${previousQuestionNumber}`);
-            previousQuestion.style.display = "block";
+            document.querySelector(`.question-${previousQuestionNumber}`).style.display = "block";           
         }
     }
 
@@ -176,16 +215,30 @@
         let currentQuestion = document.querySelector(`.question-${currentQuestionNum}`);
         currentQuestion.style.display = "none";
 
-        // Unhide next question if there is any. Otherwise, show the end of the survey
+        // Unhide next question if there is any. Otherwise, show the end of the survey and hide the progress circles
         if (currentQuestionNum >= numberOfQuestion) {
-            let endTextContainer = document.querySelector('.endOfQuizAppearance');
-            endTextContainer.style.display = "block";
+            document.querySelector('#survey-progress').style.display = "none";
+            document.querySelector('.endOfQuizAppearance').style.display = "block";            
             return;
 
         } else {
             let nextQuestionNumber = Number(currentQuestionNum) + 1;
+            fillProgressCircle(nextQuestionNumber)
+            
             let nextQuestion = document.querySelector(`.question-${nextQuestionNumber}`);
             nextQuestion.style.display = "block";
         }
+    }
+
+    function fillProgressCircle(index){
+        document.querySelector(`#currentQ-${index}`).style.backgroundColor = "#2f8328"
+    }
+
+    function emptyProgressCircle(index) {
+        document.querySelector(`#currentQ-${index}`).style.backgroundColor = "white"
+    }
+
+    function exitSurvey() {
+        window.location.replace("/");
     }
 </script>
