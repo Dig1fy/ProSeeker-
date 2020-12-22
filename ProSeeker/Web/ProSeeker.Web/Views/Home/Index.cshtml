@@ -6,25 +6,22 @@
 }
 
 @section Styles{
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <link href="~/css/Bootstrap/coolCounter.css" rel="stylesheet" />
+    <link href="~/css/Bootstrap/coolCounter.css" rel="stylesheet" asp-append-version="true" />
 }
 
 <form asp-action="Survey" asp-controller="Survey">
     <button>QUIZ</button>
 </form>
 
-<form >
+<form>
     <input hidden name="surveyId" value="firstSurvey" />
-    <button asp-action="Start" asp-controller="Survey" >START Survey</button>
+    <button asp-action="Start" asp-controller="Survey">START Survey</button>
 </form>
 
 <div class="text-center">
     <h1 class="display-4">@this.ViewData["Title"]</h1>
-    @*TODO: Adjust rendering*@
 
     <div class="container">
-
         <div class="row text-center">
             <div class="col">
                 <div class="cool-bootstrap-counter">
@@ -35,7 +32,7 @@
             </div>
             <div class="col">
                 <div class="cool-bootstrap-counter">
-                    <i class="fa fa-coffee fa-2x"></i>
+                    <i class="fas fa-user fa-2x"></i>
                     <h2 class="timer count-title count-number" data-to="@Model.Counters.AllClients" data-speed="1500"></h2>
                     @if (@Model.Counters.AllClients < 2)
                     {
@@ -49,7 +46,7 @@
             </div>
             <div class="col">
                 <div class="cool-bootstrap-counter">
-                    <i class="fa fa-lightbulb-o fa-2x"></i>
+                    <i class="fas fa-users fa-2x"></i>
                     <h2 class="timer count-title count-number" data-to="@Model.BaseCategories.SelectMany(c=>c.JobCategories).Count()" data-speed="1500"></h2>
                     @if (@Model.Counters.AllClients < 2)
                     {
@@ -63,7 +60,7 @@
             </div>
             <div class="col">
                 <div class="cool-bootstrap-counter">
-                    <i class="fa fa-bug fa-2x"></i>
+                    <i class="fas fa-user-tie fa-2x"></i>
                     <h2 class="timer count-title count-number" data-to="@Model.Counters.AllSpecialists" data-speed="1500"></h2>
                     @if (@Model.Counters.AllSpecialists < 2)
                     {
@@ -78,8 +75,6 @@
         </div>
     </div>
 
-    @*TODO: Adjust rendering*@
-
     @foreach (var baseCategory in Model.BaseCategories)
     {
         <div class="list-group m-4">
@@ -91,7 +86,6 @@
             <div class="row">
                 @foreach (var category in baseCategory.JobCategories)
                 {
-                    //  asp-controller="Ads" asp-action="Create"
                     <div class="media d-md-inline m-md-2" @*asp-route-id="@category.Id" asp-controller="JobCategories" asp-action="GetById"*@>
                         <div class="media-left">
                             <a asp-route-id="@category.Id" asp-controller="JobCategories" asp-action="GetCategory" class="text-decoration-none">
@@ -106,8 +100,6 @@
         </div>
     }
 </div>
-
-
 
 @section Scripts{
     <script src="~/js/Bootstrap/CoolCounter.js"></script>
