@@ -5,6 +5,7 @@
 
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.SignalR;
+    using ProSeeker.Common;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Data.PrivateChat;
 
@@ -25,11 +26,10 @@
 
         public async Task Send(string message, string receiverId, string senderId, string conversationId)
         {
-            var senderUser = await this.userManager.FindByIdAsync(senderId);
             var messageViewModel = await this.privateChatService.SendMessageToUserAsync(message, receiverId, senderId, conversationId);
             var adjustedDateTime = messageViewModel.CreatedOn;
             messageViewModel.CreatedOn = DateTime.Parse(adjustedDateTime.ToString("O"));
-            await this.Clients.Users(messageViewModel.ReceiverId).SendAsync("SendMessage", messageViewModel);
+            await this.Clients.Users(messageViewModel.ReceiverId).SendAsync(GlobalConstants.SendMessagePrivateChatMethod, messageViewModel);
         }
     }
 }

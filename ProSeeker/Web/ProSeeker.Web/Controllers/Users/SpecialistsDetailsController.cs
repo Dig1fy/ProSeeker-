@@ -1,6 +1,7 @@
 ﻿namespace ProSeeker.Web.Controllers.Users
 {
     using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -29,7 +30,7 @@
 
             if (profile == null)
             {
-                return this.NotFound();
+                return this.CustomNotFound();
             }
 
             // id parameter is the specialistId, therefore we need to get the user corresponding to this id.
@@ -37,7 +38,7 @@
 
             if (profileUserId == null)
             {
-                return this.NotFound();
+                return this.CustomNotFound();
             }
 
             profile.UserId = profileUserId;

@@ -12,6 +12,16 @@
 
         public const string DefaultProfileImagePath = "/images/ProfileImage/defaultUser.png";
 
+        public const string ErrorAccessDenied = "403";
+
+        public const string ErrorNotFound = "404";
+
+        public const string ErrorHandlerAction = "Error";
+
+        public const string SendMessagePrivateChatMethod = "SendMessage";
+
+        public const string HomePageRedirect = "/";
+
         // Paging
         public const int ItemsPerPage = 8;
 

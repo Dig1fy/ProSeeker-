@@ -1,4 +1,4 @@
-﻿namespace ProSeeker.Web.Controllers.Votes
+﻿namespace ProSeeker.Web.Controllers.ApiControllers.Votes
 {
     using System.Threading.Tasks;
 

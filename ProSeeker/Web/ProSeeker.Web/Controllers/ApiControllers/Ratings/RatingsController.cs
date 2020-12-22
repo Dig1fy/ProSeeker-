@@ -1,4 +1,4 @@
-﻿namespace ProSeeker.Web.Controllers.Raitings
+﻿namespace ProSeeker.Web.Controllers.ApiControllers.Ratings
 {
     using System.Threading.Tasks;
 

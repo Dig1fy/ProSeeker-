@@ -16,7 +16,8 @@
 
         public static void RegisterMappings(params Assembly[] assemblies)
         {
-            if (initialized)
+            // This could be broken. If tests don't succeed, change it to if (initialized)
+            if (MapperInstance != null)
             {
                 return;
             }

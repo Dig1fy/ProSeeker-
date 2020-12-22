@@ -1,11 +1,13 @@
 ﻿namespace ProSeeker.Web.Controllers.Quiz
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using ProSeeker.Common;
     using ProSeeker.Data.Models;
-    using ProSeeker.Data.Models.Quiz;
     using ProSeeker.Services.Data.Ads;
     using ProSeeker.Services.Data.Quizz;
     using ProSeeker.Services.Data.UsersService;
@@ -43,7 +45,7 @@
 
             if (hasItBeenCompletedAlready)
             {
-                return this.Redirect("/");
+                return this.Redirect(GlobalConstants.HomePageRedirect);
             }
 
             // Get the quiz with all question/answers and return the view model
@@ -52,7 +54,7 @@
 
             if (survey == null || surveyQuestions.Count() == 0)
             {
-                return this.NotFound();
+                return this.CustomNotFound();
             }
 
             survey.Questions = surveyQuestions;
@@ -72,19 +74,27 @@
             return this.View(surveyModel);
         }
 
+        [Authorize]
         public async Task<IActionResult> End(string surveyId)
         {
             var user = await this.userManager.GetUserAsync(this.User);
-            await this.usersService.MakeUserVip(user.Id);
 
+            try
+            {
+            await this.usersService.MakeUserVip(user.Id);
             await this.surveysService.AddUserToSurveyAsync(user.Id, surveyId);
+            }
+            catch (Exception)
+            {
+                return this.CustomCommonError();
+            }
 
             if (!user.IsSpecialist)
             {
                 await this.adsService.MakeAdsVipAsync(user.Id);
             }
 
-            return this.Redirect("/");
+            return this.Redirect(GlobalConstants.HomePageRedirect);
         }
     }
 }

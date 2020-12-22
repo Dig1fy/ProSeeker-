@@ -1,11 +1,11 @@
 ﻿namespace ProSeeker.Web.Controllers.Offers
 {
+    using System;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Routing;
     using ProSeeker.Common;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Data.Ads;
@@ -144,12 +144,12 @@
 
             if (offer is null)
             {
-                return this.NotFound();
+                return this.CustomNotFound();
             }
 
             if (offer.ApplicationUserId != currenUserId)
             {
-                return this.RedirectToAction("AccessDenied", "Errors");
+                return this.CustomAccessDenied();
             }
 
             if (!offer.IsRed)
@@ -175,7 +175,7 @@
 
             if (offer.SpecialistDetailsId != currentUser.SpecialistDetailsId)
             {
-                return this.RedirectToAction("AccessDenied", "Errors");
+                return this.CustomAccessDenied();
             }
 
             offer.IsAcountsOwner = offer.SpecialistDetailsId == currentUser.SpecialistDetailsId;
@@ -222,8 +222,15 @@
         [Authorize]
         public async Task<IActionResult> Accept(string offerId)
         {
-            await this.offersService.AcceptOffer(offerId);
-            return this.RedirectToAction(nameof(this.Details), new { offerId });
+            try
+            {
+                await this.offersService.AcceptOffer(offerId);
+                return this.RedirectToAction(nameof(this.Details), new { offerId });
+            }
+            catch (Exception)
+            {
+                return this.CustomCommonError();
+            }
         }
     }
 }

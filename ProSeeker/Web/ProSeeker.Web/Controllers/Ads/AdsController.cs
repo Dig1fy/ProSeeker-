@@ -1,5 +1,6 @@
 ﻿namespace ProSeeker.Web.Controllers.Ads
 {
+    using System;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
@@ -17,6 +18,7 @@
 
     public class AdsController : BaseController
     {
+        private const string SuccessfulyCreatedAd = "Успешно създадохте нова обява!";
         private readonly IAdsService adsService;
         private readonly ICategoriesService categoriesService;
         private readonly ICitiesService citiesService;
@@ -67,7 +69,7 @@
             var user = await this.userManager.GetUserAsync(this.User);
             var newAdId = await this.adsService.CreateAsync(input, user.Id);
 
-            this.TempData["Message"] = "Успешно създадохте нова обява!";
+            this.TempData["Message"] = SuccessfulyCreatedAd;
             return this.RedirectToAction(nameof(this.MyAds));
 
             // return this.RedirectToAction("GetDetails", new { id = id });
@@ -126,19 +128,26 @@
         [Authorize]
         public async Task<IActionResult> Delete(string id)
         {
-            await this.adsService.DeleteByIdAsync(id);
-            return this.RedirectToAction(nameof(this.MyAds));
+            try
+            {
+                await this.adsService.DeleteByIdAsync(id);
+                return this.RedirectToAction(nameof(this.MyAds));
+            }
+            catch (Exception)
+            {
+                return this.CustomCommonError(this.Response.StatusCode.ToString());
+            }
         }
 
         [Authorize(Roles = GlobalConstants.RegularUserRoleName)]
-        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        //[Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> Edit(string id)
         {
             var model = await this.adsService.GetAdDetailsByIdAsync<UpdateInputModel>(id);
 
             if (model.UserId != this.userManager.GetUserId(this.User))
             {
-                return this.RedirectToAction("AccessDenied", "Errors");
+                return this.CustomAccessDenied();
             }
 
             var allCities = await this.citiesService.GetAllCitiesAsync<CitySimpleViewModel>();
@@ -152,12 +161,12 @@
 
         [HttpPost]
         [Authorize(Roles = GlobalConstants.RegularUserRoleName)]
-        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        //[Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> Edit(UpdateInputModel inputModel)
         {
             if (this.userManager.GetUserId(this.User) == inputModel.UserId)
             {
-                return this.RedirectToAction("AccessDenied", "Errors");
+                return this.CustomAccessDenied();
             }
 
             if (!this.ModelState.IsValid)
@@ -179,6 +188,12 @@
         {
             var currenUserId = this.userManager.GetUserId(this.User);
             var ad = await this.adsService.GetAdDetailsByIdAsync<AdsFullDetailsViewModel>(id);
+
+            if (ad == null)
+            {
+                return this.CustomNotFound();
+            }
+
             ad.IsOwnerOfAd = ad.UserId == currenUserId;
             return this.View(ad);
         }

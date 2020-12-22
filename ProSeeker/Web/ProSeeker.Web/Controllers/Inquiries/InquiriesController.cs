@@ -35,7 +35,7 @@
 
             if (currentUser.SpecialistDetailsId == specialistId)
             {
-                return this.RedirectToAction("AccessDenied", "Errors");
+                return this.CustomAccessDenied();
             }
 
             var model = new CreateInquiryInputModel
@@ -59,9 +59,10 @@
 
             var currentUser = await this.userManager.GetUserAsync(this.User);
 
+            // If someone tries to cheat :)
             if (currentUser.SpecialistDetailsId == inputModel.SpecialistDetailsId)
             {
-                return this.RedirectToAction("AccessDenied", "Errors");
+                return this.CustomAccessDenied();
             }
 
             inputModel.UserId = currentUser.Id;
@@ -88,12 +89,13 @@
 
             if (inquiry == null || currentUser == null)
             {
-                return this.NotFound();
+                return this.CustomNotFound();
             }
 
+            // Explicit check against cheaters :)
             if (inquiry.SpecialistDetailsId != currentUser.SpecialistDetailsId)
             {
-                return this.RedirectToAction("AccessDenied", "Errors");
+                return this.CustomAccessDenied();
             }
 
             if (!inquiry.IsRed)

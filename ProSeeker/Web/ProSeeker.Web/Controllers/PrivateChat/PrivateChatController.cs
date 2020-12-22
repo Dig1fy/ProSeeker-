@@ -1,11 +1,13 @@
 ﻿namespace ProSeeker.Web.Controllers.PrivateChatController
 {
     using System.Threading.Tasks;
+
     using Ganss.XSS;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.SignalR;
+    using ProSeeker.Common;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Data.PrivateChat;
     using ProSeeker.Web.Hubs;
@@ -37,7 +39,7 @@
 
             if (user.Id.Equals(receiver.Id))
             {
-                return this.Redirect("/");
+                return this.Redirect(GlobalConstants.HomePageRedirect);
             }
 
             var conversationId = await this.privateChatService.GetConversationBySenderAndReceiverIdsAsync(user.Id, receiver.Id);
@@ -67,7 +69,7 @@
             var newMessageModel = await this.privateChatService.SendMessageToUserAsync(message, receiverId, sender.Id, conversationId);
 
             await this.hubContext.Clients.User(newMessageModel.ReceiverId)
-                .SendAsync("SendMessage", newMessageModel);
+                .SendAsync(GlobalConstants.SendMessagePrivateChatMethod, newMessageModel);
 
             return this.Json(newMessageModel);
         }
@@ -78,12 +80,5 @@
             await this.hubContext.Groups.AddToGroupAsync(connectionId, conversationName);
             return this.Ok();
         }
-
-        //[HttpPost]
-        //public async Task<IActionResult> LeaveConversation(string connectionId, string conversationName)
-        //{
-        //    await this.hubContext.Groups.RemoveFromGroupAsync(connectionId, conversationName);
-        //    return this.Ok();
-        //}
     }
 }

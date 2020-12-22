@@ -1,7 +1,7 @@
 ﻿namespace ProSeeker.Web.Controllers.Opinions
 {
     using System.Threading.Tasks;
-
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using ProSeeker.Data.Models;
@@ -22,7 +22,7 @@
         }
 
         [HttpPost]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> CreateAdOpinion(CreateAdOpinionInputModel inputModel)
         {
             var parentId =
@@ -44,7 +44,7 @@
         }
 
         [HttpPost]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> CreateOpinionToSpecialist(CreateSpecialistOpinionInputModel inputModel)
         {
             var parentId =
@@ -56,7 +56,7 @@
             {
                 if (!await this.opinionsService.IsInSpecialistIdAsync(parentId.Value, inputModel.SpecialistId))
                 {
-                    return this.BadRequest();
+                    return this.CustomCommonError(this.BadRequest().ToString());
                 }
             }
 

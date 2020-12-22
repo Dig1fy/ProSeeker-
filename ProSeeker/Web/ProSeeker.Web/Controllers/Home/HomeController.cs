@@ -1,9 +1,8 @@
 ﻿namespace ProSeeker.Web.Controllers
 {
-    using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using ProSeeker.Data.Models;
@@ -12,7 +11,6 @@
     using ProSeeker.Services.Data.UsersService;
     using ProSeeker.Web.ViewModels;
     using ProSeeker.Web.ViewModels.Home;
-    using ProSeeker.Web.ViewModels.PrivateChat;
 
     public class HomeController : BaseController
     {
@@ -35,7 +33,6 @@
 
         public async Task<IActionResult> Index()
         {
-            var userId = this.userManager.GetUserId(this.User);
             var viewModel = new IndexViewModel()
             {
                 BaseCategories = await this.homeService.GetAllBaseCategoriesAsync<BaseJobCategoryViewModel>(),
@@ -47,13 +44,6 @@
             };
 
             return this.View(viewModel);
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return this.View(
-                new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
         }
     }
 }
