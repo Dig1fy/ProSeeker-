@@ -18,38 +18,31 @@
 
         @if (this.User.IsInRole(GlobalConstants.SpecialistRoleName))
         {
-            <a class="dropdown-item d-inline mb-4" asp-area="" asp-controller="Inquiries" asp-action="MyInquiries">Запитвания</a>
             @if (Model.IsThereUnredInquiry)
             {
-                if (Model.UnredInquiriesCount == 1)
-                {
-                    <div class="d-inline" style="color:rgb(202, 8, 8); font-style:oblique; font-weight:bold;">@Model.UnredInquiriesCount новo*</div>
-                }
-                else
-                {
-                    <div class="d-inline" style="color:rgb(202, 8, 8);  font-style:oblique; font-weight:bold;">@Model.UnredInquiriesCount нови*</div>
-                }
-                <br />
+                var unopenedInquiriesMessage = Model.UnredInquiriesCount == 1 ? "ново" : "нови"; // 1 ново* / 2 нови*
+                <div class="position-relative">
+                    <div class="d-inline position-absolute" style="color:rgb(202, 8, 8); right:0; top:9px; font-style:oblique; font-weight:bold;">@Model.UnredInquiriesCount @unopenedInquiriesMessage</div>
+                </div>
             }
+            <a class="dropdown-item" asp-area="" asp-controller="Inquiries" asp-action="MyInquiries">Запитвания</a>
             <a class="dropdown-item" id="userNavBarOffers" asp-area="" asp-controller="Offers" asp-action="SpecialistOffers">Оферти</a>
         }
 
         @if (this.User.IsInRole(GlobalConstants.RegularUserRoleName))
         {
             <a class="dropdown-item" asp-area="" asp-controller="Ads" asp-action="MyAds">Моите обяви</a>
-            <a class="dropdown-item d-inline" id="userNavBarOffers" asp-area="" asp-controller="Offers" asp-action="UserOffers">Оферти</a>
 
             @if (Model.IsThereUnredOffer)
             {
-                if (Model.UnredOffersCount == 1)
-                {
-                    <div class="d-inline" style="color:rgb(202, 8, 8); font-style:oblique; font-weight:bold;">@Model.UnredOffersCount новo*</div>
-                }
-                else
-                {
-                    <div class="d-inline" style="color:rgb(202, 8, 8); font-style:oblique; font-weight:bold;">@Model.UnredOffersCount нови*</div>
-                }
+                var unredOffersMessage = Model.UnredOffersCount == 1 ? "нова" : "нови"; // 1 ново* / 2 нови*
+                <div class="position-relative">
+                    <div class="d-inline position-absolute" style="color:rgb(202, 8, 8); right:0; top:9px; font-style:oblique; font-weight:bold;">@Model.UnredOffersCount @unredOffersMessage</div>
+                </div>
             }
+            <a class="dropdown-item " id="userNavBarOffers" asp-area="" asp-controller="Offers" asp-action="UserOffers">Оферти</a>
+
+
         }
 
         <a onclick="SubmitForm()" class="dropdown-item">
