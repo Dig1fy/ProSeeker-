@@ -4,6 +4,8 @@
 
     public class PostRatingInputModel
     {
+        [Required]
+        [MaxLength(150)]
         public string SpecialistDetailsId { get; set; }
 
         [Range(1, 5)]

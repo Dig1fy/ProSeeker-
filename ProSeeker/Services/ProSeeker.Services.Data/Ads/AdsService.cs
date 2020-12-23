@@ -189,10 +189,10 @@
 
             return sortBy switch
             {
-                GlobalConstants.ByDateDescending => ads.OrderByDescending(x => x.CreatedOn),
-                GlobalConstants.ByOpinionsDescending => ads.OrderByDescending(x => x.Opinions.Count),
-                GlobalConstants.ByUpVotesDescending => ads.OrderByDescending(x => x.Votes.Where(v => v.VoteType == VoteType.UpVote).Count()),
-                GlobalConstants.ByDownVotesDescending => ads.OrderByDescending(x => x.Votes.Where(v => v.VoteType == VoteType.DownVote).Count()),
+                GlobalConstants.ByDateDescending => ads.OrderByDescending(x => x.IsVip == true).ThenByDescending(x => x.CreatedOn),
+                GlobalConstants.ByOpinionsDescending => ads.OrderByDescending(x => x.IsVip == true).ThenByDescending(x => x.Opinions.Count),
+                GlobalConstants.ByUpVotesDescending => ads.OrderByDescending(x => x.IsVip == true).ThenByDescending(x => x.Votes.Where(v => v.VoteType == VoteType.UpVote).Count()),
+                GlobalConstants.ByDownVotesDescending => ads.OrderByDescending(x => x.IsVip == true).ThenByDescending(x => x.Votes.Where(v => v.VoteType == VoteType.DownVote).Count()),
                 _ => ads,
             };
         }

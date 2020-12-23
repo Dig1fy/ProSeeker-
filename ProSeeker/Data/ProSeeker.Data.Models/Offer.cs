@@ -21,11 +21,13 @@
         public virtual Ad Ad { get; set; }
 
         [Required]
+        [MaxLength(25000)]
         public string Description { get; set; }
 
         public decimal Price { get; set; }
 
         [Required]
+        [MaxLength(150)]
         public string StartDate { get; set; }
 
         public DateTime ExpirationDate { get; set; }
@@ -43,6 +45,5 @@
         public string SpecialistDetailsId { get; set; }
 
         public virtual Specialist_Details SpecialistDetails { get; set; }
-
     }
 }

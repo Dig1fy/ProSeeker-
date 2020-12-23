@@ -30,10 +30,12 @@ namespace ProSeeker.Data.Models
             this.Logins = new HashSet<IdentityUserLogin<string>>();
         }
 
+        [Required]
+        [MaxLength(20)]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Моля, попълнете полето 'Име'!")]
-        [MaxLength(20)]
+        [Required]
+        [MaxLength(25)]
         public string LastName { get; set; }
 
         public bool IsOnline { get; set; }
@@ -42,7 +44,7 @@ namespace ProSeeker.Data.Models
 
         public virtual City City { get; set; }
 
-        public DateTime LastVisit { get; set; }
+        public DateTime? LastVisit { get; set; }
 
         public bool IsSpecialist { get; set; }
 
@@ -50,8 +52,10 @@ namespace ProSeeker.Data.Models
 
         public DateTime VipExpirationDate { get; set; }
 
+        [MaxLength(500)]
         public string ProfilePicture { get; set; }
 
+        [MaxLength(150)]
         public string SpecialistDetailsId { get; set; }
 
         public virtual Specialist_Details SpecialistDetails { get; set; }

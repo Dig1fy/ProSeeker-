@@ -13,6 +13,8 @@
 
         public string UserFirstName { get; set; }
 
+        public bool UserIsVip { get; set; }
+
         public string UserLastName { get; set; }
 
         public string UserFullName => $"{this.UserFirstName} {this.UserLastName}";

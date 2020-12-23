@@ -12,6 +12,7 @@
     public class CreateInquiryInputModel : IMapFrom<Inquiry>
     {
         [Required(ErrorMessage = "Моля, попълнете полето 'Подробно описание'")]
+        [MaxLength(25000)]
         [Display(Name = "Подробно описание")]
         public string Content { get; set; }
 
@@ -21,8 +22,10 @@
         [CustomFutureDateTimeValidationAttribute]
         public DateTime ValidUntil { get; set; }
 
+        [MaxLength(150)]
         public string SpecialistDetailsId { get; set; }
 
+        [MaxLength(150)]
         public string UserId { get; set; }
 
         [Required(ErrorMessage = "Моля, изберете град от падащото меню!")]

@@ -35,8 +35,8 @@ namespace ProSeeker.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    CategoryName = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true)
+                    CategoryName = table.Column<string>(maxLength: 80, nullable: true),
+                    Description = table.Column<string>(maxLength: 250, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -51,7 +51,7 @@ namespace ProSeeker.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(maxLength: 70, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -68,7 +68,8 @@ namespace ProSeeker.Data.Migrations
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     SenderId = table.Column<string>(nullable: false),
-                    ReceiverId = table.Column<string>(nullable: false)
+                    ReceiverId = table.Column<string>(nullable: false),
+                    IsSeen = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -102,7 +103,7 @@ namespace ProSeeker.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    Title = table.Column<string>(nullable: true)
+                    Title = table.Column<string>(maxLength: 250, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -140,9 +141,9 @@ namespace ProSeeker.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    PictureUrl = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(maxLength: 70, nullable: false),
+                    PictureUrl = table.Column<string>(maxLength: 500, nullable: true),
+                    Description = table.Column<string>(maxLength: 500, nullable: false),
                     BaseJobCategoryId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -175,16 +176,16 @@ namespace ProSeeker.Data.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(maxLength: 20, nullable: false),
+                    FirstName = table.Column<string>(maxLength: 20, nullable: false),
+                    LastName = table.Column<string>(maxLength: 25, nullable: false),
                     IsOnline = table.Column<bool>(nullable: false),
                     CityId = table.Column<int>(nullable: false),
-                    LastVisit = table.Column<DateTime>(nullable: false),
+                    LastVisit = table.Column<DateTime>(nullable: true),
                     IsSpecialist = table.Column<bool>(nullable: false),
                     IsVip = table.Column<bool>(nullable: false),
                     VipExpirationDate = table.Column<DateTime>(nullable: false),
-                    ProfilePicture = table.Column<string>(nullable: true),
-                    SpecialistDetailsId = table.Column<string>(nullable: true),
+                    ProfilePicture = table.Column<string>(maxLength: 500, nullable: true),
+                    SpecialistDetailsId = table.Column<string>(maxLength: 150, nullable: true),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
@@ -210,7 +211,7 @@ namespace ProSeeker.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    Text = table.Column<string>(nullable: true),
+                    Text = table.Column<string>(maxLength: 150, nullable: false),
                     Number = table.Column<int>(nullable: false),
                     SurveyId = table.Column<string>(nullable: true)
                 },
@@ -234,14 +235,14 @@ namespace ProSeeker.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    Title = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(maxLength: 95, nullable: false),
+                    Description = table.Column<string>(maxLength: 25000, nullable: false),
                     JobCategoryId = table.Column<int>(nullable: false),
                     CityId = table.Column<int>(nullable: false),
                     IsVip = table.Column<bool>(nullable: false),
                     VipExpirationDate = table.Column<DateTime>(nullable: false),
                     Views = table.Column<int>(nullable: false),
-                    PreparedBudget = table.Column<string>(nullable: true),
+                    PreparedBudget = table.Column<string>(maxLength: 150, nullable: false),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -361,8 +362,10 @@ namespace ProSeeker.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    Content = table.Column<string>(nullable: true),
+                    Content = table.Column<string>(maxLength: 2500, nullable: true),
                     ApplicationUserId = table.Column<string>(nullable: false),
+                    IsSeenBySender = table.Column<bool>(nullable: false),
+                    IsSeenByReceiver = table.Column<bool>(nullable: false),
                     ReceiverId = table.Column<string>(nullable: false),
                     ConversationId = table.Column<string>(nullable: false)
                 },
@@ -392,11 +395,11 @@ namespace ProSeeker.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    AboutMe = table.Column<string>(nullable: true),
-                    CompanyName = table.Column<string>(nullable: true),
-                    Website = table.Column<string>(nullable: true),
-                    Experience = table.Column<string>(nullable: true),
-                    Qualification = table.Column<string>(nullable: true),
+                    AboutMe = table.Column<string>(maxLength: 15000, nullable: true),
+                    CompanyName = table.Column<string>(maxLength: 100, nullable: true),
+                    Website = table.Column<string>(maxLength: 100, nullable: true),
+                    Experience = table.Column<string>(maxLength: 15000, nullable: true),
+                    Qualification = table.Column<string>(maxLength: 15000, nullable: true),
                     UserId = table.Column<string>(nullable: true),
                     JobCategoryId = table.Column<int>(nullable: false)
                 },
@@ -474,7 +477,7 @@ namespace ProSeeker.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    Text = table.Column<string>(nullable: true),
+                    Text = table.Column<string>(maxLength: 150, nullable: false),
                     QuestionId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -497,7 +500,7 @@ namespace ProSeeker.Data.Migrations
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     AdId = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: false),
+                    UserId = table.Column<string>(nullable: true),
                     VoteType = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -526,7 +529,7 @@ namespace ProSeeker.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    Content = table.Column<string>(nullable: true),
+                    Content = table.Column<string>(nullable: false),
                     ValidUntil = table.Column<DateTime>(nullable: false),
                     IsRed = table.Column<bool>(nullable: false),
                     SpecialistDetailsId = table.Column<string>(nullable: true),
@@ -560,11 +563,11 @@ namespace ProSeeker.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    Content = table.Column<string>(nullable: true),
+                    Content = table.Column<string>(maxLength: 15000, nullable: true),
                     CreatorId = table.Column<string>(nullable: true),
                     ParentOpinionId = table.Column<int>(nullable: true),
-                    AdId = table.Column<string>(nullable: true),
-                    SpecialistDetailsId = table.Column<string>(nullable: true)
+                    AdId = table.Column<string>(nullable: false),
+                    SpecialistDetailsId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -604,7 +607,7 @@ namespace ProSeeker.Data.Migrations
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     SpecialistDetailsId = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: false),
+                    UserId = table.Column<string>(nullable: true),
                     Value = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -634,8 +637,8 @@ namespace ProSeeker.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(maxLength: 250, nullable: false),
+                    Description = table.Column<string>(maxLength: 1250, nullable: false),
                     SpecialistDetailsId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -660,9 +663,9 @@ namespace ProSeeker.Data.Migrations
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     InquiryId = table.Column<string>(nullable: true),
                     AdId = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(maxLength: 25000, nullable: false),
                     Price = table.Column<decimal>(nullable: false),
-                    StartDate = table.Column<string>(nullable: false),
+                    StartDate = table.Column<string>(maxLength: 150, nullable: false),
                     ExpirationDate = table.Column<DateTime>(nullable: false),
                     IsRed = table.Column<bool>(nullable: false),
                     IsAccepted = table.Column<bool>(nullable: false),

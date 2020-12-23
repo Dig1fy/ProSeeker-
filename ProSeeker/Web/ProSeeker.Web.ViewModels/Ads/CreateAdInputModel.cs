@@ -9,8 +9,6 @@
     {
         public bool IsVip { get; set; }
 
-        public string UserId { get; set; }
-
         public virtual ApplicationUser User { get; set; }
 
         public virtual ICollection<Opinion> Opinions { get; set; }

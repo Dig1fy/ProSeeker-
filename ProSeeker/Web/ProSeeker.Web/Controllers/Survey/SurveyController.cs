@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,7 @@
     using ProSeeker.Services.Data.UsersService;
     using ProSeeker.Web.ViewModels.Quizzes;
 
+    [Authorize]
     public class SurveyController : BaseController
     {
         private readonly ISurveysService surveysService;
@@ -74,7 +76,6 @@
             return this.View(surveyModel);
         }
 
-        [Authorize]
         public async Task<IActionResult> End(string surveyId)
         {
             var user = await this.userManager.GetUserAsync(this.User);

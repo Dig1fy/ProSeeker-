@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     using ProSeeker.Data.Common.Models;
 
@@ -14,8 +15,12 @@
             this.Votes = new HashSet<Vote>();
         }
 
+        [Required]
+        [MaxLength(95)]
         public string Title { get; set; }
 
+        [Required]
+        [MaxLength(25000)]
         public string Description { get; set; }
 
         public int JobCategoryId { get; set; }
@@ -32,6 +37,8 @@
 
         public int Views { get; set; }
 
+        [Required]
+        [MaxLength(150)]
         public string PreparedBudget { get; set; }
 
         public string UserId { get; set; }

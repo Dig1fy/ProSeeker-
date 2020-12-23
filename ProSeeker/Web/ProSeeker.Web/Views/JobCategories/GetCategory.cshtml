@@ -1,6 +1,19 @@
 ﻿@using ProSeeker.Common
 @model ProSeeker.Web.ViewModels.Categories.CategoriesViewModel
 
+<style>
+    .custom-specialist-name-field {
+        font-size: 23px;
+        color: rgb(13, 77, 147);
+        text-shadow: 1px 1px 1px darkolivegreen;
+    }
+
+        .custom-specialist-name-field:hover {
+            text-decoration: none;
+            text-shadow: 1px 1px 1px rgb(72, 151, 103);
+        }
+</style>
+
 <div class="custom-heading-title" style="min-width:255px;">
     <h3 class="text-center mb-4 custom-golden-text">Добре дошли в категория '@Model.Name'!</h3>
     <div class="text-center" style="font-style:oblique; text-shadow: 1px 1px 1px rgba(20, 137, 248, 0.55);">
@@ -24,7 +37,8 @@
             <ul class="navbar-nav">
                 <li class="nav-item dropdown" style="max-width:300px; z-index:1">
                     <a class="nav-link dropdown-toggle" style="font-size:18px;" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Сортирай <label class="text-muted media-body">/текущо сортиране: по @GlobalMethods.TranslateVoteType(Model.SortBy)/</label>
+                        Сортирай
+                        <label class="text-muted media-body">/текущо сортиране: по @GlobalMethods.TranslateVoteType(Model.SortBy)/</label>
                     </a>
 
                     <div class="dropdown-menu custom-dropdown-content ml-3 mt-3" style="min-width:185px;" aria-labelledby="navbarDropdownMenuLink">
@@ -50,31 +64,45 @@ else
             <div class="row">
                 @foreach (var specialist in Model.SpecialistsDetails)
                 {
-                    <div class="media d-md-inline m-md-2 row m-5">
-                        <h4 class="media-heading"><a asp-controller="SpecialistsDetails" asp-action="GetProfile" asp-route-id="@specialist.Id">@specialist.UserFullName</a></h4>
-                        <div class="form-group">
-                            <img src="@specialist.UserProfilePicture" width="130" height="110" alt="Alternate Text" />
-                        </div>
-                        <p>@specialist.JobCategoryName - @specialist.UserCityName</p>
-                        <p><i class="fas fa-user"></i> @specialist.UserUserName</p>
-                        <p><i class="fas fa-hourglass-end"></i> Членство от: <time class="d-block mb-5" datetime="@specialist.CreatedOn.ToString("O")"> </time></p>
-                        <div class="stars-container" style="margin-left:-5px;">
-                            <div class="stars-outer">
-                                <div class="stars-inner"></div>
+                    <div class="p-3 text-center mx-auto">
+                        <div class="media d-md-inline m-md-2 row ">
+                            <div class="media-heading ">
+                                <a asp-controller="SpecialistsDetails" asp-action="GetProfile" asp-route-id="@specialist.Id" class="custom-specialist-name-field">
+                                    <p >@specialist.UserFullName</p>
+                                </a>
+                                @if (specialist.UserIsVip)
+                                {
+                                    <div class=" custom-vip-ad-wrapper col-md-12">
+                                        <p class="custom-vip-ad mx-5">
+                                            VIP
+                                        </p>
+                                    </div>
+                                }
                             </div>
-                            <span class="number-rating" style="color:darkolivegreen"><strong>@specialist.AverageRating.ToString("F1")</strong></span>
-                            <span>
-                                (
-                                @specialist.RatingsCount
-                                @if (@specialist.RatingsCount == 1)
-                                {
-                                    <span> глас )</span>
-                                }
-                                else
-                                {
-                                    <span> гласа )</span>
-                                }
-                            </span>
+                            <div class="form-group pt-4 m-1">
+                                <img src="@specialist.UserProfilePicture" width="130" height="110" alt="Alternate Text" />
+                            </div>
+                            <p>@specialist.JobCategoryName - @specialist.UserCityName</p>
+                            <p><i class="fas fa-user"></i> @specialist.UserUserName</p>
+                            <p><i class="fas fa-hourglass-end"></i> Членство от: <time class="d-block mb-3" datetime="@specialist.CreatedOn.ToString("O")"> </time></p>
+                            <div class="stars-container" style="margin-left:-5px;">
+                                <div class="stars-outer">
+                                    <div class="stars-inner"></div>
+                                </div>
+                                <span class="number-rating" style="color:darkolivegreen"><strong>@specialist.AverageRating.ToString("F1")</strong></span>
+                                <span>
+                                    (
+                                    @specialist.RatingsCount
+                                    @if (@specialist.RatingsCount == 1)
+                                    {
+                                        <span> глас )</span>
+                                    }
+                                    else
+                                    {
+                                        <span> гласа )</span>
+                                    }
+                                </span>
+                            </div>
                         </div>
                     </div>
                 }

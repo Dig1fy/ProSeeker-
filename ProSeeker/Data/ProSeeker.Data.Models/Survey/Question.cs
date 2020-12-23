@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     using ProSeeker.Data.Common.Models;
 
@@ -13,6 +14,8 @@
             this.Answers = new HashSet<Answer>();
         }
 
+        [Required]
+        [MaxLength(150)]
         public string Text { get; set; }
 
         public int Number { get; set; }

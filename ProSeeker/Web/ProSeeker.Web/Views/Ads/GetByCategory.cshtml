@@ -42,9 +42,19 @@ else
     @foreach (var ad in Model.Ads)
     {
         <section class="card border-info mb-3" id="custom-shadow-transform">
-            <h3 class=" custom-golden-text custom-heading-title-v2">
-                @ad.ShortTitle
-            </h3>
+            <div>
+                @if (ad.IsVip)
+                {
+                    <div class="pl-4 custom-vip-ad-wrapper">
+                        <p class="pl-4 custom-vip-ad">
+                            Vip обява
+                        </p>
+                    </div>
+                }
+                <h3 class=" custom-golden-text custom-heading-title-v2 ">
+                    @ad.ShortTitle
+                </h3>
+            </div>
             <div class="pl-2">
                 <span class="card-text d-block pt-2 custom-input-text">
                     <span>@Html.Raw(@ad.SanitizedShortDescription)<br></span>
@@ -62,10 +72,6 @@ else
                     </div>
                 </div>
 
-                @*@if (this.User.IsInRole("Specialist")) - Add this when the logic has been tested
-                    {
-
-                    }*@
                 <div class="clearfix">
                     <div class="button-container float-left">
                         <div style="margin-bottom:1px;">

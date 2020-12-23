@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     using ProSeeker.Data.Common.Models;
 
@@ -13,6 +14,8 @@
             this.Questions = new HashSet<Question>();
         }
 
+        [Required]
+        [MaxLength(250)]
         public string Title { get; set; }
 
         public virtual ICollection<Question> Questions { get; set; }

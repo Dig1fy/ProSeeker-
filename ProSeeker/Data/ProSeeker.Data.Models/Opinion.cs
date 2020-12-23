@@ -1,11 +1,12 @@
 ﻿namespace ProSeeker.Data.Models
 {
-    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     using ProSeeker.Data.Common.Models;
 
     public class Opinion : BaseDeletableModel<int>
     {
+        [MaxLength(15000)]
         public string Content { get; set; }
 
         public string CreatorId { get; set; }

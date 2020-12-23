@@ -66,9 +66,9 @@
 
             return sortBy switch
             {
-                GlobalConstants.ByDateDescending => specialists.OrderByDescending(x => x.CreatedOn),
-                GlobalConstants.ByOpinionsDescending => specialists.OrderByDescending(x => x.Opinions.Count),
-                GlobalConstants.ByRatingDesc => specialists.OrderByDescending(x => x.Ratings.Average(v => v.Value)),
+                GlobalConstants.ByDateDescending => specialists.OrderByDescending(x => x.User.IsVip == true).ThenByDescending(x => x.CreatedOn),
+                GlobalConstants.ByOpinionsDescending => specialists.OrderByDescending(x => x.User.IsVip == true).ThenByDescending(x => x.Opinions.Count),
+                GlobalConstants.ByRatingDesc => specialists.OrderByDescending(x => x.User.IsVip == true).ThenByDescending(x => x.Ratings.Average(v => v.Value)),
                 _ => specialists,
             };
         }

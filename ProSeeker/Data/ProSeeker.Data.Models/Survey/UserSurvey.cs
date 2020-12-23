@@ -1,5 +1,7 @@
 ﻿namespace ProSeeker.Data.Models.Quiz
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class UserSurvey
     {
         public string UserId { get; set; }

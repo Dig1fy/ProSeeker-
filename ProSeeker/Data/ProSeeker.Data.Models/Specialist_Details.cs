@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations.Schema;
+    using System.ComponentModel.DataAnnotations;
 
     using ProSeeker.Data.Common.Models;
 
@@ -17,20 +17,22 @@
             this.Offers = new HashSet<Offer>();
             this.Inquiries = new HashSet<Inquiry>();
 
-            // this.Opinions = new HashSet<Opinion>();
             // this.Recommendations = new HashSet<Recommendation>();
         }
 
-        // [ForeignKey(nameof(Specialist_Details))]
-        // public string Id { get; set; }
+        [MaxLength(15000)]
         public string AboutMe { get; set; }
 
+        [MaxLength(100)]
         public string CompanyName { get; set; }
 
+        [MaxLength(100)]
         public string Website { get; set; }
 
+        [MaxLength(15000)]
         public string Experience { get; set; }
 
+        [MaxLength(15000)]
         public string Qualification { get; set; }
 
         public string UserId { get; set; }

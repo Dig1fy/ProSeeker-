@@ -21,6 +21,7 @@
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Моля, попълнете полето 'Предвиден бюджет'")]
+        [StringLength(150, ErrorMessage = "Описанието трябва да бъде поне 20 символа.", MinimumLength = 1)]
         [Display(Name = "Предвиден бюджет (свободен текст)")]
         public string PreparedBudget { get; set; }
 

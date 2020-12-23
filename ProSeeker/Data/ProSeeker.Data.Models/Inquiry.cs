@@ -1,6 +1,7 @@
 ﻿namespace ProSeeker.Data.Models
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
 
     using ProSeeker.Data.Common.Models;
 
@@ -11,6 +12,7 @@
             this.Id = Guid.NewGuid().ToString();
         }
 
+        [Required]
         public string Content { get; set; }
 
         public DateTime ValidUntil { get; set; }
