@@ -126,7 +126,7 @@
                 conv.OtherPersonFullName = $"{otherUser.FirstName} {otherUser.LastName}";
 
                 // Check if there are any unseen conversations (where messages haven't been seen by the current user)
-                var unredMessages = await this.CheckForUnseenMessages(conv.Id, userId);
+                var unredMessages = await this.CheckForUnseenMessagesAsync(conv.Id, userId);
                 conv.IsSeen = unredMessages == 0;
                 conv.UnseenMessagesCount = unredMessages;
             }
@@ -156,7 +156,7 @@
             await this.conversationRepository.SaveChangesAsync();
         }
 
-        private async Task<int> CheckForUnseenMessages(string conversationId, string currentUserId)
+        public async Task<int> CheckForUnseenMessagesAsync(string conversationId, string currentUserId)
         {
             var unredMessagesCount = await this.messageRepository
             .All()

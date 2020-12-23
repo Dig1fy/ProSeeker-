@@ -1,0 +1,10 @@
+﻿@model ProSeeker.Web.ViewModels.PrivateChat.NewMessagesNotificationViewModel
+
+@if (Model.HaveNewMessages)
+{
+    <a class="openbtn d-inline" onclick="openNav()">☰ Съобщения <p class="d-inline" style="font-weight:bold; font-size:16px;">(@Model.Count)</p></a>
+}
+else
+{
+    <a class="openbtn" onclick="openNav()">☰ Съобщения</a>
+}

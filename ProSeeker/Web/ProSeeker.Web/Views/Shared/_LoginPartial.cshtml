@@ -24,7 +24,8 @@
             </div>
 
             <div id="main">
-                <a class="openbtn" onclick="openNav()">☰ Съобщения</a>
+                @await Component.InvokeAsync("NewMessagesNotification")
+                @*<a class="openbtn" onclick="openNav()">☰ Съобщения</a>*@
             </div>
         </li>
         if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
