@@ -14,16 +14,10 @@
     using ProSeeker.Web.ViewModels.Ads;
     using Xunit;
 
-    public class AdsServiceTests : IDisposable
+    public sealed class AdsServiceTests : IDisposable
     {
-        private readonly IAdsService adsService;
-        private CreateAdInputModel inputModel;
+        private readonly IAdsService service;
 
-        private AdsService service;
-        private EfRepository<City> citiesRepository;
-        private EfDeletableEntityRepository<ApplicationUser> usersRepository;
-        private EfDeletableEntityRepository<Ad> adsRepository;
-        private EfDeletableEntityRepository<JobCategory> categoriesRepository;
         private ApplicationDbContext dbContext;
 
         private List<ApplicationUser> users;
@@ -39,12 +33,12 @@
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
                 .Options;
 
-           using this.dbContext = new ApplicationDbContext(options);
-            this.usersRepository = new EfDeletableEntityRepository<ApplicationUser>(this.dbContext);
-            this.citiesRepository = new EfRepository<City>(this.dbContext);
-            this.adsRepository = new EfDeletableEntityRepository<Ad>(this.dbContext);
-            this.categoriesRepository = new EfDeletableEntityRepository<JobCategory>(this.dbContext);
-            this.service = new AdsService(this.adsRepository, this.usersRepository, this.citiesRepository, this.categoriesRepository);
+            this.dbContext = new ApplicationDbContext(options);
+            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(this.dbContext);
+            var citiesRepository = new EfRepository<City>(this.dbContext);
+            var adsRepository = new EfDeletableEntityRepository<Ad>(this.dbContext);
+            var categoriesRepository = new EfDeletableEntityRepository<JobCategory>(this.dbContext);
+            this.service = new AdsService(adsRepository, usersRepository, citiesRepository, categoriesRepository);
 
             this.users = new List<ApplicationUser>();
             this.ads = new List<Ad>();
@@ -58,7 +52,8 @@
         public async Task CreateShouldAddNewAdCorrectly()
         {
             var userId = "3";
-            await this.service.CreateAsync(this.inputModel, userId);
+            var inputModel = this.GetInputModel();
+            await this.service.CreateAsync(inputModel, userId);
 
             var expectedCount = 1;
             var countResult = await this.service.GetAdsCountByUserIdAsync(userId);
@@ -70,12 +65,13 @@
         {
             var userId = "3";
             var expectedResult = 5;
+            var inputModel = this.GetInputModel();
 
-            await this.service.CreateAsync(this.inputModel, userId);
-            await this.service.CreateAsync(this.inputModel, userId);
-            await this.service.CreateAsync(this.inputModel, userId);
-            await this.service.CreateAsync(this.inputModel, userId);
-            await this.service.CreateAsync(this.inputModel, userId);
+            await this.service.CreateAsync(inputModel, userId);
+            await this.service.CreateAsync(inputModel, userId);
+            await this.service.CreateAsync(inputModel, userId);
+            await this.service.CreateAsync(inputModel, userId);
+            await this.service.CreateAsync(inputModel, userId);
             var actualCountResult = await this.service.GetAdsCountByUserIdAsync(userId);
             Assert.Equal(expectedResult, actualCountResult);
         }
@@ -87,11 +83,14 @@
             var secondUserId = "2";
 
             await this.service.MakeAdsVipAsync(secondUserId);
-            var secondAd = await this.adsRepository.All().FirstOrDefaultAsync(x => x.UserId == secondUserId);
-            var firsAd = await this.adsRepository.All().FirstOrDefaultAsync(x => x.UserId == firstUserId);
+            var vipAds = await this.service.GetMyAdsAsync<AdsShortDetailsViewModel>(secondUserId, 0);
+            var normalAds = await this.service.GetMyAdsAsync<AdsShortDetailsViewModel>(firstUserId, 0);
 
-            Assert.True(!firsAd.IsVip);
-            Assert.True(secondAd.IsVip);
+            var areAllUsersAdsVip = vipAds.All(x => x.IsVip == true);
+            var areOtherAdsNormal = normalAds.All(x => x.IsVip == false);
+
+            Assert.True(areAllUsersAdsVip);
+            Assert.True(areOtherAdsNormal);
         }
 
         [Fact]
@@ -99,10 +98,11 @@
         {
             var userId = "1";
             var expectedResult = 6;
+            var inputModel = this.GetInputModel();
 
-            await this.service.CreateAsync(this.inputModel, userId);
-            await this.service.CreateAsync(this.inputModel, userId);
-            await this.service.CreateAsync(this.inputModel, userId);
+            await this.service.CreateAsync(inputModel, userId);
+            await this.service.CreateAsync(inputModel, userId);
+            await this.service.CreateAsync(inputModel, userId);
             var actualResult = await this.service.AllAdsCountAsync();
 
             Assert.Equal(expectedResult, actualResult);
@@ -228,16 +228,6 @@
 
         private void InitializeRepositoriesData()
         {
-            this.inputModel = new CreateAdInputModel
-            {
-                JobCategoryId = 1,
-                CityId = 1,
-                Opinions = new List<Opinion> { new Opinion { AdId = "spec", Content = "Здравей", SpecialistDetailsId = "1", CreatorId = "1" } },
-                Title = "Търся брокер",
-                PreparedBudget = "a lot",
-                Description = "Нуждая се от имот",
-            };
-
             this.cities.AddRange(new List<City>()
             {
                 new City { Name = "Sofia", Id = 1, },
@@ -270,6 +260,19 @@
             this.dbContext.AddRange(this.jobCategories);
             this.dbContext.AddRange(this.ads);
             this.dbContext.SaveChanges();
+        }
+
+        private CreateAdInputModel GetInputModel()
+        {
+            return new CreateAdInputModel
+            {
+                JobCategoryId = 1,
+                CityId = 1,
+                Opinions = new List<Opinion> { new Opinion { AdId = "spec", Content = "Здравей", SpecialistDetailsId = "1", CreatorId = "1" } },
+                Title = "Търся брокер",
+                PreparedBudget = "a lot",
+                Description = "Нуждая се от имот",
+            };
         }
     }
 }

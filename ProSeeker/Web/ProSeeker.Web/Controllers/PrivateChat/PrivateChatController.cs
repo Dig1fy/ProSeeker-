@@ -14,7 +14,6 @@
     using ProSeeker.Web.ViewModels.PrivateChat;
 
     [Authorize]
-    //[Route("[controller]")]
     public class PrivateChatController : BaseController
     {
         private readonly IHubContext<PrivateChatHub> hubContext;
@@ -61,25 +60,5 @@
 
             return this.View(model);
         }
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> SendMessage(string conversationId, string message, string receiverId)
-        //{
-        //    var sender = await this.userManager.GetUserAsync(this.User);
-        //    var newMessageModel = await this.privateChatService.SendMessageToUserAsync(message, receiverId, sender.Id, conversationId);
-
-        //    await this.hubContext.Clients.User(newMessageModel.ReceiverId)
-        //        .SendAsync(GlobalConstants.SendMessagePrivateChatMethod, newMessageModel);
-
-        //    return this.Json(newMessageModel);
-        //}
-
-        //[HttpPost]
-        //public async Task<IActionResult> JoinConversation(string connectionId, string conversationName)
-        //{
-        //    await this.hubContext.Groups.AddToGroupAsync(connectionId, conversationName);
-        //    return this.Ok();
-        //}
     }
 }

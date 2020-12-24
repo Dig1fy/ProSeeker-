@@ -1,6 +1,7 @@
 ﻿namespace ProSeeker.Web.Controllers.Opinions
 {
     using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;

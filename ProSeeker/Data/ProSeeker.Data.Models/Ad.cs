@@ -48,6 +48,5 @@
         public virtual ICollection<Opinion> Opinions { get; set; }
 
         public virtual ICollection<Vote> Votes { get; set; }
-
     }
 }

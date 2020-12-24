@@ -140,7 +140,6 @@
         }
 
         [Authorize(Roles = GlobalConstants.RegularUserRoleName)]
-        //[Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> Edit(string id)
         {
             var model = await this.adsService.GetAdDetailsByIdAsync<UpdateInputModel>(id);
@@ -161,7 +160,6 @@
 
         [HttpPost]
         [Authorize(Roles = GlobalConstants.RegularUserRoleName)]
-        //[Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> Edit(UpdateInputModel inputModel)
         {
             if (this.userManager.GetUserId(this.User) == inputModel.UserId)

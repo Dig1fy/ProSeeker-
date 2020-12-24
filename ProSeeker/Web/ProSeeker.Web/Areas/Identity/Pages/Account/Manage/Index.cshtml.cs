@@ -114,36 +114,6 @@
             public IEnumerable<Service> Services { get; set; }
         }
 
-        private async Task LoadAsync(ApplicationUser currentUser)
-        {
-            var user = await this.userManager.GetUserAsync(this.User);
-            user.City = this.citiesRepository.All().Where(x => x.Id == user.CityId).FirstOrDefault();
-
-            this.Input = new InputModel
-            {
-                Username = user.UserName,
-                PhoneNumber = user.PhoneNumber,
-                FirstName = GlobalMethods.UpperFirstLetterOfEachWord(user.FirstName),
-                LastName = GlobalMethods.UpperFirstLetterOfEachWord(user.LastName),
-                City = user.City,
-                IsSpecialist = user.IsSpecialist,
-                ProfilePictureUrl = user.ProfilePicture,
-            };
-
-            if (user.IsSpecialist)
-            {
-                this.Input.SpecialistDetails = this.specialistsRepository.All().Where(x => x.UserId == user.Id).Select(y => new SpecialistInputModel
-                {
-                    AboutMe = y.AboutMe,
-                    CompanyName = y.CompanyName,
-                    Website = y.Website,
-                    Experience = y.Experience,
-                    Qualification = y.Qualification,
-                    Services = y.Services,
-                }).FirstOrDefault();
-            }
-        }
-
         public async Task<IActionResult> OnGetAsync()
         {
             var user = await this.userManager.GetUserAsync(this.User);
@@ -277,6 +247,36 @@
             this.servicesRepository.Delete(service);
             await this.servicesRepository.SaveChangesAsync();
             return this.RedirectToPage();
+        }
+
+        private async Task LoadAsync(ApplicationUser currentUser)
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+            user.City = this.citiesRepository.All().Where(x => x.Id == user.CityId).FirstOrDefault();
+
+            this.Input = new InputModel
+            {
+                Username = user.UserName,
+                PhoneNumber = user.PhoneNumber,
+                FirstName = GlobalMethods.UpperFirstLetterOfEachWord(user.FirstName),
+                LastName = GlobalMethods.UpperFirstLetterOfEachWord(user.LastName),
+                City = user.City,
+                IsSpecialist = user.IsSpecialist,
+                ProfilePictureUrl = user.ProfilePicture,
+            };
+
+            if (user.IsSpecialist)
+            {
+                this.Input.SpecialistDetails = this.specialistsRepository.All().Where(x => x.UserId == user.Id).Select(y => new SpecialistInputModel
+                {
+                    AboutMe = y.AboutMe,
+                    CompanyName = y.CompanyName,
+                    Website = y.Website,
+                    Experience = y.Experience,
+                    Qualification = y.Qualification,
+                    Services = y.Services,
+                }).FirstOrDefault();
+            }
         }
     }
 }
