@@ -1,22 +1,19 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-using Microsoft.EntityFrameworkCore;
-using ProSeeker.Data;
-using ProSeeker.Data.Models;
-using ProSeeker.Data.Repositories;
-using ProSeeker.Services.Data.Ads;
-using ProSeeker.Services.Data.Offers;
-using ProSeeker.Services.Mapping;
-using ProSeeker.Web.ViewModels.Ads;
-using ProSeeker.Web.ViewModels.Offers;
-using Xunit;
-
-namespace ProSeeker.Services.Data.Tests.Offers
+﻿namespace ProSeeker.Services.Data.Tests.Offers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Microsoft.EntityFrameworkCore;
+    using ProSeeker.Data;
+    using ProSeeker.Data.Models;
+    using ProSeeker.Data.Repositories;
+    using ProSeeker.Services.Data.Offers;
+    using ProSeeker.Services.Mapping;
+    using ProSeeker.Web.ViewModels.Offers;
+    using Xunit;
+
     public sealed class OffersServiceTests : IDisposable
     {
         private readonly IOffersService service;
@@ -32,7 +29,6 @@ namespace ProSeeker.Services.Data.Tests.Offers
             this.users = new List<ApplicationUser>();
             this.ads = new List<Ad>();
             this.offers = new List<Offer>();
-            // AutoMapperConfig.RegisterMappings(typeof(CreateAdInputModel).Assembly);
 
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())

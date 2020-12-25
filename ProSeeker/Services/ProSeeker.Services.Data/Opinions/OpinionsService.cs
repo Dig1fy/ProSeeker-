@@ -11,18 +11,15 @@
     {
         private readonly IDeletableEntityRepository<Opinion> opinionsRepository;
         private readonly IDeletableEntityRepository<Ad> adsRepository;
-        private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
         private readonly IDeletableEntityRepository<Specialist_Details> specialistsRepository;
 
         public OpinionsService(
             IDeletableEntityRepository<Opinion> opinionsRepository,
             IDeletableEntityRepository<Ad> adsRepository,
-            IDeletableEntityRepository<ApplicationUser> usersRepository,
             IDeletableEntityRepository<Specialist_Details> specialistsRepository)
         {
             this.opinionsRepository = opinionsRepository;
             this.adsRepository = adsRepository;
-            this.usersRepository = usersRepository;
             this.specialistsRepository = specialistsRepository;
         }
 
