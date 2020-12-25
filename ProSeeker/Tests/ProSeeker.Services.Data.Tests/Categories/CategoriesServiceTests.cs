@@ -4,13 +4,13 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Microsoft.EntityFrameworkCore;
     using ProSeeker.Data;
     using ProSeeker.Data.Models;
     using ProSeeker.Data.Repositories;
     using ProSeeker.Services.Data.CategoriesService;
     using ProSeeker.Services.Mapping;
-    using ProSeeker.Web.ViewModels.Ads;
     using ProSeeker.Web.ViewModels.Categories;
     using Xunit;
 
@@ -26,8 +26,6 @@
 
         public CategoriesServiceTests()
         {
-
-
             this.ads = new List<Ad>();
             this.offers = new List<Offer>();
             this.categories = new List<JobCategory>();
