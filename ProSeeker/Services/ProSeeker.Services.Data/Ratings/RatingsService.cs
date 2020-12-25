@@ -10,14 +10,10 @@
     public class RatingsService : IRatingsService
     {
         private readonly IRepository<Rating> ratingsRepository;
-        private readonly IDeletableEntityRepository<Specialist_Details> specialistsDetailsRepository;
 
-        public RatingsService(
-            IRepository<Rating> ratingsRepository,
-            IDeletableEntityRepository<Specialist_Details> specialistsDetailsRepository)
+        public RatingsService(IRepository<Rating> ratingsRepository)
         {
             this.ratingsRepository = ratingsRepository;
-            this.specialistsDetailsRepository = specialistsDetailsRepository;
         }
 
         public async Task<double> GetAverageRatingAsync(string specialistId)

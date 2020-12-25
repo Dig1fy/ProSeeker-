@@ -2,18 +2,18 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.EntityFrameworkCore;
     using ProSeeker.Data;
     using ProSeeker.Data.Models;
-    using ProSeeker.Data.Repositories;
-    using ProSeeker.Services.Mapping;
-    using Xunit;
     using ProSeeker.Data.Models.PrivateChat;
+    using ProSeeker.Data.Repositories;
     using ProSeeker.Services.Data.PrivateChat;
+    using ProSeeker.Services.Mapping;
     using ProSeeker.Web.ViewModels.PrivateChat;
-    using System.Linq;
+    using Xunit;
 
     public sealed class PrivateChatServiceTests : IDisposable
     {
