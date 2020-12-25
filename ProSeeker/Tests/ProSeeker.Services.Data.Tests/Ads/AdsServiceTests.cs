@@ -21,7 +21,7 @@
         private ApplicationDbContext dbContext;
 
         private List<ApplicationUser> users;
-        private List<Ad> ads = new List<Ad>();
+        private List<Ad> ads;
         private List<City> cities;
         private List<JobCategory> jobCategories;
 
