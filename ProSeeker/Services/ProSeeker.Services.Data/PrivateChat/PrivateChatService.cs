@@ -19,18 +19,15 @@
         private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
         private readonly IDeletableEntityRepository<ChatMessage> messageRepository;
         private readonly IDeletableEntityRepository<Conversation> conversationRepository;
-        private readonly IRepository<UserConversation> userConversationRepository;
 
         public PrivateChatService(
             IDeletableEntityRepository<ApplicationUser> usersRepository,
             IDeletableEntityRepository<ChatMessage> messageRepository,
-            IDeletableEntityRepository<Conversation> conversationRepository,
-            IRepository<UserConversation> userConversationRepository)
+            IDeletableEntityRepository<Conversation> conversationRepository)
         {
             this.usersRepository = usersRepository;
             this.messageRepository = messageRepository;
             this.conversationRepository = conversationRepository;
-            this.userConversationRepository = userConversationRepository;
         }
 
         public async Task<MessageViewModel> SendMessageToUserAsync(string message, string receiverId, string senderId, string conversationId)

@@ -2,17 +2,13 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.EntityFrameworkCore;
     using ProSeeker.Data;
     using ProSeeker.Data.Models;
     using ProSeeker.Data.Repositories;
-    using ProSeeker.Services.Data.Offers;
     using ProSeeker.Services.Data.Opinions;
-    using ProSeeker.Services.Mapping;
-    using ProSeeker.Web.ViewModels.Offers;
     using Xunit;
 
     public sealed class OpinionsServiceTests : IDisposable
