@@ -21,6 +21,7 @@
 
         public async Task<IEnumerable<T>> GetAllSpecialistsPerCategoryAsync<T>(int categoryId, string sortBy, int cityId, int page)
         {
+            page = page == 0 ? 1 : page;
             sortBy = sortBy == null ? GlobalConstants.ByDateDescending : sortBy;
             var specialistsToSkip = (page - 1) * GlobalConstants.SpecialistsPerPage;
             var sortedSpecialists = this.SortSpecialists(categoryId, sortBy, cityId);
