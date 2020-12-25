@@ -8,6 +8,8 @@
 
         public string PhoneNumber { get; set; }
 
+        public string SpecialistDetailsId { get; set; }
+
         public CitySimpleViewModel City { get; set; }
     }
 }
