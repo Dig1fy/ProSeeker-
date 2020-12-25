@@ -1,9 +1,8 @@
 ﻿namespace ProSeeker.Services.Data.ServicesService
 {
-    using System;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using Microsoft.EntityFrameworkCore;
     using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;
 
@@ -21,6 +20,15 @@
             var service = await this.serviceRepository.GetByIdWithDeletedAsync(id);
             this.serviceRepository.Delete(service);
             await this.serviceRepository.SaveChangesAsync();
+        }
+
+        public async Task<bool> CheckIfServiceExists(int serviceId)
+        {
+            var service = await this.serviceRepository
+                .All()
+                .FirstOrDefaultAsync(x => x.Id == serviceId);
+
+            return service != null;
         }
     }
 }

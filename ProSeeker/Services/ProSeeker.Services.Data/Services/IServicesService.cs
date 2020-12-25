@@ -5,5 +5,7 @@
     public interface IServicesService
     {
         Task DeleteAsync(int id);
+
+        Task<bool> CheckIfServiceExists(int serviceId);
     }
 }
