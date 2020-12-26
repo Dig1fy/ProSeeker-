@@ -81,11 +81,12 @@
 
             var listedSpecialists = allSpecialistsPerCategory.ToList();
             var actualFirstSpecialistId = listedSpecialists[0].Id;
-            var actualSecondSpecialist = listedSpecialists[1];
+            var actualSecondSpecialistId = listedSpecialists[1].Id;
             var expectedFirstSpecialistId = "specialist3";
             var expectedSecondSpecialistId = "specialist2";
 
             Assert.Equal(expectedFirstSpecialistId, actualFirstSpecialistId);
+            Assert.Equal(expectedSecondSpecialistId, actualSecondSpecialistId);
         }
 
         public void Dispose()
