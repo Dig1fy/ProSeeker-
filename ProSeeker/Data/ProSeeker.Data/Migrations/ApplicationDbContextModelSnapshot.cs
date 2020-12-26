@@ -352,8 +352,8 @@ namespace ProSeeker.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CategoryName")
-                        .HasColumnType("nvarchar(80)")
-                        .HasMaxLength(80);
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -471,6 +471,9 @@ namespace ProSeeker.Data.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<int>("JobCategoryId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
@@ -1110,7 +1113,7 @@ namespace ProSeeker.Data.Migrations
 
             modelBuilder.Entity("ProSeeker.Data.Models.JobCategory", b =>
                 {
-                    b.HasOne("ProSeeker.Data.Models.BaseJobCategory", null)
+                    b.HasOne("ProSeeker.Data.Models.BaseJobCategory", "BaseJobCategory")
                         .WithMany("JobCategories")
                         .HasForeignKey("BaseJobCategoryId");
                 });

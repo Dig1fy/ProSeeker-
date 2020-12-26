@@ -24,6 +24,10 @@
         [MaxLength(500)]
         public string Description { get; set; }
 
+        public int JobCategoryId { get; set; }
+
+        public virtual BaseJobCategory BaseJobCategory { get; set; }
+
         public virtual ICollection<Specialist_Details> SpecialistsDetails { get; set; }
 
         public virtual ICollection<Ad> Ads { get; set; }

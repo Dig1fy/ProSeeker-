@@ -123,6 +123,7 @@
                     },
                 });
             }
+
             foreach (var user in users)
             {
                 await userManager.CreateAsync(user, "123123");
@@ -137,6 +138,21 @@
                     await userManager.AddToRoleAsync(user, GlobalConstants.RegularUserRoleName);
                 }
             }
+
+            var adminUser = new ApplicationUser
+            {
+                UserName = "admin@admin",
+                Email = "admin@admin",
+                CityId = 5,
+                EmailConfirmed = true,
+                FirstName = "Админ",
+                LastName = "Админ",
+                ProfilePicture = GlobalConstants.DefaultProfileImagePath,
+                IsSpecialist = false,
+            };
+
+            await userManager.CreateAsync(adminUser, "123123");
+            await userManager.AddToRoleAsync(adminUser, GlobalConstants.AdministratorRoleName);
         }
     }
 }

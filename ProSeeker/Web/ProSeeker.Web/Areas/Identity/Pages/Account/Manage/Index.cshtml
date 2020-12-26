@@ -129,22 +129,19 @@ else
                             <a class="btn btn-success col-md-10" onclick="AddMoreServices()" onload="LoadAllServices(@Model.Input.SpecialistDetails.Services)">Добави услуга</a><br /><br />
                         </div>
                         <div id="ServicesContainer"></div>
-                    }
-
-                    @if (!Model.Input.IsSpecialist)
-                    {
-                        <div class="text-left col-md-6 mt-5">
-                            <button id="update-profile-button" type="submit" class="btn btn-primary col col-md-12" style="border-radius:25px 25px; height:50px;">Запази промените</button>
-                        </div>
-                    }
-                    else
-                    {
                         <div class="text-left col-md-12">
                             <button id="update-profile-button" type="submit" class="btn btn-primary col col-md-10 " style="margin-top:3px;">Запази промените</button>
                         </div>
                     }
                 </div>
             </div>
+
+            @if (!Model.Input.IsSpecialist)
+            {
+                <div class="text-left col-md-10 mt-5">
+                    <button id="update-profile-button" type="submit" class="btn btn-primary col col-md-12" style="border-radius:25px 25px; height:50px;">Запази промените</button>
+                </div>
+            }
         </form>
     </div>
 </div>

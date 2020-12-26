@@ -19,6 +19,7 @@
     using ProSeeker.Data.Seeding;
     using ProSeeker.Services.Data;
     using ProSeeker.Services.Data.Ads;
+    using ProSeeker.Services.Data.BaseJobCategories;
     using ProSeeker.Services.Data.CategoriesService;
     using ProSeeker.Services.Data.Cities;
     using ProSeeker.Services.Data.Cloud;
@@ -133,6 +134,7 @@
             services.AddTransient<ISpecialistsService, SpecialistsService>();
             services.AddTransient<IPrivateChatService, PrivateChatService>();
             services.AddTransient<ISurveysService, SurveysService>();
+            services.AddTransient<IBaseJobCategoriesService, BaseJobCategoriesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

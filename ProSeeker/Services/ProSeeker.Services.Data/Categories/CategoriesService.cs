@@ -25,6 +25,15 @@
             this.offersRepository = offersRepository;
         }
 
+        public async Task<int> GetCategiesCountIsInJobCategoryAsync(int baseJobCategoryId)
+        {
+            var isAnyRelatedJobCategory = await this.categoriesRepository
+                .All()
+                .Where(x => x.BaseJobCategory.Id == baseJobCategoryId)
+                .CountAsync();
+            return isAnyRelatedJobCategory;
+        }
+
         public async Task<IEnumerable<T>> GetAllCategoriesAsync<T>()
         {
             var allCategories = await this.categoriesRepository

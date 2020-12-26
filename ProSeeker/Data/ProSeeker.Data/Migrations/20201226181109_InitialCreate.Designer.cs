@@ -10,8 +10,8 @@ using ProSeeker.Data;
 namespace ProSeeker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201223165000_InitialCreate23")]
-    partial class InitialCreate23
+    [Migration("20201226181109_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -354,8 +354,8 @@ namespace ProSeeker.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CategoryName")
-                        .HasColumnType("nvarchar(80)")
-                        .HasMaxLength(80);
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");

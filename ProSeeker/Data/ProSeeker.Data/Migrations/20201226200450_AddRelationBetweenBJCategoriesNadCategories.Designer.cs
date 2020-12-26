@@ -10,8 +10,8 @@ using ProSeeker.Data;
 namespace ProSeeker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201223162336_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20201226200450_AddRelationBetweenBJCategoriesNadCategories")]
+    partial class AddRelationBetweenBJCategoriesNadCategories
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -354,8 +354,8 @@ namespace ProSeeker.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CategoryName")
-                        .HasColumnType("nvarchar(80)")
-                        .HasMaxLength(80);
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -474,6 +474,9 @@ namespace ProSeeker.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<int>("JobCategoryId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
@@ -572,7 +575,6 @@ namespace ProSeeker.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AdId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Content")
@@ -598,7 +600,6 @@ namespace ProSeeker.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("SpecialistDetailsId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -1114,7 +1115,7 @@ namespace ProSeeker.Data.Migrations
 
             modelBuilder.Entity("ProSeeker.Data.Models.JobCategory", b =>
                 {
-                    b.HasOne("ProSeeker.Data.Models.BaseJobCategory", null)
+                    b.HasOne("ProSeeker.Data.Models.BaseJobCategory", "BaseJobCategory")
                         .WithMany("JobCategories")
                         .HasForeignKey("BaseJobCategoryId");
                 });
@@ -1142,9 +1143,7 @@ namespace ProSeeker.Data.Migrations
                 {
                     b.HasOne("ProSeeker.Data.Models.Ad", "Ad")
                         .WithMany("Opinions")
-                        .HasForeignKey("AdId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("AdId");
 
                     b.HasOne("ProSeeker.Data.Models.ApplicationUser", "Creator")
                         .WithMany("Opinions")
@@ -1156,9 +1155,7 @@ namespace ProSeeker.Data.Migrations
 
                     b.HasOne("ProSeeker.Data.Models.Specialist_Details", "SpecialistDetails")
                         .WithMany("Opinions")
-                        .HasForeignKey("SpecialistDetailsId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("SpecialistDetailsId");
                 });
 
             modelBuilder.Entity("ProSeeker.Data.Models.PrivateChat.ChatMessage", b =>

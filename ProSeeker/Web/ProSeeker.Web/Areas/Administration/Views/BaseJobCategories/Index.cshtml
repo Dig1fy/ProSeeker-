@@ -1,0 +1,91 @@
+﻿@model IEnumerable<ProSeeker.Web.ViewModels.BaseJobCategories.SingleBaseJobCategoryViewModel>
+
+@{
+    ViewData["Title"] = "Базови категории";
+}
+
+<style>
+    .custom-table-heading-row {
+        background: rgb(97,165,216);
+        background: linear-gradient(90deg, rgba(97,165,216,0.6895133053221288) 9%, rgba(108,171,224,0.7371323529411764) 38%, rgba(51,155,185,0.6727065826330532) 76%, rgba(79,147,217,0.5102415966386555) 100%);
+    }
+
+    .custom-table-row {
+        background: rgb(242,244,245);
+        background: linear-gradient(90deg, rgba(242,244,245,0.6895133053221288) 0%, rgba(213,234,251,0.7371323529411764) 38%, rgba(211,216,218,0.6727065826330532) 76%, rgba(235,244,254,0.5102415966386555) 100%);
+    }
+</style>
+
+<div class="text-center custom-golden-text">
+    <h1>Базови категории</h1>
+</div>
+<form>
+    <p class="float-left">
+        <button asp-action="Create" class="custom-btn-no-background">Създай нова</button>
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr class="custom-table-heading-row">
+            <th>
+                <label class="custom-textarea-text">Категория</label>
+            </th>
+            <th>
+                <label class="custom-textarea-text">Описание</label>
+            </th>
+            <th>
+                <label class="custom-textarea-text">Изтрит запис</label>
+            </th>
+            <th>
+                <label class="custom-textarea-text">Дата на изтриване</label>
+            </th>
+            <th>
+                <label class="custom-textarea-text">Дата на създаване</label>
+            </th>
+            <th>
+                <label class="custom-textarea-text">Последна промяна</label>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+            <tr class="custom-table-row">
+                <td>
+                    <label class="custom-input-text">@category.CategoryName</label>
+                </td>
+                <td>
+                    <label class="custom-input-text">@category.Description</label>
+                </td>
+                <td>
+                    @if (category.IsDeleted)
+                    {
+                        <label class="custom-input-text">Да</label>
+                    }
+                    else
+                    {
+                        <label class="custom-input-text">Не</label>
+                    }
+                </td>
+                <td>
+                    <time class="custom-input-text" datetime="@category.DeletedOn?.ToString("O")"></time>
+                </td>
+                <td>
+                    <time class="custom-input-text" datetime="@category.CreatedOn.ToString("O")"></time>
+                </td>
+                <td>
+                    <time class="custom-input-text" datetime="@category.ModifiedOn?.ToString("O")"></time>
+                </td>
+                <td>
+                    <form>
+                        <button class="custom-btn-no-background" asp-area="Administration" asp-action="Edit" asp-route-id="@category.Id">Промени</button>                        
+                    </form>
+                    <form method="post">
+                        <button class="custom-btn-no-background" asp-action="Delete" asp-route-id="@category.Id">Изтрий</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

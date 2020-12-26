@@ -35,7 +35,7 @@ namespace ProSeeker.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    CategoryName = table.Column<string>(maxLength: 80, nullable: true),
+                    CategoryName = table.Column<string>(maxLength: 50, nullable: true),
                     Description = table.Column<string>(maxLength: 250, nullable: true)
                 },
                 constraints: table =>
@@ -566,8 +566,8 @@ namespace ProSeeker.Data.Migrations
                     Content = table.Column<string>(maxLength: 15000, nullable: true),
                     CreatorId = table.Column<string>(nullable: true),
                     ParentOpinionId = table.Column<int>(nullable: true),
-                    AdId = table.Column<string>(nullable: false),
-                    SpecialistDetailsId = table.Column<string>(nullable: false)
+                    AdId = table.Column<string>(nullable: true),
+                    SpecialistDetailsId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

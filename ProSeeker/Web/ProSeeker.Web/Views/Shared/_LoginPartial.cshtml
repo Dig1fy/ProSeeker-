@@ -20,17 +20,32 @@
         <li class="nav-item dropdown collapse navbar-collapse">
             <div id="mySidebar" class="sidebar">
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><p class="closeNavbar"></p></a>
-                @await Component.InvokeAsync("UserMessages")
+                @if (this.User != null)
+                {
+                    @await Component.InvokeAsync("UserMessages")
+                }
             </div>
 
             <div id="main">
-                @await Component.InvokeAsync("NewMessagesNotification")
+                @if (this.User != null)
+                {
+                    @await Component.InvokeAsync("NewMessagesNotification")
+                }
             </div>
         </li>
         if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
         {
             <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="Administration" asp-controller="Dashboard" asp-action="Index" title="Admin">Админ</a>
+                <a class="nav-link text-dark" asp-area="Administration" asp-controller="Surveys" asp-action="Index" title="Admin">Survey</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="Administration" asp-controller="BaseJobCategories" asp-action="Index" title="Admin">BaseJobCategories</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="Administration" asp-controller="Surveys" asp-action="Index" title="Admin">Surveys</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="Administration" asp-controller="JobCategories" asp-action="Index" title="Admin">JobCategories</a>
             </li>
         }
     }

@@ -1,0 +1,39 @@
+﻿@model ProSeeker.Web.ViewModels.BaseJobCategories.BaseJobCategoryInputModel
+
+@{
+    ViewData["Title"] = "Създаване на базова категория";
+}
+
+<hr />
+<div class="row text-center">
+    <div class="col-md-5 mx-auto custom-golden-text">
+        <h2 class="mx-auto text-center custom-golden-text">Създаване на категория</h2>
+        <form asp-action="Create">
+            <div class="col-md-12">
+                <div asp-validation-summary="ModelOnly" class="text-danger custom-input-text"></div>
+                <div class="form-group">
+                    <label asp-for="@Model.CategoryName" class="control-label custom-input-text"></label>
+                    <input asp-for="@Model.CategoryName" class="form-control custom-rounded-input-field custom-input-text" />
+                    <span asp-validation-for="@Model.CategoryName" class="text-danger custom-input-text"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Description" class="control-label custom-input-text"></label>
+                    <input asp-for="@Model.Description" class="form-control custom-rounded-input-field custom-input-text" />
+                    <span asp-validation-for="@Model.Description" class="text-danger custom-input-text"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Създай" style="height:40px;" class="custom-submit-button col-md-6 mt-4" />
+            </div>
+        </form>
+        <form>
+            <button class="custom-submit-button col-md-6 mt-4" style="height:40px;" asp-action="Index">Обратно към категориите</button>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

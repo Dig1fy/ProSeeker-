@@ -1,0 +1,13 @@
+﻿@model ProSeeker.Web.ViewModels.Categories.JobCategoriesCountViewModel
+
+    <div class="text-center">
+        <h2 class="custom-golden-text">Не е възможно да изтриете тази базова категория!</h2>
+
+        <h2 class="custom-input-text">Към нея има свързани <strong>@Model.Count</strong> под-категории</h2>
+    </div>
+    <form>
+        <div class="text-center">
+            <button class="custom-submit-button col-md-4 mt-4" style="height:40px;" asp-action="Index">Обратно към категориите</button>
+        </div>
+    </form>
+

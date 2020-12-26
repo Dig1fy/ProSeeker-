@@ -11,7 +11,7 @@
             this.JobCategories = new HashSet<JobCategory>();
         }
 
-        [MaxLength(80)]
+        [MaxLength(50)]
         public string CategoryName { get; set; }
 
         [MaxLength(250)]

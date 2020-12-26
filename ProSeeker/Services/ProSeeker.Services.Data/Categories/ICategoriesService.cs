@@ -10,5 +10,7 @@
         Task<IEnumerable<T>> GetAllCategoriesAsync<T>();
 
         Task<string> GetCategoryNameByOfferIdAsync (string offerId);
+
+        Task<int> GetCategiesCountIsInJobCategoryAsync(int baseJobCategoryId);
     }
 }

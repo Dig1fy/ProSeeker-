@@ -24,6 +24,12 @@
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var currentUserId = this.userManager.GetUserId((ClaimsPrincipal)this.User);
+
+            if (currentUserId == null)
+            {
+                return this.View();
+            }
+
             var userConversations = await this.privateChatService.GetAllUserConversationsAsync<ConversationViewModel>(currentUserId);
             var totalUnseenMessages = 0;
 

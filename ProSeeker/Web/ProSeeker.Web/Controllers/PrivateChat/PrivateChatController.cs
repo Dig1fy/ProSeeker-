@@ -42,6 +42,12 @@
             }
 
             var conversationId = await this.privateChatService.GetConversationBySenderAndReceiverIdsAsync(user.Id, receiver.Id);
+
+            if (conversationId == null)
+            {
+                return this.CustomNotFound();
+            }
+
             var conversationMessages = await this.privateChatService.GetAllConversationMessagesAsync<MessageViewModel>(conversationId);
             await this.privateChatService.MarkAllMessagesOfTheCurrentUserAsSeenAsync(conversationId, user.Id);
 

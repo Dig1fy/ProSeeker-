@@ -1,0 +1,24 @@
+﻿namespace ProSeeker.Web.ViewModels.BaseJobCategories
+{
+    using System;
+
+    using ProSeeker.Data.Models;
+    using ProSeeker.Services.Mapping;
+
+    public class SingleBaseJobCategoryViewModel : IMapFrom<BaseJobCategory>
+    {
+        public int Id { get; set; }
+
+        public string CategoryName { get; set; }
+
+        public string Description { get; set; }
+
+        public DateTime CreatedOn { get; set; }
+
+        public DateTime? ModifiedOn { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        public DateTime? DeletedOn { get; set; }
+    }
+}
