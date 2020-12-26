@@ -14,11 +14,9 @@
     using ProSeeker.Web.ViewModels.Ads;
     using Xunit;
 
-    public sealed class AdsServiceTests : IDisposable
+    public sealed class AdsServiceTests : BaseServiceTests
     {
         private readonly IAdsService service;
-
-        private ApplicationDbContext dbContext;
 
         private List<ApplicationUser> users;
         private List<Ad> ads;
@@ -29,15 +27,10 @@
         {
             AutoMapperConfig.RegisterMappings(typeof(CreateAdInputModel).Assembly);
 
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
-                .Options;
-
-            this.dbContext = new ApplicationDbContext(options);
-            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(this.dbContext);
-            var citiesRepository = new EfRepository<City>(this.dbContext);
-            var adsRepository = new EfDeletableEntityRepository<Ad>(this.dbContext);
-            var categoriesRepository = new EfDeletableEntityRepository<JobCategory>(this.dbContext);
+            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(this.DbContext);
+            var citiesRepository = new EfRepository<City>(this.DbContext);
+            var adsRepository = new EfDeletableEntityRepository<Ad>(this.DbContext);
+            var categoriesRepository = new EfDeletableEntityRepository<JobCategory>(this.DbContext);
             this.service = new AdsService(adsRepository, usersRepository, citiesRepository, categoriesRepository);
 
             this.users = new List<ApplicationUser>();
@@ -220,12 +213,6 @@
             Assert.Equal("3", firstAdId);
         }
 
-        public void Dispose()
-        {
-            this.dbContext.Database.EnsureDeleted();
-            this.dbContext.Dispose();
-        }
-
         private void InitializeRepositoriesData()
         {
             this.cities.AddRange(new List<City>()
@@ -255,11 +242,11 @@
                 new ApplicationUser { Id = "2", FirstName = "Gosho", LastName = "Goshev", CityId = 1, Email = "s@s", ProfilePicture = "SpecProfilePicture", IsSpecialist = true, SpecialistDetailsId = "specialistId" },
             });
 
-            this.dbContext.AddRange(this.users);
-            this.dbContext.AddRange(this.cities);
-            this.dbContext.AddRange(this.jobCategories);
-            this.dbContext.AddRange(this.ads);
-            this.dbContext.SaveChanges();
+            this.DbContext.AddRange(this.users);
+            this.DbContext.AddRange(this.cities);
+            this.DbContext.AddRange(this.jobCategories);
+            this.DbContext.AddRange(this.ads);
+            this.DbContext.SaveChanges();
         }
 
         private CreateAdInputModel GetInputModel()

@@ -5,8 +5,6 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Microsoft.EntityFrameworkCore;
-    using ProSeeker.Data;
     using ProSeeker.Data.Models;
     using ProSeeker.Data.Repositories;
     using ProSeeker.Services.Data.Inquiries;
@@ -15,11 +13,10 @@
     using ProSeeker.Web.ViewModels.Offers;
     using Xunit;
 
-    public sealed class InquiriesServiceTests : IDisposable
+    public sealed class InquiriesServiceTests : BaseServiceTests
     {
         private readonly IInquiriesService service;
 
-        private ApplicationDbContext dbContext;
         private List<Offer> offers;
         private List<ApplicationUser> users;
         private List<Inquiry> inquiries;
@@ -30,14 +27,9 @@
             this.users = new List<ApplicationUser>();
             this.inquiries = new List<Inquiry>();
 
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
-                .Options;
-
-            this.dbContext = new ApplicationDbContext(options);
-            var offersRepository = new EfDeletableEntityRepository<Offer>(this.dbContext);
-            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(this.dbContext);
-            var inquiriesRepository = new EfDeletableEntityRepository<Inquiry>(this.dbContext);
+            var offersRepository = new EfDeletableEntityRepository<Offer>(this.DbContext);
+            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(this.DbContext);
+            var inquiriesRepository = new EfDeletableEntityRepository<Inquiry>(this.DbContext);
 
             this.service = new InquiriesService(inquiriesRepository, offersRepository, usersRepository);
             this.InitializeRepositoriesData();
@@ -124,12 +116,6 @@
             Assert.Null(inquiry);
         }
 
-        public void Dispose()
-        {
-            this.dbContext.Database.EnsureDeleted();
-            this.dbContext.Dispose();
-        }
-
         private void InitializeRepositoriesData()
         {
             this.users.AddRange(new List<ApplicationUser>
@@ -213,10 +199,10 @@
                 },
             });
 
-            this.dbContext.AddRange(this.users);
-            this.dbContext.AddRange(this.inquiries);
-            this.dbContext.AddRange(this.offers);
-            this.dbContext.SaveChanges();
+            this.DbContext.AddRange(this.users);
+            this.DbContext.AddRange(this.inquiries);
+            this.DbContext.AddRange(this.offers);
+            this.DbContext.SaveChanges();
         }
     }
 }

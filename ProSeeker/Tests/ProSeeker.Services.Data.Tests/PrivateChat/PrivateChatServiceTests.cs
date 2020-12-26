@@ -1,12 +1,9 @@
 ﻿namespace ProSeeker.Services.Data.Tests.PrivateChat
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Microsoft.EntityFrameworkCore;
-    using ProSeeker.Data;
     using ProSeeker.Data.Models;
     using ProSeeker.Data.Models.PrivateChat;
     using ProSeeker.Data.Repositories;
@@ -15,11 +12,9 @@
     using ProSeeker.Web.ViewModels.PrivateChat;
     using Xunit;
 
-    public sealed class PrivateChatServiceTests : IDisposable
+    public sealed class PrivateChatServiceTests : BaseServiceTests
     {
         private readonly IPrivateChatService service;
-
-        private ApplicationDbContext dbContext;
 
         private List<ApplicationUser> users;
         private List<ChatMessage> messages;
@@ -31,14 +26,9 @@
             this.messages = new List<ChatMessage>();
             this.conversations = new List<Conversation>();
 
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-               .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
-               .Options;
-            this.dbContext = new ApplicationDbContext(options);
-
-            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(this.dbContext);
-            var messagesRepository = new EfDeletableEntityRepository<ChatMessage>(this.dbContext);
-            var conversationsRepository = new EfDeletableEntityRepository<Conversation>(this.dbContext);
+            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(this.DbContext);
+            var messagesRepository = new EfDeletableEntityRepository<ChatMessage>(this.DbContext);
+            var conversationsRepository = new EfDeletableEntityRepository<Conversation>(this.DbContext);
             this.service = new PrivateChatService(usersRepository, messagesRepository, conversationsRepository);
 
             this.InitializeRepositoriesData();
@@ -152,12 +142,6 @@
             Assert.Equal(expectedUnseenMessagesCount, actualNumberOfUnseenMessages);
         }
 
-        public void Dispose()
-        {
-            this.dbContext.Database.EnsureDeleted();
-            this.dbContext.Dispose();
-        }
-
         private void InitializeRepositoriesData()
         {
             this.users.AddRange(new List<ApplicationUser>
@@ -233,10 +217,10 @@
                 },
             });
 
-            this.dbContext.AddRange(this.users);
-            this.dbContext.AddRange(this.messages);
-            this.dbContext.AddRange(this.conversations);
-            this.dbContext.SaveChanges();
+            this.DbContext.AddRange(this.users);
+            this.DbContext.AddRange(this.messages);
+            this.DbContext.AddRange(this.conversations);
+            this.DbContext.SaveChanges();
         }
     }
 }

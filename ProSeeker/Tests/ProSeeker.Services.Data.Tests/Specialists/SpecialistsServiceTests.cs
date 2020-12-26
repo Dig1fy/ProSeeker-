@@ -1,12 +1,9 @@
 ﻿namespace ProSeeker.Services.Data.Tests.Specialists
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Microsoft.EntityFrameworkCore;
-    using ProSeeker.Data;
     using ProSeeker.Data.Models;
     using ProSeeker.Data.Repositories;
     using ProSeeker.Services.Data.Specialists;
@@ -14,11 +11,9 @@
     using ProSeeker.Web.ViewModels.Users;
     using Xunit;
 
-    public sealed class SpecialistsServiceTests : IDisposable
+    public sealed class SpecialistsServiceTests : BaseServiceTests
     {
         private readonly ISpecialistsService service;
-
-        private ApplicationDbContext dbContext;
 
         private List<Specialist_Details> specialists;
 
@@ -26,12 +21,7 @@
         {
             this.specialists = new List<Specialist_Details>();
 
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-               .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
-               .Options;
-            this.dbContext = new ApplicationDbContext(options);
-
-            var specialistsRepository = new EfDeletableEntityRepository<Specialist_Details>(this.dbContext);
+            var specialistsRepository = new EfDeletableEntityRepository<Specialist_Details>(this.DbContext);
             this.service = new SpecialistsService(specialistsRepository);
 
             this.InitializeRepositoriesData();
@@ -56,12 +46,43 @@
         }
 
         [Fact]
+        public async Task ShouldReturnAllSpecialistsByGivenCityIdOnly()
+        {
+            AutoMapperConfig.RegisterMappings(typeof(SpecialistShortDetailsViewModel).Assembly);
+            var categoryId = 1;
+            var cityId = 1;
+
+            var allSpecialistsPerCategory =
+                await this.service.GetAllSpecialistsPerCategoryAsync<SpecialistShortDetailsViewModel>(
+                    categoryId, null, cityId, 0);
+
+            var expectedCount = 1;
+            var actualCount = allSpecialistsPerCategory.Count();
+            var isCategoryTheSame = allSpecialistsPerCategory.All(x => x.JobCategoryId == categoryId);
+
+            Assert.Equal(expectedCount, actualCount);
+            Assert.True(isCategoryTheSame);
+        }
+
+        [Fact]
         public async Task ShouldReturnCorrectSpecialistsCountByGivenCategoryId()
         {
             var categoryId = 1;
             var expectedCount = 3;
 
             var actualCount = await this.service.GetSpecialistsCountByCategoryAsync(categoryId, 0);
+
+            Assert.Equal(expectedCount, actualCount);
+        }
+
+        [Fact]
+        public async Task ShouldReturnCorrectSpecialistsCountByGivenCategoryIdAndCityId()
+        {
+            var categoryId = 1;
+            var expectedCount = 1;
+            var cityId = 1;
+
+            var actualCount = await this.service.GetSpecialistsCountByCategoryAsync(categoryId, cityId);
 
             Assert.Equal(expectedCount, actualCount);
         }
@@ -89,10 +110,19 @@
             Assert.Equal(expectedSecondSpecialistId, actualSecondSpecialistId);
         }
 
-        public void Dispose()
+        [Fact]
+        public async Task ShouldSortSpecialistByGivenCityIdOnly()
         {
-            this.dbContext.Database.EnsureDeleted();
-            this.dbContext.Dispose();
+            AutoMapperConfig.RegisterMappings(typeof(SpecialistShortDetailsViewModel).Assembly);
+
+            var categoryId = 1;
+            var cityId = 1;
+
+            var allSpecialistsPerCategory =
+                await this.service.GetAllSpecialistsPerCategoryAsync<SpecialistShortDetailsViewModel>(
+                    categoryId, null, cityId, 0);
+
+            Assert.Single(allSpecialistsPerCategory);
         }
 
         private void InitializeRepositoriesData()
@@ -114,6 +144,12 @@
                         {
                         new Opinion { Id = 1, Content = "Hey", CreatorId = "2", },
                         },
+                    User = new ApplicationUser
+                    {
+                        Id = "2",
+                        SpecialistDetailsId = "specialist2",
+                        CityId = 1,
+                    },
                 },
                 new Specialist_Details
                 {
@@ -128,8 +164,8 @@
                 },
             });
 
-            this.dbContext.AddRange(this.specialists);
-            this.dbContext.SaveChanges();
+            this.DbContext.AddRange(this.specialists);
+            this.DbContext.SaveChanges();
         }
     }
 }

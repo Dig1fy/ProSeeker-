@@ -1,12 +1,9 @@
 ﻿namespace ProSeeker.Services.Data.Tests.Home
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Microsoft.EntityFrameworkCore;
-    using ProSeeker.Data;
     using ProSeeker.Data.Models;
     using ProSeeker.Data.Repositories;
     using ProSeeker.Services.Data.Home;
@@ -14,11 +11,10 @@
     using ProSeeker.Web.ViewModels.Home;
     using Xunit;
 
-    public sealed class HomeServiceTests : IDisposable
+    public sealed class HomeServiceTests : BaseServiceTests
     {
         private readonly IHomeService service;
 
-        private ApplicationDbContext dbContext;
         private List<BaseJobCategory> categories;
 
         public HomeServiceTests()
@@ -26,12 +22,7 @@
             AutoMapperConfig.RegisterMappings(typeof(BaseJobCategoryViewModel).Assembly);
 
             this.categories = new List<BaseJobCategory>();
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
-                .Options;
-
-            this.dbContext = new ApplicationDbContext(options);
-            var categoriesRepository = new EfDeletableEntityRepository<BaseJobCategory>(this.dbContext);
+            var categoriesRepository = new EfDeletableEntityRepository<BaseJobCategory>(this.DbContext);
 
             this.service = new HomeService(categoriesRepository);
             this.InitializeRepositoriesData();
@@ -65,14 +56,8 @@
                 new BaseJobCategory { CategoryName = "Others", Id = 3, Description = "Nothing", },
             });
 
-            this.dbContext.AddRange(this.categories);
-            this.dbContext.SaveChanges();
-        }
-
-        public void Dispose()
-        {
-            this.dbContext.Database.EnsureDeleted();
-            this.dbContext.Dispose();
+            this.DbContext.AddRange(this.categories);
+            this.DbContext.SaveChanges();
         }
     }
 }

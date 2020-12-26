@@ -5,8 +5,6 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Microsoft.EntityFrameworkCore;
-    using ProSeeker.Data;
     using ProSeeker.Data.Models;
     using ProSeeker.Data.Repositories;
     using ProSeeker.Services.Data.Offers;
@@ -14,11 +12,9 @@
     using ProSeeker.Web.ViewModels.Offers;
     using Xunit;
 
-    public sealed class OffersServiceTests : IDisposable
+    public sealed class OffersServiceTests : BaseServiceTests
     {
         private readonly IOffersService service;
-
-        private ApplicationDbContext dbContext;
 
         private List<ApplicationUser> users;
         private List<Ad> ads;
@@ -30,14 +26,9 @@
             this.ads = new List<Ad>();
             this.offers = new List<Offer>();
 
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
-                .Options;
-            this.dbContext = new ApplicationDbContext(options);
-
-            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(this.dbContext);
-            var offersRepository = new EfDeletableEntityRepository<Offer>(this.dbContext);
-            var adsRepository = new EfDeletableEntityRepository<Ad>(this.dbContext);
+            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(this.DbContext);
+            var offersRepository = new EfDeletableEntityRepository<Offer>(this.DbContext);
+            var adsRepository = new EfDeletableEntityRepository<Ad>(this.DbContext);
             this.service = new OffersService(offersRepository, usersRepository, adsRepository);
 
             this.InitializeRepositoriesData();
@@ -71,8 +62,8 @@
                 PreparedBudget = "2500лв.",
             };
 
-            await this.dbContext.AddAsync(newAd);
-            await this.dbContext.SaveChangesAsync();
+            await this.DbContext.AddAsync(newAd);
+            await this.DbContext.SaveChangesAsync();
 
             var inputModel = new CreateOfferInputModel
             {
@@ -202,12 +193,6 @@
             Assert.True(offer.IsAccepted == true);
         }
 
-        public void Dispose()
-        {
-            this.dbContext.Database.EnsureDeleted();
-            this.dbContext.Dispose();
-        }
-
         private void InitializeRepositoriesData()
         {
             this.ads.AddRange(new List<Ad>
@@ -292,10 +277,10 @@
                 },
             });
 
-            this.dbContext.AddRange(this.users);
-            this.dbContext.AddRange(this.offers);
-            this.dbContext.AddRange(this.ads);
-            this.dbContext.SaveChanges();
+            this.DbContext.AddRange(this.users);
+            this.DbContext.AddRange(this.offers);
+            this.DbContext.AddRange(this.ads);
+            this.DbContext.SaveChanges();
         }
     }
 }

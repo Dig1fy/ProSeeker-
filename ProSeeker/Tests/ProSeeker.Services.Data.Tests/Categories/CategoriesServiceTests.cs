@@ -5,8 +5,6 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Microsoft.EntityFrameworkCore;
-    using ProSeeker.Data;
     using ProSeeker.Data.Models;
     using ProSeeker.Data.Repositories;
     using ProSeeker.Services.Data.CategoriesService;
@@ -14,11 +12,9 @@
     using ProSeeker.Web.ViewModels.Categories;
     using Xunit;
 
-    public sealed class CategoriesServiceTests : IDisposable
+    public sealed class CategoriesServiceTests : BaseServiceTests
     {
         private readonly ICategoriesService service;
-
-        private ApplicationDbContext dbContext;
 
         private List<JobCategory> categories;
         private List<Ad> ads;
@@ -30,14 +26,9 @@
             this.offers = new List<Offer>();
             this.categories = new List<JobCategory>();
 
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
-                .Options;
-
-            this.dbContext = new ApplicationDbContext(options);
-            var adsRepository = new EfDeletableEntityRepository<Ad>(this.dbContext);
-            var offersRepository = new EfRepository<Offer>(this.dbContext);
-            var categoriesRepository = new EfDeletableEntityRepository<JobCategory>(this.dbContext);
+            var adsRepository = new EfDeletableEntityRepository<Ad>(this.DbContext);
+            var offersRepository = new EfRepository<Offer>(this.DbContext);
+            var categoriesRepository = new EfDeletableEntityRepository<JobCategory>(this.DbContext);
             this.service = new CategoriesService(categoriesRepository, adsRepository, offersRepository);
             this.InitializeRepositoriesData();
         }
@@ -83,12 +74,6 @@
             Assert.Equal(expectedCategoryName, actualCategoryName);
         }
 
-        public void Dispose()
-        {
-            this.dbContext.Database.EnsureDeleted();
-            this.dbContext.Dispose();
-        }
-
         private void InitializeRepositoriesData()
         {
             this.categories.AddRange(new List<JobCategory>()
@@ -112,10 +97,10 @@
                 new Offer { Id = "3", AdId = null, Description = "Предлагам да започваме", ApplicationUserId = "1", InquiryId = "1", Price = 5500, CreatedOn = DateTime.UtcNow.AddMinutes(5), SpecialistDetailsId = "1", ExpirationDate = DateTime.UtcNow.AddDays(5), },
             });
 
-            this.dbContext.AddRange(this.categories);
-            this.dbContext.AddRange(this.ads);
-            this.dbContext.AddRange(this.offers);
-            this.dbContext.SaveChanges();
+            this.DbContext.AddRange(this.categories);
+            this.DbContext.AddRange(this.ads);
+            this.DbContext.AddRange(this.offers);
+            this.DbContext.SaveChanges();
         }
     }
 }

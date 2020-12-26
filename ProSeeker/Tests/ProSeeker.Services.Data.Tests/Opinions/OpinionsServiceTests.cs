@@ -4,18 +4,14 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using Microsoft.EntityFrameworkCore;
-    using ProSeeker.Data;
     using ProSeeker.Data.Models;
     using ProSeeker.Data.Repositories;
     using ProSeeker.Services.Data.Opinions;
     using Xunit;
 
-    public sealed class OpinionsServiceTests : IDisposable
+    public sealed class OpinionsServiceTests : BaseServiceTests
     {
         private readonly IOpinionsService service;
-
-        private ApplicationDbContext dbContext;
 
         private List<Ad> ads;
         private List<Opinion> opinions;
@@ -27,14 +23,9 @@
             this.opinions = new List<Opinion>();
             this.specialists = new List<Specialist_Details>();
 
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-               .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
-               .Options;
-            this.dbContext = new ApplicationDbContext(options);
-
-            var adsRepository = new EfDeletableEntityRepository<Ad>(this.dbContext);
-            var opinionsRepository = new EfDeletableEntityRepository<Opinion>(this.dbContext);
-            var specialistsRepository = new EfDeletableEntityRepository<Specialist_Details>(this.dbContext);
+            var adsRepository = new EfDeletableEntityRepository<Ad>(this.DbContext);
+            var opinionsRepository = new EfDeletableEntityRepository<Opinion>(this.DbContext);
+            var specialistsRepository = new EfDeletableEntityRepository<Specialist_Details>(this.DbContext);
             this.service = new OpinionsService(opinionsRepository, adsRepository, specialistsRepository);
 
             this.InitializeRepositoriesData();
@@ -92,12 +83,6 @@
             var isThereAnOpinion = await this.service.IsInAdIdAsync(opinionId, desiredAdId);
 
             Assert.True(isThereAnOpinion);
-        }
-
-        public void Dispose()
-        {
-            this.dbContext.Database.EnsureDeleted();
-            this.dbContext.Dispose();
         }
 
         private void InitializeRepositoriesData()
@@ -169,10 +154,10 @@
                 },
             });
 
-            this.dbContext.AddRange(this.specialists);
-            this.dbContext.AddRange(this.opinions);
-            this.dbContext.AddRange(this.ads);
-            this.dbContext.SaveChanges();
+            this.DbContext.AddRange(this.specialists);
+            this.DbContext.AddRange(this.opinions);
+            this.DbContext.AddRange(this.ads);
+            this.DbContext.SaveChanges();
         }
     }
 }

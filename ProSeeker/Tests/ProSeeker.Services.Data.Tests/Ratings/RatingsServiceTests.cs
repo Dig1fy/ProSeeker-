@@ -1,21 +1,16 @@
 ﻿namespace ProSeeker.Services.Data.Tests.Ratings
 {
-    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using Microsoft.EntityFrameworkCore;
-    using ProSeeker.Data;
     using ProSeeker.Data.Models;
     using ProSeeker.Data.Repositories;
     using ProSeeker.Services.Data.Raitings;
     using Xunit;
 
-    public sealed class RatingsServiceTests : IDisposable
+    public sealed class RatingsServiceTests : BaseServiceTests
     {
         private readonly IRatingsService service;
-
-        private ApplicationDbContext dbContext;
 
         private List<Rating> ratings;
 
@@ -23,12 +18,7 @@
         {
             this.ratings = new List<Rating>();
 
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-               .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
-               .Options;
-            this.dbContext = new ApplicationDbContext(options);
-
-            var ratingsRepository = new EfRepository<Rating>(this.dbContext);
+            var ratingsRepository = new EfRepository<Rating>(this.DbContext);
 
             this.service = new RatingsService(ratingsRepository);
 
@@ -75,12 +65,6 @@
             Assert.Equal(expectedRatingsCount, actualRatingsCount);
         }
 
-        public void Dispose()
-        {
-            this.dbContext.Database.EnsureDeleted();
-            this.dbContext.Dispose();
-        }
-
         private void InitializeRepositoriesData()
         {
             this.ratings.AddRange(new List<Rating>
@@ -101,8 +85,8 @@
                 },
             });
 
-            this.dbContext.AddRange(this.ratings);
-            this.dbContext.SaveChanges();
+            this.DbContext.AddRange(this.ratings);
+            this.DbContext.SaveChanges();
         }
     }
 }

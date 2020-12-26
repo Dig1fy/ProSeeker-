@@ -12,22 +12,15 @@
     using ProSeeker.Services.Data.UsersService;
     using Xunit;
 
-    public sealed class UsersServiceTests : IDisposable
+    public sealed class UsersServiceTests : BaseServiceTests
     {
         private readonly IUsersService service;
-
-        private ApplicationDbContext dbContext;
 
         private List<ApplicationUser> users;
 
         public UsersServiceTests()
         {
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
-                .Options;
-
-            this.dbContext = new ApplicationDbContext(options);
-            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(this.dbContext);
+            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(this.DbContext);
             this.service = new UsersService(usersRepository);
 
             this.users = new List<ApplicationUser>();
@@ -96,12 +89,6 @@
             Assert.True(hasNewExpirationDate < user.VipExpirationDate);
         }
 
-        public void Dispose()
-        {
-            this.dbContext.Database.EnsureDeleted();
-            this.dbContext.Dispose();
-        }
-
         private void InitializeRepositoriesData()
         {
             this.users.AddRange(new List<ApplicationUser>
@@ -110,8 +97,8 @@
                 new ApplicationUser { Id = "2", FirstName = "Gosho", LastName = "Goshev", CityId = 1, Email = "s@s", ProfilePicture = "SpecProfilePicture", IsSpecialist = true, SpecialistDetailsId = "specialistId" },
             });
 
-            this.dbContext.AddRange(this.users);
-            this.dbContext.SaveChanges();
+            this.DbContext.AddRange(this.users);
+            this.DbContext.SaveChanges();
         }
     }
 }

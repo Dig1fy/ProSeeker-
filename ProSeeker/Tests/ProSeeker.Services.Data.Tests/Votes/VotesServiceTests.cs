@@ -12,11 +12,9 @@
     using ProSeeker.Services.Data.Votes;
     using Xunit;
 
-    public sealed class VotesServiceTests : IDisposable
+    public sealed class VotesServiceTests : BaseServiceTests
     {
         private readonly IVotesService service;
-
-        private ApplicationDbContext dbContext;
 
         private List<Vote> votes;
 
@@ -24,14 +22,9 @@
         {
             this.votes = new List<Vote>();
 
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-               .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
-               .Options;
-            this.dbContext = new ApplicationDbContext(options);
+            var surveysRepository = new EfDeletableEntityRepository<Survey>(this.DbContext);
 
-            var surveysRepository = new EfDeletableEntityRepository<Survey>(this.dbContext);
-
-            var votesRepository = new EfRepository<Vote>(this.dbContext);
+            var votesRepository = new EfRepository<Vote>(this.DbContext);
             this.service = new VotesService(votesRepository);
 
             this.InitializeRepositoriesData();
@@ -94,12 +87,6 @@
             Assert.Equal(downVotesCountShouldBeTheSame, downVotesCount);
         }
 
-        public void Dispose()
-        {
-            this.dbContext.Database.EnsureDeleted();
-            this.dbContext.Dispose();
-        }
-
         private void InitializeRepositoriesData()
         {
             this.votes.AddRange(new List<Vote>
@@ -120,8 +107,8 @@
                 },
             });
 
-            this.dbContext.AddRange(this.votes);
-            this.dbContext.SaveChanges();
+            this.DbContext.AddRange(this.votes);
+            this.DbContext.SaveChanges();
         }
     }
 }

@@ -1,27 +1,20 @@
 ﻿namespace ProSeeker.Services.Data.Tests.Surveys
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Microsoft.EntityFrameworkCore;
-    using ProSeeker.Data;
     using ProSeeker.Data.Models;
     using ProSeeker.Data.Models.Quiz;
     using ProSeeker.Data.Repositories;
     using ProSeeker.Services.Data.Quizz;
-    using ProSeeker.Services.Data.Specialists;
     using ProSeeker.Services.Mapping;
     using ProSeeker.Web.ViewModels.Quizzes;
-    using ProSeeker.Web.ViewModels.Users;
     using Xunit;
 
-    public sealed class SurveysServiceTests : IDisposable
+    public sealed class SurveysServiceTests : BaseServiceTests
     {
         private readonly ISurveysService service;
-
-        private ApplicationDbContext dbContext;
 
         private List<ApplicationUser> users;
         private List<Survey> surveys;
@@ -37,17 +30,12 @@
             this.usersSurveys = new List<UserSurvey>();
             this.answers = new List<Answer>();
 
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-               .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
-               .Options;
-            this.dbContext = new ApplicationDbContext(options);
+            var surveysRepository = new EfDeletableEntityRepository<Survey>(this.DbContext);
+            var questionsRepository = new EfDeletableEntityRepository<Question>(this.DbContext);
+            var answersRepository = new EfDeletableEntityRepository<Answer>(this.DbContext);
 
-            var surveysRepository = new EfDeletableEntityRepository<Survey>(this.dbContext);
-            var questionsRepository = new EfDeletableEntityRepository<Question>(this.dbContext);
-            var answersRepository = new EfDeletableEntityRepository<Answer>(this.dbContext);
-
-            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(this.dbContext);
-            var usersServeysRepository = new EfRepository<UserSurvey>(this.dbContext);
+            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(this.DbContext);
+            var usersServeysRepository = new EfRepository<UserSurvey>(this.DbContext);
             this.service = new SurveysService(
                 surveysRepository,
                 questionsRepository,
@@ -104,12 +92,6 @@
             Assert.NotNull(survey);
             Assert.Equal("1", survey.Id);
             Assert.Equal(3, survey.Questions.Count());
-        }
-
-        public void Dispose()
-        {
-            this.dbContext.Database.EnsureDeleted();
-            this.dbContext.Dispose();
         }
 
         private void InitializeRepositoriesData()
@@ -209,12 +191,12 @@
                 },
             });
 
-            this.dbContext.AddRange(this.users);
-            this.dbContext.AddRange(this.usersSurveys);
-            this.dbContext.AddRange(this.surveys);
-            this.dbContext.AddRange(this.questions);
-            this.dbContext.AddRange(this.answers);
-            this.dbContext.SaveChanges();
+            this.DbContext.AddRange(this.users);
+            this.DbContext.AddRange(this.usersSurveys);
+            this.DbContext.AddRange(this.surveys);
+            this.DbContext.AddRange(this.questions);
+            this.DbContext.AddRange(this.answers);
+            this.DbContext.SaveChanges();
         }
     }
 }

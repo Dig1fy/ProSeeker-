@@ -1,20 +1,16 @@
 ﻿namespace ProSeeker.Services.Data.Tests.Services
 {
-    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Microsoft.EntityFrameworkCore;
-    using ProSeeker.Data;
+
     using ProSeeker.Data.Models;
     using ProSeeker.Data.Repositories;
     using ProSeeker.Services.Data.ServicesService;
     using Xunit;
 
-    public sealed class ServicesServiceTests : IDisposable
+    public sealed class ServicesServiceTests : BaseServiceTests
     {
         private readonly IServicesService service;
-
-        private ApplicationDbContext dbContext;
 
         private List<Service> services;
 
@@ -22,12 +18,7 @@
         {
             this.services = new List<Service>();
 
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-               .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
-               .Options;
-            this.dbContext = new ApplicationDbContext(options);
-
-            var servicesRepository = new EfDeletableEntityRepository<Service>(this.dbContext);
+            var servicesRepository = new EfDeletableEntityRepository<Service>(this.DbContext);
 
             this.service = new ServicesService(servicesRepository);
 
@@ -54,12 +45,6 @@
             Assert.True(doesServiceStillExist);
         }
 
-        public void Dispose()
-        {
-            this.dbContext.Database.EnsureDeleted();
-            this.dbContext.Dispose();
-        }
-
         private void InitializeRepositoriesData()
         {
             this.services.AddRange(new List<Service>
@@ -80,8 +65,8 @@
                 },
             });
 
-            this.dbContext.AddRange(this.services);
-            this.dbContext.SaveChanges();
+            this.DbContext.AddRange(this.services);
+            this.DbContext.SaveChanges();
         }
     }
 }
