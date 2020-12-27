@@ -33,5 +33,7 @@
         Task<string> GetSurveyTitleByIdAsync(string surveyId);
 
         Task<string> GetQuestionTextByIdAsync(string questionId);
+
+        Task<string> CreateAnswerAsync(string questionId, string answerText);
     }
 }

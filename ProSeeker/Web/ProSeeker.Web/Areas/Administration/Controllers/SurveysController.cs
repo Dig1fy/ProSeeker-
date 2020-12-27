@@ -65,26 +65,7 @@
             return this.RedirectToAction(nameof(this.SurveyIndex));
         }
 
-        // =============================================== QUESTION =============================================== 
-        //public async Task<IActionResult> QuestionIndex()
-        //{
-        //    //var allSurveys = await this.surveysService.GetAllSurveysAsync<SurveyViewModel>();
-
-        //    //foreach (var survey in allSurveys)
-        //    //{
-        //    //    survey.Questions = await this.surveysService.GetAllQuestionsBySurveyIdAsync<QuestionViewModel>(survey.Id);
-
-        //    //    foreach (var question in survey.Questions)
-        //    //    {
-        //    //        question.Answers = await this.surveysService.GetAllAnswersByQuestionIdAsync<AnswerViewModel>(question.Id);
-        //    //    }
-        //    //}
-
-        //    //var viewModel = new AllSurveysViewModel { Surveys = allSurveys };
-
-        //    return this.View();
-        //}
-
+        // =============================================== QUESTION ===============================================
         public async Task<IActionResult> CreateQuestion(string id)
         {
             var surveyTitle = await this.surveysService.GetSurveyTitleByIdAsync(id);
@@ -141,6 +122,24 @@
             };
 
             return this.View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateAnswer(NewAnswerInputModel inputModel)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(inputModel);
+            }
+
+            var newAnswerId = await this.surveysService.CreateAnswerAsync(inputModel.QuestionId, inputModel.Text);
+
+            if (newAnswerId == null)
+            {
+                return this.CustomCommonError();
+            }
+
+            return this.RedirectToAction(nameof(this.SurveyIndex));
         }
 
 

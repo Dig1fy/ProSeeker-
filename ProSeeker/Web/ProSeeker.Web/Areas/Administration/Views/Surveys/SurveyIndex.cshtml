@@ -7,50 +7,60 @@
     <h1>Анкети</h1>
 </div>
 
-<a asp-action="Create">Create New</a>
+<style>
+</style>
+<form>
+    <button class="custom-btn-no-background" asp-action="Create">Създай анкета</button>
+</form>
 <hr />
 @foreach (var survey in Model.Surveys)
 {
-    <h3 class="d-inline"> Заглавие на анкета: @survey.Title</h3>
-    <p class="d-inline">
+<div style="background-color:rgba(163, 250, 244, 0.00);">
+    <div class="text-center mx-auto">
+        <h2 class="d-inline"> Заглавие на анкета: @survey.Title</h2>
+        <p class="d-inline float-right m-2">
 
-        <a asp-action="Delete" asp-route-id="@survey.Id">Изтрий анкета</a>
-        <a asp-action="Edit" asp-route-id="@survey.Id">Промени анкета</a>
-    </p>
+            <a class="survey-create-buttons" style="color:rgb(107, 65, 6); margin: 0 auto;" asp-action="Edit" asp-route-id="@survey.Id">Промени анкета</a>
+            <a class="survey-create-buttons mx-auto" style="color:rgb(164, 8, 8); margin: 0 auto;" asp-action="Delete" asp-route-id="@survey.Id">Изтрий анкета</a>
+        </p>
+    </div>
+    <hr />
 
     @foreach (var question in survey.Questions)
     {
-        <h3 class="d-inline"> Въпрос: @question.Number) @question.Text</h3>
-        <p class="d-inline">
-
-            <a asp-action="DeleteQuestion" asp-route-id="@question.Id">Изтрий въпрос</a>
-            <a asp-action="EditQuestion" asp-route-id="@question.Id">Промени въпрос</a>
-        </p>
-        <hr />
+        <div class="questions">
+            <h4 class="d-inline ml-3"> <strong>Въпрос: </strong> @question.Number) @question.Text</h4>
+            <div class="float-right d-inline">
+                <form>
+                    <a class="d-inline survey-create-buttons" asp-action="CreateAnswer" asp-route-surveyId="@survey.Id" asp-route-questionId="@question.Id">Създай отговор</a>
+                    <a class="survey-create-buttons" style="color:rgb(107, 65, 6);" asp-action="EditQuestion" asp-route-id="@question.Id">Промени</a>
+                    <a class="survey-create-buttons" style="color:rgb(164, 8, 8);" asp-action="DeleteQuestion" asp-route-id="@question.Id">Изтрий</a>
+                </form>
+            </div>
+        </div>
+        <br />
 
         @foreach (var answer in question.Answers)
         {
-            <h3 class="d-inline"> Отговор:  @answer.Text</h3>
-            <p class="d-inline">
+            <div class="questions">
+                <h5 class="d-inline ml-5"> <strong>Отговор: </strong>  @answer.Text</h5>
+                <p class="d-inline float-right">
 
-                <a asp-action="DeleteAnswer" asp-route-id="@question.Id">Изтрий отговор</a>
-                <a asp-action="EditAnswer" asp-route-id="@question.Id">Промени отговор</a>
-            </p>
-            <hr />
+                    <a class="survey-create-buttons" style="color:rgb(107, 65, 6);" asp-action="EditAnswer" asp-route-id="@question.Id">Промени</a>
+                    <a class="survey-create-buttons" style="color:rgb(164, 8, 8);" asp-action="DeleteAnswer" asp-route-id="@question.Id">Изтрий</a>
+                </p>
+            </div>
+            <br />
         }
-
-        <div class="float-lg-right">
-            <form>
-                <a asp-action="CreateAnswer" asp-route-surveyId="@survey.Id" asp-route-questionId="@question.Id">Създай отговор</a>
-            </form>
-        </div>
     }
 
     <div class="float-lg-right">
         <form>
-            <a asp-action="CreateQuestion" asp-route-id="@survey.Id">Създай въпрос</a>
+            <button class="custom-btn-no-background" asp-action="CreateQuestion" asp-route-id="@survey.Id">Създай въпрос</button>
         </form>
     </div>
+    <br /> <br /><br /> <br /> <br />
 
 
+</div>
 }

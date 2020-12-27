@@ -50,6 +50,20 @@
             await this.userSurveysRepository.SaveChangesAsync();
         }
 
+        public async Task<string> CreateAnswerAsync(string questionId, string answerText)
+        {
+            var newAnswer = new Answer
+            {
+                Text = answerText,
+                QuestionId = questionId,
+            };
+
+            await this.answersRepository.AddAsync(newAnswer);
+            await this.answersRepository.SaveChangesAsync();
+
+            return newAnswer.Id;
+        }
+
         public async Task<string> CreateQuestionAsync(NewQuestionInputModel inputModel)
         {
             var newQuestion = new Question
@@ -83,6 +97,7 @@
             var answers = await this.answersRepository
                 .All()
                 .Where(x => x.QuestionId == questionId)
+                .OrderBy(x => x.CreatedOn)
                 .To<T>()
                 .ToListAsync();
 
@@ -94,6 +109,7 @@
             var questions = await this.questionsRepository
                 .All()
                 .Where(x => x.SurveyId == surveyId)
+                .OrderBy(x => x.CreatedOn)
                 .To<T>()
                 .ToListAsync();
 
