@@ -1,8 +1,10 @@
 # ProSeeker-
 My defense project for ASP.NET Core MVC course at SoftUni (October 2020 @SoftUni)
+
+## :hammer: Built With:
 <details>
    <summary>
-      ## :hammer: Built With: <strong> Click </strong> for more detailed information
+       <strong> Click </strong> for more detailed information
    </summary>
 
 * <strong>.NET Core 3.1 <strong>
