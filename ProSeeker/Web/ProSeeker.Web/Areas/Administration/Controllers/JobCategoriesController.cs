@@ -87,7 +87,6 @@
             return this.RedirectToAction(nameof(this.Index));
         }
 
-        // GET: Administration/JobCategories/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
             if (id == 0)

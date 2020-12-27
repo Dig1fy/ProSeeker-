@@ -26,13 +26,15 @@
 
         Task<string> CreateSurveyAsync(NewSurveyInputModel inputModel);
 
+        Task<T> GetSingleAnswerAsync<T>(string answerId);
+
         Task<int> GetQuestionNumberBySurveyIdAsync(string surveyId);
 
         Task<string> CreateQuestionAsync(NewQuestionInputModel inputModel);
 
         Task<string> GetSurveyTitleByIdAsync(string surveyId);
 
-        Task<string> GetQuestionTextByIdAsync(string questionId);
+        Task<T> GetQuestionByIdAsync<T>(string questionId);
 
         Task<string> CreateAnswerAsync(string questionId, string answerText);
 
@@ -45,5 +47,11 @@
         Task DeleteAllQuestionsAsync(string surveyId);
 
         Task DeleteAllAnswersAsync(string questionId);
+
+        Task EditSurveyAsync(string surveyId, string title);
+
+        Task EditQuestionAsync(string questionId, string newText);
+
+        Task EditAnswerAsync(string answerId, string newText);
     }
 }

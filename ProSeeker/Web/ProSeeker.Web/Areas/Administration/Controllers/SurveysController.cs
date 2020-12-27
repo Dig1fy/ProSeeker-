@@ -66,7 +66,52 @@
             return this.RedirectToAction(nameof(this.SurveyIndex));
         }
 
+        public async Task<IActionResult> EditSurvey(string surveyId)
+        {
+            if (surveyId == null)
+            {
+                return this.CustomNotFound();
+            }
+
+            var inputModel = new NewSurveyInputModel();
+
+            try
+            {
+                var survey = await this.surveysService.GetSurveyByIdAsync<SurveyViewModel>(surveyId);
+                inputModel.Title = survey.Title;
+                inputModel.Id = survey.Id;
+            }
+            catch (Exception)
+            {
+                return this.CustomCommonError();
+            }
+
+            return this.View(inputModel);
+        }
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditSurvey(NewSurveyInputModel inputModel)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(inputModel);
+            }
+
+            try
+            {
+                await this.surveysService.EditSurveyAsync(inputModel.Id, inputModel.Title);
+            }
+            catch (Exception)
+            {
+                return this.CustomCommonError();
+            }
+
+            return this.RedirectToAction(nameof(this.SurveyIndex));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteSurvey(string surveyId)
         {
             if (surveyId == null)
@@ -133,7 +178,53 @@
             return this.RedirectToAction(nameof(this.SurveyIndex));
         }
 
+        public async Task<IActionResult> EditQuestion(string questionId)
+        {
+            if (questionId == null)
+            {
+                return this.CustomNotFound();
+            }
+
+            var inputModel = new NewQuestionInputModel();
+
+            try
+            {
+                var existingQuestion = await this.surveysService.GetQuestionByIdAsync<QuestionViewModel>(questionId);
+                inputModel.Id = existingQuestion.Id;
+                inputModel.Text = existingQuestion.Text;
+                inputModel.Number = existingQuestion.Number;
+            }
+            catch (Exception)
+            {
+                return this.CustomCommonError();
+            }
+
+            return this.View(inputModel);
+        }
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditQuestion(NewQuestionInputModel inputModel)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(inputModel);
+            }
+
+            try
+            {
+                await this.surveysService.EditQuestionAsync(inputModel.Id, inputModel.Text);
+            }
+            catch (Exception)
+            {
+                return this.CustomCommonError();
+            }
+
+            return this.RedirectToAction(nameof(this.SurveyIndex));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteQuestion(string questionId)
         {
             if (questionId == null)
@@ -159,7 +250,8 @@
         public async Task<IActionResult> CreateAnswer(string surveyId, string questionId)
         {
             var surveyTitle = await this.surveysService.GetSurveyTitleByIdAsync(surveyId);
-            var questionText = await this.surveysService.GetQuestionTextByIdAsync(questionId);
+            var question = await this.surveysService.GetQuestionByIdAsync<QuestionViewModel>(questionId);
+            var questionText = question.Text;
 
             if (surveyTitle == null || questionText == null)
             {
@@ -178,6 +270,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateAnswer(NewAnswerInputModel inputModel)
         {
             if (!this.ModelState.IsValid)
@@ -196,6 +289,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteAnswer(string answerId)
         {
             if (answerId == null)
@@ -215,89 +309,48 @@
             return this.RedirectToAction(nameof(this.SurveyIndex));
         }
 
-        // GET: Administration/Surveys/Edit/5
-        //public async Task<IActionResult> Edit(string id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
+        public async Task<IActionResult> EditAnswer(string answerId)
+        {
+            if (answerId == null)
+            {
+                return this.CustomNotFound();
+            }
 
-        //    var survey = await _context.Surveys.FindAsync(id);
-        //    if (survey == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(survey);
-        //}
+            var inputModel = new NewAnswerInputModel();
 
-        // POST: Administration/Surveys/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(string id, [Bind("Title,IsDeleted,DeletedOn,Id,CreatedOn,ModifiedOn")] Survey survey)
-        //{
-        //    if (id != survey.Id)
-        //    {
-        //        return NotFound();
-        //    }
+            try
+            {
+                var existingAnswer = await this.surveysService.GetSingleAnswerAsync<AnswerViewModel>(answerId);
+                inputModel.Id = existingAnswer.Id;
+                inputModel.Text = existingAnswer.Text;
+            }
+            catch (Exception)
+            {
+                return this.CustomCommonError();
+            }
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _context.Update(survey);
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!SurveyExists(survey.Id))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(survey);
-        //}
+            return this.View(inputModel);
+        }
 
-        //// GET: Administration/Surveys/Delete/5
-        //public async Task<IActionResult> Delete(string id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditAnswer(NewAnswerInputModel inputModel)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(inputModel);
+            }
 
-        //    var survey = await _context.Surveys
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (survey == null)
-        //    {
-        //        return NotFound();
-        //    }
+            try
+            {
+                await this.surveysService.EditAnswerAsync(inputModel.Id, inputModel.Text);
+            }
+            catch (Exception)
+            {
+                return this.CustomCommonError();
+            }
 
-        //    return View(survey);
-        //}
-
-        //// POST: Administration/Surveys/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(string id)
-        //{
-        //    var survey = await _context.Surveys.FindAsync(id);
-        //    _context.Surveys.Remove(survey);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
-
-        //private bool SurveyExists(string id)
-        //{
-        //    return _context.Surveys.Any(e => e.Id == id);
-        //}
+            return this.RedirectToAction(nameof(this.SurveyIndex));
+        }
     }
 }

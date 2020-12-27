@@ -7,6 +7,8 @@
 
     public class NewSurveyInputModel
     {
+        public string Id { get; set; }
+
         [Required(ErrorMessage = "Моля, попълнете заглавие на анкетата!")]
         [MaxLength(250, ErrorMessage ="Заглавието на анкетата не може да бъде по-дълго от 250 символа.")]
         [Display(Name = "Заглавие")]

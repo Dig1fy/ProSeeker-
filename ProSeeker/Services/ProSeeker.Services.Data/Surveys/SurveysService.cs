@@ -150,6 +150,31 @@
             await this.surveysRepository.SaveChangesAsync();
         }
 
+        public async Task EditSurveyAsync(string surveyId, string title)
+        {
+            var survey = await this.surveysRepository.All().FirstOrDefaultAsync(x => x.Id == surveyId);
+            survey.Title = title;
+            this.surveysRepository.Update(survey);
+            await this.surveysRepository.SaveChangesAsync();
+        }
+
+        public async Task EditAnswerAsync(string answerId, string newText)
+        {
+            var existingAnswer = await this.answersRepository.All().FirstOrDefaultAsync(x => x.Id == answerId);
+
+            existingAnswer.Text = newText;
+            this.answersRepository.Update(existingAnswer);
+            await this.answersRepository.SaveChangesAsync();
+        }
+
+        public async Task EditQuestionAsync(string questionId, string newText)
+        {
+            var question = await this.questionsRepository.All().FirstOrDefaultAsync(x => x.Id == questionId);
+            question.Text = newText;
+            this.questionsRepository.Update(question);
+            await this.questionsRepository.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<T>> GetAllAnswersByQuestionIdAsync<T>(string questionId)
         {
             var answers = await this.answersRepository
@@ -216,12 +241,12 @@
             return quizQuestions;
         }
 
-        public async Task<string> GetQuestionTextByIdAsync(string questionId)
+        public async Task<T> GetQuestionByIdAsync<T>(string questionId)
         {
             var questionText = await this.questionsRepository
                 .All()
                 .Where(x => x.Id == questionId)
-                .Select(x => x.Text)
+                .To<T>()
                 .FirstOrDefaultAsync();
 
             return questionText;
@@ -256,6 +281,17 @@
                 .FirstOrDefaultAsync(x => x.UserId == userId);
 
             return userSurvey != null;
+        }
+
+        public async Task<T> GetSingleAnswerAsync<T>(string answerId)
+        {
+            var answer = await this.answersRepository
+                .All()
+                .Where(x => x.Id == answerId)
+                .To<T>()
+                .FirstOrDefaultAsync();
+
+            return answer;
         }
     }
 }

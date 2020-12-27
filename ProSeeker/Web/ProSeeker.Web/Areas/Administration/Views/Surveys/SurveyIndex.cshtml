@@ -22,7 +22,7 @@
             <div class="d-inline float-right m-2">
 
                 <form class="d-inline">
-                    <a class="survey-create-buttons" style="color:rgb(107, 65, 6); margin: 0 auto;" asp-action="Edit" asp-route-id="@survey.Id">Промени анкета</a>
+                    <a class="survey-create-buttons" style="color:rgb(107, 65, 6); margin: 0 auto;" asp-action="EditSurvey" asp-route-surveyId="@survey.Id">Промени анкета</a>
                 </form>
                 <form method="post" class="d-inline">
                     <button type="submit" asp-action="DeleteSurvey" class="survey-create-buttons mx-auto" style="color:rgb(164, 8, 8); margin: 0 auto;">Изтрий анкета</button>
@@ -32,11 +32,11 @@
 
         </div>
         <hr />
-
+        @{ var questionNumber = 1;}
         @foreach (var question in survey.Questions)
         {
             <div class="questions">
-                <h4 class="d-inline ml-3"> <strong>Въпрос: </strong> @question.Number) @question.Text</h4>
+                <h4 class="d-inline ml-3"> <strong>Въпрос: </strong> @questionNumber) @question.Text</h4>
                 <div class="float-right">
                     <form class="d-inline">
                         <button class="survey-create-buttons" asp-action="CreateAnswer">Създай отговор</button>
@@ -54,6 +54,7 @@
                 </div>
             </div>
             <br />
+            questionNumber++;
 
             @foreach (var answer in question.Answers)
             {
@@ -61,8 +62,9 @@
                     <h5 class="d-inline ml-5"> <strong>Отговор: </strong>  @answer.Text</h5>
                     <div class=" float-right ">
                         <form class="d-inline">
-                            <button class="survey-create-buttons" style="color:rgb(107, 65, 6);" asp-action="EditAnswer" asp-route-id="@question.Id">Промени</button>
+                            <button class="survey-create-buttons" style="color:rgb(107, 65, 6);" asp-action="EditAnswer">Промени</button>
                             <input hidden asp-for="@answer.Id" name="answerId" />
+                            <input hidden asp-for="@answer.Text" name="text" />
                         </form>
 
                         <form class="d-inline" method="post">

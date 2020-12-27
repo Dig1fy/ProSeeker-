@@ -1,0 +1,39 @@
+﻿@model ProSeeker.Web.ViewModels.Surveys.Questions.NewQuestionInputModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Промяна на съществуващ въпрос</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditQuestion" method="post">
+
+            <div class="form-group">
+                <label asp-for="@Model.Text" class="control-label"></label>
+                <input asp-for="@Model.Text" class="form-control" />
+                <span asp-validation-for="@Model.Text" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Number" class="control-label"></label>
+                <input asp-for="@Model.Number" disabled class="form-control" />
+                <input hidden name="number" value="@Model.Number" />
+                <span asp-validation-for="@Model.Number" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="custom-submit-button">Промени</button>
+                <input hidden asp-for="@Model.Id" />
+                <input hidden asp-for="@Model.Number" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="SurveyIndex">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
