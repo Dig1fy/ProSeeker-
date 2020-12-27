@@ -2,7 +2,7 @@
 My defense project for ASP.NET Core MVC course at SoftUni (October 2020 @SoftUni)
 <details>
    <summary>
-      # :hammer: Built With: <strong> Click </strong> for more detailed information
+      ## :hammer: Built With: <strong> Click </strong> for more detailed information
    </summary>
 
 * <strong>.NET Core 3.1 <strong>
@@ -25,3 +25,6 @@ My defense project for ASP.NET Core MVC course at SoftUni (October 2020 @SoftUni
 * <strong>xUnit<strong> (for testing) 
 
 </details>
+
+## DB Diagram
+![](https://res.cloudinary.com/zmax/image/upload/v1609037517/81eec76a-fb6c-4ccf-9941-b4fe8bec34f9profilePicture.png)

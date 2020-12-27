@@ -1,13 +1,11 @@
 ﻿namespace Sandbox
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
     using System.Threading.Tasks;
 
     using CommandLine;
-    using Microsoft.AspNetCore.Hosting;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -18,7 +16,6 @@
     using ProSeeker.Data.Models;
     using ProSeeker.Data.Repositories;
     using ProSeeker.Data.Seeding;
-    using ProSeeker.Services.Data;
     using ProSeeker.Services.Messaging;
 
     public static class Program
