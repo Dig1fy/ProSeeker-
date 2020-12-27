@@ -6,8 +6,8 @@
     {
         public int QuestionNumber { get; set; }
 
-        [Required]
-        [MaxLength(250)]
+        [Required(ErrorMessage = "Моля, попълнете полето 'Отговор'!")]
+        [MaxLength(250, ErrorMessage = "Отговорът не може да бъде по-дълъг от 250 символа.")]
         public string AnswerText { get; set; }
     }
 }

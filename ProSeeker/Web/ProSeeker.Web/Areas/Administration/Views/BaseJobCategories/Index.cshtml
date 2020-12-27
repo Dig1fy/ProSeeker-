@@ -7,13 +7,14 @@
 
 <div class="text-center custom-golden-text">
     <h1>Базови категории</h1>
+    <hr />
 </div>
 <form>
     <p class="float-left">
         <button asp-action="Create" class="custom-btn-no-background">Създай нова</button>
     </p>
 </form>
-<table class="table mt-5">
+<table class="table">    
     <thead>
         <tr class="custom-table-heading-row">
             <th>
@@ -40,7 +41,7 @@
                 </td>
                 <td>
                     <label class="custom-input-text">@category.Description</label>
-                </td>  
+                </td>
                 <td>
                     <time class="custom-input-text" datetime="@category.CreatedOn.ToString("O")"></time>
                 </td>
@@ -49,9 +50,9 @@
                 </td>
                 <td>
                     <form>
-                        <button class="custom-btn-no-background-v2" asp-area="Administration" asp-action="Edit" asp-route-id="@category.Id">Промени</button>                        
+                        <button class="custom-btn-no-background-v2" asp-area="Administration" asp-action="Edit" asp-route-id="@category.Id">Промени</button>
                     </form>
-                    <form method="post">
+                    <form method="post" id="deleteCategoryForm-@category.Id">
                         <button class="custom-btn-no-background-v2" asp-action="Delete" asp-route-id="@category.Id">Изтрий</button>
                     </form>
                 </td>

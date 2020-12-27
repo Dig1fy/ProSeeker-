@@ -35,7 +35,23 @@
         </li>
         if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
         {
-            <li class="nav-item">
+            <li class="btn-group">
+
+                <i id="fas-pic" class="fas fa-chevron-circle-down" style="padding-right: 10px; font-size:17px; margin:auto 0;" data-toggle="dropdown">
+                   Админ панел
+                </i>
+                <div class="dropdown-menu custom-dropdown-content" style="margin-top:-8px;">
+
+                    <a class="nav-link text-dark dropdown-item" asp-area="Administration" asp-controller="BaseJobCategories" asp-action="Index" title="Admin">Базови категории</a>
+                    <a class="nav-link text-dark dropdown-item" asp-area="Administration" asp-controller="JobCategories" asp-action="Index" title="Admin">Под-категории</a>
+                    <a class="nav-link text-dark dropdown-item" asp-area="Administration" asp-controller="Surveys" asp-action="SurveyIndex" title="Admin">Анкети</a>
+                </div>
+            </li>
+
+
+
+
+            @*<li class="nav-item">
                 <a class="nav-link text-dark" asp-area="Administration" asp-controller="Surveys" asp-action="Index" title="Admin">Survey</a>
             </li>
             <li class="nav-item">
@@ -46,7 +62,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-area="Administration" asp-controller="JobCategories" asp-action="Index" title="Admin">JobCategories</a>
-            </li>
+            </li>*@
         }
     }
     else

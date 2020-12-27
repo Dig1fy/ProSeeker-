@@ -1,0 +1,56 @@
+﻿@model ProSeeker.Web.ViewModels.Surveys.AllSurveysViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="text-center">
+    <h1>Анкети</h1>
+</div>
+
+<a asp-action="Create">Create New</a>
+<hr />
+@foreach (var survey in Model.Surveys)
+{
+    <h3 class="d-inline"> Заглавие на анкета: @survey.Title</h3>
+    <p class="d-inline">
+
+        <a asp-action="Delete" asp-route-id="@survey.Id">Изтрий анкета</a>
+        <a asp-action="Edit" asp-route-id="@survey.Id">Промени анкета</a>
+    </p>
+
+    @foreach (var question in survey.Questions)
+    {
+        <h3 class="d-inline"> Въпрос: @question.Number) @question.Text</h3>
+        <p class="d-inline">
+
+            <a asp-action="DeleteQuestion" asp-route-id="@question.Id">Изтрий въпрос</a>
+            <a asp-action="EditQuestion" asp-route-id="@question.Id">Промени въпрос</a>
+        </p>
+        <hr />
+
+        @foreach (var answer in question.Answers)
+        {
+            <h3 class="d-inline"> Отговор:  @answer.Text</h3>
+            <p class="d-inline">
+
+                <a asp-action="DeleteAnswer" asp-route-id="@question.Id">Изтрий отговор</a>
+                <a asp-action="EditAnswer" asp-route-id="@question.Id">Промени отговор</a>
+            </p>
+            <hr />
+        }
+
+        <div class="float-lg-right">
+            <form>
+                <a asp-action="CreateAnswer" asp-route-surveyId="@survey.Id" asp-route-questionId="@question.Id">Създай отговор</a>
+            </form>
+        </div>
+    }
+
+    <div class="float-lg-right">
+        <form>
+            <a asp-action="CreateQuestion" asp-route-id="@survey.Id">Създай въпрос</a>
+        </form>
+    </div>
+
+
+}

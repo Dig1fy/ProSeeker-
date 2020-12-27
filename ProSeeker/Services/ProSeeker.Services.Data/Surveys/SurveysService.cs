@@ -9,6 +9,9 @@
     using ProSeeker.Data.Models;
     using ProSeeker.Data.Models.Quiz;
     using ProSeeker.Services.Mapping;
+    using ProSeeker.Web.ViewModels.Quizzes;
+    using ProSeeker.Web.ViewModels.Surveys;
+    using ProSeeker.Web.ViewModels.Surveys.Questions;
 
     public class SurveysService : ISurveysService
     {
@@ -47,6 +50,66 @@
             await this.userSurveysRepository.SaveChangesAsync();
         }
 
+        public async Task<string> CreateQuestionAsync(NewQuestionInputModel inputModel)
+        {
+            var newQuestion = new Question
+            {
+                Number = inputModel.Number,
+                SurveyId = inputModel.SurveyId,
+                Text = inputModel.Text,
+            };
+
+            await this.questionsRepository.AddAsync(newQuestion);
+            await this.questionsRepository.SaveChangesAsync();
+
+            return newQuestion.Id;
+        }
+
+        public async Task<string> CreateSurveyAsync(NewSurveyInputModel inputModel)
+        {
+            var newSurvey = new Survey
+            {
+                Title = inputModel.Title,
+            };
+
+            await this.surveysRepository.AddAsync(newSurvey);
+            await this.surveysRepository.SaveChangesAsync();
+
+            return newSurvey.Id;
+        }
+
+        public async Task<IEnumerable<T>> GetAllAnswersByQuestionIdAsync<T>(string questionId)
+        {
+            var answers = await this.answersRepository
+                .All()
+                .Where(x => x.QuestionId == questionId)
+                .To<T>()
+                .ToListAsync();
+
+            return answers;
+        }
+
+        public async Task<IEnumerable<T>> GetAllQuestionsBySurveyIdAsync<T>(string surveyId)
+        {
+            var questions = await this.questionsRepository
+                .All()
+                .Where(x => x.SurveyId == surveyId)
+                .To<T>()
+                .ToListAsync();
+
+            return questions;
+        }
+
+        public async Task<IEnumerable<T>> GetAllSurveysAsync<T>()
+        {
+            var surveys = await this.surveysRepository
+                .All()
+                .To<T>()
+                .ToListAsync();
+
+            return surveys;
+        }
+
         public async Task<IEnumerable<T>> GetAnswersByQuestionIdAsync<T>(string questionId)
         {
             var answers = await this.answersRepository
@@ -56,6 +119,16 @@
                 .ToListAsync();
 
             return answers;
+        }
+
+        public Task<int> GetQuestionNumberBySurveyIdAsync(string surveyId)
+        {
+            var questionNumber = this.questionsRepository
+                .All()
+                .Where(x => x.SurveyId == surveyId)
+                .CountAsync();
+
+            return questionNumber;
         }
 
         public async Task<IEnumerable<T>> GetQuestionsBySurveyIdAsync<T>(string surveyId)
@@ -69,6 +142,17 @@
             return quizQuestions;
         }
 
+        public async Task<string> GetQuestionTextByIdAsync(string questionId)
+        {
+            var questionText = await this.questionsRepository
+                .All()
+                .Where(x => x.Id == questionId)
+                .Select(x => x.Text)
+                .FirstOrDefaultAsync();
+
+            return questionText;
+        }
+
         public async Task<T> GetSurveyByIdAsync<T>(string surveyId)
         {
             var survey = await this.surveysRepository
@@ -78,6 +162,17 @@
                 .FirstOrDefaultAsync();
 
             return survey;
+        }
+
+        public async Task<string> GetSurveyTitleByIdAsync(string surveyId)
+        {
+            var surveyTitle = await this.surveysRepository
+                .All()
+                .Where(x => x.Id == surveyId)
+                .Select(x => x.Title)
+                .FirstOrDefaultAsync();
+
+            return surveyTitle;
         }
 
         public async Task<bool> HasItBeenCompletedByThisUser(string userId)

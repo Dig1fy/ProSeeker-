@@ -29,7 +29,8 @@
             var adsRepository = new EfDeletableEntityRepository<Ad>(this.DbContext);
             var offersRepository = new EfRepository<Offer>(this.DbContext);
             var categoriesRepository = new EfDeletableEntityRepository<JobCategory>(this.DbContext);
-            this.service = new CategoriesService(categoriesRepository, adsRepository, offersRepository);
+            var specialistssRepository = new EfDeletableEntityRepository<Specialist_Details>(this.DbContext);
+            this.service = new CategoriesService(categoriesRepository, adsRepository, offersRepository, specialistssRepository);
             this.InitializeRepositoriesData();
         }
 
