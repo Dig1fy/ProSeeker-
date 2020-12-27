@@ -77,24 +77,6 @@ namespace ProSeeker.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Settings",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedOn = table.Column<DateTime>(nullable: false),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    Value = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Settings", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Surveys",
                 columns: table => new
                 {
@@ -917,11 +899,6 @@ namespace ProSeeker.Data.Migrations
                 column: "SpecialistDetailsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Settings_IsDeleted",
-                table: "Settings",
-                column: "IsDeleted");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Specialist_Details_IsDeleted",
                 table: "Specialist_Details",
                 column: "IsDeleted");
@@ -998,9 +975,6 @@ namespace ProSeeker.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Service");
-
-            migrationBuilder.DropTable(
-                name: "Settings");
 
             migrationBuilder.DropTable(
                 name: "UsersConversations");

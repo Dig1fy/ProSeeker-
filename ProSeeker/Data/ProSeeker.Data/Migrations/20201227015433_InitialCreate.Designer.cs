@@ -10,7 +10,7 @@ using ProSeeker.Data;
 namespace ProSeeker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201226221625_InitialCreate")]
+    [Migration("20201227015433_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -899,38 +899,6 @@ namespace ProSeeker.Data.Migrations
                     b.HasIndex("SpecialistDetailsId");
 
                     b.ToTable("Service");
-                });
-
-            modelBuilder.Entity("ProSeeker.Data.Models.Setting", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.ToTable("Settings");
                 });
 
             modelBuilder.Entity("ProSeeker.Data.Models.Specialist_Details", b =>

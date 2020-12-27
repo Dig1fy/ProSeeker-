@@ -118,7 +118,6 @@
 
             // Register all application services (Dependency container)
             services.AddTransient<IEmailSender>(x => new SendGridEmailSender("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"));
-            services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IHomeService, HomeService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
             services.AddTransient<ICloudinaryApplicationService, CloudinaryApplicationService>();

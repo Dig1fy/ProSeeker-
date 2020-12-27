@@ -25,8 +25,6 @@
         {
         }
 
-        public DbSet<Setting> Settings { get; set; }
-
         public DbSet<Opinion> Opinions { get; set; }
 
         public DbSet<JobCategory> JobCategories { get; set; }
