@@ -64,7 +64,8 @@
                         <button class="custom-btn-no-background-v2" asp-area="Administration" asp-action="Edit" asp-route-id="@category.Id">Промени</button>
                     </form>
                     <form method="post" class="mt-1">
-                        <button class="custom-btn-no-background-v2" asp-action="Delete" asp-route-id="@category.Id">Изтрий</button>
+                        <button class="custom-btn-no-background-v2" asp-action="Delete">Изтрий</button>
+                        <input hidden asp-for="@category.Id" name="categoryId" />
                     </form>
                 </td>
             </tr>

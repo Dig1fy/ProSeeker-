@@ -1,5 +1,6 @@
 ﻿namespace ProSeeker.Web.Areas.Administration.Controllers
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
@@ -65,6 +66,36 @@
             return this.RedirectToAction(nameof(this.SurveyIndex));
         }
 
+        [HttpPost]
+        public async Task<IActionResult> DeleteSurvey(string surveyId)
+        {
+            if (surveyId == null)
+            {
+                return this.CustomNotFound();
+            }
+
+            try
+            {
+                // If we want to delete a survey, first we will have to delete all answers (by given question id),
+                // then all questions (by surveyId) and finally the survey itself
+                var allSurveyQuestions = await this.surveysService.GetAllQuestionsBySurveyIdAsync<QuestionViewModel>(surveyId);
+
+                foreach (var question in allSurveyQuestions)
+                {
+                    await this.surveysService.DeleteAllAnswersAsync(question.Id);
+                }
+
+                await this.surveysService.DeleteAllQuestionsAsync(surveyId);
+                await this.surveysService.DeleteSurveyAsync(surveyId);
+            }
+            catch (Exception)
+            {
+                return this.CustomNotFound();
+            }
+
+            return this.RedirectToAction(nameof(this.SurveyIndex));
+        }
+
         // =============================================== QUESTION ===============================================
         public async Task<IActionResult> CreateQuestion(string id)
         {
@@ -102,6 +133,28 @@
             return this.RedirectToAction(nameof(this.SurveyIndex));
         }
 
+        [HttpPost]
+        public async Task<IActionResult> DeleteQuestion(string questionId)
+        {
+            if (questionId == null)
+            {
+                return this.CustomNotFound();
+            }
+
+            try
+            {
+                // before deleting the question, we'll have to delete all of it's answers
+                await this.surveysService.DeleteAllAnswersAsync(questionId);
+                await this.surveysService.DeleteQuestionAsync(questionId);
+            }
+            catch (Exception)
+            {
+                return this.CustomNotFound();
+            }
+
+            return this.RedirectToAction(nameof(this.SurveyIndex));
+        }
+
         // =============================================== Answer ===============================================
         public async Task<IActionResult> CreateAnswer(string surveyId, string questionId)
         {
@@ -115,10 +168,10 @@
 
             var model = new NewAnswerInputModel
             {
-               SurveyTitle = surveyTitle,
-               SurveyId = surveyId,
-               QuestionId = questionId,
-               QuestionText = questionText,
+                SurveyTitle = surveyTitle,
+                SurveyId = surveyId,
+                QuestionId = questionId,
+                QuestionText = questionText,
             };
 
             return this.View(model);
@@ -142,7 +195,25 @@
             return this.RedirectToAction(nameof(this.SurveyIndex));
         }
 
+        [HttpPost]
+        public async Task<IActionResult> DeleteAnswer(string answerId)
+        {
+            if (answerId == null)
+            {
+                return this.CustomNotFound();
+            }
 
+            try
+            {
+                await this.surveysService.DeleteAnswerAsync(answerId);
+            }
+            catch (Exception)
+            {
+                return this.CustomNotFound();
+            }
+
+            return this.RedirectToAction(nameof(this.SurveyIndex));
+        }
 
         // GET: Administration/Surveys/Edit/5
         //public async Task<IActionResult> Edit(string id)

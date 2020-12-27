@@ -1,10 +1,10 @@
 ﻿namespace ProSeeker.Services.Data.Quizz
 {
-    using ProSeeker.Web.ViewModels.Quizzes;
-    using ProSeeker.Web.ViewModels.Surveys;
-    using ProSeeker.Web.ViewModels.Surveys.Questions;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
+    using ProSeeker.Web.ViewModels.Surveys;
+    using ProSeeker.Web.ViewModels.Surveys.Questions;
 
     public interface ISurveysService
     {
@@ -35,5 +35,15 @@
         Task<string> GetQuestionTextByIdAsync(string questionId);
 
         Task<string> CreateAnswerAsync(string questionId, string answerText);
+
+        Task DeleteSurveyAsync(string surveyId);
+
+        Task DeleteQuestionAsync(string questionId);
+
+        Task DeleteAnswerAsync(string answerId);
+
+        Task DeleteAllQuestionsAsync(string surveyId);
+
+        Task DeleteAllAnswersAsync(string questionId);
     }
 }

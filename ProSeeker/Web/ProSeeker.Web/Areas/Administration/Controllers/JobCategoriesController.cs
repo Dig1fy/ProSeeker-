@@ -144,15 +144,15 @@
             return this.RedirectToAction(nameof(this.Index));
         }
 
-        // GET: Administration/JobCategories/Delete/5
-        public async Task<IActionResult> Delete(int id)
+        [HttpPost]
+        public async Task<IActionResult> Delete(int categoryId)
         {
-            if (id == 0)
+            if (categoryId == 0)
             {
                 return this.CustomNotFound();
             }
 
-            var countOfAllSpecialistsInThisCategory = await this.categoriesService.GetSpecialistsCountInCategoryAsync(id);
+            var countOfAllSpecialistsInThisCategory = await this.categoriesService.GetSpecialistsCountInCategoryAsync(categoryId);
 
             if (countOfAllSpecialistsInThisCategory != 0)
             {
@@ -162,7 +162,7 @@
 
             try
             {
-                await this.categoriesService.DeleteByIdAsync(id);
+                await this.categoriesService.DeleteByIdAsync(categoryId);
             }
             catch (Exception)
             {

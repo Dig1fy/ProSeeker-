@@ -92,6 +92,64 @@
             return newSurvey.Id;
         }
 
+        public async Task DeleteAllAnswersAsync(string questionId)
+        {
+            var answers = await this.answersRepository
+                .AllAsNoTrackingWithDeleted()
+                .Where(x => x.QuestionId == questionId)
+                .ToListAsync();
+
+            foreach (var answer in answers)
+            {
+                this.answersRepository.Delete(answer);
+                await this.answersRepository.SaveChangesAsync();
+            }
+        }
+
+        public async Task DeleteAllQuestionsAsync(string surveyId)
+        {
+            var questions = await this.questionsRepository
+                .AllAsNoTrackingWithDeleted()
+                .Where(x => x.SurveyId == surveyId)
+                .ToListAsync();
+
+            foreach (var question in questions)
+            {
+                this.questionsRepository.Delete(question);
+                await this.questionsRepository.SaveChangesAsync();
+            }
+        }
+
+        public async Task DeleteAnswerAsync(string answerId)
+        {
+            var answer = await this.answersRepository
+                .AllAsNoTrackingWithDeleted()
+                .FirstOrDefaultAsync(x => x.Id == answerId);
+
+            this.answersRepository.Delete(answer);
+            await this.answersRepository.SaveChangesAsync();
+        }
+
+        public async Task DeleteQuestionAsync(string questionId)
+        {
+            var question = await this.questionsRepository
+                .AllAsNoTrackingWithDeleted()
+                .FirstOrDefaultAsync(x => x.Id == questionId);
+
+            this.questionsRepository.Delete(question);
+            await this.questionsRepository.SaveChangesAsync();
+        }
+
+        public async Task DeleteSurveyAsync(string surveyId)
+        {
+            var survey = await this.surveysRepository
+                .AllAsNoTrackingWithDeleted()
+                .FirstOrDefaultAsync(x => x.Id == surveyId);
+
+            this.surveysRepository.Delete(survey);
+            await this.surveysRepository.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<T>> GetAllAnswersByQuestionIdAsync<T>(string questionId)
         {
             var answers = await this.answersRepository
