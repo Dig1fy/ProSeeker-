@@ -1,16 +1,11 @@
 ﻿namespace ProSeeker.Web.Areas.Administration.Controllers
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.EntityFrameworkCore;
     using ProSeeker.Common;
-    using ProSeeker.Data;
-    using ProSeeker.Data.Models;
     using ProSeeker.Services.Data.BaseJobCategories;
     using ProSeeker.Services.Data.CategoriesService;
     using ProSeeker.Web.Controllers;
@@ -18,7 +13,7 @@
     using ProSeeker.Web.ViewModels.Categories;
 
     [Area("Administration")]
-    [Authorize (Roles =GlobalConstants.AdministratorRoleName)]
+    [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     public class BaseJobCategoriesController : BaseController
     {
         private const string NotAllowed = "NotAllowed";

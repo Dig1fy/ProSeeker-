@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 <div class="text-center">
-    <h1>Анкети</h1>
+    <h1 class="d-inline custom-text-shadows" style="font-weight:bold; font-size:25px;">Анкети</h1>
 </div>
 
 <style>
@@ -16,8 +16,15 @@
 @foreach (var survey in Model.Surveys)
 {
     <div style="background-color:rgba(163, 250, 244, 0.00);">
-        <div class="text-center mx-auto">
-            <h2 class="d-inline"> Заглавие на анкета: @survey.Title</h2>
+        <div class="">
+            <div class="d-inline">
+                <p class="d-inline">
+                    <strong class="d-inline custom-golden-text" style="font-size:18px; font-weight:400;">Заглавие на анкета:</strong>
+                </p>
+                <p class="d-inline custom-text-shadows" style="font-weight:bold; font-size:19px;">
+                    @survey.Title
+                </p>
+            </div>
 
             <div class="d-inline float-right m-2">
 
@@ -29,14 +36,22 @@
                     <input hidden asp-for="@survey.Id" name="surveyId" />
                 </form>
             </div>
-
         </div>
         <hr />
+
         @{ var questionNumber = 1;}
+
         @foreach (var question in survey.Questions)
         {
             <div class="questions">
-                <h4 class="d-inline ml-3"> <strong>Въпрос: </strong> @questionNumber) @question.Text</h4>
+                <div class="d-inline">
+                    <p class="d-inline ml-3">
+                        <strong class="d-inline custom-golden-text" style="font-size:18px; font-weight:400;">Въпрос:</strong>
+                    </p>
+                    <p class="d-inline custom-text-shadows" style="font-weight:500; font-size:19px;">
+                        @questionNumber)  @question.Text
+                    </p>
+                </div>
                 <div class="float-right">
                     <form class="d-inline">
                         <button class="survey-create-buttons" asp-action="CreateAnswer">Създай отговор</button>
@@ -59,7 +74,15 @@
             @foreach (var answer in question.Answers)
             {
                 <div class="answers">
-                    <h5 class="d-inline ml-5"> <strong>Отговор: </strong>  @answer.Text</h5>
+                    
+                    <div class="d-inline">
+                        <p class="d-inline ml-5">
+                            <strong class="d-inline custom-golden-text" style="font-size:18px; font-weight:400;">Отговор:</strong>
+                        </p>
+                        <p class="d-inline custom-text-shadows" style="font-weight:500; font-size:19px;">
+                            @answer.Text
+                        </p>
+                    </div>
                     <div class=" float-right ">
                         <form class="d-inline">
                             <button class="survey-create-buttons" style="color:rgb(107, 65, 6);" asp-action="EditAnswer">Промени</button>
@@ -83,7 +106,5 @@
             </form>
         </div>
         <br /> <br /><br /> <br /> <br />
-
-
     </div>
 }

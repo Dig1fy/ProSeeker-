@@ -203,6 +203,7 @@
         {
             var surveys = await this.surveysRepository
                 .All()
+                .OrderByDescending(x => x.CreatedOn)
                 .To<T>()
                 .ToListAsync();
 

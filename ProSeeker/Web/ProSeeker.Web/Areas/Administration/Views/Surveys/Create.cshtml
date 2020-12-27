@@ -1,31 +1,29 @@
 ﻿@model ProSeeker.Web.ViewModels.Surveys.NewSurveyInputModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Създаване на анкета";
 }
 
-<h1>Create</h1>
-
-<h4>Survey</h4>
+<h2 class="mx-auto text-center custom-golden-text">Създаване на анкета</h2>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+<div class="row text-center">
+    <div class="col-md-5 mx-auto mt-2">
+        <form asp-action="Create" class="d-inline">
             <div class="form-group">
-                <label asp-for="@Model.Title" class="control-label"></label>
-                <input asp-for="@Model.Title" class="form-control" />
-                <span asp-validation-for="@Model.Title" class="text-danger"></span>
-            </div>   
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="@Model.Title" class="control-label custom-input-text"></label>
+                <input asp-for="@Model.Title" class="form-control custom-rounded-input-field custom-input-text" />
+                <span asp-validation-for="@Model.Title" class="text-danger custom-input-text"></span>
             </div>
+            <div class="form-group d-inline">
+                <input type="submit" value="Създай" style="height:40px; font-size:16px;" class="custom-btn-no-background col-md-5 mt-4" />
+            </div>
+        </form>
+        <form class="d-inline">
+            <button class="custom-btn-no-background col-md-5 mt-4" style="height:40px; font-size:16px;" asp-action="SurveyIndex">Назад</button>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="SurveyIndex">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

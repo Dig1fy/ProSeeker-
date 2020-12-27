@@ -4,28 +4,34 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Създаване на отговор към въпрос :@Model.QuestionText / анкета: @Model.SurveyTitle</h1>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateAnswer">
-
-            <div class="form-group">
-                <label asp-for="@Model.Text" class="control-label"></label>
-                <input asp-for="@Model.Text" class="form-control" />
-                <span asp-validation-for="@Model.Text" class="text-danger"></span>
-            </div>
-                <input hidden name="surveyId" value="@Model.SurveyId" />
-                <input hidden name="questionId" value="@Model.QuestionId" />
-            <div class="form-group">
-                <input type="submit" value="Създай" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="text-center mx-auto">
+    <h3 class="custom-golden-text" font-weight:bold;">Създаване на отговор към: </h3><hr />
+    <div style="color:rgb(42, 93, 165); font-size:19px;" class="custom-golden-text d-inline">
+        <p class="custom-golden-text d-inline" style="font-size:19px;">анкета:</p> @Model.SurveyTitle
+    </div><br />
+    <div style="color:rgb(42, 93, 165); font-size:19px;" class="custom-golden-text d-inline">
+    <p class="custom-golden-text d-inline" style="font-size: 19px;">въпрос:</p> @Model.QuestionText 
     </div>
 </div>
-
-<div>
-    <a asp-action="SurveyIndex">Back to List</a>
+<hr />
+<div class="row text-center">
+    <div class="col-md-5 mx-auto mt-2">
+        <form asp-action="CreateAnswer" class="d-inline">
+            <div class="form-group">
+                <label asp-for="@Model.Text" class="control-label custom-input-text"></label>
+                <input asp-for="@Model.Text" class="form-control custom-rounded-input-field custom-input-text" />
+                <span asp-validation-for="@Model.Text" class="text-danger"></span>
+            </div>
+            <input hidden name="surveyId" value="@Model.SurveyId" />
+            <input hidden name="questionId" value="@Model.QuestionId" />
+            <div class="form-group d-inline">
+                <input type="submit" value="Създай" style="height:40px; font-size:16px;" class="custom-btn-no-background col-md-5 mt-4" />
+            </div>
+        </form>
+        <form class="d-inline">
+            <button class="custom-btn-no-background col-md-5 mt-4" style="height:40px; font-size:16px;" asp-action="SurveyIndex">Назад</button>
+        </form>
+    </div>
 </div>
 
 @section Scripts {
