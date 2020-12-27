@@ -24,7 +24,7 @@
         [MaxLength(500)]
         public string Description { get; set; }
 
-        public int JobCategoryId { get; set; }
+        public int BaseJobCategoryId { get; set; }
 
         public virtual BaseJobCategory BaseJobCategory { get; set; }
 

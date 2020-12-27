@@ -119,8 +119,8 @@
     font-weight: bold;
     color: rgb(10, 85, 105);
     box-shadow: inset 0px 0px 0px 0px rgb(23, 24, 25), 1px 0px 0px 0px rgba(115,171,185,1);
-    border-top-color: rgb(10, 85, 105);
-    border-top: 0.1px solid;
+    /*border-top-color: rgb(10, 85, 105);*/
+    /*border-top: 0.1px solid;*/
 }
 
     .custom-btn-no-background:active,
@@ -133,5 +133,26 @@
         color: rgb(6, 74, 26);
         border-top-color: rgb(10, 85, 105);
         border-top: 0.1px solid;
+        box-shadow: inset 0px 0px 0px 0px rgb(23, 24, 25), 3px 3px 3px 0px rgba(115,171,185,1);
+    }
+
+.custom-btn-no-background-v2 {
+    background-color: none;
+    border-radius: 25px 25px;
+    background: none;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    color: rgb(10, 85, 105);
+}
+
+    .custom-btn-no-background-v2:active,
+    .custom-btn-no-background-v2:focus {
+        outline: none;
+    }
+
+    .custom-btn-no-background-v2:hover {
+        text-shadow: 1px 1px 1px rgba(20, 82, 193, 0.37);
+        color: rgb(6, 74, 26);
         box-shadow: inset 0px 0px 0px 0px rgb(23, 24, 25), 3px 3px 3px 0px rgba(115,171,185,1);
     }

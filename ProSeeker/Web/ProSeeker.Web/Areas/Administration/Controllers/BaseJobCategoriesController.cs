@@ -117,7 +117,7 @@
                 return this.CustomNotFound();
             }
 
-            var countOfAllCategoriesInTheBaseCategory = await this.categoriesService.GetCategiesCountIsInJobCategoryAsync(id);
+            var countOfAllCategoriesInTheBaseCategory = await this.categoriesService.GetCategiesCountInBaseJobCategoryAsync(id);
 
             if (countOfAllCategoriesInTheBaseCategory != 0)
             {

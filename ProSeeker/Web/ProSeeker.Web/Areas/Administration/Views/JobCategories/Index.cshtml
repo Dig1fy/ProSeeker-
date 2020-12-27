@@ -1,0 +1,74 @@
+﻿@model ProSeeker.Web.ViewModels.Categories.AllSubCategoriesViewModel
+@{
+    ViewData["Title"] = "Категории";
+}
+
+<div class="pb-2">
+    <div class="text-center custom-golden-text">
+        <h1>Категории</h1>
+    </div>
+    <form>
+        <p class="float-left mb-2">
+            <button asp-action="Create" class="custom-btn-no-background">Създай нова</button>
+        </p>
+    </form>
+</div>
+
+<table class="table mt-5">
+    <thead>
+        <tr class="custom-table-heading-row">
+            <th scope="col">
+                <label class="custom-textarea-text">#</label>
+            </th>
+            <th scope="col">
+                <label class="custom-textarea-text">Снимка</label>
+            </th>
+            <th scope="col">
+                <label class="custom-textarea-text">Категория</label>
+            </th>
+            <th scope="col" style="min-width: 200px;">
+                <label class="custom-textarea-text">Описание</label>
+            </th>
+            <th scope="col">
+                <label class="custom-textarea-text">Дата на създаване</label>
+            </th>
+            <th scope="col">
+                <label class="custom-textarea-text">Последна промяна</label>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ var counter = 1;}
+        @foreach (var category in Model.Categories)
+        {
+            <tr class="custom-table-row col-md-12">
+                <th scope="row">@counter</th>
+                <td>
+                    <img class="media-object" width="120" height="80" style="border-radius:5px 5px;" src="@category.PictureUrl" alt="...">
+                </td>
+                <td>
+                    <label class="custom-input-text">@category.Name</label>
+                </td>
+                <td style="min-width: 200px;">
+                    <label style="min-width:200px;" class="custom-input-text">@category.Description</label>
+                </td>
+                <td>
+                    <time class="custom-input-text" datetime="@category.CreatedOn.ToString("O")"></time>
+                </td>
+                <td>
+                    <time class="custom-input-text" datetime="@category.ModifiedOn?.ToString("O")"></time>
+                </td>
+                <td>
+                    <form>
+                        <button class="custom-btn-no-background-v2" asp-area="Administration" asp-action="Edit" asp-route-id="@category.Id">Промени</button>
+                    </form>
+                    <form method="post" class="mt-1">
+                        <button class="custom-btn-no-background-v2" asp-action="Delete" asp-route-id="@category.Id">Изтрий</button>
+                    </form>
+                </td>
+            </tr>
+            counter++;
+        }
+    </tbody>
+</table>

@@ -144,7 +144,7 @@ namespace ProSeeker.Data.Migrations
                     Name = table.Column<string>(maxLength: 70, nullable: false),
                     PictureUrl = table.Column<string>(maxLength: 500, nullable: true),
                     Description = table.Column<string>(maxLength: 500, nullable: false),
-                    BaseJobCategoryId = table.Column<int>(nullable: true)
+                    BaseJobCategoryId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

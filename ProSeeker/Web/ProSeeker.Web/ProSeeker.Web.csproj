@@ -116,6 +116,9 @@
     <Content Update="wwwroot\images\customer.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Update="wwwroot\images\defaultCategory.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="wwwroot\images\ProfileImage\defaultUser.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -22,6 +22,8 @@
 
         public const string HomePageRedirect = "/";
 
+        public const string InvalidProfilePictureMessage = "Невалиден формат на снимка. Поддържаме jpg, jpeg и png файлове.";
+
         // Paging
         public const int ItemsPerPage = 8;
 

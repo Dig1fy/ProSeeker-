@@ -2,6 +2,7 @@
 {
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;
+    using System;
 
     public class JobCategoriesViewModel : IMapFrom<JobCategory>
     {
@@ -15,5 +16,15 @@
 
         public string ShortDescription =>
             this.Description.Length > 30 ? this.Description.Substring(0, 30) + "..." : this.Description;
+
+        public int BaseJobCategoryId { get; set; }
+
+        public DateTime CreatedOn { get; set; }
+
+        public DateTime? ModifiedOn { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        public DateTime? DeletedOn { get; set; }
     }
 }

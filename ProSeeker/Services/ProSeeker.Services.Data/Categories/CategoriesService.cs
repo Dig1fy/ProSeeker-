@@ -1,5 +1,6 @@
 ﻿namespace ProSeeker.Services.Data.CategoriesService
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -8,24 +9,28 @@
     using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;
+    using ProSeeker.Web.ViewModels.Categories;
 
     public class CategoriesService : ICategoriesService
     {
         private readonly IDeletableEntityRepository<JobCategory> categoriesRepository;
         private readonly IDeletableEntityRepository<Ad> adsRepository;
         private readonly IRepository<Offer> offersRepository;
+        private readonly IDeletableEntityRepository<Specialist_Details> specialistsRepository;
 
         public CategoriesService(
             IDeletableEntityRepository<JobCategory> categoriesRepository,
             IDeletableEntityRepository<Ad> adsRepository,
-            IRepository<Offer> offersRepository)
+            IRepository<Offer> offersRepository,
+            IDeletableEntityRepository<Specialist_Details> specialistsRepository)
         {
             this.categoriesRepository = categoriesRepository;
             this.adsRepository = adsRepository;
             this.offersRepository = offersRepository;
+            this.specialistsRepository = specialistsRepository;
         }
 
-        public async Task<int> GetCategiesCountIsInJobCategoryAsync(int baseJobCategoryId)
+        public async Task<int> GetCategiesCountInBaseJobCategoryAsync(int baseJobCategoryId)
         {
             var isAnyRelatedJobCategory = await this.categoriesRepository
                 .All()
@@ -78,6 +83,62 @@
                 .FirstOrDefaultAsync();
 
             return category.Name;
+        }
+
+        public async Task<int> CreateAsync(CategoryInputModel inputModel)
+        {
+            var category = new JobCategory
+            {
+                BaseJobCategoryId = inputModel.BaseJobCategoryId,
+                Description = inputModel.Description,
+                Name = inputModel.Name,
+                PictureUrl = inputModel.PictureUrl,
+            };
+
+            await this.categoriesRepository.AddAsync(category);
+            await this.categoriesRepository.SaveChangesAsync();
+
+            return category.Id;
+        }
+
+        public async Task UpdateAsync(CategoryInputModel inputModel)
+        {
+            var category = await this.categoriesRepository.All().FirstOrDefaultAsync(x => x.Id == inputModel.Id);
+
+            if (category == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            category.Description = inputModel.Description;
+            category.Name = inputModel.Name;
+            category.PictureUrl = inputModel.PictureUrl;
+
+            this.categoriesRepository.Update(category);
+            await this.categoriesRepository.SaveChangesAsync();
+        }
+
+        public async Task<int> GetSpecialistsCountInCategoryAsync(int categoryId)
+        {
+            var specialistsCount = await this.specialistsRepository
+                .All()
+                .Where(x => x.JobCategoryId == categoryId)
+                .CountAsync();
+
+            return specialistsCount;
+        }
+
+        public async Task DeleteByIdAsync(int categoryId)
+        {
+            var category = await this.categoriesRepository.AllAsNoTrackingWithDeleted().FirstOrDefaultAsync(x => x.Id == categoryId);
+
+            if (category == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            this.categoriesRepository.Delete(category);
+            await this.categoriesRepository.SaveChangesAsync();
         }
     }
 }

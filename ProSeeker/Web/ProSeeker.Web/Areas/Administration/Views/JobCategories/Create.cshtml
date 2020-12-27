@@ -1,0 +1,69 @@
+﻿@model ProSeeker.Web.ViewModels.Categories.CategoryInputModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+<div class="text-center">
+    <h2 class="mx-auto text-center custom-golden-text">Създаване на категория</h2>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-12 mx-auto text-center">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div class="col-md-6 text-center mx-auto">
+                <div class="form-group">
+                    <div class="image-area col-md-10 text-center mx-auto">
+                        <label for="uploadCategoryImage" style="cursor:pointer;">
+                            <img src="~/images/defaultCategory.png" id="categoryImageResult" alt="" class="">
+                        </label>
+                        <input hidden id="uploadCategoryImage" class="col-md-10" name="imageFile" type="file" onchange="RenderCategoryImage();">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Name" class="control-label custom-input-text"></label>
+                    <input asp-for="@Model.Name" class="form-control custom-rounded-input-field custom-input-text" />
+                    <span asp-validation-for="@Model.Name" class="text-danger custom-input-text"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Description" class="control-label custom-input-text"></label>
+                    <input asp-for="@Model.Description" class="form-control custom-rounded-input-field custom-input-text" />
+                    <span asp-validation-for="@Model.Description" class="text-danger custom-input-text"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.BaseJobCategoryId" class="custom-input-text"></label>
+                    <select id="categorySelector" asp-for="@Model.BaseJobCategoryId" class="form-control custom-rounded-input-field custom-textarea-text" 
+                            asp-items="@Model.BaseJobCategories.Select(c => new SelectListItem() { Text = c.CategoryName, Value = c.Id.ToString() })
+          .ToList(); ">
+                        <option disabled selected class="form-control custom-rounded-input-field custom-textarea-text"> - Изберете базова категория - </option>
+                    </select>
+                    <span asp-validation-for="@Model.BaseJobCategoryId" class="text-danger custom-input-text"></span>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <button type="submit" style="height:40px;" class="custom-submit-button col-md-4 mt-4">Създай</button>
+            </div>
+        </form>
+        <form>
+            <button class="custom-submit-button col-md-3 mt-4" style="height:40px;" asp-action="Index">Обратно към категориите</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script asp-append-version="true">
+        function RenderCategoryImage() {
+            let inputImg = document.querySelector('#uploadCategoryImage');
+            let imageRender = document.querySelector('#categoryImageResult')
+
+            if (inputImg.files.length > 0) {
+                let newPictureSrc = URL.createObjectURL(inputImg.files[0]);
+                imageRender.src = newPictureSrc;
+            }
+        }
+    </script>
+}

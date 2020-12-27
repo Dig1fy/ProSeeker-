@@ -1,0 +1,59 @@
+﻿@model ProSeeker.Web.ViewModels.Categories.CategoryInputModel
+
+@{
+    ViewData["Title"] = "Промяна на категория";
+}
+
+<h2 class="mx-auto text-center custom-golden-text">Промяна на категория</h2>
+<hr />
+<div class="row">
+    <div class="col-md-5 mx-auto custom-golden-text">
+
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div class="col-md-12">
+                <div asp-validation-summary="ModelOnly" class="text-danger custom-input-text"></div>
+                <div class="form-group">
+                    <div class="image-area col-md-10 text-center mx-auto">
+                        <label for="editCategoryImage" style="cursor:pointer;">
+                            <img src="@Model.PictureUrl" id="editCategoryImageResult" style="width:220px; height:180px; border-radius:7px 7px;" alt="" class="">
+                        </label>
+                        <input hidden id="editCategoryImage" class="col-md-10" name="imageFile" type="file" onchange="RenderEditingCategoryImage();">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label custom-input-text"></label>
+                    <input asp-for="Name" class="form-control custom-rounded-input-field custom-input-text" />
+                    <span asp-validation-for="Name" class="text-danger custom-input-text"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label custom-input-text"></label>
+                    <input asp-for="Description" class="form-control custom-rounded-input-field custom-input-text" />
+                    <span asp-validation-for="Description" class="text-danger custom-input-text"></span>
+                </div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <input type="submit" value="Запази промените" style="height:40px;" class="custom-submit-button col-md-12 mt-4" />
+                </div>
+            </div>
+        </form>
+        <form>
+            <button class="custom-submit-button col-md-9 mt-4" style="height:40px;" asp-action="Index">Обратно към категориите</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script asp-append-version="true">
+        function RenderEditingCategoryImage() {
+            let inputImg = document.querySelector('#editCategoryImage');
+            let imageRender = document.querySelector('#editCategoryImageResult')
+
+            if (inputImg.files.length > 0) {
+                let newPictureSrc = URL.createObjectURL(inputImg.files[0]);
+                imageRender.src = newPictureSrc;
+            }
+        }
+    </script>
+}
