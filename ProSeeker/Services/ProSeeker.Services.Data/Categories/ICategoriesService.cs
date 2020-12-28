@@ -22,5 +22,7 @@
         Task<int> GetSpecialistsCountInCategoryAsync(int categoryId);
 
         Task DeleteByIdAsync(int categoryId);
+
+        Task<string> GetCategoryPictureByCategoryId(int categoryId);
     }
 }

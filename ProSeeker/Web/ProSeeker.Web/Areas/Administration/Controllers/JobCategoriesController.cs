@@ -1,17 +1,13 @@
 ﻿namespace ProSeeker.Web.Areas.Administration.Controllers
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.EntityFrameworkCore;
     using ProSeeker.Common;
-    using ProSeeker.Data;
-    using ProSeeker.Data.Models;
     using ProSeeker.Services.Data.BaseJobCategories;
     using ProSeeker.Services.Data.CategoriesService;
     using ProSeeker.Services.Data.Cloud;
@@ -62,6 +58,8 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CategoryInputModel inputModel, IFormFile imageFile)
         {
+            // We need to cover a few edge cases for the category picture:
+            // We can create new category without changing the default picture / or change it/ or choose invalid file for picture and save.
             if (!this.ModelState.IsValid || !this.cloudinaryApplicationService.IsFileValid(imageFile))
             {
                 var baseJobCategories = await this.baseJobCategoriesService.GetAllBaseCategoriesAsync<SimpleBaseJobCategoryViewModel>();
@@ -78,9 +76,16 @@
                 }
             }
 
-            var imageName = imageFile.FileName;
-            var imageUrl = await this.cloudinaryApplicationService.UploadImageAsync(imageFile, imageName);
-            inputModel.PictureUrl = imageUrl;
+            if (imageFile != null)
+            {
+                var imageName = imageFile.FileName;
+                var imageUrl = await this.cloudinaryApplicationService.UploadImageAsync(imageFile, imageName);
+                inputModel.PictureUrl = imageUrl;
+            }
+            else
+            {
+                inputModel.PictureUrl = GlobalConstants.DefaultCategoryPictureUrl;
+            }
 
             var newCategory = await this.categoriesService.CreateAsync(inputModel);
 
@@ -121,15 +126,26 @@
             {
                 return this.View(inputModel);
             }
-            else if (!this.cloudinaryApplicationService.IsFileValid(imageFile))
+            else if (imageFile != null && !this.cloudinaryApplicationService.IsFileValid(imageFile))
             {
                 inputModel.StatusMessage = GlobalConstants.InvalidProfilePictureMessage;
                 return this.View(inputModel);
             }
 
+            if (imageFile != null)
+            {
             var imageName = imageFile.FileName;
             var imageUrl = await this.cloudinaryApplicationService.UploadImageAsync(imageFile, imageName);
             inputModel.PictureUrl = imageUrl;
+            }
+            else
+            {
+                var existingCategoryPicture = await this.categoriesService.GetCategoryPictureByCategoryId(inputModel.Id);
+                if (existingCategoryPicture != null)
+                {
+                    inputModel.PictureUrl = existingCategoryPicture;
+                }
+            }
 
             try
             {

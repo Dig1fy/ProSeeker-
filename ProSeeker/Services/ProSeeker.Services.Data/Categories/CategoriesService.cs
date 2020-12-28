@@ -140,5 +140,16 @@
             this.categoriesRepository.Delete(category);
             await this.categoriesRepository.SaveChangesAsync();
         }
+
+        public async Task<string> GetCategoryPictureByCategoryId(int categoryId)
+        {
+            var categoryPicture = await this.categoriesRepository
+                .All()
+                .Where(x => x.Id == categoryId)
+                .Select(x => x.PictureUrl)
+                .FirstOrDefaultAsync();
+
+            return categoryPicture;
+        }
     }
 }

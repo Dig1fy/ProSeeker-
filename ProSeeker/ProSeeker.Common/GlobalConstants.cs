@@ -12,6 +12,8 @@
 
         public const string DefaultProfileImagePath = "/images/ProfileImage/defaultUser.png";
 
+        public const string DefaultCategoryPictureUrl = "/images/defaultCategory.png";
+
         public const string ErrorAccessDenied = "403";
 
         public const string ErrorNotFound = "404";
