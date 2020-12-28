@@ -116,8 +116,9 @@
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
-            // Register all application services (Dependency container)
-            services.AddTransient<IEmailSender>(x => new SendGridEmailSender("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"));
+            // Register all application services (Dependency container) "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"
+            //services.AddTransient<IEmailSender>(x => new SendGridEmailSender(this.configuration["SendGrid:ApiKey"]));
+            services.AddTransient<IEmailSender>(x => new SendGridEmailSender("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"));
             services.AddTransient<IHomeService, HomeService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
             services.AddTransient<ICloudinaryApplicationService, CloudinaryApplicationService>();

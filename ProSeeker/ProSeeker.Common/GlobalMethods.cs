@@ -104,5 +104,34 @@
 
             return (int)(timeSpan.TotalDays / 365.242) == 1 ? "1 година" : $"{(int)(timeSpan.TotalDays / 365.242)} години";
         }
+
+        public static string GetContentForAcceptedOffer(
+            string userName,
+            string userEmail,
+            string userPhone,
+            string specialistPhone,
+            string specialistName,
+            string specialistEmail,
+            string offerDescription,
+            decimal price)
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine("<h3>Здравейте,</h3>");
+            sb.AppendLine("<h3>Офертата е приета и вече можете да започнете съвместна работа!</h3>");
+            sb.AppendLine($"<h4>Контакти на потребител:</h4>");
+            sb.AppendLine($"<p>Имена: {userName}</p>");
+            sb.AppendLine($"<p>Телефон: {userPhone}</p>");
+            sb.AppendLine($"<p>Email: {userEmail}</p>");
+
+            sb.AppendLine($"<h4>Контакти на специалист:</h4>");
+            sb.AppendLine($"<p>Имена: {specialistName}</p>");
+            sb.AppendLine($"<p>Телефон: {specialistPhone}</p>");
+            sb.AppendLine($"<p>Email: {specialistEmail}</p>");
+            sb.AppendLine(string.Empty);
+            sb.AppendLine($"<h4>Офертна цена: {price}</h4>");
+            sb.AppendLine($"<p>Описание на офертата: {offerDescription}</p>");
+
+            return sb.ToString();
+        }
     }
 }

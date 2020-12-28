@@ -16,7 +16,7 @@ function openNav() {
 }
 
 function SubmitForm() {
-    if (confirm('Наистина ли излезе от акаунта си?') === true) {
+    if (confirm('Наистина ли искате да излезете от акаунта си?') === true) {
         $('#submitForm').submit();
     }
 }

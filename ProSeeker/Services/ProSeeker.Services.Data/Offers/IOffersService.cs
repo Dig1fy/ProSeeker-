@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
+    using ProSeeker.Web.ViewModels.EmailsSender;
     using ProSeeker.Web.ViewModels.Offers;
 
     public interface IOffersService
@@ -29,5 +29,7 @@
         bool IsThereUnredOffer(string userId);
 
         int GetUnredOffersCount(string userId);
+
+        Task<SendEmailViewModel> GetOffersSenderAndReceiverDataByOfferIdAsync(string offerId, string userId);
     }
 }

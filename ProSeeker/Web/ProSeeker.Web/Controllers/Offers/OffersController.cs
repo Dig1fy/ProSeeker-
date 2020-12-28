@@ -1,6 +1,7 @@
 ﻿namespace ProSeeker.Web.Controllers.Offers
 {
     using System;
+    using System.Text;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
@@ -12,6 +13,7 @@
     using ProSeeker.Services.Data.CategoriesService;
     using ProSeeker.Services.Data.Offers;
     using ProSeeker.Services.Data.UsersService;
+    using ProSeeker.Services.Messaging;
     using ProSeeker.Web.ViewModels.Offers;
     using ProSeeker.Web.ViewModels.Pagination;
 
@@ -22,19 +24,22 @@
         private readonly IUsersService usersService;
         private readonly IAdsService adsService;
         private readonly ICategoriesService categoriesService;
+        private readonly IEmailSender emailSender;
 
         public OffersController(
             IOffersService offersService,
             UserManager<ApplicationUser> userManager,
             IUsersService usersService,
             IAdsService adsService,
-            ICategoriesService categoriesService)
+            ICategoriesService categoriesService,
+            IEmailSender emailSender)
         {
             this.offersService = offersService;
             this.userManager = userManager;
             this.usersService = usersService;
             this.adsService = adsService;
             this.categoriesService = categoriesService;
+            this.emailSender = emailSender;
         }
 
         [HttpGet]
@@ -224,6 +229,9 @@
         {
             try
             {
+                var currentUserId = this.userManager.GetUserId(this.User);
+                var model = await this.offersService.GetOffersSenderAndReceiverDataByOfferIdAsync(offerId, currentUserId);
+                await this.SendEmailsToBothSidesAsync(model);
                 await this.offersService.AcceptOffer(offerId);
                 return this.RedirectToAction(nameof(this.Details), new { offerId });
             }
@@ -231,6 +239,36 @@
             {
                 return this.CustomCommonError();
             }
+        }
+
+        //[HttpPost]
+        //public async Task<IActionResult> SendMail(string offerId)
+        //{
+        //    var html = new StringBuilder();
+        //    html.AppendLine($"<h1>FFFF</h1>");
+        //    html.AppendLine($"<h3>FFF</h3>");
+        //    await this.emailSender.SendEmailAsync("q2kforeveralon3@gmail.com", "ProSeeker", "laliv89309@chatdays.com", "Gosho", html.ToString());
+        //    return this.RedirectToAction(nameof(this.UserOffers));
+        //}
+
+        private async Task SendEmailsToBothSidesAsync(ViewModels.EmailsSender.SendEmailViewModel model)
+        {
+            var subject = GlobalConstants.AcceptedOfferSubject;
+            var content = GlobalMethods.GetContentForAcceptedOffer(
+                model.UserFullname,
+                model.UserEmail,
+                model.UserPhone,
+                model.SpecialistPhone,
+                model.SpecialistFullName,
+                model.SpecialistEmail,
+                model.OfferDescription,
+                model.Price);
+
+            // Send to user
+            await this.emailSender.SendEmailAsync(GlobalConstants.ApplicationEmail, GlobalConstants.ApplicationName, model.UserEmail, subject, content);
+
+            // Send to specialist
+            await this.emailSender.SendEmailAsync(GlobalConstants.ApplicationEmail, GlobalConstants.ApplicationName, model.SpecialistEmail, subject, content);
         }
     }
 }

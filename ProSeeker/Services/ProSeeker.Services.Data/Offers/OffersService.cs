@@ -9,6 +9,7 @@
     using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;
+    using ProSeeker.Web.ViewModels.EmailsSender;
     using ProSeeker.Web.ViewModels.Offers;
 
     public class OffersService : IOffersService
@@ -156,6 +157,26 @@
             offer.IsAccepted = true;
             this.offersRepository.Update(offer);
             await this.offersRepository.SaveChangesAsync();
+        }
+
+        public async Task<SendEmailViewModel> GetOffersSenderAndReceiverDataByOfferIdAsync(string offerId, string userId)
+        {
+            var acceptedBy = await this.usersRepository.All().FirstOrDefaultAsync(x => x.Id == userId);
+            var offer = await this.offersRepository.All().FirstOrDefaultAsync(x => x.Id == offerId);
+            var specialist = await this.usersRepository.All().FirstOrDefaultAsync(x => x.SpecialistDetailsId == offer.SpecialistDetailsId);
+            var model = new SendEmailViewModel
+            {
+                UserFullname = $"{acceptedBy.FirstName} {acceptedBy.LastName}",
+                UserPhone = acceptedBy.PhoneNumber,
+                UserEmail = acceptedBy.Email,
+                SpecialistFullName = $"{specialist.FirstName} {specialist.LastName}",
+                SpecialistEmail = specialist.Email,
+                SpecialistPhone = specialist.PhoneNumber,
+                OfferDescription = offer.Description,
+                Price = offer.Price,
+            };
+
+            return model;
         }
     }
 }

@@ -26,6 +26,12 @@
 
         public const string InvalidProfilePictureMessage = "Невалиден формат на снимка. Поддържаме jpg, jpeg и png файлове.";
 
+        public const string AcceptedOfferSubject = "Приета оферта";
+
+        public const string ApplicationName = "ProSeeker";
+
+        public const string ApplicationEmail = "q2kforeveralon3@gmail.com";
+
         // Paging
         public const int ItemsPerPage = 8;
 
