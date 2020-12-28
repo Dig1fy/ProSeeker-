@@ -29,7 +29,7 @@ My defense project for ASP.NET Core MVC course at SoftUni (October 2020 @SoftUni
 </details>
 
 ## DB Diagram
-![](https://res.cloudinary.com/zmax/image/upload/v1609037517/81eec76a-fb6c-4ccf-9941-b4fe8bec34f9profilePicture.png)
+![](https://res.cloudinary.com/zmax/image/upload/v1609124986/81eec76a-fb6c-4ccf-9941-b4fe8bec34f9profilePicture.png)
 
 
 ## Unit tests (services test coverage)
