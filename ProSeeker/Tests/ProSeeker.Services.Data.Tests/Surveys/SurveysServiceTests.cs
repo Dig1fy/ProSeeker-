@@ -10,6 +10,9 @@
     using ProSeeker.Services.Data.Quizz;
     using ProSeeker.Services.Mapping;
     using ProSeeker.Web.ViewModels.Quizzes;
+    using ProSeeker.Web.ViewModels.Surveys;
+    using ProSeeker.Web.ViewModels.Surveys.Answers;
+    using ProSeeker.Web.ViewModels.Surveys.Questions;
     using Xunit;
 
     public sealed class SurveysServiceTests : BaseServiceTests
@@ -92,6 +95,241 @@
             Assert.NotNull(survey);
             Assert.Equal("1", survey.Id);
             Assert.Equal(3, survey.Questions.Count());
+        }
+
+        [Fact]
+        public async Task ShouldReturnSurveyTitleByGivenSurveyId()
+        {
+            var surveyId = "1";
+            var expectedTitle = "Go go Rangers!";
+
+            var actualTitle = await this.service.GetSurveyTitleByIdAsync(surveyId);
+
+            Assert.Equal(expectedTitle, actualTitle);
+        }
+
+        [Fact]
+        public async Task ShouldReturnAsnwerByAnswerId()
+        {
+            AutoMapperConfig.RegisterMappings(typeof(AnswerViewModel).Assembly);
+
+            var answerId = "2";
+            var expectedText = "Third question's answer!";
+
+            var answer = await this.service.GetSingleAnswerAsync<AnswerViewModel>(answerId);
+
+            Assert.Equal(expectedText, answer.Text);
+            Assert.Equal(answerId, answer.Id);
+        }
+
+        [Fact]
+        public async Task ShouldReturnCorrectQuestionByGivenQuestionId()
+        {
+            AutoMapperConfig.RegisterMappings(typeof(QuestionViewModel).Assembly);
+
+            var questionId = "1";
+            var expectedText = "What's your favourite horror movie?";
+
+            var question = await this.service.GetQuestionByIdAsync<QuestionViewModel>(questionId);
+
+            Assert.Equal(expectedText, question.Text);
+            Assert.Equal(questionId, question.Id);
+        }
+
+        [Fact]
+        public async Task ShouldReturnCorrentNumberOfQuestionsByGivenSurveyId()
+        {
+            var surveyId = "1";
+            var expectedQuestionsCount = 3;
+
+            var actualCount = await this.service.GetQuestionNumberBySurveyIdAsync(surveyId);
+
+            Assert.Equal(expectedQuestionsCount, actualCount);
+        }
+
+        [Fact]
+        public async Task ShouldReturnAllSurveysProperly()
+        {
+            AutoMapperConfig.RegisterMappings(typeof(SurveyViewModel).Assembly);
+            var expectedSurveysCount = 1;
+
+            var allSurveys = await this.service.GetAllSurveysAsync<SurveyViewModel>();
+
+            Assert.Equal(expectedSurveysCount, allSurveys.Count());
+            Assert.Equal("1", allSurveys.First().Id);
+        }
+
+        [Fact]
+        public async Task ShouldReturnAllQuestionByGivenSurveyId()
+        {
+            AutoMapperConfig.RegisterMappings(typeof(QuestionViewModel).Assembly);
+            var surveyId = "1";
+            var expectedCount = 3;
+
+            var allSurveyQuestions = await this.service.GetAllQuestionsBySurveyIdAsync<QuestionViewModel>(surveyId);
+
+            Assert.Equal(expectedCount, allSurveyQuestions.Count());
+        }
+
+        [Fact]
+        public async Task ShouldReturnAllAnswersByGivenQuestionId()
+        {
+            AutoMapperConfig.RegisterMappings(typeof(AnswerViewModel).Assembly);
+            var questionId = "1";
+            var expectedCount = 1;
+            var expectedAnswerId = "1";
+
+            var allQuestionAnswers = await this.service.GetAllAnswersByQuestionIdAsync<AnswerViewModel>(questionId);
+
+            Assert.Equal(expectedCount, allQuestionAnswers.Count());
+            Assert.Equal(expectedAnswerId, allQuestionAnswers.First().Id);
+        }
+
+        [Fact]
+        public async Task ShouldEditQuestionByGivenIdAndNewText()
+        {
+            AutoMapperConfig.RegisterMappings(typeof(QuestionViewModel).Assembly);
+            var questionId = "1";
+            var newText = "xo-xo-xo";
+
+            await this.service.EditQuestionAsync(questionId, newText);
+            var edittedQuestion = await this.service.GetQuestionByIdAsync<QuestionViewModel>(questionId);
+
+            Assert.Equal(newText, edittedQuestion.Text);
+        }
+
+        [Fact]
+        public async Task ShouldEditAnswerByGivenAnswerIdAndNewText()
+        {
+            AutoMapperConfig.RegisterMappings(typeof(AnswerViewModel).Assembly);
+            var answerId = "1";
+            var newText = "xo-xo-xo";
+
+            await this.service.EditAnswerAsync(answerId, newText);
+            var edittedAnswer = await this.service.GetSingleAnswerAsync<AnswerViewModel>(answerId);
+
+            Assert.Equal(newText, edittedAnswer.Text);
+        }
+
+        [Fact]
+        public async Task ShouldEditSurveyByGivenIdAndTitle()
+        {
+            AutoMapperConfig.RegisterMappings(typeof(SurveyViewModel).Assembly);
+            var surveyId = "1";
+            var newTitle = "xo-xo-xo";
+
+            await this.service.EditSurveyAsync(surveyId, newTitle);
+            var edittedSurvey = await this.service.GetSurveyByIdAsync<SurveyViewModel>(surveyId);
+
+            Assert.Equal(newTitle, edittedSurvey.Title);
+        }
+
+        [Fact]
+        public async Task ShouldDeleteSurveyProperly()
+        {
+            AutoMapperConfig.RegisterMappings(typeof(SurveyViewModel).Assembly);
+            var surveyId = "1";
+
+            await this.service.DeleteSurveyAsync(surveyId);
+            var deletedSurvey = await this.service.GetSurveyByIdAsync<SurveyViewModel>(surveyId);
+
+            Assert.Null(deletedSurvey);
+        }
+
+        [Fact]
+        public async Task ShouldDeleteQuestionProperly()
+        {
+            AutoMapperConfig.RegisterMappings(typeof(QuestionViewModel).Assembly);
+            var questionId = "1";
+
+            await this.service.DeleteQuestionAsync(questionId);
+            var deletedQuestion = await this.service.GetQuestionByIdAsync<QuestionViewModel>(questionId);
+
+            Assert.Null(deletedQuestion);
+        }
+
+        [Fact]
+        public async Task ShouldDeleteAnswerProperly()
+        {
+            AutoMapperConfig.RegisterMappings(typeof(AnswerViewModel).Assembly);
+            var answerId = "1";
+
+            await this.service.DeleteAnswerAsync(answerId);
+            var deletedAnswer = await this.service.GetSingleAnswerAsync<AnswerViewModel>(answerId);
+
+            Assert.Null(deletedAnswer);
+        }
+
+        [Fact]
+        public async Task ShouldDeleteAllQuestionByGivenSurveyId()
+        {
+            AutoMapperConfig.RegisterMappings(typeof(QuestionViewModel).Assembly);
+            var surveyId = "1";
+
+            await this.service.DeleteAllQuestionsAsync(surveyId);
+            var deletedSurvey = await this.service.GetAllQuestionsBySurveyIdAsync<QuestionViewModel>(surveyId);
+            var expectedCount = 0;
+
+            Assert.Equal(expectedCount, deletedSurvey.Count());
+        }
+
+        [Fact]
+        public async Task ShouldCreateSurveyProperly()
+        {
+            AutoMapperConfig.RegisterMappings(typeof(SurveyViewModel).Assembly);
+            var newSurveyId = "555";
+            var inputModel = new NewSurveyInputModel
+            {
+                Id = newSurveyId,
+                Title = "20",
+            };
+
+            var surveyId = await this.service.CreateSurveyAsync(inputModel);
+            var allSurveysCount = await this.service.GetAllSurveysAsync<SurveyViewModel>();
+            Assert.Equal(2, allSurveysCount.Count());
+        }
+
+        [Fact]
+        public async Task ShouldCreateNewQuestionProperly()
+        {
+            AutoMapperConfig.RegisterMappings(typeof(QuestionViewModel).Assembly);
+            var surveyId = "1";
+            var inputModel = new NewQuestionInputModel
+            {
+                Text = "20",
+                SurveyId = surveyId,
+            };
+
+            var questionId = await this.service.CreateQuestionAsync(inputModel);
+            var allQuestion = await this.service.GetAllQuestionsBySurveyIdAsync<QuestionViewModel>(surveyId);
+            var expectedQuestionsCount = 4;
+
+            Assert.Equal(expectedQuestionsCount, allQuestion.Count());
+            Assert.NotNull(questionId);
+        }
+
+        [Fact]
+        public async Task ShouldCreateNewAnswerCorrectly()
+        {
+            var questionId = "1";
+            var newAnswersText = "xo-xo";
+
+            var newAnswerId = await this.service.CreateAnswerAsync(questionId, newAnswersText);
+
+            Assert.NotNull(newAnswerId);
+        }
+
+        [Fact]
+        public async Task ShouldDeleteAllAnswersByGivenQuestionId()
+        {
+            AutoMapperConfig.RegisterMappings(typeof(AnswerViewModel).Assembly);
+            var questionId = "1";
+
+            await this.service.DeleteAllAnswersAsync(questionId);
+            var allAnswers = await this.service.GetAllAnswersByQuestionIdAsync<AnswerViewModel>(questionId);
+            var expectedAnswersCount = 0;
+
+            Assert.Equal(expectedAnswersCount, allAnswers.Count());
         }
 
         private void InitializeRepositoriesData()

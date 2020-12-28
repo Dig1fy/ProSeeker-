@@ -95,7 +95,7 @@
         public async Task DeleteAllAnswersAsync(string questionId)
         {
             var answers = await this.answersRepository
-                .AllAsNoTrackingWithDeleted()
+                .AllWithDeleted()
                 .Where(x => x.QuestionId == questionId)
                 .ToListAsync();
 
@@ -109,7 +109,7 @@
         public async Task DeleteAllQuestionsAsync(string surveyId)
         {
             var questions = await this.questionsRepository
-                .AllAsNoTrackingWithDeleted()
+                .AllWithDeleted()
                 .Where(x => x.SurveyId == surveyId)
                 .ToListAsync();
 
@@ -123,7 +123,7 @@
         public async Task DeleteAnswerAsync(string answerId)
         {
             var answer = await this.answersRepository
-                .AllAsNoTrackingWithDeleted()
+                .AllWithDeleted()
                 .FirstOrDefaultAsync(x => x.Id == answerId);
 
             this.answersRepository.Delete(answer);
@@ -133,7 +133,7 @@
         public async Task DeleteQuestionAsync(string questionId)
         {
             var question = await this.questionsRepository
-                .AllAsNoTrackingWithDeleted()
+                .AllWithDeleted()
                 .FirstOrDefaultAsync(x => x.Id == questionId);
 
             this.questionsRepository.Delete(question);
@@ -143,7 +143,7 @@
         public async Task DeleteSurveyAsync(string surveyId)
         {
             var survey = await this.surveysRepository
-                .AllAsNoTrackingWithDeleted()
+                .AllWithDeleted()
                 .FirstOrDefaultAsync(x => x.Id == surveyId);
 
             this.surveysRepository.Delete(survey);

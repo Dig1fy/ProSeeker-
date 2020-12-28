@@ -37,9 +37,9 @@
         [Fact]
         public async Task GetAllCategoriesShouldWorkCorrectly()
         {
-            AutoMapperConfig.RegisterMappings(typeof(CategoriesViewModel).Assembly);
+            AutoMapperConfig.RegisterMappings(typeof(CategorySimpleViewModel).Assembly);
             var expecedCategoriesCount = 3;
-            var actualCategories = await this.service.GetAllCategoriesAsync<CategoriesViewModel>();
+            var actualCategories = await this.service.GetAllCategoriesAsync<CategorySimpleViewModel>();
 
             Assert.Equal(expecedCategoriesCount, actualCategories.Count());
         }
