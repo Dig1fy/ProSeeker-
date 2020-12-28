@@ -30,3 +30,11 @@ My defense project for ASP.NET Core MVC course at SoftUni (October 2020 @SoftUni
 
 ## DB Diagram
 ![](https://res.cloudinary.com/zmax/image/upload/v1609037517/81eec76a-fb6c-4ccf-9941-b4fe8bec34f9profilePicture.png)
+
+
+<details>
+   <summary>
+       ## Services test coverage: <strong> Click </strong> for more detailed information
+   </summary>
+![](https://res.cloudinary.com/zmax/image/upload/v1609123432/81eec76a-fb6c-4ccf-9941-b4fe8bec34f9profilePicture.png)
+   </details>
