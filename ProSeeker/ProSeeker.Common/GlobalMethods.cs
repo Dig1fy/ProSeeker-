@@ -133,5 +133,18 @@
 
             return sb.ToString();
         }
+
+        public static string GetUpdatedContentFromContactsForm(string content, string userEmail, string userName)
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine("<h3>Здравейте,</h3>");
+            sb.AppendLine("<h3>Имате ново запитване от:</h3>");
+            sb.AppendLine($"<h4>Имена: {userName}</h4>");
+            sb.AppendLine($"<h4>Email: {userEmail}</h4>");
+            sb.AppendLine();
+            sb.AppendLine("<h4>Съобщение:</h4>");
+            sb.AppendLine($"{content}");
+            return sb.ToString();
+        }
     }
 }

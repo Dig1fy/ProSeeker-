@@ -24,6 +24,7 @@ My defense project for ASP.NET Core MVC course at SoftUni (October 2020 @SoftUni
 * <strong>JQuery<strong>
 * <strong>SignalR<strong> (used for real-time chat)
 * <strong>WebAPI <strong>
+* <strong>SendGrid<strong> (for sending emails) 
 * <strong>xUnit<strong> (for testing) 
 
 </details>
