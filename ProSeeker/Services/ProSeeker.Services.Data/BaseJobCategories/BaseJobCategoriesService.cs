@@ -37,7 +37,7 @@
         public async Task DeleteByIdAsync(int baseCategoryId)
         {
             var category = await this.baseJobCategoriesRepository
-                .AllAsNoTrackingWithDeleted()
+                .AllWithDeleted()
                 .FirstOrDefaultAsync(x => x.Id == baseCategoryId);
 
             if (category == null)

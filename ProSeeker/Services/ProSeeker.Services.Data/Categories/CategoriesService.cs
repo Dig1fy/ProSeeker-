@@ -32,11 +32,11 @@
 
         public async Task<int> GetCategiesCountInBaseJobCategoryAsync(int baseJobCategoryId)
         {
-            var isAnyRelatedJobCategory = await this.categoriesRepository
+            var categoriesInJobCategory = await this.categoriesRepository
                 .All()
-                .Where(x => x.BaseJobCategory.Id == baseJobCategoryId)
+                .Where(x => x.BaseJobCategoryId == baseJobCategoryId)
                 .CountAsync();
-            return isAnyRelatedJobCategory;
+            return categoriesInJobCategory;
         }
 
         public async Task<IEnumerable<T>> GetAllCategoriesAsync<T>()
@@ -130,7 +130,9 @@
 
         public async Task DeleteByIdAsync(int categoryId)
         {
-            var category = await this.categoriesRepository.AllAsNoTrackingWithDeleted().FirstOrDefaultAsync(x => x.Id == categoryId);
+            var category = await this.categoriesRepository
+                .AllWithDeleted()
+                .FirstOrDefaultAsync(x => x.Id == categoryId);
 
             if (category == null)
             {

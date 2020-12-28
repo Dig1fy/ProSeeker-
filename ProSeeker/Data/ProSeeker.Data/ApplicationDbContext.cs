@@ -45,7 +45,7 @@
 
         public DbSet<Inquiry> Inquiries { get; set; }
 
-        // Quizz
+        // Survey
         public DbSet<Survey> Surveys { get; set; }
 
         public DbSet<Question> Questions { get; set; }

@@ -75,13 +75,88 @@
             Assert.Equal(expectedCategoryName, actualCategoryName);
         }
 
+        [Fact]
+        public async Task ShouldReturnCorrectNumberOfCategoriesByGivenJobCategoryId()
+        {
+            var baseJobCategoryId = 2;
+            var categoriesCount = await this.service.GetCategiesCountInBaseJobCategoryAsync(baseJobCategoryId);
+
+            var expectedCount = 2;
+
+            Assert.Equal(expectedCount, categoriesCount);
+        }
+
+        [Fact]
+        public async Task ShouldCreateCategoryCorrectly()
+        {
+            var inputModel = new CategoryInputModel
+            {
+                BaseJobCategoryId = 1,
+                Description = "test",
+                Name = "TEST",
+            };
+
+            var newCategoryId = await this.service.CreateAsync(inputModel);
+
+            Assert.Equal(4, newCategoryId);
+        }
+
+        [Fact]
+        public async Task ShouldUpdateTheCategoryCorrectly()
+        {
+            var inputModel = new CategoryInputModel
+            {
+                Id = 1,
+                BaseJobCategoryId = 1,
+                Description = "test",
+                Name = "TEST",
+                PictureUrl = "xxx",
+            };
+
+            await this.service.UpdateAsync(inputModel);
+            var newCategoryPicture = await this.service.GetCategoryPictureByCategoryId(1);
+            var expectedNewCategoryPicture = "xxx";
+
+            Assert.Equal(expectedNewCategoryPicture, newCategoryPicture);
+        }
+
+        [Fact]
+        public async Task ShouldReturnCorrectNumberOfSpecialistsPerGivenCategory()
+        {
+            var categoryIdWithZeroSpecialists = 1;
+            var categoryIdWithOneSpecialists = 3;
+
+            var actualResultOfFirstCategory = await this.service.GetSpecialistsCountInCategoryAsync(categoryIdWithZeroSpecialists);
+            var actualResultOfThirdCategory = await this.service.GetSpecialistsCountInCategoryAsync(categoryIdWithOneSpecialists);
+
+            var expectedNumberOfSpecialistInFirstCategory = 0;
+            var expectedNumberOfSpecialistInThirdCategory = 1;
+
+            Assert.Equal(expectedNumberOfSpecialistInFirstCategory, actualResultOfFirstCategory);
+            Assert.Equal(expectedNumberOfSpecialistInThirdCategory, actualResultOfThirdCategory);
+        }
+
+        [Fact]
+        public async Task ShouldDeleteCategoryProperly()
+        {
+            AutoMapperConfig.RegisterMappings(typeof(CategoriesViewModel).Assembly);
+            var categoryId = 1;
+
+            await this.service.DeleteByIdAsync(categoryId);
+            var deletedCategory = await this.service.GetByIdAsync<CategoriesViewModel>(categoryId);
+
+            Assert.Null(deletedCategory);
+        }
+
+
+
         private void InitializeRepositoriesData()
         {
             this.categories.AddRange(new List<JobCategory>()
             {
-                new JobCategory { Id = 1, Name = "Архитект", Description = "лоши хора", PictureUrl = "archPicture", CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new JobCategory { Id = 2, Name = "Брокер", Description = "по-лоши хора", PictureUrl = "realEstateAgentPicture", CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new JobCategory { Id = 3, Name = "Урбанист", Description = "иновативни хора", PictureUrl = "urbanistPicure", CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new JobCategory { Id = 1, BaseJobCategoryId = 1, Name = "Архитект", Description = "лоши хора", PictureUrl = "archPicture", CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new JobCategory { Id = 2, BaseJobCategoryId = 2, Name = "Брокер", Description = "по-лоши хора", PictureUrl = "realEstateAgentPicture", CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new JobCategory { Id = 3, BaseJobCategoryId = 2, Name = "Урбанист", Description = "иновативни хора", PictureUrl = "urbanistPicure", CreatedOn = DateTime.UtcNow, IsDeleted = false, SpecialistsDetails = new List<Specialist_Details> { new Specialist_Details { Id = "555" } } },
             });
 
             this.ads.AddRange(new List<Ad>
