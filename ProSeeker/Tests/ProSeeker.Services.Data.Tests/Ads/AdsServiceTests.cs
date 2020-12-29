@@ -159,6 +159,15 @@
         }
 
         [Fact]
+        public async Task ShouldReturnAllAdsCountProperly()
+        {
+            var expectedCount = 3;
+            var actualCount = await this.service.GetAllAdsCountAsync();
+
+            Assert.Equal(expectedCount, actualCount);
+        }
+
+        [Fact]
         public async Task UpdateShouldAdjustTheAdCorrectly()
         {
             AutoMapperConfig.RegisterMappings(typeof(UpdateInputModel).Assembly);

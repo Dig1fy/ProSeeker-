@@ -1,14 +1,11 @@
 ﻿namespace ProSeeker.Web.Areas.Administration.Controllers
 {
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore;
     using ProSeeker.Common;
-    using ProSeeker.Data;
-    using ProSeeker.Data.Models.Quiz;
     using ProSeeker.Services.Data.Quizz;
     using ProSeeker.Web.Controllers;
     using ProSeeker.Web.ViewModels.Quizzes;

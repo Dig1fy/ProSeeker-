@@ -12,7 +12,7 @@
     <link href="~/css/MyCustomCss/Common/buttons.css" rel="stylesheet" asp-append-version="true" />
     <link href="~/css/Bootstrap/chat.css" rel="stylesheet" asp-append-version="true" />
     <link href="~/css/MyCustomCss/IndexSideBar/sidebar.css" rel="stylesheet" asp-append-version="true" />
-    
+    <link href="~/css/MyCustomCss/Background/common.css" rel="stylesheet" asp-append-version="true" />
     @await this.RenderSectionAsync("Styles", required: false)
 </head>
 <body>
@@ -45,6 +45,11 @@
                                     <vc:navbar-categories></vc:navbar-categories>
                                 </div>
                             </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <form>
+                                <a class="nav-link" asp-area="" asp-action="Index" asp-controller="Contacts">Контакти</a>
+                            </form>
                         </li>
                     </ul>
                 </div>

@@ -1,12 +1,13 @@
 ﻿namespace ProSeeker.Web.ViewComponents
 {
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Data.PrivateChat;
     using ProSeeker.Web.ViewModels.PrivateChat;
-    using System.Security.Claims;
-    using System.Threading.Tasks;
 
     public class NewMessagesNotification : ViewComponent
     {

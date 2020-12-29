@@ -175,6 +175,13 @@
             }
         }
 
+        public async Task<int> GetAllAdsCountAsync()
+        {
+            var allAdsCount = await this.adsRepository.All().CountAsync();
+
+            return allAdsCount;
+        }
+
         // TODO: Try with reflection
         private IQueryable<Ad> SortAds(string categoryName, string sortBy, int cityId)
         {

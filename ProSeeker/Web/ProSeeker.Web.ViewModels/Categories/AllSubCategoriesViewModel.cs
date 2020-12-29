@@ -6,6 +6,6 @@
 
     public class AllSubCategoriesViewModel
     {
-        public IEnumerable<JobCategoriesViewModel> Categories{ get; set; }
+        public IEnumerable<JobCategoriesViewModel> Categories { get; set; }
     }
 }

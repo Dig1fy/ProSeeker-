@@ -11,6 +11,7 @@
 
         [Required(ErrorMessage = "Моля, попълнете имейла си")]
         [Display(Name = "Електронна Ви поща (имейл)")]
+        [EmailAddress(ErrorMessage ="Невалиден имейл.")]
         [MaxLength(50, ErrorMessage = "Имейлът не може да бъде повече от 50 символа")]
         public string FromEmail { get; set; }
 

@@ -2,33 +2,12 @@
 @model ProSeeker.Web.ViewModels.Home.IndexViewModel
 
 @{
-    this.ViewData["Title"] = $"Welcome to {GlobalConstants.SystemName}!";
+    this.ViewData["Title"] = $"Добре дошли в {GlobalConstants.SystemName}!";
 }
-
-@section Styles{
-    <link href="~/css/Bootstrap/coolCounter.css" rel="stylesheet" asp-append-version="true" />
-}
-
-<style>
-
-    html, body {
-        height: 100%;
-    }
-
-    body {
-        background-image: url('/images/Background/4.png');
-        background-repeat: no-repeat;
-        background-size: 100% auto;
-    }
-</style>
 
 <form>
     <input hidden name="surveyId" value="0aa7a7fa-6074-489d-a982-31d6b6c88a68" />
     <button asp-action="Start" asp-controller="Survey">START Survey</button>
-</form>
-<form>
-   
-    <button asp-action="Index" asp-controller="Contacts">Contacts</button>
 </form>
 
 <div class="text-center">
@@ -38,9 +17,16 @@
         <div class="row text-center">
             <div class="col">
                 <div class="cool-bootstrap-counter">
-                    <i class="fa fa-code fa-2x"></i>
-                    <h2 class="timer count-title count-number" data-to="100" data-speed="1500"></h2>
-                    <p class="count-text ">Our Customer</p>
+                    <i class="fas fa-scroll fa-2x"></i>
+                    <h2 class="timer count-title count-number" data-to="@Model.Counters.AllAds" data-speed="1500"></h2>
+                    @if (@Model.Counters.AllAds == 1)
+                    {
+                        <p class="count-text ">Обява</p>
+                    }
+                    else
+                    {
+                        <p class="count-text ">Обяви</p>
+                    }
                 </div>
             </div>
             <div class="col">
@@ -99,10 +85,10 @@
             <div class="row">
                 @foreach (var category in baseCategory.JobCategories)
                 {
-                    <div class="media d-md-inline m-md-2" @*asp-route-id="@category.Id" asp-controller="JobCategories" asp-action="GetById"*@>
+                    <div class="media d-md-inline m-md-2">
                         <div class="media-left">
                             <a asp-route-id="@category.Id" asp-controller="JobCategories" asp-action="GetCategory" class="text-decoration-none">
-                                <img class="media-object" width="250" height="200" src="@category.PictureUrl" alt="...">
+                                <img class="media-object" width="150" height="100" src="@category.PictureUrl" alt="...">
                                 <h4 class="media-heading text-success">@category.Name</h4>
                             </a>
                             <p class="text-break text-dark">@category.ShortDescription</p>

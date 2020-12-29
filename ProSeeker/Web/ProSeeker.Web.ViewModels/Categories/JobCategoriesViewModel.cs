@@ -1,8 +1,9 @@
 ﻿namespace ProSeeker.Web.ViewModels.Home
 {
+    using System;
+
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;
-    using System;
 
     public class JobCategoriesViewModel : IMapFrom<JobCategory>
     {

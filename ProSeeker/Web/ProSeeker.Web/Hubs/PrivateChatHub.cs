@@ -3,23 +3,18 @@
     using System;
     using System.Threading.Tasks;
 
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.SignalR;
     using ProSeeker.Common;
-    using ProSeeker.Data.Models;
     using ProSeeker.Services.Data.PrivateChat;
 
     public class PrivateChatHub : Hub
     {
         private readonly IPrivateChatService privateChatService;
-        private readonly UserManager<ApplicationUser> userManager;
 
         public PrivateChatHub(
-            IPrivateChatService privateChatService, 
-            UserManager<ApplicationUser> userManager)
+            IPrivateChatService privateChatService)
         {
             this.privateChatService = privateChatService;
-            this.userManager = userManager;
         }
 
         public string GetConnectionId() => this.Context.ConnectionId;
