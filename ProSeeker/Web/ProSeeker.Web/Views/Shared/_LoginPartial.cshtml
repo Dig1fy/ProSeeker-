@@ -10,8 +10,9 @@
     {
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Профил">
-                <img style="width: 35px; height:35px; border-radius: 50%;" title="Профил" asp-append-version="true" src="@await this.usersService.GetUserProfilePictureAsync(this.UserManager.GetUserId(this.User))" alt="@this.UserManager.GetUserName(this.User) Avatar" />
-                Здравейте, @await this.usersService.GetUserFirstNameByIdAsync(this.UserManager.GetUserId(this.User))!
+                <img style="font-weight: bold; font-size: 17px; width: 35px; height: 35px; border-radius: 50%;" title="Профил" asp-append-version="true"
+                     src="@await this.usersService.GetUserProfilePictureAsync(this.UserManager.GetUserId(this.User))" class="d-inline" alt="@this.UserManager.GetUserName(this.User) Avatar" />
+                <p class="d-inline pt-5" style="font-weight: bold; font-size: 16px;">Здравейте, @await this.usersService.GetUserFirstNameByIdAsync(this.UserManager.GetUserId(this.User))!</p>
             </a>
         </li>
 
@@ -37,8 +38,8 @@
         {
             <li class="btn-group">
 
-                <i id="fas-pic" class="fas fa-chevron-circle-down" style="padding-right: 10px; font-size:17px; margin:auto 0;" data-toggle="dropdown">
-                   Админ панел
+                <i id="fas-pic" class="fas fa-chevron-circle-down" style="font-weight: bold; font-size: 17px; padding-right: 10px; font-size: 17px; margin: auto 0;" data-toggle="dropdown">
+                    Админ панел
                 </i>
                 <div class="dropdown-menu custom-dropdown-content" style="margin-top:-8px;">
 
@@ -52,10 +53,10 @@
     else
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/RegisterOptions">Регистрация</a>
+            <a class="nav-link text-dark" style="font-weight:bold; font-size:17px;" asp-area="Identity" asp-page="/Account/RegisterOptions">Регистрация</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Влез</a>
+            <a class="nav-link text-dark" style="font-weight:bold; font-size:17px;" asp-area="Identity" asp-page="/Account/Login">Влез</a>
         </li>
     }
 </ul>

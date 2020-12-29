@@ -13,6 +13,7 @@
     using ProSeeker.Services.Data.Quizz;
     using ProSeeker.Services.Data.UsersService;
     using ProSeeker.Web.ViewModels.Quizzes;
+    using ProSeeker.Web.ViewModels.Surveys;
 
     [Authorize]
     public class SurveyController : BaseController
@@ -34,9 +35,17 @@
             this.adsService = adsService;
         }
 
-        public IActionResult Survey()
+        public async Task<IActionResult> All()
         {
-            return this.View();
+            var surveys = await this.surveysService.GetAllSurveysAsync<SurveyViewModel>();
+
+            if (surveys == null)
+            {
+                return this.CustomNotFound();
+            }
+
+            var model = new AllSurveysViewModel() { Surveys = surveys };
+            return this.View(model);
         }
 
         public async Task<IActionResult> Start(string surveyId)
@@ -47,7 +56,7 @@
 
             if (hasItBeenCompletedAlready)
             {
-                return this.Redirect(GlobalConstants.HomePageRedirect);
+                return this.RedirectToAction(nameof(this.All));
             }
 
             // Get the quiz with all question/answers and return the view model

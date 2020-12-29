@@ -1,0 +1,20 @@
+﻿@model ProSeeker.Web.ViewModels.Surveys.AllSurveysViewModel
+
+<div class="text-center mx-auto">
+    <h3>Можете да попълните някоя от наличните ни анкети и да станете ВИП потребител за една седмица! Можете да попълните една анкета само веднъж.</h3><br />
+    <h2 class="inquiry-notes mt-2">Привилегиите, които това ще ви донесе са:</h2>
+    <h2 class="inquiry-notes">Ако сте потребител - обявите Ви ще се показват преди всички останали, които не са Вип</h2>
+    <h2 class="inquiry-notes">Ако сте специалист - профилът Ви ще се показва преди всички останали, които не са Вип</h2>
+    <hr />
+</div>
+<br />
+
+<div class="row">
+    @foreach (var survey in Model.Surveys)
+    {
+        <form asp-controller="Survey" asp-action="Start" class="d-inline col-md-12 mt-2">
+            <button class="btn col-md-12 d-inline mb-2 custom-btn-no-background" type="submit">Анкета на тема: @survey.Title</button>
+            <input hidden name="surveyId" asp-for="@survey.Id" />
+        </form>
+    }
+</div>
