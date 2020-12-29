@@ -1,0 +1,20 @@
+﻿@model IEnumerable<ProSeeker.Web.ViewModels.Categories.BaseJobCategoryViewModel>
+
+@foreach (var baseCategory in Model)
+{
+<div class="mx-auto text-center">
+    <div style="" class="col">
+        <div class="dropdown-header"><strong style="font-size:18px; color:cornflowerblue">@baseCategory.CategoryName</strong></div>
+
+        @foreach (var category in baseCategory.JobCategories.OrderBy(x => x.Name))
+        {
+            <a asp-route-id="@category.Id" asp-controller="JobCategories" asp-action="GetCategory" class="text-decoration-none ">
+                <p class="media-heading " style="white-space:initial; font-size:19px; color:rgb(1, 19, 23);">@category.Name</p>
+                <img class="media-object" width="170" height="90" src="@category.PictureUrl" alt="...">
+                
+            </a>
+        }
+
+    </div>
+</div>
+}

@@ -14,10 +14,11 @@
     <link href="~/css/MyCustomCss/IndexSideBar/sidebar.css" rel="stylesheet" asp-append-version="true" />
     <link href="~/css/MyCustomCss/Background/common.css" rel="stylesheet" asp-append-version="true" />
     @await this.RenderSectionAsync("Styles", required: false)
+        
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3 dudu">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -28,11 +29,11 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Начало</a>
+                            <a class="nav-link dada" style="font-weight:bold;" asp-area="" asp-controller="Home" asp-action="Index">Начало</a>
                         </li>
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Обяви</a>
+                            <a class="nav-link dropdown-toggle" style="font-weight:bold;" href="#" id="servicesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Обяви</a>
                             <div class="dropdown-menu dropdown-menu-center" aria-labelledby="servicesDropdown">
 
                                 @if (this.User.Identity.IsAuthenticated && this.User.IsInRole(GlobalConstants.RegularUserRoleName))
@@ -41,14 +42,25 @@
                                 }
 
                                 <div class="dropdown-divider"></div>
-                                <div class="d-md-flex align-items-start justify-content-start custom-mega-menu-content">
+                                <div class="d-md-flex align-items-start justify-content-start custom-mega-menu-content drop-down-background">
                                     <vc:navbar-categories></vc:navbar-categories>
                                 </div>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" style="font-weight:bold;" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Специалисти</a>
+                            <div class="dropdown-menu dropdown-menu-center" aria-labelledby="servicesDropdown">
+
+                                <div class="dropdown-divider"></div>
+                                <div class="d-md-flex align-items-start justify-content-start custom-mega-menu-content drop-down-background">
+                                    <vc:navbar-specialists></vc:navbar-specialists>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
                             <form>
-                                <a class="nav-link" asp-area="" asp-action="Index" asp-controller="Contacts">Контакти</a>
+                                <a class="nav-link" style="font-weight:bold;" asp-area="" asp-action="Index" asp-controller="Contacts">Контакти</a>
                             </form>
                         </li>
                     </ul>

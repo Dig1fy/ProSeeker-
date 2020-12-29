@@ -7,3 +7,7 @@ body {
     background-repeat: no-repeat;
     background-size: 100% auto;
 }
+
+.drop-down-background {
+    background: rgba(238, 240, 243, 0.62);
+}

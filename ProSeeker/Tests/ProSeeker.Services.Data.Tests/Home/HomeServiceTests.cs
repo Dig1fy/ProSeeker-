@@ -8,7 +8,7 @@
     using ProSeeker.Data.Repositories;
     using ProSeeker.Services.Data.Home;
     using ProSeeker.Services.Mapping;
-    using ProSeeker.Web.ViewModels.Home;
+    using ProSeeker.Web.ViewModels.Categories;
     using Xunit;
 
     public sealed class HomeServiceTests : BaseServiceTests

@@ -7,5 +7,7 @@
         public int AllSpecialists { get; set; }
 
         public int AllClients { get; set; }
+
+        public int AllBaseJobCategories { get; set; }
     }
 }

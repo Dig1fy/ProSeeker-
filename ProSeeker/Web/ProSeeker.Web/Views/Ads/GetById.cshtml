@@ -40,8 +40,8 @@
                                     <div class="col-md-0">
                                         <img src="@opinion.Creator.ProfilePicture" class="d-block ui-w-40 rounded-circle col-md-0 d-inline" style="width:40px; height:40px;">
                                     </div>
-                                    <div class="col-md-11">
-                                        <p class="custom-text-shadows d-inline"> @opinion.Creator.FullName </p>
+                                    <div class="col-md-11" style="word-break:break-word;">
+                                        <p class="custom-text-shadows d-inline" style="word-break:break-word;"> @opinion.Creator.FullName </p>
                                         @*<div class="clearfix"></div>*@
                                         @Html.Raw(opinion.SanitizedContent)
                                     </div>

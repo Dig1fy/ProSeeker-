@@ -11,6 +11,7 @@
 
     public class NavbarCategoriesViewComponent : ViewComponent
     {
+        // TODO: Switch to services and invoke the vc with await in the view
         private readonly IDeletableEntityRepository<BaseJobCategory> baseJobCategoriesRepository;
         private readonly IDeletableEntityRepository<JobCategory> jobCategoriesRepository;
 

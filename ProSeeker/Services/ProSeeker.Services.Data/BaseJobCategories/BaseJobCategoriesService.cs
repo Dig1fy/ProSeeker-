@@ -59,6 +59,15 @@
             return allBaseCategories;
         }
 
+        public async Task<int> GetAllBaseJobCategoriesCountAsync()
+        {
+            var allBaseCategories = await this.baseJobCategoriesRepository
+                .All()
+                .CountAsync();
+
+            return allBaseCategories;
+        }
+
         public async Task<T> GetBaseJobCategoryById<T>(int baseCategoryId)
         {
             var category = await this.baseJobCategoriesRepository

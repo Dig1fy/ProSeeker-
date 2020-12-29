@@ -5,3 +5,15 @@
     min-height: 100vh;
     background-size: cover;
 }
+
+.welcome-text {
+    font-size: 45px;
+    color: rgba(211,216,218,0.6727065826330532);
+    text-shadow: -1px 1px 1px rgb(4, 56, 139);
+}
+
+.welcome-text-v2 {
+    font-size: 45px;
+    color: rgba(200, 204, 206, 0.67);
+    text-shadow: -1px 1px 1px rgb(4, 56, 139);
+}

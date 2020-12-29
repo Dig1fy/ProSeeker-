@@ -5,19 +5,24 @@
     this.ViewData["Title"] = $"Добре дошли в {GlobalConstants.SystemName}!";
 }
 
+@section Styles{ 
+    <link href="~/css/MyCustomCss/Background/backgroundImg.css" rel="stylesheet" />
+}
+
 <form>
     <input hidden name="surveyId" value="0aa7a7fa-6074-489d-a982-31d6b6c88a68" />
     <button asp-action="Start" asp-controller="Survey">START Survey</button>
 </form>
 
 <div class="text-center">
-    <h1 class="display-4">@this.ViewData["Title"]</h1>
+    <h5 class="welcome-text">@this.ViewData["Title"]</h5>
+    <h4 class="welcome-text-v2" style="font-size:35px;">Мястото, където търсенето среща предлагането</h4>
 
-    <div class="container">
+    <div class="container mt-5">
         <div class="row text-center">
             <div class="col">
                 <div class="cool-bootstrap-counter">
-                    <i class="fas fa-scroll fa-2x"></i>
+                    <i class="fas fa-scroll fa-2x" style="color:rgb(67, 131, 178);"></i>
                     <h2 class="timer count-title count-number" data-to="@Model.Counters.AllAds" data-speed="1500"></h2>
                     @if (@Model.Counters.AllAds == 1)
                     {
@@ -31,7 +36,7 @@
             </div>
             <div class="col">
                 <div class="cool-bootstrap-counter">
-                    <i class="fas fa-user fa-2x"></i>
+                    <i class="fas fa-user fa-2x" style="color:rgb(67, 131, 178);"></i>
                     <h2 class="timer count-title count-number" data-to="@Model.Counters.AllClients" data-speed="1500"></h2>
                     @if (@Model.Counters.AllClients < 2)
                     {
@@ -45,8 +50,8 @@
             </div>
             <div class="col">
                 <div class="cool-bootstrap-counter">
-                    <i class="fas fa-users fa-2x"></i>
-                    <h2 class="timer count-title count-number" data-to="@Model.BaseCategories.SelectMany(c=>c.JobCategories).Count()" data-speed="1500"></h2>
+                    <i class="fas fa-users fa-2x" style="color:rgb(67, 131, 178);"></i>
+                    <h2 class="timer count-title count-number" data-to="@Model.Counters.AllBaseJobCategories" data-speed="1500"></h2>
                     @if (@Model.Counters.AllClients < 2)
                     {
                         <p class="count-text ">Професия</p>
@@ -59,7 +64,7 @@
             </div>
             <div class="col">
                 <div class="cool-bootstrap-counter">
-                    <i class="fas fa-user-tie fa-2x"></i>
+                    <i class="fas fa-user-tie fa-2x" style="color:rgb(67, 131, 178);"></i>
                     <h2 class="timer count-title count-number" data-to="@Model.Counters.AllSpecialists" data-speed="1500"></h2>
                     @if (@Model.Counters.AllSpecialists < 2)
                     {
@@ -73,31 +78,6 @@
             </div>
         </div>
     </div>
-
-    @foreach (var baseCategory in Model.BaseCategories)
-    {
-        <div class="list-group m-4">
-            <a href="#" class="list-group-item active">
-                <h4 class="list-group-item-heading">@baseCategory.CategoryName</h4>
-                <p class="list-group-item-text">@baseCategory.Description</p>
-            </a>
-
-            <div class="row">
-                @foreach (var category in baseCategory.JobCategories)
-                {
-                    <div class="media d-md-inline m-md-2">
-                        <div class="media-left">
-                            <a asp-route-id="@category.Id" asp-controller="JobCategories" asp-action="GetCategory" class="text-decoration-none">
-                                <img class="media-object" width="150" height="100" src="@category.PictureUrl" alt="...">
-                                <h4 class="media-heading text-success">@category.Name</h4>
-                            </a>
-                            <p class="text-break text-dark">@category.ShortDescription</p>
-                        </div>
-                    </div>
-                }
-            </div>
-        </div>
-    }
 </div>
 
 @section Scripts{

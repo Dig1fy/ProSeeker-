@@ -16,5 +16,7 @@
         Task UpdateAsync(BaseJobCategoryInputModel inputModel);
 
         Task DeleteByIdAsync(int baseCategoryId);
+
+        Task<int> GetAllBaseJobCategoriesCountAsync();
     }
 }

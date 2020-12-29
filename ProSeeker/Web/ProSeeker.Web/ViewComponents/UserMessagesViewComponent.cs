@@ -2,27 +2,24 @@
 {
     using System.Security.Claims;
     using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Data.PrivateChat;
-    using ProSeeker.Services.Data.UsersService;
     using ProSeeker.Web.ViewModels.PrivateChat;
 
     public class UserMessagesViewComponent : ViewComponent
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IPrivateChatService privateChatService;
-        private readonly IUsersService usersService;
 
         public UserMessagesViewComponent(
             UserManager<ApplicationUser> userManager,
-            IPrivateChatService privateChatService,
-            IUsersService usersService)
+            IPrivateChatService privateChatService)
         {
             this.userManager = userManager;
             this.privateChatService = privateChatService;
-            this.usersService = usersService;
         }
 
         // Refferences are a bit broken... We call this VC in side nav bar (loginPartial) for all active conversations
