@@ -1,0 +1,9 @@
+﻿html, body {
+    height: 100%;
+}
+
+body {
+    background-image: url('/images/Background/4.png');
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
