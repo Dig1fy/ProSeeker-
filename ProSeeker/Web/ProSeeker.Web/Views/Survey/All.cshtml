@@ -12,7 +12,7 @@
 <div class="row">
     @foreach (var survey in Model.Surveys)
     {
-        <form asp-controller="Survey" asp-action="Start" class="d-inline col-md-12 mt-2">
+        <form asp-area="" asp-controller="Survey" asp-action="Start" class="d-inline col-md-12 mt-2">
             <button class="btn col-md-12 d-inline mb-2 custom-btn-no-background" type="submit">Анкета на тема: @survey.Title</button>
             <input hidden name="surveyId" asp-for="@survey.Id" />
         </form>

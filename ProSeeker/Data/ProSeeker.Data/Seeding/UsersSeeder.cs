@@ -96,12 +96,12 @@
             {
                 users.Add(new ApplicationUser
                 {
-                    UserName = $"s@{i}s",
-                    Email = $"s@{i}s",
+                    UserName = $"testUser@{i}s",
+                    Email = $"testUser@{i}s",
                     CityId = 5,
                     EmailConfirmed = true,
-                    FirstName = $"Г{i}еорги",
-                    LastName = $"Г{i}еоргиев",
+                    FirstName = $"Георги{i}с",
+                    LastName = $"Георгиев{i}в",
                     ProfilePicture = GlobalConstants.DefaultProfileImagePath,
                     IsSpecialist = true,
                     SpecialistDetails = new Specialist_Details

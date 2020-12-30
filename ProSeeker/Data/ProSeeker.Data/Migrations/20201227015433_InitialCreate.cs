@@ -1,8 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace ProSeeker.Data.Migrations
+﻿namespace ProSeeker.Data.Migrations
 {
+    using System;
+
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,7 +19,7 @@ namespace ProSeeker.Data.Migrations
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true)
+                    DeletedOn = table.Column<DateTime>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -36,7 +37,7 @@ namespace ProSeeker.Data.Migrations
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     CategoryName = table.Column<string>(maxLength: 50, nullable: true),
-                    Description = table.Column<string>(maxLength: 250, nullable: true)
+                    Description = table.Column<string>(maxLength: 250, nullable: true),
                 },
                 constraints: table =>
                 {
@@ -51,7 +52,7 @@ namespace ProSeeker.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(maxLength: 70, nullable: false)
+                    Name = table.Column<string>(maxLength: 70, nullable: false),
                 },
                 constraints: table =>
                 {
@@ -69,7 +70,7 @@ namespace ProSeeker.Data.Migrations
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     SenderId = table.Column<string>(nullable: false),
                     ReceiverId = table.Column<string>(nullable: false),
-                    IsSeen = table.Column<bool>(nullable: false)
+                    IsSeen = table.Column<bool>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -85,7 +86,7 @@ namespace ProSeeker.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    Title = table.Column<string>(maxLength: 250, nullable: false)
+                    Title = table.Column<string>(maxLength: 250, nullable: false),
                 },
                 constraints: table =>
                 {
@@ -100,7 +101,7 @@ namespace ProSeeker.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
+                    ClaimValue = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -126,7 +127,7 @@ namespace ProSeeker.Data.Migrations
                     Name = table.Column<string>(maxLength: 70, nullable: false),
                     PictureUrl = table.Column<string>(maxLength: 500, nullable: true),
                     Description = table.Column<string>(maxLength: 500, nullable: false),
-                    BaseJobCategoryId = table.Column<int>(nullable: false)
+                    BaseJobCategoryId = table.Column<int>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -171,7 +172,7 @@ namespace ProSeeker.Data.Migrations
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true)
+                    DeletedOn = table.Column<DateTime>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -195,7 +196,7 @@ namespace ProSeeker.Data.Migrations
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     Text = table.Column<string>(maxLength: 150, nullable: false),
                     Number = table.Column<int>(nullable: false),
-                    SurveyId = table.Column<string>(nullable: true)
+                    SurveyId = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -225,7 +226,7 @@ namespace ProSeeker.Data.Migrations
                     VipExpirationDate = table.Column<DateTime>(nullable: false),
                     Views = table.Column<int>(nullable: false),
                     PreparedBudget = table.Column<string>(maxLength: 150, nullable: false),
-                    UserId = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -258,7 +259,7 @@ namespace ProSeeker.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
+                    ClaimValue = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -278,7 +279,7 @@ namespace ProSeeker.Data.Migrations
                     LoginProvider = table.Column<string>(nullable: false),
                     ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: false)
+                    UserId = table.Column<string>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -296,7 +297,7 @@ namespace ProSeeker.Data.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    RoleId = table.Column<string>(nullable: false)
+                    RoleId = table.Column<string>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -322,7 +323,7 @@ namespace ProSeeker.Data.Migrations
                     UserId = table.Column<string>(nullable: false),
                     LoginProvider = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: false),
-                    Value = table.Column<string>(nullable: true)
+                    Value = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -349,7 +350,7 @@ namespace ProSeeker.Data.Migrations
                     IsSeenBySender = table.Column<bool>(nullable: false),
                     IsSeenByReceiver = table.Column<bool>(nullable: false),
                     ReceiverId = table.Column<string>(nullable: false),
-                    ConversationId = table.Column<string>(nullable: false)
+                    ConversationId = table.Column<string>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -383,7 +384,7 @@ namespace ProSeeker.Data.Migrations
                     Experience = table.Column<string>(maxLength: 15000, nullable: true),
                     Qualification = table.Column<string>(maxLength: 15000, nullable: true),
                     UserId = table.Column<string>(nullable: true),
-                    JobCategoryId = table.Column<int>(nullable: false)
+                    JobCategoryId = table.Column<int>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -407,7 +408,7 @@ namespace ProSeeker.Data.Migrations
                 columns: table => new
                 {
                     ConversationId = table.Column<string>(nullable: false),
-                    ApplicationUserId = table.Column<string>(nullable: false)
+                    ApplicationUserId = table.Column<string>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -431,7 +432,7 @@ namespace ProSeeker.Data.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    SurveyId = table.Column<string>(nullable: false)
+                    SurveyId = table.Column<string>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -460,7 +461,7 @@ namespace ProSeeker.Data.Migrations
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     Text = table.Column<string>(maxLength: 150, nullable: false),
-                    QuestionId = table.Column<string>(nullable: true)
+                    QuestionId = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -483,7 +484,7 @@ namespace ProSeeker.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     AdId = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true),
-                    VoteType = table.Column<int>(nullable: false)
+                    VoteType = table.Column<int>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -516,7 +517,7 @@ namespace ProSeeker.Data.Migrations
                     IsRed = table.Column<bool>(nullable: false),
                     SpecialistDetailsId = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true),
-                    CityId = table.Column<int>(nullable: false)
+                    CityId = table.Column<int>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -549,7 +550,7 @@ namespace ProSeeker.Data.Migrations
                     CreatorId = table.Column<string>(nullable: true),
                     ParentOpinionId = table.Column<int>(nullable: true),
                     AdId = table.Column<string>(nullable: true),
-                    SpecialistDetailsId = table.Column<string>(nullable: true)
+                    SpecialistDetailsId = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -590,7 +591,7 @@ namespace ProSeeker.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     SpecialistDetailsId = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true),
-                    Value = table.Column<int>(nullable: false)
+                    Value = table.Column<int>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -621,7 +622,7 @@ namespace ProSeeker.Data.Migrations
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(maxLength: 250, nullable: false),
                     Description = table.Column<string>(maxLength: 1250, nullable: false),
-                    SpecialistDetailsId = table.Column<string>(nullable: true)
+                    SpecialistDetailsId = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -653,7 +654,7 @@ namespace ProSeeker.Data.Migrations
                     IsAccepted = table.Column<bool>(nullable: false),
                     AcceptedOn = table.Column<DateTime>(nullable: true),
                     ApplicationUserId = table.Column<string>(nullable: true),
-                    SpecialistDetailsId = table.Column<string>(nullable: true)
+                    SpecialistDetailsId = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {

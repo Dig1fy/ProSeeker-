@@ -8,7 +8,7 @@
 
         @foreach (var category in baseCategory.JobCategories.OrderBy(x => x.Name))
         {
-            <a asp-route-id="@category.Id" asp-controller="JobCategories" asp-action="GetCategory" class="text-decoration-none ">
+            <a asp-area="" asp-route-id="@category.Id" asp-controller="JobCategories" asp-action="GetCategory" class="text-decoration-none ">
                 <p class="media-heading " style="white-space:initial; font-size:19px; color:rgb(1, 19, 23);">@category.Name</p>
                 <img class="media-object" width="170" height="90" src="@category.PictureUrl" alt="...">
                 
