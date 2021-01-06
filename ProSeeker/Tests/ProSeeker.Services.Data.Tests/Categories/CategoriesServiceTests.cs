@@ -35,7 +35,7 @@
         }
 
         [Fact]
-        public async Task GetAllCategoriesShouldWorkCorrectly()
+        public async Task GetAllCategoriesAsync_ShouldWorkCorrectly()
         {
             AutoMapperConfig.RegisterMappings(typeof(CategorySimpleViewModel).Assembly);
             var expecedCategoriesCount = 3;
@@ -45,7 +45,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnCorrectCategoryByGivenId()
+        public async Task GetByIdAsync_ShouldReturnCorrectCategoryByGivenId()
         {
             AutoMapperConfig.RegisterMappings(typeof(CategoriesViewModel).Assembly);
             var id = 1;
@@ -66,7 +66,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnCorrectCategoryNameByGivenOfferId()
+        public async Task GetCategoryNameByOfferIdAsync_ShouldReturnCorrectCategoryNameByGivenOfferId()
         {
             var offerId = "1";
             var expectedCategoryName = "Архитект";
@@ -76,7 +76,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnCorrectNumberOfCategoriesByGivenJobCategoryId()
+        public async Task GetCategiesCountInBaseJobCategoryAsync_ShouldReturnCorrectNumberOfCategoriesByGivenJobCategoryId()
         {
             var baseJobCategoryId = 2;
             var categoriesCount = await this.service.GetCategiesCountInBaseJobCategoryAsync(baseJobCategoryId);
@@ -87,7 +87,7 @@
         }
 
         [Fact]
-        public async Task ShouldCreateCategoryCorrectly()
+        public async Task CreateAsync_ShouldCreateCategoryCorrectly()
         {
             var inputModel = new CategoryInputModel
             {
@@ -102,7 +102,7 @@
         }
 
         [Fact]
-        public async Task ShouldUpdateTheCategoryCorrectly()
+        public async Task GetCategoryPictureByCategoryId_ShouldUpdateTheCategoryCorrectly()
         {
             var inputModel = new CategoryInputModel
             {
@@ -121,7 +121,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnCorrectNumberOfSpecialistsPerGivenCategory()
+        public async Task GetSpecialistsCountInCategoryAsync_ShouldReturnCorrectNumberOfSpecialistsPerGivenCategory()
         {
             var categoryIdWithZeroSpecialists = 1;
             var categoryIdWithOneSpecialists = 3;
@@ -137,7 +137,7 @@
         }
 
         [Fact]
-        public async Task ShouldDeleteCategoryProperly()
+        public async Task GetByIdAsync_ShouldDeleteCategoryProperly()
         {
             AutoMapperConfig.RegisterMappings(typeof(CategoriesViewModel).Assembly);
             var categoryId = 1;

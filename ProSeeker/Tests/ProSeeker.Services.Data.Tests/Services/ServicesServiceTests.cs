@@ -26,7 +26,7 @@
         }
 
         [Fact]
-        public async Task DeletingShouldBeWorkingCorrectly()
+        public async Task DeleteAsync_ShouldBeWorkingCorrectly()
         {
             var serviceId = 1;
             await this.service.DeleteAsync(serviceId);
@@ -36,7 +36,7 @@
         }
 
         [Fact]
-        public async Task CheckForExistingServiceShouldReturnTrue()
+        public async Task CheckIfServiceExists_CheckForExistingServiceShouldReturnTrue()
         {
             var serviceId = 1;
 

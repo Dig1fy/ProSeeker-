@@ -31,7 +31,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnCorrectNumberOfUpvotes()
+        public async Task GetUpVotesAsync_ShouldReturnCorrectNumberOfUpvotes()
         {
             var desiredAdId = "1";
             var expectedCount = 1;
@@ -42,7 +42,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnCorrectNumberOfDownVotes()
+        public async Task GetDownVotesAsync_ShouldReturnCorrectNumberOfDownVotes()
         {
             var desiredAdId = "1";
             var expectedCount = 1;
@@ -53,7 +53,7 @@
         }
 
         [Fact]
-        public async Task ShouldAccountNewVoteCorrectly()
+        public async Task GetUpVotesAsync_ShouldAccountNewVoteCorrectly()
         {
             var desiredAdId = "1";
             var userId = "3";
@@ -67,7 +67,7 @@
         }
 
         [Fact]
-        public async Task IfUserVotesManyTimesOnlyTheLastVoteShouldBeAccounted()
+        public async Task GetUpVotesAsync_IfUserVotesManyTimesOnlyTheLastVoteShouldBeAccounted()
         {
             var desiredAdId = "1";
             var userId = "3";

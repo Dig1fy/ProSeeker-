@@ -35,7 +35,7 @@
         }
 
         [Fact]
-        public async Task MessageShouldBeSentProperly()
+        public async Task SendMessageToUserAsync_MessageShouldBeSentProperly()
         {
             AutoMapperConfig.RegisterMappings(typeof(MessageViewModel).Assembly);
 
@@ -52,7 +52,7 @@
         }
 
         [Fact]
-        public async Task AllConversationMessagesShouldBeReturnedCorrectly()
+        public async Task GetAllConversationMessagesAsync_AllConversationMessagesShouldBeReturnedCorrectly()
         {
             AutoMapperConfig.RegisterMappings(typeof(MessageViewModel).Assembly);
             var conversationId = "1";
@@ -65,7 +65,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnConversationIdIfThereIsExistingOne()
+        public async Task GetConversationBySenderAndReceiverIdsAsync_ShouldReturnConversationIdIfThereIsExistingOne()
         {
             var senderId = "1";
             var receiverId = "2";
@@ -77,7 +77,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnNewConversationIdIfThereIsNotExistingOneCorrespondingToTheGivenIds()
+        public async Task GetConversationBySenderAndReceiverIdsAsync_ShouldReturnNewConversationIdIfThereIsNotExistingOneCorrespondingToTheGivenIds()
         {
             var senderId = "3";
             var receiverId = "2";
@@ -89,7 +89,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnAllUserConversationCorrectly()
+        public async Task GetAllUserConversationsAsync_ShouldReturnAllUserConversationCorrectly()
         {
             AutoMapperConfig.RegisterMappings(typeof(ConversationViewModel).Assembly);
             var userId = "2";
@@ -102,7 +102,7 @@
         }
 
         [Fact]
-        public async Task ShouldUpdateConversationsInfoProperly()
+        public async Task UpdateusersInfoAsync_ShouldUpdateConversationsInfoProperly()
         {
             AutoMapperConfig.RegisterMappings(typeof(ConversationViewModel).Assembly);
             var userId = "2";
@@ -117,7 +117,7 @@
         }
 
         [Fact]
-        public async Task ShouldMarkAllUserMessagesAsSeenCorrectly()
+        public async Task MarkAllMessagesOfTheCurrentUserAsSeenAsync_ShouldMarkAllUserMessagesAsSeenCorrectly()
         {
             AutoMapperConfig.RegisterMappings(typeof(ConversationViewModel).Assembly);
             var userId = "2";
@@ -131,7 +131,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnCorrectNumberOfUnseenMessages()
+        public async Task CheckForUnseenMessagesAsync_ShouldReturnCorrectNumberOfUnseenMessages()
         {
             var userId = "2";
             var conversationId = "1";

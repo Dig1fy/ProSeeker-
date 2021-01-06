@@ -28,7 +28,7 @@
         }
 
         [Fact]
-        public async Task ShouldCreateBaseCategoryProperly()
+        public async Task CreateAsync_ShouldCreateBaseCategoryProperly()
         {
             var inputModel = new BaseJobCategoryInputModel
             {
@@ -43,7 +43,7 @@
         }
 
         [Fact]
-        public async Task ShouldDeleteCategoryByGivenId()
+        public async Task DeleteByIdAsync_ShouldDeleteCategoryByGivenId()
         {
             AutoMapperConfig.RegisterMappings(typeof(SimpleBaseJobCategoryViewModel).Assembly);
             var baseCategoryId = 1;
@@ -55,7 +55,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnAllBaseCategoriesCorrectly()
+        public async Task GetAllBaseCategoriesAsync_ShouldReturnAllBaseCategoriesCorrectly()
         {
             AutoMapperConfig.RegisterMappings(typeof(SimpleBaseJobCategoryViewModel).Assembly);
 
@@ -68,7 +68,7 @@
         }
 
         [Fact]
-        public async Task UpdateShouldWorkProperly()
+        public async Task UpdateAsync_ShouldWorkProperly()
         {
             AutoMapperConfig.RegisterMappings(typeof(SimpleBaseJobCategoryViewModel).Assembly);
             var model = new BaseJobCategoryInputModel

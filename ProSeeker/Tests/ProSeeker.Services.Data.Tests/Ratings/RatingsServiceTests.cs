@@ -26,7 +26,7 @@
         }
 
         [Fact]
-        public async Task AverageRatingShouldReturnCorrectValue()
+        public async Task GetAverageRatingAsync_ShouldReturnCorrectValue()
         {
             var specialistId = "specialistId";
             var expectedAverageRating = 4.5;
@@ -37,7 +37,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnCorrectNumberOfRatings()
+        public async Task GetRatingsCountAsync_ShouldReturnCorrectNumberOfRatings()
         {
             var specialistId = "specialistId";
             var expectedRatingsCount = 2;
@@ -48,7 +48,7 @@
         }
 
         [Fact]
-        public async Task OneUserShouldBeAbleToRateOnlyOnceAndHisLastRatingShouldBeAccounted()
+        public async Task GetRatingsCountAsync_OneUserShouldBeAbleToRateOnlyOnceAndHisLastRatingShouldBeAccounted()
         {
             var userId = "1";
             var specialistId = "specialistId";

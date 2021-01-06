@@ -29,7 +29,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnAllCitiesCorrectly()
+        public async Task GetAllCitiesAsync_ShouldReturnAllCitiesCorrectly()
         {
             var allCities = await this.citiesService.GetAllCitiesAsync<CitySimpleViewModel>();
             var expecedCitiesCount = 3;
@@ -39,7 +39,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnCitiesWithCorrectData()
+        public async Task GetAllCitiesAsync_ShouldReturnCitiesWithCorrectData()
         {
             var allCities = await this.citiesService.GetAllCitiesAsync<CitySimpleViewModel>();
             var firstCity = allCities.FirstOrDefault();

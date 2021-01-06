@@ -28,7 +28,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnAllSpecialistsPerCategoryProperly()
+        public async Task GetAllSpecialistsPerCategoryAsync_ShouldReturnAllSpecialistsPerCategoryProperly()
         {
             AutoMapperConfig.RegisterMappings(typeof(SpecialistShortDetailsViewModel).Assembly);
             var categoryId = 1;
@@ -46,7 +46,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnAllSpecialistsByGivenCityIdOnly()
+        public async Task GetAllSpecialistsPerCategoryAsync_ShouldReturnAllSpecialistsByGivenCityIdOnly()
         {
             AutoMapperConfig.RegisterMappings(typeof(SpecialistShortDetailsViewModel).Assembly);
             var categoryId = 1;
@@ -65,7 +65,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnCorrectSpecialistsCountByGivenCategoryId()
+        public async Task GetSpecialistsCountByCategoryAsync_ShouldReturnCorrectSpecialistsCountByGivenCategoryId()
         {
             var categoryId = 1;
             var expectedCount = 3;
@@ -76,7 +76,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnCorrectSpecialistsCountByGivenCategoryIdAndCityId()
+        public async Task GetSpecialistsCountByCategoryAsync_ShouldReturnCorrectSpecialistsCountByGivenCategoryIdAndCityId()
         {
             var categoryId = 1;
             var expectedCount = 1;
@@ -88,7 +88,7 @@
         }
 
         [Fact]
-        public async Task SortByOpinionsCountShouldWorkProperly()
+        public async Task GetAllSpecialistsPerCategoryAsync_SortByOpinionsCountShouldWorkProperly()
         {
             AutoMapperConfig.RegisterMappings(typeof(SpecialistShortDetailsViewModel).Assembly);
 
@@ -111,7 +111,7 @@
         }
 
         [Fact]
-        public async Task ShouldSortSpecialistByGivenCityIdOnly()
+        public async Task GetAllSpecialistsPerCategoryAsync_ShouldSortSpecialistByGivenCityIdOnly()
         {
             AutoMapperConfig.RegisterMappings(typeof(SpecialistShortDetailsViewModel).Assembly);
 

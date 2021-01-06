@@ -5,8 +5,6 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Microsoft.EntityFrameworkCore;
-    using ProSeeker.Data;
     using ProSeeker.Data.Models;
     using ProSeeker.Data.Repositories;
     using ProSeeker.Services.Data.UsersService;
@@ -28,7 +26,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnCorrectFirstNameByGivenUserId()
+        public async Task GetUserFirstNameByIdAsync_ShouldReturnCorrectFirstNameByGivenUserId()
         {
             var userId = "1";
             var expectedUserFirstName = "Ivo";
@@ -38,7 +36,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnUsersProfilePictureByGivenId()
+        public async Task GetUserProfilePictureAsync_ShouldReturnUsersProfilePictureByGivenId()
         {
             var userId = "1";
             var expectedResult = "SomeProfilePicture";
@@ -48,7 +46,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnCorrectCountOfAllSpecialists()
+        public async Task GetAllSpecialistsCountAsync_ShouldReturnCorrectCountOfAllSpecialists()
         {
             var expectedCount = 1;
             var actualCount = await this.service.GetAllSpecialistsCountAsync();
@@ -57,7 +55,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnCorrectCountOfAllRegularUsers()
+        public async Task GetAllClientsCountAsync_ShouldReturnCorrectCountOfAllRegularUsers()
         {
             var expectedCount = 1;
             var actualCount = await this.service.GetAllClientsCountAsync();
@@ -66,7 +64,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnCoorectUserIdByGivenSpecialistId()
+        public async Task GetUserIdBySpecialistIdAsync_ShouldReturnCoorectUserIdByGivenSpecialistId()
         {
             var specialistId = "specialistId";
 
@@ -77,7 +75,7 @@
         }
 
         [Fact]
-        public async Task ShouldMakeUserVipAndSetExpirationDateOfOneWeek()
+        public async Task MakeUserVip_ShouldMakeUserVipAndSetExpirationDateOfOneWeek()
         {
             var userId = "1";
             await this.service.MakeUserVip(userId);

@@ -42,7 +42,7 @@
         }
 
         [Fact]
-        public async Task CreateShouldAddNewAdCorrectly()
+        public async Task CreateAsync_CreateShouldAddNewAdCorrectly()
         {
             var userId = "3";
             var inputModel = this.GetInputModel();
@@ -54,7 +54,7 @@
         }
 
         [Fact]
-        public async Task CountOfUserAdsShouldIncrementProperly()
+        public async Task GetAdsCountByUserIdAsync_CountOfUserAdsShouldIncrementProperly()
         {
             var userId = "3";
             var expectedResult = 5;
@@ -70,7 +70,7 @@
         }
 
         [Fact]
-        public async Task MakeUserAdsVipShouldChangeTheStatusOfHisAdsOnly()
+        public async Task MakeAdsVipAsync_ShouldChangeTheStatusOfHisAdsOnly()
         {
             var firstUserId = "1";
             var secondUserId = "2";
@@ -87,7 +87,7 @@
         }
 
         [Fact]
-        public async Task AllAdsCountShouldReturnCorrectValue()
+        public async Task AllAdsCountAsync_ShouldReturnCorrectValue()
         {
             var userId = "1";
             var expectedResult = 6;
@@ -102,19 +102,17 @@
         }
 
         [Fact]
-        public async Task ShouldReturnCorrectNumberOfListedAds()
+        public async Task AllAdsByCategoryCountAsync_ShouldReturnCorrectNumberOfListedAds()
         {
             var categoryName = "Архитект";
             var cityId = 1;
-            var emptyCityId = 0;
             var firstCount = await this.service.AllAdsByCategoryCountAsync(categoryName, cityId);
-            var counWithoutCityId = await this.service.AllAdsByCategoryCountAsync(categoryName, emptyCityId);
 
             Assert.Equal(2, firstCount);
         }
 
         [Fact]
-        public async Task AdsByUserShouldReturnCorrectCount()
+        public async Task GetMyAdsAsync_AdsByUserShouldReturnCorrectCount()
         {
             var userId = "2";
 
@@ -126,7 +124,7 @@
         }
 
         [Fact]
-        public async Task GetAddDetailsShouldMapGenericToViewModel()
+        public async Task GetAdDetailsByIdAsync_ShouldMapGenericToViewModel()
         {
             var desiredAdId = "1";
 
@@ -136,7 +134,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnCorrectUserId()
+        public async Task GetUserIdByAdIdAsync_ShouldReturnCorrectUserId()
         {
             var expectedUserId = "2";
 
@@ -147,7 +145,7 @@
         }
 
         [Fact]
-        public async Task DeleteAdByIdShouldWorkCorrectly()
+        public async Task GetAdDetailsByIdAsync_ShouldWorkCorrectly()
         {
             var desiredAdToDelete = "2";
 
@@ -159,7 +157,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnAllAdsCountProperly()
+        public async Task GetAllAdsCountAsync_ShouldReturnAllAdsCountProperly()
         {
             var expectedCount = 3;
             var actualCount = await this.service.GetAllAdsCountAsync();
@@ -168,7 +166,7 @@
         }
 
         [Fact]
-        public async Task UpdateShouldAdjustTheAdCorrectly()
+        public async Task UpdateAdAsync_ShouldAdjustTheAdCorrectly()
         {
             AutoMapperConfig.RegisterMappings(typeof(UpdateInputModel).Assembly);
             var newDescription = "Бих искал да си наема кон!";
@@ -198,7 +196,7 @@
         }
 
         [Fact]
-        public async Task GetByCategoryShouldReturnCoorectCountOfAds()
+        public async Task GetByCategoryAsync_ShouldReturnCoorectCountOfAds()
         {
             AutoMapperConfig.RegisterMappings(typeof(AdsShortDetailsViewModel).Assembly);
             var categoryName = "Архитект";
@@ -210,7 +208,7 @@
         }
 
         [Fact]
-        public async Task GetByCategoryShouldHaveAccurateDefaultSorting()
+        public async Task GetByCategoryAsync_ShouldHaveAccurateDefaultSorting()
         {
             AutoMapperConfig.RegisterMappings(typeof(AdsShortDetailsViewModel).Assembly);
             var categoryName = "Архитект";

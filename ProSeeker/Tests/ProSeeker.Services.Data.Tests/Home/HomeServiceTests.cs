@@ -29,7 +29,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnAllBaseCategoriesCorrectly()
+        public async Task GetAllBaseCategoriesAsync_ShouldReturnAllBaseCategoriesCorrectly()
         {
             var expectedCount = 3;
             var allCategories = await this.service.GetAllBaseCategoriesAsync<BaseJobCategoryViewModel>();
@@ -38,7 +38,7 @@
         }
 
         [Fact]
-        public async Task DataShouldRemainUnchanged()
+        public async Task GetAllBaseCategoriesAsync_DataShouldRemainUnchanged()
         {
             var allCategories = await this.service.GetAllBaseCategoriesAsync<BaseJobCategoryViewModel>();
 

@@ -50,7 +50,7 @@
         }
 
         [Fact]
-        public async Task ShouldAddUserToSurveyProperly()
+        public async Task AddUserToSurveyAsync_ShouldWorkProperly()
         {
             var userId = "1";
             var surveyId = "1";
@@ -61,7 +61,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnAllAnswersForGivenQuestionCorrectly()
+        public async Task GetAnswersByQuestionIdAsync_ShouldReturnAllAnswersForGivenQuestionCorrectly()
         {
             AutoMapperConfig.RegisterMappings(typeof(AnswerViewModel).Assembly);
 
@@ -73,7 +73,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnAllQuestionsByGivenSurveyIdProperly()
+        public async Task GetQuestionsBySurveyIdAsync_ShouldReturnAllQuestionsByGivenSurveyIdProperly()
         {
             AutoMapperConfig.RegisterMappings(typeof(QuestionViewModel).Assembly);
 
@@ -85,7 +85,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnSurveyDetailsByGivenSurveyIdCorrectly()
+        public async Task GetSurveyByIdAsync_ShouldReturnSurveyDetailsByGivenSurveyIdCorrectly()
         {
             AutoMapperConfig.RegisterMappings(typeof(SurveyViewModel).Assembly);
 
@@ -98,7 +98,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnSurveyTitleByGivenSurveyId()
+        public async Task GetSurveyTitleByIdAsync_ShouldReturnSurveyTitleByGivenSurveyId()
         {
             var surveyId = "1";
             var expectedTitle = "Go go Rangers!";
@@ -109,7 +109,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnAsnwerByAnswerId()
+        public async Task GetSingleAnswerAsync_ShouldReturnAsnwerByAnswerId()
         {
             AutoMapperConfig.RegisterMappings(typeof(AnswerViewModel).Assembly);
 
@@ -123,7 +123,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnCorrectQuestionByGivenQuestionId()
+        public async Task GetQuestionByIdAsync_ShouldReturnCorrectQuestionByGivenQuestionId()
         {
             AutoMapperConfig.RegisterMappings(typeof(QuestionViewModel).Assembly);
 
@@ -137,7 +137,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnCorrentNumberOfQuestionsByGivenSurveyId()
+        public async Task GetQuestionNumberBySurveyIdAsync_ShouldReturnCorrentNumberOfQuestionsByGivenSurveyId()
         {
             var surveyId = "1";
             var expectedQuestionsCount = 3;
@@ -148,7 +148,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnAllSurveysProperly()
+        public async Task GetAllSurveysAsync_ShouldReturnAllSurveysProperly()
         {
             AutoMapperConfig.RegisterMappings(typeof(SurveyViewModel).Assembly);
             var expectedSurveysCount = 1;
@@ -160,7 +160,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnAllQuestionByGivenSurveyId()
+        public async Task GetAllQuestionsBySurveyIdAsync_ShouldReturnAllQuestionByGivenSurveyId()
         {
             AutoMapperConfig.RegisterMappings(typeof(QuestionViewModel).Assembly);
             var surveyId = "1";
@@ -172,7 +172,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnAllAnswersByGivenQuestionId()
+        public async Task GetAllAnswersByQuestionIdAsync_ShouldReturnAllAnswersByGivenQuestionId()
         {
             AutoMapperConfig.RegisterMappings(typeof(AnswerViewModel).Assembly);
             var questionId = "1";
@@ -186,7 +186,7 @@
         }
 
         [Fact]
-        public async Task ShouldEditQuestionByGivenIdAndNewText()
+        public async Task GetQuestionByIdAsync_ShouldEditQuestionByGivenIdAndNewText()
         {
             AutoMapperConfig.RegisterMappings(typeof(QuestionViewModel).Assembly);
             var questionId = "1";
@@ -199,7 +199,7 @@
         }
 
         [Fact]
-        public async Task ShouldEditAnswerByGivenAnswerIdAndNewText()
+        public async Task GetSingleAnswerAsync_ShouldEditAnswerByGivenAnswerIdAndNewText()
         {
             AutoMapperConfig.RegisterMappings(typeof(AnswerViewModel).Assembly);
             var answerId = "1";
@@ -212,7 +212,7 @@
         }
 
         [Fact]
-        public async Task ShouldEditSurveyByGivenIdAndTitle()
+        public async Task GetSurveyByIdAsync_ShouldEditSurveyByGivenIdAndTitle()
         {
             AutoMapperConfig.RegisterMappings(typeof(SurveyViewModel).Assembly);
             var surveyId = "1";
@@ -225,7 +225,7 @@
         }
 
         [Fact]
-        public async Task ShouldDeleteSurveyProperly()
+        public async Task GetSurveyByIdAsync_ShouldDeleteSurveyProperly()
         {
             AutoMapperConfig.RegisterMappings(typeof(SurveyViewModel).Assembly);
             var surveyId = "1";
@@ -237,7 +237,7 @@
         }
 
         [Fact]
-        public async Task ShouldDeleteQuestionProperly()
+        public async Task GetQuestionByIdAsync_ShouldDeleteQuestionProperly()
         {
             AutoMapperConfig.RegisterMappings(typeof(QuestionViewModel).Assembly);
             var questionId = "1";
@@ -249,7 +249,7 @@
         }
 
         [Fact]
-        public async Task ShouldDeleteAnswerProperly()
+        public async Task DeleteAnswerAsync_ShouldDeleteAnswerProperly()
         {
             AutoMapperConfig.RegisterMappings(typeof(AnswerViewModel).Assembly);
             var answerId = "1";
@@ -261,7 +261,7 @@
         }
 
         [Fact]
-        public async Task ShouldDeleteAllQuestionByGivenSurveyId()
+        public async Task DeleteAllQuestionsAsync_ShouldDeleteAllQuestionByGivenSurveyId()
         {
             AutoMapperConfig.RegisterMappings(typeof(QuestionViewModel).Assembly);
             var surveyId = "1";
@@ -274,7 +274,7 @@
         }
 
         [Fact]
-        public async Task ShouldCreateSurveyProperly()
+        public async Task CreateSurveyAsync_ShouldCreateSurveyProperly()
         {
             AutoMapperConfig.RegisterMappings(typeof(SurveyViewModel).Assembly);
             var newSurveyId = "555";
@@ -290,7 +290,7 @@
         }
 
         [Fact]
-        public async Task ShouldCreateNewQuestionProperly()
+        public async Task CreateQuestionAsync_ShouldCreateNewQuestionProperly()
         {
             AutoMapperConfig.RegisterMappings(typeof(QuestionViewModel).Assembly);
             var surveyId = "1";
@@ -309,7 +309,7 @@
         }
 
         [Fact]
-        public async Task ShouldCreateNewAnswerCorrectly()
+        public async Task CreateAnswerAsync_ShouldCreateNewAnswerCorrectly()
         {
             var questionId = "1";
             var newAnswersText = "xo-xo";
@@ -320,7 +320,7 @@
         }
 
         [Fact]
-        public async Task ShouldDeleteAllAnswersByGivenQuestionId()
+        public async Task DeleteAllAnswersAsync_ShouldDeleteAllAnswersByGivenQuestionId()
         {
             AutoMapperConfig.RegisterMappings(typeof(AnswerViewModel).Assembly);
             var questionId = "1";

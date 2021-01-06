@@ -35,7 +35,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnExistingOfferIfAny()
+        public async Task GetExistingOfferAsync_ShouldReturnExistingOfferIfAny()
         {
             AutoMapperConfig.RegisterMappings(typeof(ExistingOfferViewModel).Assembly);
             var desiredAdId = "1";
@@ -49,7 +49,7 @@
 
         // We can create an offer in two ways - directly from existing Ad/ from user's inquiry
         [Fact]
-        public async Task CreateFromAdShouldWorkCorrectly()
+        public async Task CreateFromAdAsync_ShouldWorkCorrectly()
         {
             AutoMapperConfig.RegisterMappings(typeof(ExistingOfferViewModel).Assembly);
             var newAd = new Ad
@@ -86,7 +86,7 @@
         }
 
         [Fact]
-        public async Task CreatingAnOfferFromInquiryShouldWorkCorrectly()
+        public async Task CreateFromInquiryAsync_ShouldWorkCorrectly()
         {
             AutoMapperConfig.RegisterMappings(typeof(ExistingOfferViewModel).Assembly);
             var applicationUserId = "1";
@@ -107,7 +107,7 @@
         }
 
         [Fact]
-        public async Task ShouldDeleteAnOfferProperly()
+        public async Task DeleteByIdAsync_ShouldDeleteAnOfferProperly()
         {
             AutoMapperConfig.RegisterMappings(typeof(ExistingOfferViewModel).Assembly);
 
@@ -124,7 +124,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnAllSpecialistOffers()
+        public async Task GetAllSpecialistOffersAsync_ShouldReturnAllSpecialistOffersCorrectly()
         {
             AutoMapperConfig.RegisterMappings(typeof(ExistingOfferViewModel).Assembly);
 
@@ -138,7 +138,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnCorrectOfferByGivenOfferId()
+        public async Task GetDetailsByIdAsync_ShouldReturnCorrectOfferByGivenOfferId()
         {
             AutoMapperConfig.RegisterMappings(typeof(ExistingOfferViewModel).Assembly);
             var existingOfferId = "2";
@@ -149,7 +149,7 @@
         }
 
         [Fact]
-        public void ShouldReturnCorrectNumberOfUnredOffers()
+        public void GetUnredOffersCount_ShouldReturnCorrectNumberOfUnredOffers()
         {
             var userId = "2";
             var expectedCount = 1;
@@ -160,7 +160,7 @@
         }
 
         [Fact]
-        public void ShouldReturnCorrectBoolValueIfThereAreAnyUnredOffers()
+        public void IsThereUnredOffer_ShouldReturnCorrectBoolValueIfThereAreAnyUnredOffers()
         {
             var userId = "2";
 
@@ -170,7 +170,7 @@
         }
 
         [Fact]
-        public async Task ShouldAdjustUnredOfferToRedCorrectly()
+        public async Task MarkOfferAsRedAsync_ShouldWorkCorrectlyForSingleOffer()
         {
             AutoMapperConfig.RegisterMappings(typeof(ExistingOfferViewModel).Assembly);
             var existingOfferId = "2";
@@ -182,7 +182,7 @@
         }
 
         [Fact]
-        public async Task AcceptingOfferShouldWorkCorrectly()
+        public async Task AcceptOffer_ShouldWorkCorrectly()
         {
             AutoMapperConfig.RegisterMappings(typeof(ExistingOfferViewModel).Assembly);
             var existingOfferId = "2";

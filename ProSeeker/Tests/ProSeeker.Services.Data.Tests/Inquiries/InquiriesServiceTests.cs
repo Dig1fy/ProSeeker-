@@ -36,7 +36,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnExistingOfferByGivenInquiryIdIfAny()
+        public async Task CheckForExistingOfferAsync_ShouldReturnExistingOfferByGivenInquiryIdIfAny()
         {
             var inquiryId = "1";
 
@@ -49,7 +49,7 @@
         }
 
         [Fact]
-        public async Task CreateShouldWorkCorrectly()
+        public async Task CreateAsync_ShouldWorkCorrectly()
         {
             AutoMapperConfig.RegisterMappings(typeof(InquiriesViewModel).Assembly);
             var specialistId = "specialistId";
@@ -70,7 +70,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnCorrectInquiryIfAny()
+        public async Task GetDetailsByIdAsync_ShouldReturnCorrectInquiryIfAny()
         {
             AutoMapperConfig.RegisterMappings(typeof(InquiriesViewModel).Assembly);
             var existingInquiry = this.inquiries.FirstOrDefault(x => x.Id == "1");
@@ -82,7 +82,7 @@
         }
 
         [Fact]
-        public void ShouldReturnTrueIfThereIsAnyUnseenInquiry()
+        public void IsThereUnredInquiry_ShouldReturnTrueIfThereIsAnyUnseenInquiry()
         {
             var userId = "2";
 
@@ -92,7 +92,7 @@
         }
 
         [Fact]
-        public async Task ShouldMarkTheInquiryAsRedByGivenInquiryId()
+        public async Task MarkInquiryAsRedAsync_ShouldMarkTheInquiryAsRedByGivenInquiryId()
         {
             var inquiryId = "2";
             var userId = "2";
@@ -105,7 +105,7 @@
         }
 
         [Fact]
-        public async Task ShouldDeleteInquiryByGivenId()
+        public async Task DeleteByIdAsync_ShouldDeleteInquiryByGivenIdCorrectly()
         {
             AutoMapperConfig.RegisterMappings(typeof(InquiriesViewModel).Assembly);
             var inquiryId = "2";

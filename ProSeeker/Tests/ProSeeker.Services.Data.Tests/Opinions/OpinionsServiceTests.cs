@@ -32,7 +32,7 @@
         }
 
         [Fact]
-        public async Task ShouldCreateOpinionToAdProperly()
+        public async Task CreateAdOpinionAsync_ShouldCreateOpinionToAdProperly()
         {
             var desiredAdId = "1";
             var userId = "1";
@@ -48,7 +48,7 @@
         }
 
         [Fact]
-        public async Task ShouldCreateOpinionToSpecialistProfileProperly()
+        public async Task CreateSpecOpinionAsync_ShouldCreateOpinionToSpecialistProfileProperly()
         {
             var desiredSpecialistId = "specialist";
             var userId = "1";
@@ -64,7 +64,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnCorrectValuesIfGivenOpinionIsInSpecialistProfile()
+        public async Task IsInSpecialistIdAsync_ShouldReturnCorrectValuesIfGivenOpinionIsInSpecialistProfile()
         {
             var desiredSpecialistId = "specialist";
             var opinionId = 3;
@@ -75,7 +75,7 @@
         }
 
         [Fact]
-        public async Task ShouldReturnCorrectValuesIfGivenOpinionIsInAdWithGivenAdId()
+        public async Task IsInAdIdAsync_ShouldReturnCorrectValuesIfGivenOpinionIsInAdWithGivenAdId()
         {
             var desiredAdId = "1";
             var opinionId = 2;
