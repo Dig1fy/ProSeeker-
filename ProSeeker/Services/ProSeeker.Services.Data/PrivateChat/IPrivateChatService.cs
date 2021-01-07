@@ -3,7 +3,6 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using ProSeeker.Data.Models.PrivateChat;
     using ProSeeker.Web.ViewModels.PrivateChat;
 
     public interface IPrivateChatService
@@ -21,7 +20,5 @@
         Task MarkAllMessagesOfTheCurrentUserAsSeenAsync(string conversationId, string currentUserId);
 
         Task<int> CheckForUnseenMessagesAsync(string conversationId, string currentUserId);
-
-        //Task ReceiveNewMessage(string message, string receiverId, string senderId, string conversationId);
     }
 }

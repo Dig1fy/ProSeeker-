@@ -148,8 +148,6 @@
             Assert.Null(deletedCategory);
         }
 
-
-
         private void InitializeRepositoriesData()
         {
             this.categories.AddRange(new List<JobCategory>()

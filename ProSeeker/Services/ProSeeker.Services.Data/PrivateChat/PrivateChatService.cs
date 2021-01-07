@@ -64,7 +64,6 @@
 
         public async Task<IEnumerable<T>> GetAllConversationMessagesAsync<T>(string conversationId)
         {
-
             var messages = await this.messageRepository.All()
                 .Where(x => x.ConversationId == conversationId)
                 .OrderBy(x => x.CreatedOn)

@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using ProSeeker.Data.Models;
     using ProSeeker.Data.Repositories;
     using ProSeeker.Services.Data.Cities;

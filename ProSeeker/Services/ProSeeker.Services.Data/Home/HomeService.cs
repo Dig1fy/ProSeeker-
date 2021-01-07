@@ -1,8 +1,8 @@
 ﻿namespace ProSeeker.Services.Data.Home
 {
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
+
     using Microsoft.EntityFrameworkCore;
     using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;

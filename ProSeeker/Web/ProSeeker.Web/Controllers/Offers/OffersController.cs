@@ -241,16 +241,6 @@
             }
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> SendMail(string offerId)
-        //{
-        //    var html = new StringBuilder();
-        //    html.AppendLine($"<h1>FFFF</h1>");
-        //    html.AppendLine($"<h3>FFF</h3>");
-        //    await this.emailSender.SendEmailAsync("q2kforeveralon3@gmail.com", "ProSeeker", "laliv89309@chatdays.com", "Gosho", html.ToString());
-        //    return this.RedirectToAction(nameof(this.UserOffers));
-        //}
-
         private async Task SendEmailsToBothSidesAsync(ViewModels.EmailsSender.SendEmailViewModel model)
         {
             var subject = GlobalConstants.AcceptedOfferSubject;

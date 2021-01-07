@@ -1,7 +1,7 @@
 ﻿namespace ProSeeker.Services.Data.ServicesService
 {
-    using System.Linq;
     using System.Threading.Tasks;
+
     using Microsoft.EntityFrameworkCore;
     using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;

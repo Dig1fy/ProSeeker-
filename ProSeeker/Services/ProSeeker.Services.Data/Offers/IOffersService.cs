@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using ProSeeker.Web.ViewModels.EmailsSender;
     using ProSeeker.Web.ViewModels.Offers;
 
