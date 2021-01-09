@@ -19,7 +19,20 @@
         public UsersServiceTests()
         {
             var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(this.DbContext);
-            this.service = new UsersService(usersRepository);
+            var citiesRepository = new EfRepository<City>(this.DbContext);
+            var specialistsRepository = new EfDeletableEntityRepository<Specialist_Details>(this.DbContext);
+            var categoriesRepository = new EfDeletableEntityRepository<JobCategory>(this.DbContext);
+            var servicesRepository = new EfDeletableEntityRepository<Service>(this.DbContext);
+            var opinionsRepository = new EfDeletableEntityRepository<Opinion>(this.DbContext);
+            var ratingsRepository = new EfRepository<Rating>(this.DbContext);
+            this.service = new UsersService(
+                usersRepository,
+                citiesRepository,
+                specialistsRepository,
+                categoriesRepository,
+                servicesRepository,
+                opinionsRepository,
+                ratingsRepository);
 
             this.users = new List<ApplicationUser>();
             this.InitializeRepositoriesData();

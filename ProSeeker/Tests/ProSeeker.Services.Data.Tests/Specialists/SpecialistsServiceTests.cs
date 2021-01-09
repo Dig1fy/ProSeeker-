@@ -22,7 +22,8 @@
             this.specialists = new List<Specialist_Details>();
 
             var specialistsRepository = new EfDeletableEntityRepository<Specialist_Details>(this.DbContext);
-            this.service = new SpecialistsService(specialistsRepository);
+            var ratingsRepository = new EfRepository<Rating>(this.DbContext);
+            this.service = new SpecialistsService(specialistsRepository, ratingsRepository);
 
             this.InitializeRepositoriesData();
         }
