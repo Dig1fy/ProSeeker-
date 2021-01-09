@@ -25,8 +25,7 @@ My defense project for ASP.NET Core MVC course at SoftUni (October 2020 @SoftUni
 * <strong>SignalR<strong> (used for real-time chat)
 * <strong>WebAPI <strong>
 * <strong>SendGrid<strong> (for sending emails) 
-* <strong>xUnit<strong> (for testing) 
-
+* <strong>xUnit<strong> (for testing)
 </details>
 
 ## DB Diagram
@@ -34,4 +33,5 @@ My defense project for ASP.NET Core MVC course at SoftUni (October 2020 @SoftUni
 
 
 ## Unit tests (services test coverage)
+![](https://res.cloudinary.com/zmax/image/upload/v1609123432/81eec76a-fb6c-4ccf-9941-b4fe8bec34f9profilePicture.png)
 ![](https://res.cloudinary.com/zmax/image/upload/v1609123432/81eec76a-fb6c-4ccf-9941-b4fe8bec34f9profilePicture.png)
