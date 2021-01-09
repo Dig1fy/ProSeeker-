@@ -186,7 +186,7 @@
         private IQueryable<Ad> SortAds(string categoryName, string sortBy, int cityId)
         {
             var ads = this.adsRepository
-                .AllAsNoTracking()
+                .All()
                 .Where(x => x.JobCategory.Name == categoryName);
 
             if (cityId != 0)

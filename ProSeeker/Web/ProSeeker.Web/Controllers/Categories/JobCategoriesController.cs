@@ -46,7 +46,7 @@
 
             viewModel.Cities = await this.citiesService.GetAllCitiesAsync<CitySimpleViewModel>();
             var specialistsPerPage = await this.specialistsService
-                .GetAllSpecialistsPerCategoryAsync<SpecialistsInCategoryViewModel>(input.Id, input.SortBy, viewModel.CityId, viewModel.PageNumber);
+                .GetSpecialistsFullDetailsPerCategoryAsync(input.Id, input.SortBy, viewModel.CityId, viewModel.PageNumber);
 
             viewModel.SpecialistsDetails = specialistsPerPage;
 

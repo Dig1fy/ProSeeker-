@@ -15,16 +15,16 @@ namespace ProSeeker.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.9")
+                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "5.0.1");
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -48,7 +48,7 @@ namespace ProSeeker.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -139,8 +139,8 @@ namespace ProSeeker.Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasMaxLength(25000);
+                        .HasMaxLength(25000)
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -156,13 +156,13 @@ namespace ProSeeker.Data.Migrations
 
                     b.Property<string>("PreparedBudget")
                         .IsRequired()
-                        .HasColumnType("nvarchar(150)")
-                        .HasMaxLength(150);
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(95)")
-                        .HasMaxLength(95);
+                        .HasMaxLength(95)
+                        .HasColumnType("nvarchar(95)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -208,12 +208,12 @@ namespace ProSeeker.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
@@ -221,7 +221,7 @@ namespace ProSeeker.Data.Migrations
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex")
+                        .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
@@ -249,16 +249,16 @@ namespace ProSeeker.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -274,8 +274,8 @@ namespace ProSeeker.Data.Migrations
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(25)")
-                        .HasMaxLength(25);
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<DateTime?>("LastVisit")
                         .HasColumnType("datetime2");
@@ -290,12 +290,12 @@ namespace ProSeeker.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
@@ -307,22 +307,22 @@ namespace ProSeeker.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("ProfilePicture")
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SpecialistDetailsId")
-                        .HasColumnType("nvarchar(150)")
-                        .HasMaxLength(150);
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<DateTime>("VipExpirationDate")
                         .HasColumnType("datetime2");
@@ -334,11 +334,11 @@ namespace ProSeeker.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
+                        .HasDatabaseName("EmailIndex");
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex")
+                        .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
@@ -349,11 +349,11 @@ namespace ProSeeker.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("CategoryName")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -362,8 +362,8 @@ namespace ProSeeker.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -383,7 +383,7 @@ namespace ProSeeker.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -393,8 +393,8 @@ namespace ProSeeker.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(70)")
-                        .HasMaxLength(70);
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
 
                     b.HasKey("Id");
 
@@ -453,7 +453,7 @@ namespace ProSeeker.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<int>("BaseJobCategoryId")
                         .HasColumnType("int");
@@ -466,8 +466,8 @@ namespace ProSeeker.Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -477,12 +477,12 @@ namespace ProSeeker.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(70)")
-                        .HasMaxLength(70);
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
 
                     b.Property<string>("PictureUrl")
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.HasKey("Id");
 
@@ -515,8 +515,8 @@ namespace ProSeeker.Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasMaxLength(25000);
+                        .HasMaxLength(25000)
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ExpirationDate")
                         .HasColumnType("datetime2");
@@ -544,8 +544,8 @@ namespace ProSeeker.Data.Migrations
 
                     b.Property<string>("StartDate")
                         .IsRequired()
-                        .HasColumnType("nvarchar(150)")
-                        .HasMaxLength(150);
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.HasKey("Id");
 
@@ -567,14 +567,14 @@ namespace ProSeeker.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("AdId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)")
-                        .HasMaxLength(15000);
+                        .HasMaxLength(15000)
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -622,8 +622,8 @@ namespace ProSeeker.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Content")
-                        .HasColumnType("nvarchar(2500)")
-                        .HasMaxLength(2500);
+                        .HasMaxLength(2500)
+                        .HasColumnType("nvarchar(2500)");
 
                     b.Property<string>("ConversationId")
                         .IsRequired()
@@ -734,8 +734,8 @@ namespace ProSeeker.Data.Migrations
 
                     b.Property<string>("Text")
                         .IsRequired()
-                        .HasColumnType("nvarchar(150)")
-                        .HasMaxLength(150);
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.HasKey("Id");
 
@@ -771,8 +771,8 @@ namespace ProSeeker.Data.Migrations
 
                     b.Property<string>("Text")
                         .IsRequired()
-                        .HasColumnType("nvarchar(150)")
-                        .HasMaxLength(150);
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.HasKey("Id");
 
@@ -802,8 +802,8 @@ namespace ProSeeker.Data.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.HasKey("Id");
 
@@ -832,7 +832,7 @@ namespace ProSeeker.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -863,7 +863,7 @@ namespace ProSeeker.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -873,8 +873,8 @@ namespace ProSeeker.Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(1250)")
-                        .HasMaxLength(1250);
+                        .HasMaxLength(1250)
+                        .HasColumnType("nvarchar(1250)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -884,8 +884,8 @@ namespace ProSeeker.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("SpecialistDetailsId")
                         .HasColumnType("nvarchar(450)");
@@ -905,12 +905,12 @@ namespace ProSeeker.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("AboutMe")
-                        .HasColumnType("nvarchar(max)")
-                        .HasMaxLength(15000);
+                        .HasMaxLength(15000)
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CompanyName")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -919,8 +919,8 @@ namespace ProSeeker.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Experience")
-                        .HasColumnType("nvarchar(max)")
-                        .HasMaxLength(15000);
+                        .HasMaxLength(15000)
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -932,15 +932,15 @@ namespace ProSeeker.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Qualification")
-                        .HasColumnType("nvarchar(max)")
-                        .HasMaxLength(15000);
+                        .HasMaxLength(15000)
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Website")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -952,7 +952,7 @@ namespace ProSeeker.Data.Migrations
                         .IsUnique()
                         .HasFilter("[UserId] IS NOT NULL");
 
-                    b.ToTable("Specialist_Details");
+                    b.ToTable("SpecialistDetails");
                 });
 
             modelBuilder.Entity("ProSeeker.Data.Models.Vote", b =>
@@ -960,7 +960,7 @@ namespace ProSeeker.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("AdId")
                         .HasColumnType("nvarchar(450)");
@@ -1054,6 +1054,12 @@ namespace ProSeeker.Data.Migrations
                     b.HasOne("ProSeeker.Data.Models.ApplicationUser", "User")
                         .WithMany("Ads")
                         .HasForeignKey("UserId");
+
+                    b.Navigation("City");
+
+                    b.Navigation("JobCategory");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ProSeeker.Data.Models.ApplicationUser", b =>
@@ -1063,6 +1069,8 @@ namespace ProSeeker.Data.Migrations
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("City");
                 });
 
             modelBuilder.Entity("ProSeeker.Data.Models.Inquiry", b =>
@@ -1074,6 +1082,10 @@ namespace ProSeeker.Data.Migrations
                     b.HasOne("ProSeeker.Data.Models.ApplicationUser", "User")
                         .WithMany("Inquiries")
                         .HasForeignKey("UserId");
+
+                    b.Navigation("SpecialistDetails");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ProSeeker.Data.Models.JobCategory", b =>
@@ -1083,6 +1095,8 @@ namespace ProSeeker.Data.Migrations
                         .HasForeignKey("BaseJobCategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("BaseJobCategory");
                 });
 
             modelBuilder.Entity("ProSeeker.Data.Models.Offer", b =>
@@ -1102,6 +1116,14 @@ namespace ProSeeker.Data.Migrations
                     b.HasOne("ProSeeker.Data.Models.Specialist_Details", "SpecialistDetails")
                         .WithMany("Offers")
                         .HasForeignKey("SpecialistDetailsId");
+
+                    b.Navigation("Ad");
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Inquiry");
+
+                    b.Navigation("SpecialistDetails");
                 });
 
             modelBuilder.Entity("ProSeeker.Data.Models.Opinion", b =>
@@ -1121,6 +1143,14 @@ namespace ProSeeker.Data.Migrations
                     b.HasOne("ProSeeker.Data.Models.Specialist_Details", "SpecialistDetails")
                         .WithMany("Opinions")
                         .HasForeignKey("SpecialistDetailsId");
+
+                    b.Navigation("Ad");
+
+                    b.Navigation("Creator");
+
+                    b.Navigation("ParentOpinion");
+
+                    b.Navigation("SpecialistDetails");
                 });
 
             modelBuilder.Entity("ProSeeker.Data.Models.PrivateChat.ChatMessage", b =>
@@ -1136,6 +1166,10 @@ namespace ProSeeker.Data.Migrations
                         .HasForeignKey("ConversationId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Conversation");
                 });
 
             modelBuilder.Entity("ProSeeker.Data.Models.PrivateChat.UserConversation", b =>
@@ -1151,6 +1185,10 @@ namespace ProSeeker.Data.Migrations
                         .HasForeignKey("ConversationId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Conversation");
                 });
 
             modelBuilder.Entity("ProSeeker.Data.Models.Quiz.Answer", b =>
@@ -1158,6 +1196,8 @@ namespace ProSeeker.Data.Migrations
                     b.HasOne("ProSeeker.Data.Models.Quiz.Question", "Question")
                         .WithMany("Answers")
                         .HasForeignKey("QuestionId");
+
+                    b.Navigation("Question");
                 });
 
             modelBuilder.Entity("ProSeeker.Data.Models.Quiz.Question", b =>
@@ -1165,6 +1205,8 @@ namespace ProSeeker.Data.Migrations
                     b.HasOne("ProSeeker.Data.Models.Quiz.Survey", "Survey")
                         .WithMany("Questions")
                         .HasForeignKey("SurveyId");
+
+                    b.Navigation("Survey");
                 });
 
             modelBuilder.Entity("ProSeeker.Data.Models.Quiz.UserSurvey", b =>
@@ -1180,6 +1222,10 @@ namespace ProSeeker.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Survey");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ProSeeker.Data.Models.Rating", b =>
@@ -1191,6 +1237,10 @@ namespace ProSeeker.Data.Migrations
                     b.HasOne("ProSeeker.Data.Models.ApplicationUser", "User")
                         .WithMany("Ratings")
                         .HasForeignKey("UserId");
+
+                    b.Navigation("SpecialistDetails");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ProSeeker.Data.Models.Service", b =>
@@ -1198,12 +1248,14 @@ namespace ProSeeker.Data.Migrations
                     b.HasOne("ProSeeker.Data.Models.Specialist_Details", "SpecialistDetails")
                         .WithMany("Services")
                         .HasForeignKey("SpecialistDetailsId");
+
+                    b.Navigation("SpecialistDetails");
                 });
 
             modelBuilder.Entity("ProSeeker.Data.Models.Specialist_Details", b =>
                 {
                     b.HasOne("ProSeeker.Data.Models.JobCategory", "JobCategory")
-                        .WithMany("SpecialistsDetails")
+                        .WithMany("SpecialistDetails")
                         .HasForeignKey("JobCategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -1211,6 +1263,10 @@ namespace ProSeeker.Data.Migrations
                     b.HasOne("ProSeeker.Data.Models.ApplicationUser", "User")
                         .WithOne("SpecialistDetails")
                         .HasForeignKey("ProSeeker.Data.Models.Specialist_Details", "UserId");
+
+                    b.Navigation("JobCategory");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ProSeeker.Data.Models.Vote", b =>
@@ -1222,6 +1278,95 @@ namespace ProSeeker.Data.Migrations
                     b.HasOne("ProSeeker.Data.Models.ApplicationUser", "User")
                         .WithMany("Votes")
                         .HasForeignKey("UserId");
+
+                    b.Navigation("Ad");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ProSeeker.Data.Models.Ad", b =>
+                {
+                    b.Navigation("Opinions");
+
+                    b.Navigation("Votes");
+                });
+
+            modelBuilder.Entity("ProSeeker.Data.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("Ads");
+
+                    b.Navigation("ChatMessages");
+
+                    b.Navigation("Claims");
+
+                    b.Navigation("Inquiries");
+
+                    b.Navigation("Logins");
+
+                    b.Navigation("Offers");
+
+                    b.Navigation("Opinions");
+
+                    b.Navigation("Ratings");
+
+                    b.Navigation("Roles");
+
+                    b.Navigation("SpecialistDetails");
+
+                    b.Navigation("UserConversations");
+
+                    b.Navigation("UsersSurveys");
+
+                    b.Navigation("Votes");
+                });
+
+            modelBuilder.Entity("ProSeeker.Data.Models.BaseJobCategory", b =>
+                {
+                    b.Navigation("JobCategories");
+                });
+
+            modelBuilder.Entity("ProSeeker.Data.Models.City", b =>
+                {
+                    b.Navigation("Ads");
+
+                    b.Navigation("ApplicationUsers");
+                });
+
+            modelBuilder.Entity("ProSeeker.Data.Models.JobCategory", b =>
+                {
+                    b.Navigation("Ads");
+
+                    b.Navigation("SpecialistDetails");
+                });
+
+            modelBuilder.Entity("ProSeeker.Data.Models.PrivateChat.Conversation", b =>
+                {
+                    b.Navigation("ChatMessages");
+
+                    b.Navigation("UsersConversations");
+                });
+
+            modelBuilder.Entity("ProSeeker.Data.Models.Quiz.Question", b =>
+                {
+                    b.Navigation("Answers");
+                });
+
+            modelBuilder.Entity("ProSeeker.Data.Models.Quiz.Survey", b =>
+                {
+                    b.Navigation("Questions");
+                });
+
+            modelBuilder.Entity("ProSeeker.Data.Models.Specialist_Details", b =>
+                {
+                    b.Navigation("Inquiries");
+
+                    b.Navigation("Offers");
+
+                    b.Navigation("Opinions");
+
+                    b.Navigation("Ratings");
+
+                    b.Navigation("Services");
                 });
 #pragma warning restore 612, 618
         }

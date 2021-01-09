@@ -1,12 +1,9 @@
-﻿
-namespace ProSeeker.Web.ViewModels.Inquiries
+﻿namespace ProSeeker.Web.ViewModels.Inquiries
 {
     using System;
 
     using Ganss.XSS;
     using ProSeeker.Common;
-    using ProSeeker.Data.Models;
-    using ProSeeker.Services.Mapping;
     using ProSeeker.Web.ViewModels.Offers;
     using ProSeeker.Web.ViewModels.Users;
 

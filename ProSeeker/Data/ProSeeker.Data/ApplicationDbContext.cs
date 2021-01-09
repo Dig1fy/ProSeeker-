@@ -31,7 +31,7 @@
 
         public DbSet<BaseJobCategory> BaseJobCategories { get; set; }
 
-        public DbSet<Specialist_Details> Specialist_Details { get; set; }
+        public DbSet<Specialist_Details> SpecialistDetails { get; set; }
 
         public DbSet<Vote> Votes { get; set; }
 

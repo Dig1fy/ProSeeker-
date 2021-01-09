@@ -4,7 +4,7 @@ namespace ProSeeker.Data.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
+    using System.ComponentModel.DataAnnotations.Schema;
     using Microsoft.AspNetCore.Identity;
     using ProSeeker.Data.Common.Models;
     using ProSeeker.Data.Models.PrivateChat;
@@ -56,6 +56,7 @@ namespace ProSeeker.Data.Models
         public string ProfilePicture { get; set; }
 
         [MaxLength(150)]
+        [ForeignKey(nameof(SpecialistDetails))]
         public string SpecialistDetailsId { get; set; }
 
         public virtual Specialist_Details SpecialistDetails { get; set; }

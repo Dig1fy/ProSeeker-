@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+
     using ProSeeker.Data.Common.Models;
 
     public class BaseJobCategory : BaseDeletableModel<int>

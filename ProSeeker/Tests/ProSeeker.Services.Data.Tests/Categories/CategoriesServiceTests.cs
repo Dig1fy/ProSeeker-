@@ -154,7 +154,7 @@
             {
                 new JobCategory { Id = 1, BaseJobCategoryId = 1, Name = "Архитект", Description = "лоши хора", PictureUrl = "archPicture", CreatedOn = DateTime.UtcNow, IsDeleted = false },
                 new JobCategory { Id = 2, BaseJobCategoryId = 2, Name = "Брокер", Description = "по-лоши хора", PictureUrl = "realEstateAgentPicture", CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new JobCategory { Id = 3, BaseJobCategoryId = 2, Name = "Урбанист", Description = "иновативни хора", PictureUrl = "urbanistPicure", CreatedOn = DateTime.UtcNow, IsDeleted = false, SpecialistsDetails = new List<Specialist_Details> { new Specialist_Details { Id = "555" } } },
+                new JobCategory { Id = 3, BaseJobCategoryId = 2, Name = "Урбанист", Description = "иновативни хора", PictureUrl = "urbanistPicure", CreatedOn = DateTime.UtcNow, IsDeleted = false, SpecialistDetails = new List<Specialist_Details> { new Specialist_Details { Id = "555" } } },
             });
 
             this.ads.AddRange(new List<Ad>

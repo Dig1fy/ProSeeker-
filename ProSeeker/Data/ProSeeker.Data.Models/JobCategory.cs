@@ -9,7 +9,7 @@
     {
         public JobCategory()
         {
-            this.SpecialistsDetails = new HashSet<Specialist_Details>();
+            this.SpecialistDetails = new HashSet<Specialist_Details>();
             this.Ads = new HashSet<Ad>();
         }
 
@@ -28,7 +28,7 @@
 
         public virtual BaseJobCategory BaseJobCategory { get; set; }
 
-        public virtual ICollection<Specialist_Details> SpecialistsDetails { get; set; }
+        public virtual ICollection<Specialist_Details> SpecialistDetails { get; set; }
 
         public virtual ICollection<Ad> Ads { get; set; }
     }

@@ -26,7 +26,7 @@
         public async Task<IActionResult> GetProfile(string id)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
-            var profile = await this.usersService.GetUserByIdAsync<UserViewModel>(id);
+            var profile = await this.usersService.GetUserProfileAsync(currentUser.Id, id);
 
             if (profile == null)
             {

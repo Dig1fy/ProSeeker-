@@ -68,7 +68,7 @@
                 .FirstOrDefaultAsync();
 
             var ad = await this.adsRepository
-                .AllAsNoTracking()
+                .All()
                 .FirstOrDefaultAsync(a => a.Id == offer.AdId);
 
             // If the request for delete comes from Inquiries
@@ -78,7 +78,7 @@
             }
 
             var category = await this.categoriesRepository
-                .AllAsNoTracking()
+                .All()
                 .Where(x => x.Id == ad.JobCategoryId)
                 .FirstOrDefaultAsync();
 

@@ -1,5 +1,6 @@
 ﻿namespace ProSeeker.Services.Data.UsersService
 {
+    using ProSeeker.Web.ViewModels.Users;
     using System.Threading.Tasks;
 
     public interface IUsersService
@@ -17,5 +18,7 @@
         Task<string> GetUserIdBySpecialistIdAsync(string specialistId);
 
         Task MakeUserVip(string userId);
+
+        Task<UserViewModel> GetUserProfileAsync(string currentUserId, string specialistId);
     }
 }

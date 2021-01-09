@@ -9,14 +9,55 @@
     using ProSeeker.Data.Common.Repositories;
     using ProSeeker.Data.Models;
     using ProSeeker.Services.Mapping;
+    using ProSeeker.Web.ViewModels.Categories;
 
     public class SpecialistsService : ISpecialistsService
     {
         private readonly IDeletableEntityRepository<Specialist_Details> specialistsRepository;
+        private readonly IRepository<Rating> ratingsRepository;
 
-        public SpecialistsService(IDeletableEntityRepository<Specialist_Details> specialistsRepository)
+        public SpecialistsService(
+            IDeletableEntityRepository<Specialist_Details> specialistsRepository,
+            IRepository<Rating> ratingsRepository)
         {
             this.specialistsRepository = specialistsRepository;
+            this.ratingsRepository = ratingsRepository;
+        }
+
+        public async Task<IEnumerable<SpecialistsInCategoryViewModel>> GetSpecialistsFullDetailsPerCategoryAsync(int categoryId, string sortBy, int cityId, int page)
+        {
+            // After migrating to net5.0, the AutoMapper stopped mapping Specialists_Details (returns null when using generics).
+            // It has something to do with the underscore. After 27 different approaches with refactoring, nothing worked. Therefore, we will just return viewModel
+            // and do the mapping manually.
+            page = page == 0 ? 1 : page;
+            sortBy = sortBy == null ? GlobalConstants.ByDateDescending : sortBy;
+            var specialistsToSkip = (page - 1) * GlobalConstants.SpecialistsPerPage;
+            var sortedSpecialists = this.SortSpecialists(categoryId, sortBy, cityId);
+
+            var specialists = await sortedSpecialists
+                .Skip(specialistsToSkip)
+                .Take(GlobalConstants.SpecialistsPerPage)
+                .Select(x => new SpecialistsInCategoryViewModel
+                {
+                    Id = x.Id,
+                    CreatedOn = x.CreatedOn,
+                    JobCategoryName = x.JobCategory.Name,
+                    UserFirstName = x.User.FirstName,
+                    UserCityName = x.User.City.Name,
+                    UserIsVip = x.User.IsVip,
+                    UserLastName = x.User.LastName,
+                    UserProfilePicture = x.User.ProfilePicture,
+                    UserUserName = x.User.UserName,
+                })
+                .ToListAsync();
+
+            foreach (var specialist in specialists)
+            {
+                specialist.RatingsCount = await this.GetSpecialistRatingsCountByGivenSpecialistIdAsync(specialist.Id);
+                specialist.AverageRating = await this.GetSpecialistAverageRatingByGivenSpecialistIdAsync(specialist.Id);
+            }
+
+            return specialists;
         }
 
         public async Task<IEnumerable<T>> GetAllSpecialistsPerCategoryAsync<T>(int categoryId, string sortBy, int cityId, int page)
@@ -57,7 +98,7 @@
         private IQueryable<Specialist_Details> SortSpecialists(int categoryId, string sortBy, int cityId)
         {
             var specialists = this.specialistsRepository
-                .AllAsNoTracking()
+                .All()
                 .Where(x => x.JobCategoryId == categoryId);
 
             if (cityId != 0)
@@ -72,6 +113,24 @@
                 GlobalConstants.ByRatingDesc => specialists.OrderByDescending(x => x.User.IsVip == true).ThenByDescending(x => x.Ratings.Average(v => v.Value)),
                 _ => specialists,
             };
+        }
+
+        private async Task<double> GetSpecialistAverageRatingByGivenSpecialistIdAsync(string specialistId)
+        {
+            var allRatings = await this.ratingsRepository.All().Where(x => x.SpecialistDetailsId == specialistId).ToListAsync();
+            if (allRatings.Count() == 0)
+            {
+                return 0;
+            }
+
+            var averageRating = allRatings.Average(a => a.Value);
+            return averageRating;
+        }
+
+        private async Task<int> GetSpecialistRatingsCountByGivenSpecialistIdAsync(string specialistId)
+        {
+            var ratingsCount = await this.ratingsRepository.All().Where(x => x.SpecialistDetailsId == specialistId).CountAsync();
+            return ratingsCount;
         }
     }
 }
