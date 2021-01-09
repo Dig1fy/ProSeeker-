@@ -78,7 +78,7 @@
 
             if (imageFile != null)
             {
-                var imageName = imageFile.FileName;
+                var imageName = Guid.NewGuid().ToString() + imageFile.FileName;
                 var imageUrl = await this.cloudinaryApplicationService.UploadImageAsync(imageFile, imageName);
                 inputModel.PictureUrl = imageUrl;
             }

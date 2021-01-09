@@ -34,4 +34,4 @@ My defense project for ASP.NET Core MVC course at SoftUni (October 2020 @SoftUni
 
 
 ## Unit tests (services test coverage)
-![](https://res.cloudinary.com/zmax/image/upload/v1609123432/81eec76a-fb6c-4ccf-9941-b4fe8bec34f9profilePicture.png)
+![](https://res.cloudinary.com/zmax/image/upload/v1610213611/adfe08c8-bf3f-4958-bbc5-ea3f10ec67fcUnitTestsCoverage.png.png)
