@@ -41,7 +41,7 @@
                 return this.CustomCommonError();
             }
 
-            return this.Redirect("/");
+            return this.Redirect(GlobalConstants.HomePageRedirect);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿namespace ProSeeker.Web.Controllers.Offers
 {
     using System;
-    using System.Text;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
@@ -229,6 +228,13 @@
         {
             try
             {
+                // Users cannot accept an offer if their profile has no phone number data.
+                var currentUser = await this.userManager.GetUserAsync(this.User);
+                if (currentUser.PhoneNumber == null)
+                {
+                    return this.RedirectToAction(nameof(this.MissingPhoneNumber));
+                }
+
                 var currentUserId = this.userManager.GetUserId(this.User);
                 var model = await this.offersService.GetOffersSenderAndReceiverDataByOfferIdAsync(offerId, currentUserId);
                 await this.SendEmailsToBothSidesAsync(model);
@@ -239,6 +245,22 @@
             {
                 return this.CustomCommonError();
             }
+        }
+
+        public IActionResult MissingPhoneNumber()
+        {
+            return this.View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> MissingPhoneNumber(string offerId, string phoneNumber)
+        { // ADD phoneNumber validation (regex) and implement the view
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+            await this.usersService.UpdateUserPhoneNumberAsync(currentUser.Id, phoneNumber);
+
+            return this.RedirectToAction(nameof(this.Accept), new { offerId });
+
         }
 
         private async Task SendEmailsToBothSidesAsync(ViewModels.EmailsSender.SendEmailViewModel model)
@@ -254,6 +276,7 @@
                 model.OfferDescription,
                 model.Price);
 
+            // SendGrind requires registering sender in their platform so we need to send the messages separately - in both emails the sender will be ProSeeker 
             // Send to user
             await this.emailSender.SendEmailAsync(GlobalConstants.ApplicationEmail, GlobalConstants.ApplicationName, model.UserEmail, subject, content);
 

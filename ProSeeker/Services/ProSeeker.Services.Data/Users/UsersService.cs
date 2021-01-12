@@ -196,5 +196,16 @@
 
             return model;
         }
+
+        public async Task UpdateUserPhoneNumberAsync(string userId, string phoneNumber)
+        {
+            var user = await this.usersRepository
+                .All()
+                .FirstOrDefaultAsync(x => x.Id == userId);
+
+            user.PhoneNumber = phoneNumber;
+            this.usersRepository.Update(user);
+            await this.usersRepository.SaveChangesAsync();
+        }
     }
 }
