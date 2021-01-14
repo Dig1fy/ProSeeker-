@@ -1,0 +1,25 @@
+﻿@model ProSeeker.Web.ViewModels.Offers.MissingOfferInputModel
+
+<div class="row text-center">
+    <h4 class="mx-auto custom-golden-text">Въвеждане на актуален телефонен номер</h4>
+    <div class="col-md-12">
+        <div class="col-md-4 mx-auto">
+            <section>
+                <form id="account" method="post">
+                    <hr />
+                    <div asp-validation-summary="All" class="text-danger custom-input-text"></div>
+                    <div class="form-group">
+                        <label asp-for="@Model.UserPhoneNumber" class="custom-input-text"></label>
+                        <input asp-for="@Model.UserPhoneNumber" style="-webkit-box-shadow: 0 0 0 30px white inset;" class="form-control custom-rounded-input-field custom-textarea-text" />
+                        <span asp-validation-for="@Model.UserPhoneNumber" class="text-danger custom-input-text"></span>
+                        <input hidden asp-for="@Model.OfferId" name="offerId"/>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="custom-submit-button col-md-12" style="height:36px;">Потвърди</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+</div>

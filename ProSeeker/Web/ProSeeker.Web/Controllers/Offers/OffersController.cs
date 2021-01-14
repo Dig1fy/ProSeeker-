@@ -232,7 +232,7 @@
                 var currentUser = await this.userManager.GetUserAsync(this.User);
                 if (currentUser.PhoneNumber == null)
                 {
-                    return this.RedirectToAction(nameof(this.MissingPhoneNumber));
+                    return this.RedirectToAction(nameof(this.MissingPhoneNumber), new { offerId });
                 }
 
                 var currentUserId = this.userManager.GetUserId(this.User);
@@ -247,20 +247,37 @@
             }
         }
 
-        public IActionResult MissingPhoneNumber()
+        public IActionResult MissingPhoneNumber(string offerId)
         {
-            return this.View();
+            var model = new MissingOfferInputModel
+            {
+                OfferId = offerId,
+            };
+
+            return this.View(model);
         }
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> MissingPhoneNumber(string offerId, string phoneNumber)
+        public async Task<IActionResult> MissingPhoneNumber(MissingOfferInputModel model)
         { // ADD phoneNumber validation (regex) and implement the view
-            var currentUser = await this.userManager.GetUserAsync(this.User);
-            await this.usersService.UpdateUserPhoneNumberAsync(currentUser.Id, phoneNumber);
 
-            return this.RedirectToAction(nameof(this.Accept), new { offerId });
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
 
+            try
+            {
+                var currentUser = await this.userManager.GetUserAsync(this.User);
+                await this.usersService.UpdateUserPhoneNumberAsync(currentUser.Id, model.UserPhoneNumber);
+
+                return this.RedirectToAction(nameof(this.Accept), new { model.OfferId });
+            }
+            catch (Exception)
+            {
+                return this.CustomNotFound();
+            }
         }
 
         private async Task SendEmailsToBothSidesAsync(ViewModels.EmailsSender.SendEmailViewModel model)
