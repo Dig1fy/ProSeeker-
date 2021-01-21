@@ -169,29 +169,34 @@
                 LastName = profileOnwer.LastName,
                 ProfilePicture = profileOnwer.ProfilePicture,
                 CreatedOn = profileOnwer.CreatedOn,
-                City = new CitySimpleViewModel
-                {
-                    Id = city.Id,
-                    Name = city.Name,
-                },
-                SpecialistDetails = new SpecialistDetailsViewModel
-                {
-                    Id = specialistDetails.Id,
-                    AboutMe = specialistDetails.AboutMe,
-                    CompanyName = specialistDetails.CompanyName,
-                    Experience = specialistDetails.Experience,
-                    RatingsCount = specialistRatings.Count(),
-                    Website = specialistDetails.Website,
-                    Qualification = specialistDetails.Qualification,
-                    JobCategory = new CategorySimpleViewModel
-                    {
-                        Id = jobCategory.Id,
-                        Name = jobCategory.Name,
-                    },
-                    Opinions = allOpinionsViewModel,
-                    Services = allServicesViewModel,
-                    AverageRating = specialistRatings.Average(v => v.Value),
-                },
+            };
+
+            model.City = new CitySimpleViewModel
+            {
+                Id = city.Id,
+                Name = city.Name,
+            };
+
+            var averageRating = specialistRatings.Average(v => v.Value);
+
+            model.SpecialistDetails = new SpecialistDetailsViewModel
+            {
+                Id = specialistDetails.Id,
+                AboutMe = specialistDetails.AboutMe,
+                CompanyName = specialistDetails.CompanyName,
+                Experience = specialistDetails.Experience,
+                RatingsCount = specialistRatings.Count(),
+                Website = specialistDetails.Website,
+                Qualification = specialistDetails.Qualification,
+                Opinions = allOpinionsViewModel,
+                Services = allServicesViewModel,
+                AverageRating = averageRating,
+            };
+
+            model.SpecialistDetails.JobCategory = new CategorySimpleViewModel
+            {
+                Id = jobCategory.Id,
+                Name = jobCategory.Name,
             };
 
             return model;
