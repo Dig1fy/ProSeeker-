@@ -177,7 +177,7 @@
                 Name = city.Name,
             };
 
-            var averageRating = specialistRatings.Average(v => v.Value);
+            var averageRating = specialistRatings.Count > 0 ? specialistRatings.Average(v => v.Value) : 0;
 
             model.SpecialistDetails = new SpecialistDetailsViewModel
             {
