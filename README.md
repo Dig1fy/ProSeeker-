@@ -74,7 +74,7 @@ Restrictions:
 
 ## :framed_picture: Image - Home Page
 
-![](https://ibb.co/9HC8yfk)
+![](https://res.cloudinary.com/zmax/image/upload/v1610213611/adfe08c8-bf3f-4958-bbc5-ea3f10ec67fcUnitTestsCoverage.png.png)
 ![](https://ibb.co/vYhWtYD)
 ![](https://ibb.co/k5N3m8Q)
 ![](https://ibb.co/88LPRRV)
