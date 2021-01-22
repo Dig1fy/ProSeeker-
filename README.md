@@ -1,6 +1,10 @@
 # ProSeeker-
 My defense project for ASP.NET Core MVC course at SoftUni (October 2020 @SoftUni)
 ## Brief description of the functionalities
+<details>
+   <summary>
+       <strong> Click </strong> for more detailed information
+   </summary>
 ProSeeker‘s main idea is to be a platform based on supply and demand. A place where professionals in a certain field can be found by regular users who need their services. (mostly professionals who work on a recommendation basis).
 Users themselves can directly seek a specialist or upload an ad and receive an offer for a service.
 
@@ -31,6 +35,7 @@ Restrictions:
 - Only specialists can send offers to regular users.
 - Private chat is allowed for user-user / specialist-specialist. Users cannot start a private chat with specialists. This is against the main idea of the platform. 
 - Server side + client side validations for all inputs.
+</details>
 
 ## :hammer: Built With:
 <details>
@@ -67,4 +72,15 @@ Restrictions:
 ![](https://res.cloudinary.com/zmax/image/upload/v1610213611/adfe08c8-bf3f-4958-bbc5-ea3f10ec67fcUnitTestsCoverage.png.png)
 <!-- https://res.cloudinary.com/zmax/image/upload/v1610213611/adfe08c8-bf3f-4958-bbc5-ea3f10ec67fcUnitTestsCoverage.png.png -->
 
-## Screen shots
+## :framed_picture: Image - Home Page
+
+![](https://ibb.co/9HC8yfk)
+![](https://ibb.co/vYhWtYD)
+![](https://ibb.co/k5N3m8Q)
+![](https://ibb.co/88LPRRV)
+![](https://ibb.co/g4Szpbw)
+![](https://ibb.co/HpDLNs0)
+![](https://ibb.co/373TxKF)
+![](https://ibb.co/RCtsmgf)
+![](https://ibb.co/xCP7YQN)
+![](https://ibb.co/pJ3thT5)

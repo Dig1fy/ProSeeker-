@@ -35,7 +35,7 @@
         // Paging
         public const int ItemsPerPage = 8;
 
-        public const int SpecialistsPerPage = 12;
+        public const int SpecialistsPerPage = 4;
 
         // Ad Sorting options
         public const string ByDateDescending = "CreatedOn";
