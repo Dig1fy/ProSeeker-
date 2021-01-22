@@ -6,18 +6,21 @@ My defense project for ASP.NET Core MVC course at SoftUni (October 2020 @SoftUni
        <strong> Click </strong> for more detailed information
    </summary>
 ProSeeker‘s main idea is to be a platform based on supply and demand. A place where professionals in a certain field can be found by regular users who need their services. (mostly professionals who work on a recommendation basis).
-Users themselves can directly seek a specialist or upload an ad and receive an offer for a service.
+Users themselves can directly seek a specialist or upload an ad and receive an offer for a service. </br>
 
-3 roles: regular user, specialist, administrator
-User: 
+3 roles: regular user, specialist, administrator </br>
+
+<strong>User:</strong>
 - Can create/edit/delete Ad. 
 - Can send inquiry to a professional and receive an offer.
 - Can receive an offer from professional in two ways (from existing Ad or from sent inquiry).
 - Has section with his ads only, where he can access each of them.
-Specialist:
+
+<strong>Specialist:</strong>
 - Receive inquiries from regular users.
 - Can make offers to clients (two ways : Ad/Inquiry).
-Admin:
+
+<strong>Admin:</strong>
 - Create/edit/delete job sub-categories;
 - Create/edit/delete base job categories;
 - Can create/edit/delete new surveys with questions and answers. When a certain user takes a survey, he becomes VIP for 1 week. 
@@ -27,7 +30,7 @@ Common actions for users and specialists:
 - After accepting an offer, both parties receive emails with other person’s contacts.
 - Update their profile info, add/change/delete avatar image.
 
-Restrictions:
+<strong>Restrictions:</strong>
 - Specialists can make only 1 offer to a certain Ad. If they try to send second offer to the same Ad, new modal window pops up and they can either cancel the attempt to make an offer or retrieve/delete the old offer and make a new one.
 - Specialists can make more than 1 offers to regular user only when the user has sent an inquiry to the specialist (through the specialist profile).
 - Guest users (not logged-in) are restricted to a very few actions.
@@ -72,7 +75,7 @@ Restrictions:
 ![](https://res.cloudinary.com/zmax/image/upload/v1610213611/adfe08c8-bf3f-4958-bbc5-ea3f10ec67fcUnitTestsCoverage.png.png)
 <!-- https://res.cloudinary.com/zmax/image/upload/v1610213611/adfe08c8-bf3f-4958-bbc5-ea3f10ec67fcUnitTestsCoverage.png.png -->
 
-## :framed_picture: Image - Home Page
+## :framed_picture: Random screen shots
 
 ![](https://cdn1.bbcode0.com/uploads/2021/1/22/f79de7c1c4475756417f21beb7f1a53a-full.png)
 ![](https://cdn1.bbcode0.com/uploads/2021/1/22/aa810dbbfbab64daa2085d84577889c0-full.png)
