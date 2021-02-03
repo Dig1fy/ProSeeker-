@@ -75,14 +75,27 @@ Common actions for users and specialists:
 ![](https://res.cloudinary.com/zmax/image/upload/v1610213611/adfe08c8-bf3f-4958-bbc5-ea3f10ec67fcUnitTestsCoverage.png.png)
 <!-- https://res.cloudinary.com/zmax/image/upload/v1610213611/adfe08c8-bf3f-4958-bbc5-ea3f10ec67fcUnitTestsCoverage.png.png -->
 
-## :framed_picture: Random screen shots
+## :framed_picture: Some screen shots
 
-![](https://cdn1.bbcode0.com/uploads/2021/1/22/f79de7c1c4475756417f21beb7f1a53a-full.png)
-![](https://cdn1.bbcode0.com/uploads/2021/1/22/aa810dbbfbab64daa2085d84577889c0-full.png)
-![](https://cdn1.bbcode0.com/uploads/2021/1/22/2f02216a8f2e9703adeaaf5ef0816dbf-full.png)
-![](https://cdn1.bbcode0.com/uploads/2021/1/22/6be79ef9fe5eabbde6ce3d148e556580-full.png)
-![](https://cdn1.bbcode0.com/uploads/2021/1/22/32a97ddfa7e645a3e5d1eddab92b3b3e-full.png)
-![](https://cdn1.bbcode0.com/uploads/2021/1/22/289d6e825a946536890bdcb463452e6b-full.png)
-![](https://cdn1.bbcode0.com/uploads/2021/1/22/8b63ff03e673ae2b7954dc1375550eee-full.png)
-![](https://bbcode0.com/uploaded/2021/1/22/919d024821dd425819e0d20e3ea418c2-full.png.html)
-![](https://cdn1.bbcode0.com/uploads/2021/1/22/13cdf0505f282e42490e65c96d5921ff-full.png)
+Home
+![](https://res.cloudinary.com/zmax/image/upload/v1612347706/5cb7964f-0f48-4e68-8b93-4cf14eab9c75profilePicture.png)
+Register
+![](https://res.cloudinary.com/zmax/image/upload/v1612348198/5cb7964f-0f48-4e68-8b93-4cf14eab9c75profilePicture.png)
+AD
+![](https://res.cloudinary.com/zmax/image/upload/v1612347375/8b545fb2-5817-4cd7-9123-ead5028d170eprofilePicture.png)
+Chat
+![](https://res.cloudinary.com/zmax/image/upload/v1612347610/5cb7964f-0f48-4e68-8b93-4cf14eab9c75profilePicture.png)
+Admin (Job categories)
+![](https://res.cloudinary.com/zmax/image/upload/v1612347787/5cb7964f-0f48-4e68-8b93-4cf14eab9c75profilePicture.png)
+User's offers
+![](https://res.cloudinary.com/zmax/image/upload/v1612347872/5cb7964f-0f48-4e68-8b93-4cf14eab9c75profilePicture.png)
+New offer
+![](https://res.cloudinary.com/zmax/image/upload/v1612347955/5cb7964f-0f48-4e68-8b93-4cf14eab9c75profilePicture.png)
+Specialist's profile
+![](https://res.cloudinary.com/zmax/image/upload/v1612348097/5cb7964f-0f48-4e68-8b93-4cf14eab9c75profilePicture.png)
+Specialists
+![](https://res.cloudinary.com/zmax/image/upload/v1612348276/5cb7964f-0f48-4e68-8b93-4cf14eab9c75profilePicture.png)
+Survey
+![](https://res.cloudinary.com/zmax/image/upload/v1612348354/5cb7964f-0f48-4e68-8b93-4cf14eab9c75profilePicture.png)
+Admin (surveys)
+![](https://res.cloudinary.com/zmax/image/upload/v1612348439/5cb7964f-0f48-4e68-8b93-4cf14eab9c75profilePicture.png)
