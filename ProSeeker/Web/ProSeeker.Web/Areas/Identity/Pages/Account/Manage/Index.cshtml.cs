@@ -214,7 +214,7 @@
                 }
             }
 
-            var profileImageName = $"{user.Id}profilePicture";
+            var profileImageName = $"{user.Id}profilePicture11";
 
             if (imageFile != null)
             {

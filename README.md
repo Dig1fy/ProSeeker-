@@ -78,24 +78,24 @@ Common actions for users and specialists:
 ## :framed_picture: Some screen shots
 
 Home
-![](https://res.cloudinary.com/zmax/image/upload/v1612347706/5cb7964f-0f48-4e68-8b93-4cf14eab9c75profilePicture.png)
+![](https://res.cloudinary.com/zmax/image/upload/v1612348857/5cb7964f-0f48-4e68-8b93-4cf14eab9c75profilePicture1.png)
 Register
-![](https://res.cloudinary.com/zmax/image/upload/v1612348198/5cb7964f-0f48-4e68-8b93-4cf14eab9c75profilePicture.png)
+![](https://res.cloudinary.com/zmax/image/upload/v1612348927/5cb7964f-0f48-4e68-8b93-4cf14eab9c75profilePicture2.png)
 AD
-![](https://res.cloudinary.com/zmax/image/upload/v1612347375/8b545fb2-5817-4cd7-9123-ead5028d170eprofilePicture.png)
+![](https://res.cloudinary.com/zmax/image/upload/v1612350104/5cb7964f-0f48-4e68-8b93-4cf14eab9c75profilePicture11.png)
 Chat
-![](https://res.cloudinary.com/zmax/image/upload/v1612347610/5cb7964f-0f48-4e68-8b93-4cf14eab9c75profilePicture.png)
+![](https://res.cloudinary.com/zmax/image/upload/v1612349009/5cb7964f-0f48-4e68-8b93-4cf14eab9c75profilePicture3.png)
 Admin (Job categories)
-![](https://res.cloudinary.com/zmax/image/upload/v1612347787/5cb7964f-0f48-4e68-8b93-4cf14eab9c75profilePicture.png)
+![](https://res.cloudinary.com/zmax/image/upload/v1612349065/5cb7964f-0f48-4e68-8b93-4cf14eab9c75profilePicture4.png)
 User's offers
-![](https://res.cloudinary.com/zmax/image/upload/v1612347872/5cb7964f-0f48-4e68-8b93-4cf14eab9c75profilePicture.png)
+![](https://res.cloudinary.com/zmax/image/upload/v1612349129/5cb7964f-0f48-4e68-8b93-4cf14eab9c75profilePicture5.png)
 New offer
-![](https://res.cloudinary.com/zmax/image/upload/v1612347955/5cb7964f-0f48-4e68-8b93-4cf14eab9c75profilePicture.png)
+![](https://res.cloudinary.com/zmax/image/upload/v1612349191/5cb7964f-0f48-4e68-8b93-4cf14eab9c75profilePicture6.png)
 Specialist's profile
-![](https://res.cloudinary.com/zmax/image/upload/v1612348097/5cb7964f-0f48-4e68-8b93-4cf14eab9c75profilePicture.png)
+![](https://res.cloudinary.com/zmax/image/upload/v1612349672/5cb7964f-0f48-4e68-8b93-4cf14eab9c75profilePicture7.png)
 Specialists
-![](https://res.cloudinary.com/zmax/image/upload/v1612348276/5cb7964f-0f48-4e68-8b93-4cf14eab9c75profilePicture.png)
+![](https://res.cloudinary.com/zmax/image/upload/v1612349747/5cb7964f-0f48-4e68-8b93-4cf14eab9c75profilePicture8.png)
 Survey
-![](https://res.cloudinary.com/zmax/image/upload/v1612348354/5cb7964f-0f48-4e68-8b93-4cf14eab9c75profilePicture.png)
+![](https://res.cloudinary.com/zmax/image/upload/v1612349802/5cb7964f-0f48-4e68-8b93-4cf14eab9c75profilePicture9.png)
 Admin (surveys)
-![](https://res.cloudinary.com/zmax/image/upload/v1612348439/5cb7964f-0f48-4e68-8b93-4cf14eab9c75profilePicture.png)
+![](https://res.cloudinary.com/zmax/image/upload/v1612349861/5cb7964f-0f48-4e68-8b93-4cf14eab9c75profilePicture10.png)
